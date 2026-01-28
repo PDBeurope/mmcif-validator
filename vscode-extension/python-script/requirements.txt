@@ -1,0 +1,3 @@
+# Python requirements for mmCIF validator
+# No external dependencies required - uses only standard library
+
