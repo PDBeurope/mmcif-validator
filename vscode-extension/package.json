@@ -1,0 +1,95 @@
+{
+  "name": "pdbe-mmcif-validator",
+  "displayName": "PDBe mmCIF Validator",
+  "description": "Validates mmCIF/CIF files against the PDBx/mmCIF dictionary or any CIF dictionary with real-time error checking",
+  "version": "0.1.0",
+  "author": "Deborah Harrus <Protein Data Bank in Europe (PDBe), EMBL-EBI>",
+  "publisher": "PDBEurope",
+  "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PDBeurope/mmcif-validator"
+  },
+  "bugs": {
+    "url": "https://github.com/PDBeurope/mmcif-validator/issues"
+  },
+  "homepage": "https://github.com/PDBeurope/mmcif-validator#readme",
+  "license": "MIT",
+  "keywords": [
+    "mmcif",
+    "cif",
+    "validation",
+    "pdb",
+    "crystallography",
+    "structural biology"
+  ],
+  "categories": [
+    "Linters",
+    "Other"
+  ],
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onLanguage:cif"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "cif",
+        "aliases": [
+          "mmCIF",
+          "CIF"
+        ],
+        "extensions": [
+          ".cif"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "cif",
+        "scopeName": "source.cif",
+        "path": "./syntaxes/cif.tmLanguage.json"
+      }
+    ],
+    "configuration": {
+      "title": "PDBe mmCIF Validator",
+      "properties": {
+        "mmcifValidator.dictionaryPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to the mmCIF dictionary file (mmcif_pdbx_v5_next.dic). Can be absolute or relative to workspace root. If not set, will look for common dictionary files in workspace."
+        },
+        "mmcifValidator.dictionaryUrl": {
+          "type": "string",
+          "default": "http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic",
+          "description": "URL to download the mmCIF dictionary from. Defaults to the official PDB dictionary. Takes precedence over dictionaryPath."
+        },
+        "mmcifValidator.pythonPath": {
+          "type": "string",
+          "default": "python",
+          "description": "Path to Python executable"
+        },
+        "mmcifValidator.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable/disable mmCIF validation"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.80.0",
+    "@types/node": "^18.0.0",
+    "typescript": "^5.0.0"
+  }
+}
+

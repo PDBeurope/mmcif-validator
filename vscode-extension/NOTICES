@@ -1,0 +1,20 @@
+THIRD-PARTY SOFTWARE NOTICES AND INFORMATION
+
+This extension includes code and functionality from the following third-party projects:
+
+===============================================================================
+vscode-cif Extension
+===============================================================================
+
+The following files include code derived from the vscode-cif extension:
+- syntaxes/cif.tmLanguage.json
+- src/cifParser.ts
+
+Original work Copyright (c) 2018-2025 Heikki Kainulainen, Kaisa Helttunen
+Source: https://github.com/hmkainul/vscode-cif
+License: MIT License
+
+The syntax highlighting grammar and hover functionality parser are based on the 
+implementation by Heikki Kainulainen (hmkainul) from the vscode-cif extension.
+
+===============================================================================
