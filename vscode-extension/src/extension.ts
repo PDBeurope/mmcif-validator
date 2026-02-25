@@ -340,6 +340,8 @@ async function validateDocument(
     const dictionaryPath = config.get<string>('dictionaryPath', '');
     const dictionaryUrl = config.get<string>('dictionaryUrl', 'http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic');
     const pythonPath = config.get<string>('pythonPath', 'python');
+    const validationTimeoutSeconds = config.get<number>('validationTimeoutSeconds', 60);
+    const validationTimeoutMs = Math.max(5000, Math.min(600000, validationTimeoutSeconds * 1000));
 
     // Determine dictionary source
     let dictSource: string | null = null;
@@ -489,7 +491,7 @@ async function validateDocument(
         
         const { stdout, stderr } = await execAsync(
             command,
-            { timeout: 30000 }
+            { timeout: validationTimeoutMs }
         );
         
         // Log output for debugging

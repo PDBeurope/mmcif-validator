@@ -20,6 +20,7 @@ Both implementations share the same validation engine, ensuring consistent resul
 - ✅ **Dictionary flexibility** - Works with PDBx/mmCIF dictionary or any CIF dictionary format
 - ✅ **Comprehensive validation** - Validates mandatory items, enumerations, data types, ranges, foreign keys, composite keys, and more
 - ✅ **Works out-of-the-box** - No configuration required (uses default dictionary URL)
+- ✅ **Configurable validation timeout** - Increase timeout for very large files (extension setting, default 60s, max 10 min)
 - ✅ **No dependencies** - Python script uses only standard library
 
 ## Quick Start

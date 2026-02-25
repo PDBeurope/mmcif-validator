@@ -225,11 +225,11 @@ python validate_mmcif.py mmcif_pdbx_v5_next.dic 9rff.cif > validation_results.tx
 - Ensure Python 3.7+ is installed: `python --version`
 - Check file paths are correct
 - Verify dictionary file format is correct
-- For large files, validation may take time (30 second timeout)
+- For large files, validation may take time. When using the VSCode extension, the validation timeout is configurable in settings (default 60 seconds, max 600); increase `mmcifValidator.validationTimeoutSeconds` if you see "Validation timed out".
 
 ### Python not found
 - Make sure Python is in your PATH
-- Or use the full path to Python: `C:\Python39\python.exe validate_mmcif.py ...`
+- Or use the full path to your Python executable, e.g. `python3 validate_mmcif.py ...` or on Windows `C:\Python39\python.exe validate_mmcif.py ...`
 
 ## Limitations
 

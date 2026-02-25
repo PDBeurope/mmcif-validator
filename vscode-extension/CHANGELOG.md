@@ -4,6 +4,11 @@ All notable changes to the PDBe mmCIF Validator extension will be documented in 
 
 # [Unreleased]
 
+## [0.1.3] - 2026-02-25
+
+### Added
+- **Configurable validation timeout**: Validation timeout can be set in extension settings (`mmcifValidator.validationTimeoutSeconds`). Default 60 seconds, range 5–600 seconds (10 minutes max). Use a longer timeout for very large mmCIF files to avoid "Validation timed out" messages.
+
 ## [0.1.2] - 2025-12-11
 
 ### Added

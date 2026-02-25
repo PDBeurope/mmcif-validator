@@ -66,6 +66,9 @@ The extension works with sensible defaults, but you can customize it in VSCode s
 - **`mmcifValidator.enabled`** (default: `true`)
   - Enable/disable validation
 
+- **`mmcifValidator.validationTimeoutSeconds`** (default: `60`, range: 5–600)
+  - Validation timeout in seconds. Increase for very large mmCIF files to avoid "Validation timed out" messages (e.g. set to 120 or 180).
+
 ### Example Settings
 
 **Use default (recommended):**
@@ -103,6 +106,13 @@ The extension works with sensible defaults, but you can customize it in VSCode s
 }
 ```
 On Windows, use escaped backslashes, e.g. `"C:\\Python39\\python.exe"`.
+
+**Longer validation timeout** (for very large files):
+```json
+{
+  "mmcifValidator.validationTimeoutSeconds": 120
+}
+```
 
 ## Validation Checks
 
@@ -187,7 +197,7 @@ These are advisory issues that may indicate problems but are not strictly requir
 
 1. Check that the dictionary file/URL is accessible
 2. Verify the mmCIF file format is correct
-3. Large files may take time to validate (30 second timeout)
+3. Large files may take time to validate; the timeout is configurable in settings (default 60 seconds, max 600). Increase `mmcifValidator.validationTimeoutSeconds` if you see "Validation timed out" on large files.
 
 ## Standalone Python Script
 
