@@ -4,6 +4,14 @@ All notable changes to the PDBe mmCIF Validator extension will be documented in 
 
 # [Unreleased]
 
+## [0.1.4] - 2026-02-26
+
+### Added
+- **Duplicate category and item detection**: Validator now reports dictionary-breaking errors when a category or item is duplicated
+  - **Duplicate category**: Same category appears in more than one loop block or in more than one frame (non-loop) block; reported once per category with line of first duplicate
+  - **Duplicate item**: Same item name appears twice in a loop header, twice in a frame block, or in two blocks of the same category; reported with line of first occurrence
+  - Works for both loop format (`loop_` with multiple columns) and frame format (item–value pairs)
+
 ## [0.1.3] - 2026-02-25
 
 ### Added

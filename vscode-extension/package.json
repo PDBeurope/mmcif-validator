@@ -2,7 +2,7 @@
   "name": "pdbe-mmcif-validator",
   "displayName": "PDBe mmCIF Validator",
   "description": "Validates mmCIF/CIF files against the PDBx/mmCIF dictionary or any CIF dictionary with real-time error checking",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "author": "Deborah Harrus <Protein Data Bank in Europe (PDBe), EMBL-EBI>",
   "publisher": "PDBEurope",
   "icon": "icon.png",
@@ -90,8 +90,8 @@
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./"
+    "compile": "npx tsc -p ./",
+    "watch": "npx tsc -watch -p ./"
   },
   "devDependencies": {
     "@types/vscode": "^1.80.0",
