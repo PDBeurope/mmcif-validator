@@ -13,6 +13,7 @@ A standalone Python script to validate mmCIF/CIF files against the PDBx/mmCIF di
 - ✅ **Foreign key integrity validation** - Ensures referenced data exists in parent items
 - ✅ **Composite key validation** - Validates that combinations of multiple child items together match corresponding combinations in parent categories
 - ✅ **Operation expression validation** - Parses and validates complex operation expressions like `(1-60)`, `(1,2,5)`, `(X0)(1-5,11-15)`
+- ✅ **Duplicate category and item detection** - Reports when a category or item is duplicated (in loop or frame format)
 - ✅ Supports local dictionary files or downloading from URL (works with PDBx/mmCIF dictionary or any CIF dictionary format)
 - ✅ **Enhanced JSON output** - Includes precise character positions and column indices for programmatic error handling
 - ✅ **Exit codes** - Returns 0 for success, 1 for errors (useful for CI/CD integration)

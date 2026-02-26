@@ -496,6 +496,10 @@ class MmCIFParser:
         self.items: Dict[str, List[Tuple[int, str, int, int]]] = {}  # item_name -> [(line_num, value, global_column_index, local_column_index), ...]
         self.categories: Set[str] = set()  # Set of category names present in the file
         self.lines: List[str] = []
+        # Each loop block: (loop_start_line, category_name, [(item_name, header_line_num), ...])
+        self.loop_blocks: List[Tuple[int, str, List[Tuple[str, int]]]] = []
+        # Frame blocks (non-loop item-name value pairs): (first_line, category_name, [(item_name, line_num), ...])
+        self.frame_blocks: List[Tuple[int, str, List[Tuple[str, int]]]] = []
         
     def parse(self):
         """Parse the mmCIF file. Only parses the first data block."""
@@ -531,6 +535,10 @@ class MmCIFParser:
         self._in_multiline_string = False  # Track if we're inside a multi-line string
         self._multiline_content = ""  # Accumulate multi-line string content
         self._multiline_start_line = 0  # Track line where multi-line string started
+        # Frame block (non-loop): [start_line, category, [(item_name, line_num), ...]] or None
+        current_frame_block = None
+        # Categories that have been closed (we left them via loop_ or different category) - re-appearance is duplicate category
+        closed_frame_categories: Set[str] = set()
         
         for line_num, line in enumerate(self.lines, 1):
             # Skip lines before the first data block
@@ -558,6 +566,16 @@ class MmCIFParser:
             
             # Check for loop_ directive
             if stripped == 'loop_':
+                # Close current frame block (non-loop items) if any
+                if current_frame_block is not None:
+                    closed_frame_categories.add(current_frame_block[1])
+                    self.frame_blocks.append((current_frame_block[0], current_frame_block[1], list(current_frame_block[2])))
+                    current_frame_block = None
+                # Record the previous loop block (for duplicate category/item detection)
+                if in_loop and is_real_loop and current_loop_items:
+                    first_item_name = current_loop_items[0][0]
+                    cat = first_item_name[1:].split('.')[0] if (first_item_name.startswith('_') and '.' in first_item_name) else ''
+                    self.loop_blocks.append((loop_start_line, cat, list(current_loop_items)))
                 # Finish any partial row before starting new loop
                 if partial_row_values and current_loop_items:
                     self._assign_loop_row(current_loop_items, partial_row_values, partial_row_line_nums)
@@ -585,15 +603,14 @@ class MmCIFParser:
                         category = item_name[1:].split('.')[0]
                         self.categories.add(category)
                     
-                    if in_loop and current_loop_items:
-                        # If we're in a loop and see an item name with no value,
-                        # it's a loop item header - add it to the loop
+                    if in_loop:
+                        # In a loop: item with no value is a loop header; item with value ends the loop
                         if value is None:
                             current_loop_items.append((item_name, line_num))
                             expected_columns = len(current_loop_items)
                         else:
                             # Item name with value - this ends the loop, finish any partial row
-                            if partial_row_values:
+                            if partial_row_values and current_loop_items:
                                 self._assign_loop_row(current_loop_items, partial_row_values, partial_row_line_nums)
                             in_loop = False
                             is_real_loop = False
@@ -608,6 +625,29 @@ class MmCIFParser:
                             if value is not None:
                                 value = value.strip("'\" ")
                             self.items[item_name].append((line_num, value, 0, 1))  # global_column_index = 0, local_column_index = 1 for non-loop items (item name is at 0, value is at 1)
+                            # Record frame block (for duplicate category/item detection)
+                            if category:
+                                if category in closed_frame_categories:
+                                    # Re-appearing category (e.g. struct again after a loop) = new block, duplicate category
+                                    if current_frame_block is not None:
+                                        self.frame_blocks.append((current_frame_block[0], current_frame_block[1], list(current_frame_block[2])))
+                                    current_frame_block = [line_num, category, [(item_name, line_num)]]
+                                elif current_frame_block is not None and current_frame_block[1] == category:
+                                    # Same category: if this item already in block, we're re-starting category (duplicate)
+                                    if any(x[0] == item_name for x in current_frame_block[2]):
+                                        closed_frame_categories.add(category)
+                                        self.frame_blocks.append((current_frame_block[0], current_frame_block[1], list(current_frame_block[2])))
+                                        current_frame_block = [line_num, category, [(item_name, line_num)]]
+                                    else:
+                                        current_frame_block[2].append((item_name, line_num))
+                                elif current_frame_block is not None and current_frame_block[1] != category:
+                                    closed_frame_categories.add(current_frame_block[1])
+                                    self.frame_blocks.append((current_frame_block[0], current_frame_block[1], list(current_frame_block[2])))
+                                    current_frame_block = [line_num, category, [(item_name, line_num)]]
+                                elif current_frame_block is None:
+                                    current_frame_block = [line_num, category, [(item_name, line_num)]]
+                                else:
+                                    current_frame_block[2].append((item_name, line_num))
                     else:
                         # Not in a loop - regular item
                         if item_name not in self.items:
@@ -616,6 +656,27 @@ class MmCIFParser:
                             # Strip quotes and whitespace from value
                             value = value.strip("'\" ")
                             self.items[item_name].append((line_num, value, 0, 1))  # global_column_index = 0, local_column_index = 1 for non-loop items (item name is at 0, value is at 1)
+                            # Record frame block (for duplicate category/item detection)
+                            if category:
+                                if category in closed_frame_categories:
+                                    if current_frame_block is not None:
+                                        self.frame_blocks.append((current_frame_block[0], current_frame_block[1], list(current_frame_block[2])))
+                                    current_frame_block = [line_num, category, [(item_name, line_num)]]
+                                elif current_frame_block is not None and current_frame_block[1] == category:
+                                    if any(x[0] == item_name for x in current_frame_block[2]):
+                                        closed_frame_categories.add(category)
+                                        self.frame_blocks.append((current_frame_block[0], current_frame_block[1], list(current_frame_block[2])))
+                                        current_frame_block = [line_num, category, [(item_name, line_num)]]
+                                    else:
+                                        current_frame_block[2].append((item_name, line_num))
+                                elif current_frame_block is not None and current_frame_block[1] != category:
+                                    closed_frame_categories.add(current_frame_block[1])
+                                    self.frame_blocks.append((current_frame_block[0], current_frame_block[1], list(current_frame_block[2])))
+                                    current_frame_block = [line_num, category, [(item_name, line_num)]]
+                                elif current_frame_block is None:
+                                    current_frame_block = [line_num, category, [(item_name, line_num)]]
+                                else:
+                                    current_frame_block[2].append((item_name, line_num))
                         else:
                             # Item name without value - start a new pseudo-loop (for multi-line string handling)
                             current_loop_items = [(item_name, line_num)]
@@ -708,6 +769,16 @@ class MmCIFParser:
         # Finish any remaining partial row
         if in_loop and current_loop_items and partial_row_values:
             self._assign_loop_row(current_loop_items, partial_row_values, partial_row_line_nums)
+        
+        # Record the last loop block (for duplicate category/item detection)
+        if in_loop and is_real_loop and current_loop_items:
+            first_item_name = current_loop_items[0][0]
+            cat = first_item_name[1:].split('.')[0] if (first_item_name.startswith('_') and '.' in first_item_name) else ''
+            self.loop_blocks.append((loop_start_line, cat, list(current_loop_items)))
+        
+        # Close final frame block if any
+        if current_frame_block is not None:
+            self.frame_blocks.append((current_frame_block[0], current_frame_block[1], list(current_frame_block[2])))
         
         # Clean up multi-line string state
         if hasattr(self, '_in_multiline_string'):
@@ -828,6 +899,55 @@ class MmCIFValidator:
     def validate(self) -> List[ValidationError]:
         """Perform validation and return list of errors."""
         self.errors = []
+        
+        # Check for duplicate categories (same category in more than one block: loop or frame)
+        all_blocks = list(getattr(self.mmcif, 'loop_blocks', [])) + list(getattr(self.mmcif, 'frame_blocks', []))
+        seen_categories: Dict[str, int] = {}
+        reported_duplicate_categories: Set[str] = set()
+        for block_start_line, category, block_items in all_blocks:
+            if not category:
+                continue
+            if category in seen_categories:
+                # Report duplicate category only once per category (at first duplicate block)
+                if category not in reported_duplicate_categories:
+                    reported_duplicate_categories.add(category)
+                    self.errors.append(ValidationError(
+                        line=block_start_line,
+                        item=f"_{category}.",
+                        message=f"Duplicate category '{category}' (first occurrence at line {seen_categories[category]})",
+                        severity="error"
+                    ))
+            else:
+                seen_categories[category] = block_start_line
+        
+        # Check for duplicate items within a block and across blocks of same category
+        seen_items_by_category: Dict[str, Dict[str, int]] = {}  # category -> {item_name: first_line}
+        for block_start_line, category, block_items in all_blocks:
+            seen_items_in_block: Dict[str, int] = {}
+            for item_name, item_line in block_items:
+                # Duplicate within same block
+                if item_name in seen_items_in_block:
+                    self.errors.append(ValidationError(
+                        line=item_line,
+                        item=item_name,
+                        message=f"Duplicate item '{item_name}' (first occurrence at line {seen_items_in_block[item_name]})",
+                        severity="error"
+                    ))
+                else:
+                    seen_items_in_block[item_name] = item_line
+                    # Duplicate in same category in a previous block
+                    if category and category in seen_items_by_category and item_name in seen_items_by_category[category]:
+                        self.errors.append(ValidationError(
+                            line=item_line,
+                            item=item_name,
+                            message=f"Duplicate item '{item_name}' (first occurrence at line {seen_items_by_category[category][item_name]})",
+                            severity="error"
+                        ))
+                if category:
+                    if category not in seen_items_by_category:
+                        seen_items_by_category[category] = {}
+                    if item_name not in seen_items_by_category[category]:
+                        seen_items_by_category[category][item_name] = item_line
         
         # Check for undefined items
         for item_name in self.mmcif.items:

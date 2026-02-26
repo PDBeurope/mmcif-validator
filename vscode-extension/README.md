@@ -11,7 +11,7 @@ A Visual Studio Code extension to validate mmCIF/CIF files against the PDBx/mmCI
 - ✅ **Dictionary support** - Works with the PDBx/mmCIF dictionary or any CIF dictionary format
 - ✅ **Flexible dictionary sources** - Uses local dictionary files or downloads from URL
 - ✅ **Auto-detection** - Automatically finds dictionary files in your workspace
-- ✅ **Comprehensive checks** - Validates mandatory items, enumerations, and schema compliance
+- ✅ **Comprehensive checks** - Validates mandatory items, enumerations, schema compliance, and duplicate category/item detection
 - ✅ **Works out-of-the-box** - No configuration required!
 
 ## Installation

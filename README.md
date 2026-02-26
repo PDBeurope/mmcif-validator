@@ -59,6 +59,7 @@ The validator performs comprehensive checks including:
 - Foreign key integrity
 - Composite key validation
 - Complex operation expression parsing
+- Duplicate category and item detection (loop and frame format)
 
 For detailed information about all validation checks, error severity levels, and configuration options, see the [extension README](vscode-extension/README.md).
 
