@@ -1,5 +1,7 @@
 # PDBe mmCIF Validator - Python Script
 
+**Version 0.1.5**
+
 A standalone Python script to validate mmCIF/CIF files against the PDBx/mmCIF dictionary or any CIF dictionary.
 
 ## Features
@@ -40,7 +42,7 @@ python validate_mmcif.py <dictionary.dic or URL> <mmcif_file.cif>
 
 ```bash
 # Use PDBx/mmCIF dictionary
-python validate_mmcif.py mmcif_pdbx_v5_next.dic 9rff.cif
+python validate_mmcif.py mmcif_pdbx_v5_next.dic 6qvt.cif
 
 # Or use any CIF dictionary file
 python validate_mmcif.py path/to/your/cif_dictionary.dic your_file.cif
@@ -50,23 +52,23 @@ python validate_mmcif.py path/to/your/cif_dictionary.dic your_file.cif
 
 ```bash
 # Using --url option (explicit) - defaults to PDBx/mmCIF dictionary
-python validate_mmcif.py --url http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic 9rff.cif
+python validate_mmcif.py --url http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic 6qvt.cif
 
 # Or use any CIF dictionary URL
-python validate_mmcif.py --url https://example.com/path/to/your/dictionary.dic 9rff.cif
+python validate_mmcif.py --url https://example.com/path/to/your/dictionary.dic 6qvt.cif
 
 # Or as positional argument (auto-detects URL)
-python validate_mmcif.py http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic 9rff.cif
+python validate_mmcif.py http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic 6qvt.cif
 ```
 
 ### Explicit Options
 
 ```bash
 # Use local file
-python validate_mmcif.py --file mmcif_pdbx_v5_next.dic 9rff.cif
+python validate_mmcif.py --file mmcif_pdbx_v5_next.dic 6qvt.cif
 
 # Use URL
-python validate_mmcif.py --url http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic 9rff.cif
+python validate_mmcif.py --url http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic 6qvt.cif
 ```
 
 ### Help
@@ -74,6 +76,105 @@ python validate_mmcif.py --url http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdb
 ```bash
 python validate_mmcif.py --help
 ```
+
+## Library usage
+
+You can use the validator as a Python library (e.g. in prerelease pipelines or other tools) by importing and calling the same logic the CLI uses. The library raises exceptions instead of exiting, so callers can handle errors.
+
+### Install
+
+From the project (e.g. after cloning or from a wheel):
+
+```bash
+pip install -e /path/to/mmcif-validator/vscode-extension/python-script
+# or from that directory:
+pip install -e .
+```
+
+Or install from PyPI (when published):
+
+```bash
+pip install pdbe-mmcif-validator
+```
+
+When installed via pip, a `validate-mmcif` console script is also available:
+
+```bash
+validate-mmcif --file mmcif_pdbx_v5_next.dic file.cif
+validate-mmcif --help
+```
+
+### Basic usage
+
+```python
+from pathlib import Path
+from validate_mmcif import validate, ValidatorFactory, ValidationError
+from validate_mmcif import DictionaryNotFoundError, CifNotFoundError, DownloadError
+
+# Option 1: top-level function (recommended)
+try:
+    errors = validate(Path("mmcif_pdbx_v5_next.dic"), Path("file.cif"))
+    for err in errors:
+        print(err.line, err.item, err.message, err.severity)
+    if not errors:
+        print("Validation passed.")
+except DictionaryNotFoundError as e:
+    print("Dictionary not found:", e)
+except CifNotFoundError as e:
+    print("mmCIF file not found:", e)
+except DownloadError as e:
+    print("Download failed:", e)
+
+# Option 2: factory (same behaviour)
+errors = ValidatorFactory.validate(Path("dict.dic"), Path("file.cif"))
+```
+
+### Using a dictionary from a URL
+
+Download the dictionary first, then validate:
+
+```python
+from pathlib import Path
+from validate_mmcif import validate, download_dictionary, DownloadError
+
+try:
+    dict_path = download_dictionary("http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic")
+    errors = validate(dict_path, Path("file.cif"))
+    # ... use errors ...
+finally:
+    if dict_path.exists():
+        dict_path.unlink()  # clean up temp file
+except DownloadError as e:
+    print("Download failed:", e)
+```
+
+### Integrating with your logging
+
+The module uses the standard `logging` logger `validate_mmcif`. Configure logging so library messages go to your logs:
+
+```python
+import logging
+logging.basicConfig(level=logging.DEBUG)
+# or attach to your app's logger:
+logging.getLogger("validate_mmcif").setLevel(logging.INFO)
+```
+
+### Exceptions
+
+| Exception | When it is raised |
+|-----------|-------------------|
+| `DictionaryNotFoundError` | The dictionary path does not exist. |
+| `CifNotFoundError` | The mmCIF file path does not exist. |
+| `DownloadError` | Downloading the dictionary from a URL failed. |
+
+All of these inherit from `MmCIFValidatorError`, so you can catch that for any validator error.
+
+### Return value
+
+`validate()` and `ValidatorFactory.validate()` return a list of `ValidationError` dataclass instances with:
+
+- `line`, `item`, `message`, `severity` (`"error"` or `"warning"`)
+- `column`, `start_char`, `end_char` (optional, for positioning)
 
 ## Output
 
@@ -206,13 +307,13 @@ These are advisory issues that may indicate problems but are not strictly requir
 
 ```bash
 # Validate with local dictionary
-python validate_mmcif.py mmcif_pdbx_v5_next.dic 9rff.cif
+python validate_mmcif.py mmcif_pdbx_v5_next.dic 6qvt.cif
 
 # Validate with online dictionary
-python validate_mmcif.py --url http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic 9rff.cif
+python validate_mmcif.py --url http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic 6qvt.cif
 
 # Output to file
-python validate_mmcif.py mmcif_pdbx_v5_next.dic 9rff.cif > validation_results.txt
+python validate_mmcif.py mmcif_pdbx_v5_next.dic 6qvt.cif > validation_results.txt
 ```
 
 ## Troubleshooting

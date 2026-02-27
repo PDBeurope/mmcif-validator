@@ -1,5 +1,7 @@
 # PDBe mmCIF Validator
 
+**Version 0.1.5**
+
 Real-time VSCode extension and standalone Python script for validating mmCIF/CIF files against the PDBx/mmCIF dictionary or any CIF dictionary.
 
 ## Overview

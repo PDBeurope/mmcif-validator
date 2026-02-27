@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+
+# Build output (TypeScript)
+out/
+*.js.map
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+*.so
+.venv/
+venv/
+env/
+*.egg-info/
+*.egg
+
+# IDE / editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs and temp
+*.log
+*.tmp
+.cache/
+
+# Maintainer-only (not for GitHub)
+vscode-extension/python-script/PUBLISH_PYPI.md
