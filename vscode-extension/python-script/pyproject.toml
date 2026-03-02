@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pdbe-mmcif-validator"
+version = "0.1.5"
+description = "Validate mmCIF/CIF files against the PDBx/mmCIF dictionary or any CIF dictionary"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.7"
+authors = [
+    { name = "Deborah Harrus", email = "deborah@ebi.ac.uk" }
+]
+maintainers = [
+    { name = "Protein Data Bank in Europe (PDBe), EMBL-EBI" }
+]
+keywords = ["mmcif", "cif", "pdb", "validation", "pdbe", "structural-biology"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Chemistry",
+]
+
+[project.optional-dependencies]
+dev = []
+
+[project.urls]
+Homepage = "https://github.com/PDBeurope/mmcif-validator"
+Documentation = "https://github.com/PDBeurope/mmcif-validator/blob/main/vscode-extension/python-script/README.md"
+Repository = "https://github.com/PDBeurope/mmcif-validator"
+
+[project.scripts]
+validate-mmcif = "validate_mmcif:main"
+
+[tool.setuptools]
+py-modules = ["validate_mmcif"]

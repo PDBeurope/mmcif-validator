@@ -4,6 +4,25 @@ All notable changes to the PDBe mmCIF Validator extension will be documented in 
 
 # [Unreleased]
 
+## [0.1.5] - 2026-02-27
+
+### Added
+- **Python validator as library**: The Python validator can be used from other code (e.g. prerelease pipelines) as well as from the CLI
+  - **Library entry point**: `validate(dict_path, cif_path)` and `ValidatorFactory.validate(dict_path, cif_path)` return a list of `ValidationError`; no process exit when used as a library
+  - **Custom exceptions**: `DictionaryNotFoundError`, `CifNotFoundError`, `DownloadError` (and base `MmCIFValidatorError`) so callers can catch and handle errors instead of the process exiting
+  - **Logging**: Replaced `print` with the standard `logging` module (`logger`) so the validator integrates with existing logging configuration
+- **PyPI packaging**: The Python validator is packaged for PyPI as `pdbe-mmcif-validator`
+  - Install with `pip install pdbe-mmcif-validator`; provides a `validate-mmcif` console script
+  - `pyproject.toml` in `vscode-extension/python-script` with metadata, entry point, and Python 3.7+ support
+- **README**: New "Library usage" section in the Python script README with install, basic usage, URL download example, logging integration, and exception reference
+
+### Improved
+- **Python validator structure**: Refactored for both CLI and library use
+  - **ValidatorFactory**: Single factory method that parses dictionary, parses mmCIF, and runs validation (used by both `main()` and library callers)
+  - **Split validation**: `MmCIFValidator.validate()` split into smaller methods (`_validate_duplicate_blocks`, `_validate_undefined_and_mandatory_items`, `_validate_item_values`, etc.) with shared helpers (`_present_values`, `_advisory_message`, etc.)
+  - **Typing**: `severity` now uses `Literal["error", "warning"]`; item values use a named tuple `ItemValue` (line_num, value, global_column_index, local_column_index) instead of raw tuples
+  - **Exit behaviour**: `sys.exit()` is only called from `main()`; library code raises exceptions so callers can handle failures
+
 ## [0.1.4] - 2026-02-26
 
 ### Added

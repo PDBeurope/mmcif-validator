@@ -12,11 +12,39 @@ import re
 import sys
 import json
 import argparse
+import logging
 import urllib.request
 import tempfile
 from pathlib import Path
-from typing import Dict, List, Set, Optional, Tuple
+from typing import Dict, List, Set, Optional, Tuple, Literal
 from dataclasses import dataclass
+from collections import namedtuple
+
+# Module-level logger for library integration with existing logging mechanisms
+logger = logging.getLogger(__name__)
+
+# Named tuple for item values: (line_num, value, global_column_index, local_column_index)
+ItemValue = namedtuple('ItemValue', ['line_num', 'value', 'global_column_index', 'local_column_index'])
+
+
+class MmCIFValidatorError(Exception):
+    """Base exception for mmCIF validator errors."""
+    pass
+
+
+class DictionaryNotFoundError(MmCIFValidatorError):
+    """Raised when the dictionary file is not found."""
+    pass
+
+
+class CifNotFoundError(MmCIFValidatorError):
+    """Raised when the mmCIF file is not found."""
+    pass
+
+
+class DownloadError(MmCIFValidatorError):
+    """Raised when dictionary download fails."""
+    pass
 
 
 @dataclass
@@ -25,7 +53,7 @@ class ValidationError:
     line: int
     item: str
     message: str
-    severity: str = "error"  # error, warning
+    severity: Literal["error", "warning"] = "error"
     column: Optional[int] = None  # Column index (0-based) within the line, for loop data
     start_char: Optional[int] = None  # Character start position within the line
     end_char: Optional[int] = None  # Character end position within the line
@@ -40,7 +68,6 @@ class DictionaryParser:
         self.categories: Dict[str, Dict] = {}
         self.mandatory_items: Set[str] = set()
         self.parent_child_relationships: List[Dict] = []  # List of {child_cat, parent_cat, child_item, parent_item}
-        self.type_regex_patterns: Dict[str, str] = {}  # Map type code to regex pattern
         self.type_regex_patterns: Dict[str, str] = {}  # Map type code to regex pattern
         
     def parse(self):
@@ -493,7 +520,7 @@ class MmCIFParser:
     
     def __init__(self, cif_path: Path):
         self.cif_path = cif_path
-        self.items: Dict[str, List[Tuple[int, str, int, int]]] = {}  # item_name -> [(line_num, value, global_column_index, local_column_index), ...]
+        self.items: Dict[str, List[ItemValue]] = {}  # item_name -> list of ItemValue(line_num, value, global_column_index, local_column_index)
         self.categories: Set[str] = set()  # Set of category names present in the file
         self.lines: List[str] = []
         # Each loop block: (loop_start_line, category_name, [(item_name, header_line_num), ...])
@@ -624,7 +651,7 @@ class MmCIFParser:
                             # Strip quotes and whitespace from value
                             if value is not None:
                                 value = value.strip("'\" ")
-                            self.items[item_name].append((line_num, value, 0, 1))  # global_column_index = 0, local_column_index = 1 for non-loop items (item name is at 0, value is at 1)
+                            self.items[item_name].append(ItemValue(line_num, value, 0, 1))  # global_column_index = 0, local_column_index = 1 for non-loop items (item name is at 0, value is at 1)
                             # Record frame block (for duplicate category/item detection)
                             if category:
                                 if category in closed_frame_categories:
@@ -655,7 +682,7 @@ class MmCIFParser:
                         if value is not None:
                             # Strip quotes and whitespace from value
                             value = value.strip("'\" ")
-                            self.items[item_name].append((line_num, value, 0, 1))  # global_column_index = 0, local_column_index = 1 for non-loop items (item name is at 0, value is at 1)
+                            self.items[item_name].append(ItemValue(line_num, value, 0, 1))  # global_column_index = 0, local_column_index = 1 for non-loop items (item name is at 0, value is at 1)
                             # Record frame block (for duplicate category/item detection)
                             if category:
                                 if category in closed_frame_categories:
@@ -820,7 +847,7 @@ class MmCIFParser:
                 global_column_index = i
                 # Local column index is the position on this specific line (0-based)
                 local_column_index = local_column_indices[i] if i < len(local_column_indices) else 0
-                self.items[item_name].append((value_line_num, values[i], global_column_index, local_column_index))
+                self.items[item_name].append(ItemValue(value_line_num, values[i], global_column_index, local_column_index))
     
     def _parse_loop_line(self, line: str) -> List[str]:
         """Parse a line of loop data, handling quoted strings."""
@@ -859,12 +886,12 @@ class MmCIFParser:
         
         return values
     
-    def get_category_rows(self, category: str) -> List[Dict[str, Tuple[int, str, int, int]]]:
+    def get_category_rows(self, category: str) -> List[Dict[str, ItemValue]]:
         """
         Get all rows in a category as dictionaries.
         Reconstructs rows by matching values at the same index across items.
-        
-        Returns: List of dicts, each dict maps item_name -> (line_num, value, global_col, local_col)
+
+        Returns: List of dicts, each dict maps item_name -> ItemValue(line_num, value, global_col, local_col)
         """
         # Get all items in this category
         category_items = {name: values for name, values in self.items.items() 
@@ -899,7 +926,24 @@ class MmCIFValidator:
     def validate(self) -> List[ValidationError]:
         """Perform validation and return list of errors."""
         self.errors = []
-        
+        self._validate_duplicate_blocks()
+        self._validate_undefined_and_mandatory_items()
+        self._validate_item_values()
+        # Validate parent/child category relationships
+        self._validate_parent_child_relationships()
+        # Validate oper_expression foreign key relationships
+        self._validate_oper_expression_foreign_keys()
+        return self.errors
+
+    @staticmethod
+    def _present_values(values: List[ItemValue]):
+        """Yield ItemValue entries whose value is not '?' or '.' (missing/unknown)."""
+        for iv in values:
+            if iv.value not in ('?', '.'):
+                yield iv
+
+    def _validate_duplicate_blocks(self) -> None:
+        """Check for duplicate categories and duplicate items within/across blocks."""
         # Check for duplicate categories (same category in more than one block: loop or frame)
         all_blocks = list(getattr(self.mmcif, 'loop_blocks', [])) + list(getattr(self.mmcif, 'frame_blocks', []))
         seen_categories: Dict[str, int] = {}
@@ -919,7 +963,7 @@ class MmCIFValidator:
                     ))
             else:
                 seen_categories[category] = block_start_line
-        
+
         # Check for duplicate items within a block and across blocks of same category
         seen_items_by_category: Dict[str, Dict[str, int]] = {}  # category -> {item_name: first_line}
         for block_start_line, category, block_items in all_blocks:
@@ -948,21 +992,23 @@ class MmCIFValidator:
                         seen_items_by_category[category] = {}
                     if item_name not in seen_items_by_category[category]:
                         seen_items_by_category[category][item_name] = item_line
-        
+
+    def _validate_undefined_and_mandatory_items(self) -> None:
+        """Check for undefined items and missing mandatory items."""
         # Check for undefined items
         for item_name in self.mmcif.items:
             if item_name not in self.dictionary.items:
                 # Allow items that start with underscore (might be valid but not in dict)
                 # Only warn if it's clearly not a standard item
                 if not item_name.startswith('_'):
-                    line_num = self.mmcif.items[item_name][0][0] if self.mmcif.items[item_name] else 1
+                    line_num = self.mmcif.items[item_name][0].line_num if self.mmcif.items[item_name] else 1
                     self.errors.append(ValidationError(
                         line=line_num,
                         item=item_name,
                         message=f"Item '{item_name}' is not defined in the dictionary",
                         severity="warning"
                     ))
-        
+
         # Check for missing mandatory items (only for categories that are present)
         for mandatory_item in self.dictionary.mandatory_items:
             if mandatory_item not in self.mmcif.items:
@@ -979,170 +1025,171 @@ class MmCIFValidator:
                             message=f"Mandatory item '{mandatory_item}' is missing",
                             severity="error"
                         ))
-        
-        # Validate item values against enumerations
+
+    def _validate_item_values(self) -> None:
+        """Validate item values: enumerations, types, allowed and advisory ranges."""
         # Skip enumeration validation for linked items (they reference other items, enumerations are examples)
         # Also skip for atom_id, comp_id, and similar items that can have many valid values
         skip_enum_items = ['atom_id', 'comp_id', 'asym_id', 'seq_id', 'label_', 'auth_']
-        
+
         for item_name, values in self.mmcif.items.items():
-            if item_name in self.dictionary.items:
-                item_def = self.dictionary.items[item_name]
-                
-                # Skip enumeration validation for linked items or items that reference IDs
-                should_skip = False
-                if item_def.get('is_linked', False):
-                    should_skip = True
-                else:
-                    # Check if item name suggests it's an ID/reference field
-                    for skip_pattern in skip_enum_items:
-                        if skip_pattern in item_name.lower():
-                            should_skip = True
-                            break
-                
-                if 'enumerations' in item_def and not should_skip:
-                    allowed_values = set(item_def['enumerations'])
-                    for line_num, value, global_column_index, local_column_index in values:
-                        # Handle '?' and '.' as valid (missing/unknown values)
-                        if value not in ['?', '.'] and value not in allowed_values:
-                            # Enumeration validation reports as error since values must match the controlled vocabulary
-                            # Sort enumeration values alphabetically for consistent display
-                            sorted_values = sorted(allowed_values)
-                            self.errors.append(self._create_validation_error(
-                                line_num=line_num,
-                                item_name=item_name,
-                                message=f"Value '{value}' is not in enumeration examples: {sorted_values}",
-                                severity="error",
-                                global_column_index=global_column_index,
-                                local_column_index=local_column_index,
-                                value=value
-                            ))
-                
-                # Validate data types
-                if 'type' in item_def:
-                    item_type = item_def['type']
-                    for line_num, value, global_column_index, local_column_index in values:
-                        # Handle '?' and '.' as valid (missing/unknown values)
-                        if value not in ['?', '.']:
-                            if not self._validate_type(value, item_type):
-                                self.errors.append(self._create_validation_error(
-                                    line_num=line_num,
-                                    item_name=item_name,
-                                    message=f"Value '{value}' does not match expected type '{item_type}'",
-                                    severity="error",
-                                    global_column_index=global_column_index,
-                                    local_column_index=local_column_index,
-                                    value=value
-                                ))
-                
-                # Validate range constraints
-                # First check _item_range (strictly Allowed Boundary Conditions) - these are errors
-                if 'allowed_ranges' in item_def:
-                    # Multiple ranges (from loop structure) - value must match at least one
-                    for line_num, value, global_column_index, local_column_index in values:
-                        if value not in ['?', '.']:
-                            range_error = self._validate_ranges(value, item_def['allowed_ranges'], item_def.get('type'))
-                            if range_error:
-                                self.errors.append(self._create_validation_error(
-                                    line_num=line_num,
-                                    item_name=item_name,
-                                    message=range_error,
-                                    severity="error",
-                                global_column_index=global_column_index,
-                                local_column_index=local_column_index,
-                                value=value
-                                ))
-                elif 'allowed_range_min' in item_def or 'allowed_range_max' in item_def:
-                    # Single range (from non-loop structure)
-                    for line_num, value, global_column_index, local_column_index in values:
-                        # Handle '?' and '.' as valid (missing/unknown values)
-                        if value not in ['?', '.']:
-                            range_error = self._validate_range(value, item_def.get('allowed_range_min'), item_def.get('allowed_range_max'), item_def.get('type'))
-                            if range_error:
-                                self.errors.append(self._create_validation_error(
-                                    line_num=line_num,
-                                    item_name=item_name,
-                                    message=range_error,
-                                    severity="error",
-                                global_column_index=global_column_index,
-                                local_column_index=local_column_index,
-                                value=value
-                                ))
-                
-                # Then check _pdbx_item_range (Advisory Boundary Conditions) - these are warnings
-                if 'advisory_ranges' in item_def:
-                    # Multiple ranges (from loop structure) - value must match at least one
-                    for line_num, value, global_column_index, local_column_index in values:
-                        if value not in ['?', '.']:
-                            range_error = self._validate_ranges(value, item_def['advisory_ranges'], item_def.get('type'))
-                            if range_error:
-                                # Check if value is also outside allowed range
-                                is_outside_allowed = False
-                                if 'allowed_ranges' in item_def:
-                                    allowed_error = self._validate_ranges(value, item_def['allowed_ranges'], item_def.get('type'))
-                                    is_outside_allowed = allowed_error is not None
-                                elif 'allowed_range_min' in item_def or 'allowed_range_max' in item_def:
-                                    allowed_error = self._validate_range(value, item_def.get('allowed_range_min'), item_def.get('allowed_range_max'), item_def.get('type'))
-                                    is_outside_allowed = allowed_error is not None
-                                
-                                # Adjust message wording: use "advised" if within allowed range, "allowed" if outside
-                                if is_outside_allowed:
-                                    # Value is outside allowed range - keep "allowed" wording
-                                    message = f"Out of advisory range: {range_error}"
-                                else:
-                                    # Value is within allowed range but outside advisory - use "advised" wording
-                                    message = f"Out of advisory range: {range_error.replace('allowed', 'advised')}"
-                                
-                                self.errors.append(self._create_validation_error(
-                                    line_num=line_num,
-                                    item_name=item_name,
-                                    message=message,
-                                    severity="warning",
-                                global_column_index=global_column_index,
-                                local_column_index=local_column_index,
-                                value=value
-                                ))
-                elif 'advisory_range_min' in item_def or 'advisory_range_max' in item_def:
-                    # Single range (from non-loop structure)
-                    for line_num, value, global_column_index, local_column_index in values:
-                        # Handle '?' and '.' as valid (missing/unknown values)
-                        if value not in ['?', '.']:
-                            range_error = self._validate_range(value, item_def.get('advisory_range_min'), item_def.get('advisory_range_max'), item_def.get('type'))
-                            if range_error:
-                                # Check if value is also outside allowed range
-                                is_outside_allowed = False
-                                if 'allowed_ranges' in item_def:
-                                    allowed_error = self._validate_ranges(value, item_def['allowed_ranges'], item_def.get('type'))
-                                    is_outside_allowed = allowed_error is not None
-                                elif 'allowed_range_min' in item_def or 'allowed_range_max' in item_def:
-                                    allowed_error = self._validate_range(value, item_def.get('allowed_range_min'), item_def.get('allowed_range_max'), item_def.get('type'))
-                                    is_outside_allowed = allowed_error is not None
-                                
-                                # Adjust message wording: use "advised" if within allowed range, "allowed" if outside
-                                if is_outside_allowed:
-                                    # Value is outside allowed range - keep "allowed" wording
-                                    message = f"Out of advisory range: {range_error}"
-                                else:
-                                    # Value is within allowed range but outside advisory - use "advised" wording
-                                    message = f"Out of advisory range: {range_error.replace('allowed', 'advised')}"
-                                
-                                self.errors.append(self._create_validation_error(
-                                    line_num=line_num,
-                                    item_name=item_name,
-                                    message=message,
-                                    severity="warning",
-                                global_column_index=global_column_index,
-                                local_column_index=local_column_index,
-                                value=value
-                                ))
-        
-        # Validate parent/child category relationships
-        self._validate_parent_child_relationships()
-        
-        # Validate oper_expression foreign key relationships
-        self._validate_oper_expression_foreign_keys()
-        
-        return self.errors
+            if item_name not in self.dictionary.items:
+                continue
+            item_def = self.dictionary.items[item_name]
+
+            should_skip_enum = item_def.get('is_linked', False) or any(
+                p in item_name.lower() for p in skip_enum_items
+            )
+
+            if 'enumerations' in item_def and not should_skip_enum:
+                self._validate_enumeration(item_name, item_def, values)
+
+            # Validate data types
+            if 'type' in item_def:
+                self._validate_type_for_item(item_name, item_def, values)
+
+            # Validate range constraints: first check _item_range (strictly Allowed Boundary Conditions) - these are errors
+            if 'allowed_ranges' in item_def:
+                # Multiple ranges (from loop structure) - value must match at least one
+                self._validate_allowed_ranges_multi(item_name, item_def, values)
+            elif 'allowed_range_min' in item_def or 'allowed_range_max' in item_def:
+                # Single range (from non-loop structure)
+                self._validate_allowed_range_single(item_name, item_def, values)
+
+            # Then check _pdbx_item_range (Advisory Boundary Conditions) - these are warnings
+            if 'advisory_ranges' in item_def:
+                self._validate_advisory_ranges_multi(item_name, item_def, values)
+            elif 'advisory_range_min' in item_def or 'advisory_range_max' in item_def:
+                self._validate_advisory_range_single(item_name, item_def, values)
+
+    def _validate_enumeration(self, item_name: str, item_def: Dict, values: List[ItemValue]) -> None:
+        """Add errors for values not in the item's enumeration."""
+        allowed_values = set(item_def['enumerations'])
+        for iv in self._present_values(values):
+            if iv.value not in allowed_values:
+                # Enumeration validation reports as error since values must match the controlled vocabulary
+                # Sort enumeration values alphabetically for consistent display
+                sorted_values = sorted(allowed_values)
+                self.errors.append(self._create_validation_error(
+                    line_num=iv.line_num,
+                    item_name=item_name,
+                    message=f"Value '{iv.value}' is not in enumeration examples: {sorted_values}",
+                    severity="error",
+                    global_column_index=iv.global_column_index,
+                    local_column_index=iv.local_column_index,
+                    value=iv.value
+                ))
+
+    def _validate_type_for_item(self, item_name: str, item_def: Dict, values: List[ItemValue]) -> None:
+        """Add errors for values that do not match the item's type."""
+        item_type = item_def['type']
+        for iv in self._present_values(values):
+            # Handle '?' and '.' as valid (missing/unknown values) - _present_values already skips them
+            if not self._validate_type(iv.value, item_type):
+                self.errors.append(self._create_validation_error(
+                    line_num=iv.line_num,
+                    item_name=item_name,
+                    message=f"Value '{iv.value}' does not match expected type '{item_type}'",
+                    severity="error",
+                    global_column_index=iv.global_column_index,
+                    local_column_index=iv.local_column_index,
+                    value=iv.value
+                ))
+
+    def _validate_allowed_ranges_multi(self, item_name: str, item_def: Dict, values: List[ItemValue]) -> None:
+        """Validate values against allowed_ranges (loop structure). Multiple ranges - value must match at least one."""
+        for iv in self._present_values(values):
+            range_error = self._validate_ranges(iv.value, item_def['allowed_ranges'], item_def.get('type'))
+            if range_error:
+                self.errors.append(self._create_validation_error(
+                    line_num=iv.line_num,
+                    item_name=item_name,
+                    message=range_error,
+                    severity="error",
+                    global_column_index=iv.global_column_index,
+                    local_column_index=iv.local_column_index,
+                    value=iv.value
+                ))
+
+    def _validate_allowed_range_single(self, item_name: str, item_def: Dict, values: List[ItemValue]) -> None:
+        """Validate values against allowed_range_min/max (single range from non-loop structure)."""
+        for iv in self._present_values(values):
+            range_error = self._validate_range(
+                iv.value,
+                item_def.get('allowed_range_min'),
+                item_def.get('allowed_range_max'),
+                item_def.get('type')
+            )
+            if range_error:
+                self.errors.append(self._create_validation_error(
+                    line_num=iv.line_num,
+                    item_name=item_name,
+                    message=range_error,
+                    severity="error",
+                    global_column_index=iv.global_column_index,
+                    local_column_index=iv.local_column_index,
+                    value=iv.value
+                ))
+
+    def _is_outside_allowed_range(self, value: str, item_def: Dict) -> bool:
+        """Return True if value is outside the item's allowed range (if any). Used for advisory message wording."""
+        if 'allowed_ranges' in item_def:
+            return self._validate_ranges(value, item_def['allowed_ranges'], item_def.get('type')) is not None
+        if 'allowed_range_min' in item_def or 'allowed_range_max' in item_def:
+            return self._validate_range(
+                value,
+                item_def.get('allowed_range_min'),
+                item_def.get('allowed_range_max'),
+                item_def.get('type')
+            ) is not None
+        return False
+
+    def _advisory_message(self, range_error: str, item_def: Dict, value: str) -> str:
+        """Format advisory range error message. Use 'advised' if within allowed range, 'allowed' if outside."""
+        # Value is outside allowed range - keep "allowed" wording
+        if self._is_outside_allowed_range(value, item_def):
+            return f"Out of advisory range: {range_error}"
+        # Value is within allowed range but outside advisory - use "advised" wording
+        return f"Out of advisory range: {range_error.replace('allowed', 'advised')}"
+
+    def _validate_advisory_ranges_multi(self, item_name: str, item_def: Dict, values: List[ItemValue]) -> None:
+        """Validate values against advisory_ranges (loop structure); add warnings. Multiple ranges - value must match at least one."""
+        for iv in self._present_values(values):
+            range_error = self._validate_ranges(iv.value, item_def['advisory_ranges'], item_def.get('type'))
+            if range_error:
+                # Adjust message wording: use "advised" if within allowed range, "allowed" if outside
+                message = self._advisory_message(range_error, item_def, iv.value)
+                self.errors.append(self._create_validation_error(
+                    line_num=iv.line_num,
+                    item_name=item_name,
+                    message=message,
+                    severity="warning",
+                    global_column_index=iv.global_column_index,
+                    local_column_index=iv.local_column_index,
+                    value=iv.value
+                ))
+
+    def _validate_advisory_range_single(self, item_name: str, item_def: Dict, values: List[ItemValue]) -> None:
+        """Validate values against advisory_range_min/max (single range from non-loop structure); add warnings."""
+        for iv in self._present_values(values):
+            range_error = self._validate_range(
+                iv.value,
+                item_def.get('advisory_range_min'),
+                item_def.get('advisory_range_max'),
+                item_def.get('type')
+            )
+            if range_error:
+                # Adjust message wording: use "advised" if within allowed range, "allowed" if outside
+                message = self._advisory_message(range_error, item_def, iv.value)
+                self.errors.append(self._create_validation_error(
+                    line_num=iv.line_num,
+                    item_name=item_name,
+                    message=message,
+                    severity="warning",
+                    global_column_index=iv.global_column_index,
+                    local_column_index=iv.local_column_index,
+                    value=iv.value
+                ))
     
     def _find_category_line(self, category: str) -> int:
         """Find the line number where a category appears."""
@@ -1159,7 +1206,7 @@ class MmCIFValidator:
                     return line_num
         return 0
     
-    def _create_validation_error(self, line_num: int, item_name: str, message: str, severity: str, global_column_index: int = None, local_column_index: int = None, value: str = None) -> ValidationError:
+    def _create_validation_error(self, line_num: int, item_name: str, message: str, severity: Literal["error", "warning"], global_column_index: int = None, local_column_index: int = None, value: str = None) -> ValidationError:
         """Create a ValidationError with character position information if available."""
         start_char = None
         end_char = None
@@ -2212,8 +2259,9 @@ class MmCIFValidator:
 
 
 def download_dictionary(url: str) -> Path:
-    """Download dictionary from URL and return path to temporary file."""
-    print(f"Downloading dictionary from {url}...")
+    """Download dictionary from URL and return path to temporary file.
+    Raises DownloadError on failure."""
+    logger.info("Downloading dictionary from %s...", url)
     try:
         with urllib.request.urlopen(url) as response:
             # Create a temporary file
@@ -2225,14 +2273,50 @@ def download_dictionary(url: str) -> Path:
                         break
                     tmp_file.write(chunk.decode('utf-8', errors='replace'))
                 tmp_path = Path(tmp_file.name)
-        print(f"Dictionary downloaded to temporary file: {tmp_path}")
+        logger.info("Dictionary downloaded to temporary file: %s", tmp_path)
         return tmp_path
     except urllib.error.URLError as e:
-        print(f"Error downloading dictionary: {e}")
-        sys.exit(1)
+        logger.error("Error downloading dictionary: %s", e)
+        raise DownloadError(f"Failed to download dictionary: {e}") from e
     except Exception as e:
-        print(f"Error processing downloaded dictionary: {e}")
-        sys.exit(1)
+        logger.error("Error processing downloaded dictionary: %s", e)
+        raise DownloadError(f"Error processing downloaded dictionary: {e}") from e
+
+
+def validate(dict_path: Path, cif_path: Path) -> List[ValidationError]:
+    """
+    Library entry point: parse dictionary, parse mmCIF, validate, and return errors.
+    Use this when embedding the validator in other code (e.g. prerelease).
+    Raises DictionaryNotFoundError if dict_path does not exist.
+    Raises CifNotFoundError if cif_path does not exist.
+    """
+    return ValidatorFactory.validate(dict_path, cif_path)
+
+
+class ValidatorFactory:
+    """Factory for parsing and validating mmCIF files against a dictionary."""
+
+    @staticmethod
+    def validate(dict_path: Path, cif_path: Path) -> List[ValidationError]:
+        """
+        Parse dictionary, parse mmCIF file, run validation, and return list of validation errors.
+        Can be used from CLI (main) or from other code as a library.
+        Raises DictionaryNotFoundError if dict_path does not exist.
+        Raises CifNotFoundError if cif_path does not exist.
+        """
+        if not dict_path.exists():
+            raise DictionaryNotFoundError(f"Dictionary file not found: {dict_path}")
+        if not cif_path.exists():
+            raise CifNotFoundError(f"mmCIF file not found: {cif_path}")
+        logger.debug("Parsing dictionary: %s", dict_path)
+        dictionary = DictionaryParser(dict_path).parse()
+        logger.debug("Loaded %d items from dictionary", len(dictionary.items))
+        logger.debug("Parsing mmCIF file: %s", cif_path)
+        mmcif = MmCIFParser(cif_path).parse()
+        logger.debug("Found %d items in mmCIF file", len(mmcif.items))
+        logger.debug("Validating...")
+        validator = MmCIFValidator(dictionary, mmcif)
+        return validator.validate()
 
 
 def main():
@@ -2261,14 +2345,14 @@ def main():
         epilog="""
 Examples:
   # Use local dictionary file
-  validate_mmcif.py --file mmcif_pdbx_v5_next.dic 9rff.cif
+  validate_mmcif.py --file mmcif_pdbx_v5_next.dic 6qvt.cif
   
   # Use dictionary from URL
-  validate_mmcif.py --url http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic 9rff.cif
+  validate_mmcif.py --url http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic 6qvt.cif
   
   # Auto-detect (file path or URL) - backward compatible
-  validate_mmcif.py mmcif_pdbx_v5_next.dic 9rff.cif
-  validate_mmcif.py http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic 9rff.cif
+  validate_mmcif.py mmcif_pdbx_v5_next.dic 6qvt.cif
+  validate_mmcif.py http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic 6qvt.cif
         """
     )
     
@@ -2313,75 +2397,74 @@ Examples:
         parser.error("Either specify --file, --url, or provide dictionary source as positional argument")
     
     cif_path = Path(args.cif_file)
+    dict_path = None
+    cleanup_temp_file = False
     
-    # Get dictionary file
-    if is_url:
-        dict_path = download_dictionary(dict_source)
-        cleanup_temp_file = True
-    else:
-        dict_path = Path(dict_source)
-        cleanup_temp_file = False
-    
-    if not dict_path.exists():
-        print(f"Error: Dictionary file not found: {dict_path}")
-        sys.exit(1)
-    
-    if not cif_path.exists():
-        print(f"Error: mmCIF file not found: {cif_path}")
-        if cleanup_temp_file:
-            dict_path.unlink()  # Clean up temp file
-        sys.exit(1)
-    
-    # Parse dictionary
-    print(f"Parsing dictionary: {dict_path}")
-    dictionary = DictionaryParser(dict_path)
-    dictionary.parse()
-    print(f"Loaded {len(dictionary.items)} items from dictionary")
-    
-    # Parse mmCIF file
-    print(f"Parsing mmCIF file: {cif_path}")
-    mmcif = MmCIFParser(cif_path)
-    mmcif.parse()
-    print(f"Found {len(mmcif.items)} items in mmCIF file")
-    
-    # Validate
-    print("Validating...")
-    validator = MmCIFValidator(dictionary, mmcif)
-    errors = validator.validate()
-    
-    # Output results
-    if errors:
-        print(f"\nFound {len(errors)} validation issue(s):\n")
-        for error in errors:
-            print(f"{error.severity.upper()}: Line {error.line}, Item '{error.item}'")
-            print(f"  {error.message}\n")
+    # Get dictionary file and run validation
+    try:
+        if is_url:
+            dict_path = download_dictionary(dict_source)
+            cleanup_temp_file = True
+        else:
+            dict_path = Path(dict_source)
+            cleanup_temp_file = False
         
-        # Output JSON for VSCode extension
-        json_output = {
-            'errors': [
-                {
-                    'line': err.line,
-                    'item': err.item,
-                    'message': err.message,
-                    'severity': err.severity,
-                    'column': err.column,
-                    'start_char': err.start_char,
-                    'end_char': err.end_char
-                }
-                for err in errors
-            ]
-        }
-        print(json.dumps(json_output, indent=2))
-        if cleanup_temp_file:
-            dict_path.unlink()  # Clean up temp file
-        sys.exit(1)
-    else:
-        print("\nValidation passed! No errors found.")
-        if cleanup_temp_file:
-            dict_path.unlink()  # Clean up temp file
-        sys.exit(0)
+        if not dict_path.exists():
+            logger.error("Dictionary file not found: %s", dict_path)
+            raise DictionaryNotFoundError(f"Dictionary file not found: {dict_path}")
+        
+        if not cif_path.exists():
+            logger.error("mmCIF file not found: %s", cif_path)
+            if cleanup_temp_file and dict_path.exists():
+                dict_path.unlink()
+            raise CifNotFoundError(f"mmCIF file not found: {cif_path}")
+        
+        try:
+            errors = ValidatorFactory.validate(dict_path, cif_path)
+        finally:
+            if cleanup_temp_file and dict_path is not None and dict_path.exists():
+                dict_path.unlink()
+        
+        # Output results
+        if errors:
+            logger.info("Found %d validation issue(s)", len(errors))
+            for error in errors:
+                logger.info("%s: Line %d, Item '%s' - %s", error.severity.upper(), error.line, error.item, error.message)
+            
+            print(f"\nFound {len(errors)} validation issue(s):\n")
+            for error in errors:
+                print(f"{error.severity.upper()}: Line {error.line}, Item '{error.item}'")
+                print(f"  {error.message}\n")
+            
+            # Output JSON for VSCode extension
+            json_output = {
+                'errors': [
+                    {
+                        'line': err.line,
+                        'item': err.item,
+                        'message': err.message,
+                        'severity': err.severity,
+                        'column': err.column,
+                        'start_char': err.start_char,
+                        'end_char': err.end_char
+                    }
+                    for err in errors
+                ]
+            }
+            print(json.dumps(json_output, indent=2))
+            return 1
+        else:
+            logger.info("Validation passed - no errors found")
+            print("\nValidation passed! No errors found.")
+            return 0
+    except MmCIFValidatorError as e:
+        logger.error("%s", e)
+        print(f"Error: {e}", file=sys.stderr)
+        if cleanup_temp_file and dict_path is not None and dict_path.exists():
+            dict_path.unlink()
+        return 1
 
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main())
 
