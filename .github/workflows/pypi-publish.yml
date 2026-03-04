@@ -1,24 +1,12 @@
-# This workflow will upload a Python Package using Twine when a release is created
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python#publishing-to-package-registries
-
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
-name: Upload Python Package
+name: Publish to PyPI
 
 on:
   push:
-    tags:
-      - "v*"
+    tags: [ 'v*' ]
 
-permissions:
-  contents: read
-
-jobs:
+jobs:  
   build:
-    name: Build distribution
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
 
     steps:
@@ -36,29 +24,29 @@ jobs:
     - name: Build a binary wheel and a source tarball
       working-directory: vscode-extension/python-script
       run: python3 -m build
-    - name: Store the distribution packages
-      uses: actions/upload-artifact@v3
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
       with:
-        name: python-package-distributions
+        name: dist
         path: dist/
 
-  publish-to-pypi:
-    name: >-
-      Publish Python distribution to PyPI
-    needs:
-    - build
+  publish:
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
-    environment:
-      name: pypi
-      url: https://pypi.org/project/pdbe-mmcif-validator
+    needs: build
+    environment: release
     permissions:
-      id-token: write  # IMPORTANT: mandatory for trusted publishing
+      id-token: write
 
     steps:
-    - name: Download all the dists
-      uses: actions/download-artifact@v3
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
       with:
-        name: python-package-distributions
+        name: dist
         path: dist/
-    - name: Publish distribution to PyPI
+
+    - name: Publish package
       uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        user: ${{ secrets.PYPI_USERNAME }}
+        password: ${{ secrets.PYPI_PASSWORD }}
