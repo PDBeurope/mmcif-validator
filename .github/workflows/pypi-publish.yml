@@ -28,7 +28,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: dist
-        path: dist/
+        path: vscode-extension/python-script/dist/
 
   publish:
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
