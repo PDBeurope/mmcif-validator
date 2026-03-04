@@ -5,6 +5,9 @@ node_modules/
 out/
 *.js.map
 
+# VS Code extension package (use GitHub Releases to distribute)
+*.vsix
+
 # Python
 __pycache__/
 *.py[cod]

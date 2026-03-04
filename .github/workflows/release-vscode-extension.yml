@@ -1,0 +1,44 @@
+# Build the VS Code extension and publish the .vsix to GitHub Releases when a version tag is pushed.
+# Usage: create a tag (e.g. v0.1.7), push it, then find the .vsix on the Releases page.
+
+name: Release VS Code extension
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write  # needed to create the release and upload the .vsix
+
+jobs:
+  release:
+    name: Build and publish to GitHub Releases
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: vscode-extension/package-lock.json
+
+      - name: Install dependencies
+        working-directory: vscode-extension
+        run: npm ci
+
+      - name: Package extension
+        working-directory: vscode-extension
+        run: npx --yes @vscode/vsce package --no-dependencies
+
+      - name: Create release and upload .vsix
+        uses: softprops/action-gh-release@v2
+        with:
+          files: vscode-extension/*.vsix
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -2,6 +2,31 @@
 
 All notable changes to the PDBe mmCIF Validator extension will be documented in this file.
 
+# Released
+
+## [0.1.6] - 2026-03-03
+
+### Changed
+- **Extension refactor**: Split `extension.ts` into separate modules (validation, hover, config, dictionary, types); extension entry point only registers commands and initialises.
+- **Dictionary download**: Extension now delegates dictionary download to the Python script (single implementation). Cache path is shared (`mmcif-validator-cache` in temp directory).
+- **Script–extension protocol**: Formalised IO between Python script and extension:
+  - **protocol.py**: `ValidationResult` / `ValidationErrorItem`, `ScriptFailure` with `error_code` and `message`, `ErrorCode` constants (DICT_NOT_FOUND, CIF_NOT_FOUND, DOWNLOAD_ERROR, UNKNOWN_ERROR). Script prints JSON on both success and script-level failure.
+  - Extension parses script-failure JSON and shows user-facing messages by error code.
+
+### Added
+- **Python: download-dictionary subcommand**: `python validate_mmcif.py download-dictionary --url URL [--output PATH]` downloads the dictionary to the shared cache (or optional path) and prints `{"path": "..."}` or script-failure JSON.
+- **Python: new modules**:
+  - **protocol.py** – IO schema and error codes for script–extension communication.
+  - **mmcif_types.py** – `ItemValue`, `ValidationError`, and exception classes.
+  - **download.py** – `get_cache_dir()`, `get_cached_dictionary_path()`, `download_dictionary()`.
+  - **dict_parser.py** – `DictionaryParser` (dictionary file parsing).
+  - **cif_parser.py** – `MmCIFParser` (mmCIF file parsing).
+  - **validator.py** – `MmCIFValidator` (validation logic).
+- **pyproject.toml**: New modules listed in `py-modules` for packaging.
+
+### Improved
+- **Python structure**: `validate_mmcif.py` is now a thin CLI/orchestration layer (~265 lines); parser and validator classes live in dedicated modules for maintainability.
+
 # [Unreleased]
 
 ## [0.1.5] - 2026-02-27
