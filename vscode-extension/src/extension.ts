@@ -59,7 +59,9 @@ export function activate(context: vscode.ExtensionContext): void {
     const validationCtx = {
         outputChannel,
         extensionPath: context.extensionPath,
+        depositionStatusBarItem: vscode.window.createStatusBarItem('mmcif.deposition', vscode.StatusBarAlignment.Right),
     };
+    context.subscriptions.push(validationCtx.depositionStatusBarItem);
 
     vscode.workspace.onDidOpenTextDocument((document) => {
         if (document.languageId === 'cif' || document.fileName.endsWith('.cif')) {

@@ -10,6 +10,7 @@ import { promisify } from 'util';
 import {
     ValidationErrorItem,
     ValidationResult,
+    DepositionReadiness,
     ScriptFailure,
     ErrorCode,
     isScriptFailure,
@@ -23,6 +24,7 @@ const execAsync = promisify(exec);
 export interface ValidationContext {
     outputChannel: vscode.OutputChannel;
     extensionPath: string | undefined;
+    depositionStatusBarItem?: vscode.StatusBarItem;
 }
 
 /**
@@ -125,6 +127,31 @@ function scriptFailureUserMessage(failure: ScriptFailure): string {
     }
 }
 
+function showDepositionReadiness(dep: DepositionReadiness, outputChannel: vscode.OutputChannel): void {
+    outputChannel.appendLine('');
+    outputChannel.appendLine('--- Deposition readiness ---');
+    outputChannel.appendLine(`  ${dep.percentage}% (${dep.filled_count}/${dep.total_count} mandatory items filled)`);
+    if (dep.method_detected) {
+        outputChannel.appendLine(`  Method: ${dep.method_detected}`);
+    }
+    if (dep.message) {
+        outputChannel.appendLine(`  ${dep.message}`);
+    }
+    outputChannel.appendLine('');
+}
+
+function setDepositionStatusBar(dep: DepositionReadiness, item?: vscode.StatusBarItem): void {
+    if (!item) return;
+    const methodNote = dep.method_detected ? ` (${dep.method_detected})` : ' (method unknown)';
+    item.text = `$(check-all) Deposition: ${dep.percentage}%${methodNote}`;
+    item.tooltip = dep.message ?? `${dep.filled_count}/${dep.total_count} mandatory items filled`;
+    item.show();
+}
+
+function clearDepositionStatusBar(item?: vscode.StatusBarItem): void {
+    if (item) item.hide();
+}
+
 export async function validateDocument(
     document: vscode.TextDocument,
     diagnosticCollection: vscode.DiagnosticCollection,
@@ -134,6 +161,7 @@ export async function validateDocument(
     const settings = getSettings();
     if (!settings.enabled) {
         diagnosticCollection.delete(document.uri);
+        clearDepositionStatusBar(ctx.depositionStatusBarItem);
         return;
     }
 
@@ -142,6 +170,7 @@ export async function validateDocument(
     const source = getDictionarySource(workspaceFolder, getCachedPath);
     if (!source) {
         diagnosticCollection.delete(document.uri);
+        clearDepositionStatusBar(ctx.depositionStatusBarItem);
         return;
     }
 
@@ -155,6 +184,7 @@ export async function validateDocument(
             'Validation script not found. Please ensure validate_mmcif.py is in the extension or workspace.'
         );
         diagnosticCollection.delete(document.uri);
+        clearDepositionStatusBar(ctx.depositionStatusBarItem);
         return;
     }
 
@@ -181,6 +211,7 @@ export async function validateDocument(
     if (!useUrl && !fs.existsSync(dictSource)) {
         vscode.window.showErrorMessage(`Dictionary file not found: ${dictSource}`);
         diagnosticCollection.delete(document.uri);
+        clearDepositionStatusBar(ctx.depositionStatusBarItem);
         return;
     }
 
@@ -223,8 +254,16 @@ export async function validateDocument(
     if (isScriptFailure(json)) {
         diagnostics = [scriptFailureToDiagnostic(json)];
         vscode.window.showErrorMessage(scriptFailureUserMessage(json));
+        clearDepositionStatusBar(ctx.depositionStatusBarItem);
     } else if (isValidationResult(json)) {
         diagnostics = buildDiagnosticsFromResult(document, json);
+        const dep = (json as ValidationResult).deposition_readiness;
+        if (dep) {
+            showDepositionReadiness(dep, outputChannel);
+            setDepositionStatusBar(dep, ctx.depositionStatusBarItem);
+        } else {
+            clearDepositionStatusBar(ctx.depositionStatusBarItem);
+        }
     } else if (exitCode === 1 && stderr) {
         const match = stderr.match(/Error: (.+)/);
         if (match) {
@@ -236,6 +275,9 @@ export async function validateDocument(
                 ),
             ];
         }
+        clearDepositionStatusBar(ctx.depositionStatusBarItem);
+    } else {
+        clearDepositionStatusBar(ctx.depositionStatusBarItem);
     }
 
     diagnosticCollection.set(document.uri, diagnostics);

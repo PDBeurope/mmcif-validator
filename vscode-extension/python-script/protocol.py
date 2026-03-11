@@ -49,9 +49,30 @@ class ValidationErrorItem:
 class ValidationResult:
     """Success response: validation ran and produced a list of errors (possibly empty)."""
     errors: List[ValidationErrorItem]
+    deposition_readiness: Optional["DepositionReadiness"] = None
 
     def to_dict(self) -> dict:
-        return {"errors": [e.to_dict() for e in self.errors]}
+        d = {"errors": [e.to_dict() for e in self.errors]}
+        if self.deposition_readiness is not None:
+            d["deposition_readiness"] = self.deposition_readiness.to_dict()
+        return d
+
+
+# ---------------------------------------------------------------------------
+# Deposition readiness (optional, included in ValidationResult when computed)
+# ---------------------------------------------------------------------------
+
+@dataclass
+class DepositionReadiness:
+    """Deposition-readiness indicator: percentage and method detection."""
+    percentage: float  # 0–100, or capped at 50 when method is unknown
+    filled_count: int
+    total_count: int
+    method_detected: Optional[str] = None  # "xray" | "em" | "nmr" | null when unknown
+    message: Optional[str] = None  # e.g. "Experimental method could not be determined; only common categories counted."
+
+    def to_dict(self) -> dict:
+        return asdict(self)
 
 
 # ---------------------------------------------------------------------------

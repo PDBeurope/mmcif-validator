@@ -13,8 +13,17 @@ export interface ValidationErrorItem {
     end_char?: number;
 }
 
+export interface DepositionReadiness {
+    percentage: number;
+    filled_count: number;
+    total_count: number;
+    method_detected?: string | null;
+    message?: string | null;
+}
+
 export interface ValidationResult {
     errors: ValidationErrorItem[];
+    deposition_readiness?: DepositionReadiness;
 }
 
 export interface ScriptFailure {
