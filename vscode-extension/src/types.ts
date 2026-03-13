@@ -21,7 +21,7 @@ export interface DepositionMissingItem {
     has_validation_error?: boolean;
 }
 
-export interface DepositionReadiness {
+export interface MetadataCompleteness {
     percentage: number;
     filled_count: number;
     total_count: number;
@@ -33,7 +33,7 @@ export interface DepositionReadiness {
 
 export interface ValidationResult {
     errors: ValidationErrorItem[];
-    deposition_readiness?: DepositionReadiness;
+    metadata_completeness?: MetadataCompleteness;
 }
 
 export interface ScriptFailure {

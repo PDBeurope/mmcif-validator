@@ -10,7 +10,7 @@ import { promisify } from 'util';
 import {
     ValidationErrorItem,
     ValidationResult,
-    DepositionReadiness,
+    MetadataCompleteness,
     DepositionMissingItem,
     ScriptFailure,
     ErrorCode,
@@ -26,7 +26,7 @@ export interface ValidationContext {
     outputChannel: vscode.OutputChannel;
     extensionPath: string | undefined;
     depositionStatusBarItem?: vscode.StatusBarItem;
-    onDepositionUpdate?: (dep: DepositionReadiness | null) => void;
+    onDepositionUpdate?: (dep: MetadataCompleteness | null) => void;
 }
 
 /**
@@ -136,9 +136,9 @@ function formatMissingItem(m: DepositionMissingItem): string {
     return `${m.item}${row}${key}${err}`;
 }
 
-function showDepositionReadiness(dep: DepositionReadiness, outputChannel: vscode.OutputChannel): void {
+function showDepositionReadiness(dep: MetadataCompleteness, outputChannel: vscode.OutputChannel): void {
     outputChannel.appendLine('');
-    outputChannel.appendLine('--- Deposition readiness ---');
+    outputChannel.appendLine('--- Metadata completeness ---');
     outputChannel.appendLine(`  ${dep.percentage}% (${dep.filled_count}/${dep.total_count} mandatory items filled)`);
     if (dep.method_detected) {
         outputChannel.appendLine(`  Method: ${dep.method_detected}`);
@@ -160,16 +160,16 @@ function showDepositionReadiness(dep: DepositionReadiness, outputChannel: vscode
     outputChannel.appendLine('');
 }
 
-function setDepositionStatusBar(dep: DepositionReadiness, item?: vscode.StatusBarItem): void {
+function setDepositionStatusBar(dep: MetadataCompleteness, item?: vscode.StatusBarItem): void {
     if (!item) return;
     const methodNote = dep.method_detected ? ` (${dep.method_detected})` : ' (method unknown)';
-    item.text = `$(check-all) Deposition: ${dep.percentage}%${methodNote}`;
+    item.text = `$(check-all) Metadata: ${dep.percentage}%${methodNote}`;
     const missingCats = dep.missing_categories ?? [];
     const missingItems = dep.missing_items ?? [];
     const parts = [`${dep.filled_count}/${dep.total_count} mandatory items filled`];
     if (dep.message) parts.push(dep.message);
     if (missingCats.length > 0) parts.push(`Missing categories: ${missingCats.join(', ')}`);
-    if (missingItems.length > 0) parts.push(`Missing items: ${missingItems.length} (see Output channel or "Deposition Readiness" in Explorer sidebar)`);
+    if (missingItems.length > 0) parts.push(`Missing items: ${missingItems.length} (see Output channel or "Metadata Completeness" in Explorer sidebar)`);
     item.tooltip = parts.join('\n');
     item.show();
 }
@@ -288,7 +288,7 @@ export async function validateDocument(
         ctx.onDepositionUpdate?.(null);
     } else if (isValidationResult(json)) {
         diagnostics = buildDiagnosticsFromResult(document, json);
-        const dep = (json as ValidationResult).deposition_readiness;
+        const dep = (json as ValidationResult).metadata_completeness;
         if (dep) {
             showDepositionReadiness(dep, outputChannel);
             setDepositionStatusBar(dep, ctx.depositionStatusBarItem);

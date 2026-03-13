@@ -17,6 +17,7 @@ METHOD_UNKNOWN = "unknown"
 XRAY_LIST = "xray_mandatory_cat.list"
 EM_LIST = "em_mandatory_cat.list"
 NMR_LIST = "nmr_mandatory_cat.list"
+ENTITY_SRC_GROUP_LIST = "entity_src_cat.list"
 
 
 def _find_completeness_dir() -> Optional[Path]:
@@ -83,6 +84,17 @@ def load_mandatory_categories() -> Tuple[Dict[str, Set[str]], Set[str], Dict[str
     }
 
     return mandatory_by_method, common_categories, method_specific_categories
+
+
+def load_entity_src_group() -> Set[str]:
+    """
+    Load the group of entity source categories where at least one must be present
+    for metadata completeness (applies to all methods).
+    """
+    root = _find_completeness_dir()
+    if not root:
+        return set()
+    return _load_categories(root / ENTITY_SRC_GROUP_LIST)
 
 
 def detect_method(file_categories: Set[str], method_specific: Dict[str, Set[str]]) -> str:

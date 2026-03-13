@@ -210,11 +210,11 @@ Examples:
             if cleanup_temp_file and dict_path is not None and dict_path.exists():
                 dict_path.unlink()
 
-        # Build JSON output for VSCode extension (always include deposition_readiness when available)
+        # Build JSON output for VSCode extension (always include metadata_completeness when available)
         json_output = validation_result_from_errors(errors)
         try:
             dep = compute_deposition_readiness(dictionary, mmcif, validation_errors=errors)
-            json_output["deposition_readiness"] = dep.to_dict()
+            json_output["metadata_completeness"] = dep.to_dict()
         except Exception as e:
             logger.debug("Deposition readiness computation skipped: %s", e)
 

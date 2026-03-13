@@ -91,7 +91,7 @@
       "explorer": [
         {
           "id": "mmcifDeposition",
-          "name": "Deposition Readiness"
+          "name": "Metadata Completeness"
         }
       ]
     }

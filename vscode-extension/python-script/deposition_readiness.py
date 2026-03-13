@@ -10,12 +10,13 @@ reported with has_validation_error=True.
 
 from typing import List, Optional, Set, Tuple
 
-from protocol import DepositionReadiness
+from protocol import MetadataCompleteness
 from dict_parser import DictionaryParser
 from cif_parser import MmCIFParser
 
 from completeness.mandatory_categories import (
     load_mandatory_categories,
+    load_entity_src_group,
     detect_method,
     METHOD_UNKNOWN,
 )
@@ -56,7 +57,7 @@ def compute_deposition_readiness(
     dictionary: DictionaryParser,
     mmcif: MmCIFParser,
     validation_errors: Optional[List[object]] = None,
-) -> DepositionReadiness:
+) -> MetadataCompleteness:
     """
     Compute deposition-readiness percentage, method, and missing categories/items.
 
@@ -92,6 +93,30 @@ def compute_deposition_readiness(
     filled_count = 0
     missing_categories: List[str] = []
     missing_items: List[dict] = []
+
+    # Handle entity source category group: at least one of these categories must be present.
+    entity_group = load_entity_src_group()
+    if entity_group:
+        present_entity_cats = entity_group & file_categories
+        # Always work on a copy so we don't mutate shared sets from load_mandatory_categories()
+        mandatory_categories = set(mandatory_categories)
+        if present_entity_cats:
+            # Group satisfied: drop the absent ones so they are not treated as missing.
+            mandatory_categories -= (entity_group - present_entity_cats)
+        else:
+            # Group not satisfied: treat as one logical missing group for scoring/reporting.
+            synthetic_cat = "[entity_src_group]"
+            group_items: Set[str] = set()
+            for cat in entity_group:
+                group_items |= dictionary.deposition_mandatory_items.get(cat, set())
+            if group_items:
+                missing_categories.append(synthetic_cat)
+                total_count += len(group_items)
+                for item_name in group_items:
+                    missing_items.append({"category": synthetic_cat, "item": item_name})
+            # Also remove all entity-group categories from per-category mandatory list
+            # to avoid double-counting them as individual missing categories.
+            mandatory_categories -= entity_group
 
     for cat in mandatory_categories:
         items = dictionary.deposition_mandatory_items.get(cat, set())
@@ -151,7 +176,7 @@ def compute_deposition_readiness(
         if cap_at_50 and percentage > 50.0:
             percentage = 50.0
 
-    return DepositionReadiness(
+    return MetadataCompleteness(
         percentage=round(percentage, 1),
         filled_count=filled_count,
         total_count=total_count,

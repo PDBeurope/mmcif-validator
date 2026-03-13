@@ -24,7 +24,7 @@ Both implementations share the same validation engine, ensuring consistent resul
 - ✅ **Works out-of-the-box** - No configuration required (uses default dictionary URL)
 - ✅ **Configurable validation timeout** - Increase timeout for very large files (extension setting, default 60s, max 10 min)
 - ✅ **No dependencies** - Python script uses only standard library
-- ✅ **Deposition readiness** - Extension shows a deposition-ready percentage (status bar and Explorer view), lists missing mandatory categories/items, and treats validation errors as not filled
+- ✅ **Metadata completeness** - Extension shows a metadata-completeness percentage (status bar and Explorer view), lists missing mandatory categories/items, and treats validation errors as not filled
 
 ## Quick Start
 
@@ -64,7 +64,7 @@ The validator performs comprehensive checks including:
 - Complex operation expression parsing
 - Duplicate category and item detection (loop and frame format)
 
-**Deposition readiness** (extension): When validating a `.cif` file, the extension also computes a deposition-readiness score (0–100%). It uses mandatory categories per experimental method (xray/em/nmr from bundled lists) and deposition-mandatory items from the dictionary. The score is shown in the status bar and in a **Deposition Readiness** view in the Explorer sidebar; missing categories and items (including row-level missing or invalid values) are listed there and in the Output channel. If the experimental method cannot be determined from the file, only common categories are used and the score is capped at 50%.
+**Metadata completeness** (extension): When validating a `.cif` file, the extension also computes a metadata-completeness score (0–100%). It uses mandatory categories per experimental method (xray/em/nmr from bundled lists), including an entity-source group where any one of several categories is sufficient, and deposition-mandatory items from the dictionary. The score is shown in the status bar and in a **Metadata Completeness** view in the Explorer sidebar; missing categories and items (including row-level missing or invalid values) are listed there and in the Output channel. If the experimental method cannot be determined from the file, only common categories are used and the score is capped at 50%.
 
 For detailed information about all validation checks, error severity levels, and configuration options, see the [extension README](vscode-extension/README.md).
 

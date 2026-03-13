@@ -15,7 +15,7 @@ A Visual Studio Code extension to validate mmCIF/CIF files against the PDBx/mmCI
 - ✅ **Auto-detection** - Automatically finds dictionary files in your workspace
 - ✅ **Comprehensive checks** - Validates mandatory items, enumerations, schema compliance, and duplicate category/item detection
 - ✅ **Works out-of-the-box** - No configuration required!
-- ✅ **Deposition readiness** - Shows how deposition-ready the file is (percentage in status bar and Explorer view), with missing mandatory categories and items listed; validation errors count as not filled
+- ✅ **Metadata completeness** - Shows how complete the file metadata is (percentage in status bar and Explorer view), with missing mandatory categories and items listed; validation errors count as not filled
 
 ## Installation
 
@@ -32,7 +32,7 @@ The extension works out-of-the-box! By default, it will automatically:
 - Dictionary updates are usually released in conjunction with OneDep software releases (average update frequency ~43 days)
 - Validate any `.cif` files you open
 - Show errors and warnings in the Problems panel with precise character positioning
-- Show **deposition readiness** (percentage and missing items) in the status bar and in the **Deposition Readiness** view in the Explorer sidebar
+- Show **metadata completeness** (percentage and missing items) in the status bar and in the **Metadata Completeness** view in the Explorer sidebar
 
 **No configuration required!** However, you can also use any other CIF dictionary by configuring the `dictionaryPath` or `dictionaryUrl` settings (see Configuration section below).
 
@@ -48,15 +48,15 @@ The extension works out-of-the-box! By default, it will automatically:
    - Loop information (if in a loop)
 4. Errors and warnings will be highlighted in the editor
 5. Use the Command Palette (`Ctrl+Shift+P`) and run "mmCIF: Validate" to manually trigger validation
-6. **Deposition readiness**: In the status bar (bottom right) you’ll see e.g. "Deposition: 75%". Click it or open **Explorer → Deposition Readiness** to see which mandatory categories or items are missing or have validation errors.
+6. **Metadata completeness**: In the status bar (bottom right) you’ll see e.g. "Metadata: 75%". Click it or open **Explorer → Metadata Completeness** to see which mandatory categories or items are missing or have validation errors.
 
-## Deposition Readiness
+## Metadata Completeness
 
-The extension computes a **deposition-readiness** score (0–100%) for the open mmCIF file, based on mandatory categories (for the detected experimental method: xray, em, or nmr) and mandatory items from the dictionary. This helps you see how complete the file is for deposition.
+The extension computes a **metadata-completeness** score (0–100%) for the open mmCIF file, based on mandatory categories (for the detected experimental method: xray, em, or nmr) and mandatory items from the dictionary. For some category families (such as entity-source categories listed in `entity_src_cat.list`), the score treats them as a group where at least one category must be present, rather than requiring every category individually. This helps you see how complete the file metadata is without over-penalising equivalent representations.
 
-- **Status bar** (bottom right): Shows e.g. `Deposition: 75% (xray)`. Hover for a short summary and a note to see the Output channel or the **Deposition Readiness** view in the Explorer sidebar for the full list of missing items.
-- **Output channel**: View → Output → select "PDBe mmCIF Validator". After each validation run, a "Deposition readiness" section lists the percentage, detected method, missing categories, and missing items (with row and key when applicable). Items that have a validation error (e.g. wrong type) are marked with `[validation error]`.
-- **Deposition Readiness view**: In the Explorer sidebar (left), scroll to the **Deposition Readiness** section. Expand it to see the summary, **Missing categories**, and **Missing items**. Each missing item can show row index and key (e.g. author id) and "(validation error)" when the value is present but invalid.
+- **Status bar** (bottom right): Shows e.g. `Metadata: 75% (xray)`. Hover for a short summary and a note to see the Output channel or the **Metadata Completeness** view in the Explorer sidebar for the full list of missing items.
+- **Output channel**: View → Output → select "PDBe mmCIF Validator". After each validation run, a "Metadata completeness" section lists the percentage, detected method, missing categories, and missing items (with row and key when applicable). Items that have a validation error (e.g. wrong type) are marked with `[validation error]`.
+- **Metadata Completeness view**: In the Explorer sidebar (left), scroll to the **Metadata Completeness** section. Expand it to see the summary, **Missing categories**, and **Missing items**. Each missing item can show row index and key (e.g. author id) and "(validation error)" when the value is present but invalid.
 
 **Behaviour**: The score uses row-level checks (every row in a mandatory loop must have all mandatory items filled). If the experimental method cannot be determined from the file, only categories common to all methods are used and the maximum score is 50%. Items that trigger a validation error (severity "error") are counted as not filled and appear in the missing list with a validation-error flag.
 
@@ -221,7 +221,7 @@ This extension includes a standalone Python validation script that can be used i
 - Command-line usage instructions
 - Standalone validation without VSCode
 - Enhanced JSON output with precise character positions and column indices for programmatic error handling
-- **Deposition readiness**: When run by the extension, the script also outputs a `deposition_readiness` object in the JSON (percentage, filled/total counts, method, missing categories and items)
+- **Metadata completeness**: When run by the extension, the script also outputs a `metadata_completeness` object in the JSON (percentage, filled/total counts, method, missing categories and items)
 - Exit codes: 0 for success, 1 for errors (useful for CI/CD integration)
 
 ## Contributing

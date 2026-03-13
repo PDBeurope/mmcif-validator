@@ -1,16 +1,16 @@
 /**
- * Deposition Readiness sidebar view: tree of summary, missing categories, and missing items.
+ * Metadata Completeness sidebar view: tree of summary, missing categories, and missing items.
  */
 
 import * as vscode from 'vscode';
-import { DepositionReadiness, DepositionMissingItem } from './types';
+import { MetadataCompleteness, DepositionMissingItem } from './types';
 
 type DepositionTreeItem = SummaryItem | MissingCategoriesItem | MissingCategoryItem | MissingItemsItem | MissingItemLeaf;
 
 class SummaryItem extends vscode.TreeItem {
-    constructor(public readonly dep: DepositionReadiness) {
+    constructor(public readonly dep: MetadataCompleteness) {
         super(
-            `Deposition: ${dep.percentage}% (${dep.filled_count}/${dep.total_count})`,
+            `Metadata: ${dep.percentage}% (${dep.filled_count}/${dep.total_count})`,
             vscode.TreeItemCollapsibleState.None
         );
         this.description = dep.method_detected ?? 'method unknown';
@@ -52,11 +52,11 @@ class MissingItemLeaf extends vscode.TreeItem {
     }
 }
 
-let lastDeposition: DepositionReadiness | null = null;
+let lastDeposition: MetadataCompleteness | null = null;
 const changeEmitter = new vscode.EventEmitter<DepositionTreeItem | undefined | null>();
 let subscription: vscode.Disposable | undefined;
 
-export function updateDepositionReadiness(dep: DepositionReadiness | null): void {
+export function updateDepositionReadiness(dep: MetadataCompleteness | null): void {
     lastDeposition = dep;
     changeEmitter.fire(null);
 }

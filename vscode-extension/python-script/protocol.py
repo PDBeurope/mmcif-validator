@@ -49,12 +49,12 @@ class ValidationErrorItem:
 class ValidationResult:
     """Success response: validation ran and produced a list of errors (possibly empty)."""
     errors: List[ValidationErrorItem]
-    deposition_readiness: Optional["DepositionReadiness"] = None
+    metadata_completeness: Optional["MetadataCompleteness"] = None
 
     def to_dict(self) -> dict:
         d = {"errors": [e.to_dict() for e in self.errors]}
-        if self.deposition_readiness is not None:
-            d["deposition_readiness"] = self.deposition_readiness.to_dict()
+        if self.metadata_completeness is not None:
+            d["metadata_completeness"] = self.metadata_completeness.to_dict()
         return d
 
 
@@ -63,8 +63,8 @@ class ValidationResult:
 # ---------------------------------------------------------------------------
 
 @dataclass
-class DepositionReadiness:
-    """Deposition-readiness indicator: percentage, method, and missing categories/items."""
+class MetadataCompleteness:
+    """Metadata-completeness indicator: percentage, method, and missing categories/items."""
     percentage: float  # 0–100, or capped at 50 when method is unknown
     filled_count: int
     total_count: int

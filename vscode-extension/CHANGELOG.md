@@ -7,18 +7,18 @@ All notable changes to the PDBe mmCIF Validator extension will be documented in 
 ## [0.1.7] - 2026-03-11
 
 ### Added
-- **Deposition readiness indicator**: Percentage score showing how deposition-ready the file is (mandatory categories and items from completeness lists and dictionary).
-  - **Status bar**: Shows "Deposition: X%" with method (xray/em/nmr or "method unknown"); tooltip lists missing categories/items.
-  - **Output channel**: "Deposition readiness" section with percentage, method, missing categories, and missing items (with row/key and "[validation error]" where applicable).
-  - **Deposition Readiness view**: Sidebar view in Explorer with summary, "Missing categories", and "Missing items" (expandable).
+- **Metadata completeness indicator**: Percentage score showing how complete the file metadata is (mandatory categories and items from completeness lists and dictionary).
+  - **Status bar**: Shows "Metadata: X%" with method (xray/em/nmr or "method unknown"); tooltip lists missing categories/items.
+  - **Output channel**: "Metadata completeness" section with percentage, method, missing categories, and missing items (with row/key and "[validation error]" where applicable).
+  - **Metadata Completeness view**: Sidebar view in Explorer with summary, "Missing categories", and "Missing items" (expandable).
 - **Row-level checks**: Every row in a mandatory loop category must have all mandatory items filled; missing or `?`/`.` values count as not filled; percentage = filled/total.
 - **Method detection**: Experimental method (xray/em/nmr) inferred from file categories; when unknown, only common categories are used and score is capped at 50%.
 - **Validation errors as not filled**: Items with a validation error (severity "error") are counted as not filled and listed in missing items with "validation error"; second pass includes errors in mandatory categories even when the item is not deposition-mandatory in the dictionary.
-- **Python**: `deposition_readiness` module, `completeness` package (mandatory category lists), `dict_parser` deposition-mandatory items (`_pdbx_item.mandatory_code`); protocol extended with `DepositionReadiness` (missing_categories, missing_items, has_validation_error).
+- **Python**: `deposition_readiness` module, `completeness` package (mandatory category lists, including an entity-source group where at least one category must be present), `dict_parser` deposition-mandatory items (`_pdbx_item.mandatory_code`); protocol extended with `MetadataCompleteness` (missing_categories, missing_items, has_validation_error) and JSON `metadata_completeness` field.
 
 ### Changed
-- Validation script always outputs JSON (with optional `deposition_readiness`) on both success and failure so the extension can show deposition info.
-- Status bar tooltip directs users to "Output channel or Deposition Readiness in Explorer sidebar" for missing items.
+- Validation script always outputs JSON (with optional `metadata_completeness`) on both success and failure so the extension can show metadata completeness info.
+- Status bar tooltip directs users to "Output channel or Metadata Completeness in Explorer sidebar" for missing items.
 
 ## [0.1.6] - 2026-03-03
 
