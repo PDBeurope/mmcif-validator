@@ -7,7 +7,6 @@ em_admin
 em_author_list
 em_buffer
 em_ctf_correction
-em_depui
 em_entity_assembly
 em_entity_assembly_naturalsource
 em_euler_angle_assignment
@@ -22,7 +21,6 @@ em_sample_support
 em_single_particle_entity
 em_software
 em_specimen
-em_start_model
 em_support_film
 em_tomography
 em_vitrification
