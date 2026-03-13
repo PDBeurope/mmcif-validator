@@ -20,6 +20,9 @@ All notable changes to the PDBe mmCIF Validator extension will be documented in 
 - Validation script always outputs JSON (with optional `metadata_completeness`) on both success and failure so the extension can show metadata completeness info.
 - Status bar tooltip directs users to "Output channel or Metadata Completeness in Explorer sidebar" for missing items.
 
+### Improved
+- **Metadata completeness when switching tabs**: When you have multiple .cif files open, switching to another tab updates the status bar and Metadata Completeness tree to show the result for the active file using cached results (no re-validation).
+
 ## [0.1.6] - 2026-03-03
 
 ### Changed

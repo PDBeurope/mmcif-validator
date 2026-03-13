@@ -26,7 +26,11 @@ export interface ValidationContext {
     outputChannel: vscode.OutputChannel;
     extensionPath: string | undefined;
     depositionStatusBarItem?: vscode.StatusBarItem;
-    onDepositionUpdate?: (dep: MetadataCompleteness | null) => void;
+    /**
+     * Callback when metadata completeness has been computed for a document.
+     * The first argument is the document URI as a string.
+     */
+    onDepositionUpdate?: (uri: string, dep: MetadataCompleteness | null) => void;
 }
 
 /**
@@ -178,6 +182,18 @@ function clearDepositionStatusBar(item?: vscode.StatusBarItem): void {
     if (item) item.hide();
 }
 
+/**
+ * Update status bar (and keep tree view untouched) from a cached metadata-completeness value.
+ * Used when switching between already-validated documents without re-running validation.
+ */
+export function updateMetadataCompletenessUIFromCache(dep: MetadataCompleteness | null, ctx: ValidationContext): void {
+    if (dep) {
+        setDepositionStatusBar(dep, ctx.depositionStatusBarItem);
+    } else {
+        clearDepositionStatusBar(ctx.depositionStatusBarItem);
+    }
+}
+
 export async function validateDocument(
     document: vscode.TextDocument,
     diagnosticCollection: vscode.DiagnosticCollection,
@@ -188,7 +204,7 @@ export async function validateDocument(
     if (!settings.enabled) {
         diagnosticCollection.delete(document.uri);
         clearDepositionStatusBar(ctx.depositionStatusBarItem);
-        ctx.onDepositionUpdate?.(null);
+        ctx.onDepositionUpdate?.(document.uri.toString(), null);
         return;
     }
 
@@ -198,7 +214,7 @@ export async function validateDocument(
     if (!source) {
         diagnosticCollection.delete(document.uri);
         clearDepositionStatusBar(ctx.depositionStatusBarItem);
-        ctx.onDepositionUpdate?.(null);
+        ctx.onDepositionUpdate?.(document.uri.toString(), null);
         return;
     }
 
@@ -213,7 +229,7 @@ export async function validateDocument(
         );
         diagnosticCollection.delete(document.uri);
         clearDepositionStatusBar(ctx.depositionStatusBarItem);
-        ctx.onDepositionUpdate?.(null);
+        ctx.onDepositionUpdate?.(document.uri.toString(), null);
         return;
     }
 
@@ -241,7 +257,7 @@ export async function validateDocument(
         vscode.window.showErrorMessage(`Dictionary file not found: ${dictSource}`);
         diagnosticCollection.delete(document.uri);
         clearDepositionStatusBar(ctx.depositionStatusBarItem);
-        ctx.onDepositionUpdate?.(null);
+        ctx.onDepositionUpdate?.(document.uri.toString(), null);
         return;
     }
 
@@ -285,17 +301,17 @@ export async function validateDocument(
         diagnostics = [scriptFailureToDiagnostic(json)];
         vscode.window.showErrorMessage(scriptFailureUserMessage(json));
         clearDepositionStatusBar(ctx.depositionStatusBarItem);
-        ctx.onDepositionUpdate?.(null);
+        ctx.onDepositionUpdate?.(document.uri.toString(), null);
     } else if (isValidationResult(json)) {
         diagnostics = buildDiagnosticsFromResult(document, json);
         const dep = (json as ValidationResult).metadata_completeness;
         if (dep) {
             showDepositionReadiness(dep, outputChannel);
             setDepositionStatusBar(dep, ctx.depositionStatusBarItem);
-            ctx.onDepositionUpdate?.(dep);
+            ctx.onDepositionUpdate?.(document.uri.toString(), dep);
         } else {
             clearDepositionStatusBar(ctx.depositionStatusBarItem);
-            ctx.onDepositionUpdate?.(null);
+            ctx.onDepositionUpdate?.(document.uri.toString(), null);
         }
     } else if (exitCode === 1 && stderr) {
         const match = stderr.match(/Error: (.+)/);
@@ -309,10 +325,10 @@ export async function validateDocument(
             ];
         }
         clearDepositionStatusBar(ctx.depositionStatusBarItem);
-        ctx.onDepositionUpdate?.(null);
+        ctx.onDepositionUpdate?.(document.uri.toString(), null);
     } else {
         clearDepositionStatusBar(ctx.depositionStatusBarItem);
-        ctx.onDepositionUpdate?.(null);
+        ctx.onDepositionUpdate?.(document.uri.toString(), null);
     }
 
     diagnosticCollection.set(document.uri, diagnostics);

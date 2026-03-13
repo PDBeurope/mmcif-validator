@@ -11,7 +11,8 @@ import * as fs from 'fs';
 import { getSettings, getScriptPath } from './config';
 import { getCachedDictionaryPath, downloadAndCacheDictionary } from './dictionary';
 import { createHoverProvider } from './hover';
-import { validateDocument } from './validation';
+import { validateDocument, updateMetadataCompletenessUIFromCache } from './validation';
+import { MetadataCompleteness } from './types';
 import { updateDepositionReadiness, registerDepositionView } from './depositionView';
 
 export function activate(context: vscode.ExtensionContext): void {
@@ -57,15 +58,38 @@ export function activate(context: vscode.ExtensionContext): void {
         }
     }
 
+    const metadataByUri = new Map<string, MetadataCompleteness | null>();
+
     const validationCtx = {
         outputChannel,
         extensionPath: context.extensionPath,
         depositionStatusBarItem: vscode.window.createStatusBarItem('mmcif.deposition', vscode.StatusBarAlignment.Right),
-        onDepositionUpdate: updateDepositionReadiness,
-    };
+        onDepositionUpdate: (uri: string, dep: MetadataCompleteness | null) => {
+            metadataByUri.set(uri, dep ?? null);
+            updateDepositionReadiness(dep ?? null);
+        },
+    } as const;
     context.subscriptions.push(validationCtx.depositionStatusBarItem);
 
     registerDepositionView(context);
+
+    vscode.window.onDidChangeActiveTextEditor((editor) => {
+        if (!editor) {
+            updateMetadataCompletenessUIFromCache(null, validationCtx);
+            updateDepositionReadiness(null);
+            return;
+        }
+        const doc = editor.document;
+        if (doc.languageId === 'cif' || doc.fileName.endsWith('.cif')) {
+            const key = doc.uri.toString();
+            const dep = metadataByUri.get(key) ?? null;
+            updateMetadataCompletenessUIFromCache(dep, validationCtx);
+            updateDepositionReadiness(dep);
+        } else {
+            updateMetadataCompletenessUIFromCache(null, validationCtx);
+            updateDepositionReadiness(null);
+        }
+    });
 
     vscode.workspace.onDidOpenTextDocument((document) => {
         if (document.languageId === 'cif' || document.fileName.endsWith('.cif')) {
