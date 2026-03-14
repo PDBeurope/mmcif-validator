@@ -13,8 +13,27 @@ export interface ValidationErrorItem {
     end_char?: number;
 }
 
+export interface DepositionMissingItem {
+    category: string;
+    item: string;
+    row_index?: number;
+    row_key?: string;
+    has_validation_error?: boolean;
+}
+
+export interface MetadataCompleteness {
+    percentage: number;
+    filled_count: number;
+    total_count: number;
+    method_detected?: string | null;
+    message?: string | null;
+    missing_categories?: string[];
+    missing_items?: DepositionMissingItem[];
+}
+
 export interface ValidationResult {
     errors: ValidationErrorItem[];
+    metadata_completeness?: MetadataCompleteness;
 }
 
 export interface ScriptFailure {
