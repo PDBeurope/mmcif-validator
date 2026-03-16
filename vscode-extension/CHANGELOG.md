@@ -4,7 +4,7 @@ All notable changes to the PDBe mmCIF Validator extension will be documented in 
 
 # Released
 
-## [0.1.7] - 2026-03-13
+## [0.1.71] - 2026-03-16
 
 ### Added
 - **Metadata completeness indicator**: Percentage score showing how complete the file metadata is (mandatory categories and items from completeness lists and dictionary).
