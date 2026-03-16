@@ -15,6 +15,9 @@ class DictionaryParser:
         self.items: Dict[str, Dict] = {}
         self.categories: Dict[str, Dict] = {}
         self.mandatory_items: Set[str] = set()
+        # Deposition mandatory: for PDB deposition, use _pdbx_item.mandatory_code when present, else _item.mandatory_code
+        # Maps category_id -> set of full item names (e.g. _pdbx_contact_author.id)
+        self.deposition_mandatory_items: Dict[str, Set[str]] = {}
         self.parent_child_relationships: List[Dict] = []  # List of {child_cat, parent_cat, child_item, parent_item}
         self.type_regex_patterns: Dict[str, str] = {}  # Map type code to regex pattern
         
@@ -42,6 +45,14 @@ class DictionaryParser:
                     self.items[item_name] = item_info
                     if item_info.get('mandatory') == 'yes':
                         self.mandatory_items.add(item_name)
+                    # Deposition mandatory: _pdbx_item.mandatory_code yes, or _item.mandatory_code yes if no _pdbx_item
+                    pdbx_mandatory = item_info.get('pdbx_mandatory')
+                    if pdbx_mandatory == 'yes' or (pdbx_mandatory is None and item_info.get('mandatory') == 'yes'):
+                        cat = item_info.get('category')
+                        if cat:
+                            if cat not in self.deposition_mandatory_items:
+                                self.deposition_mandatory_items[cat] = set()
+                            self.deposition_mandatory_items[cat].add(item_name)
             
             # Parse category definitions
             elif not block_name.startswith('_'):
@@ -73,6 +84,11 @@ class DictionaryParser:
         mandatory_match = re.search(r'_item\.mandatory_code\s+(\w+)', content)
         if mandatory_match:
             item_info['mandatory'] = mandatory_match.group(1).strip()
+
+        # Extract PDBx deposition mandatory code (used for deposition-readiness; takes precedence when present)
+        pdbx_mandatory_match = re.search(r'_pdbx_item\.mandatory_code\s+(\w+)', content)
+        if pdbx_mandatory_match:
+            item_info['pdbx_mandatory'] = pdbx_mandatory_match.group(1).strip()
         
         # Extract category ID
         category_match = re.search(r'_item\.category_id\s+(\w+)', content)

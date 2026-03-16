@@ -10,6 +10,8 @@ import { promisify } from 'util';
 import {
     ValidationErrorItem,
     ValidationResult,
+    MetadataCompleteness,
+    DepositionMissingItem,
     ScriptFailure,
     ErrorCode,
     isScriptFailure,
@@ -23,6 +25,12 @@ const execAsync = promisify(exec);
 export interface ValidationContext {
     outputChannel: vscode.OutputChannel;
     extensionPath: string | undefined;
+    depositionStatusBarItem?: vscode.StatusBarItem;
+    /**
+     * Callback when metadata completeness has been computed for a document.
+     * The first argument is the document URI as a string.
+     */
+    onDepositionUpdate?: (uri: string, dep: MetadataCompleteness | null) => void;
 }
 
 /**
@@ -125,6 +133,67 @@ function scriptFailureUserMessage(failure: ScriptFailure): string {
     }
 }
 
+function formatMissingItem(m: DepositionMissingItem): string {
+    const row = m.row_index !== undefined ? ` row ${m.row_index + 1}` : '';
+    const key = m.row_key !== undefined ? ` (${m.row_key})` : '';
+    const err = m.has_validation_error ? ' [validation error]' : '';
+    return `${m.item}${row}${key}${err}`;
+}
+
+function showDepositionReadiness(dep: MetadataCompleteness, outputChannel: vscode.OutputChannel): void {
+    outputChannel.appendLine('');
+    outputChannel.appendLine('--- Metadata completeness ---');
+    outputChannel.appendLine(`  ${dep.percentage}% (${dep.filled_count}/${dep.total_count} mandatory items filled)`);
+    if (dep.method_detected) {
+        outputChannel.appendLine(`  Method: ${dep.method_detected}`);
+    }
+    if (dep.message) {
+        outputChannel.appendLine(`  ${dep.message}`);
+    }
+    const missingCats = dep.missing_categories ?? [];
+    const missingItems = dep.missing_items ?? [];
+    if (missingCats.length > 0) {
+        outputChannel.appendLine('  Missing categories: ' + missingCats.join(', '));
+    }
+    if (missingItems.length > 0) {
+        outputChannel.appendLine('  Missing items:');
+        for (const m of missingItems) {
+            outputChannel.appendLine('    - ' + formatMissingItem(m));
+        }
+    }
+    outputChannel.appendLine('');
+}
+
+function setDepositionStatusBar(dep: MetadataCompleteness, item?: vscode.StatusBarItem): void {
+    if (!item) return;
+    const methodNote = dep.method_detected ? ` (${dep.method_detected})` : ' (method unknown)';
+    item.text = `$(check-all) Metadata: ${dep.percentage}%${methodNote}`;
+    const missingCats = dep.missing_categories ?? [];
+    const missingItems = dep.missing_items ?? [];
+    const parts = [`${dep.filled_count}/${dep.total_count} mandatory items filled`];
+    if (dep.message) parts.push(dep.message);
+    if (missingCats.length > 0) parts.push(`Missing categories: ${missingCats.join(', ')}`);
+    if (missingItems.length > 0) parts.push(`Missing items: ${missingItems.length} (see Output channel or "Metadata Completeness" in Explorer sidebar)`);
+    item.tooltip = parts.join('\n');
+    item.show();
+}
+
+function clearDepositionStatusBar(item?: vscode.StatusBarItem): void {
+    if (item) item.hide();
+}
+
+/**
+ * Update status bar (and keep tree view untouched) from a cached metadata-completeness value.
+ * Used when switching between already-validated documents without re-running validation.
+ */
+export function updateMetadataCompletenessUIFromCache(dep: MetadataCompleteness | null, ctx: ValidationContext): void {
+    if (dep) {
+        setDepositionStatusBar(dep, ctx.depositionStatusBarItem);
+    } else {
+        clearDepositionStatusBar(ctx.depositionStatusBarItem);
+    }
+}
+
 export async function validateDocument(
     document: vscode.TextDocument,
     diagnosticCollection: vscode.DiagnosticCollection,
@@ -134,6 +203,8 @@ export async function validateDocument(
     const settings = getSettings();
     if (!settings.enabled) {
         diagnosticCollection.delete(document.uri);
+        clearDepositionStatusBar(ctx.depositionStatusBarItem);
+        ctx.onDepositionUpdate?.(document.uri.toString(), null);
         return;
     }
 
@@ -142,6 +213,8 @@ export async function validateDocument(
     const source = getDictionarySource(workspaceFolder, getCachedPath);
     if (!source) {
         diagnosticCollection.delete(document.uri);
+        clearDepositionStatusBar(ctx.depositionStatusBarItem);
+        ctx.onDepositionUpdate?.(document.uri.toString(), null);
         return;
     }
 
@@ -155,6 +228,8 @@ export async function validateDocument(
             'Validation script not found. Please ensure validate_mmcif.py is in the extension or workspace.'
         );
         diagnosticCollection.delete(document.uri);
+        clearDepositionStatusBar(ctx.depositionStatusBarItem);
+        ctx.onDepositionUpdate?.(document.uri.toString(), null);
         return;
     }
 
@@ -181,6 +256,8 @@ export async function validateDocument(
     if (!useUrl && !fs.existsSync(dictSource)) {
         vscode.window.showErrorMessage(`Dictionary file not found: ${dictSource}`);
         diagnosticCollection.delete(document.uri);
+        clearDepositionStatusBar(ctx.depositionStatusBarItem);
+        ctx.onDepositionUpdate?.(document.uri.toString(), null);
         return;
     }
 
@@ -223,8 +300,19 @@ export async function validateDocument(
     if (isScriptFailure(json)) {
         diagnostics = [scriptFailureToDiagnostic(json)];
         vscode.window.showErrorMessage(scriptFailureUserMessage(json));
+        clearDepositionStatusBar(ctx.depositionStatusBarItem);
+        ctx.onDepositionUpdate?.(document.uri.toString(), null);
     } else if (isValidationResult(json)) {
         diagnostics = buildDiagnosticsFromResult(document, json);
+        const dep = (json as ValidationResult).metadata_completeness;
+        if (dep) {
+            showDepositionReadiness(dep, outputChannel);
+            setDepositionStatusBar(dep, ctx.depositionStatusBarItem);
+            ctx.onDepositionUpdate?.(document.uri.toString(), dep);
+        } else {
+            clearDepositionStatusBar(ctx.depositionStatusBarItem);
+            ctx.onDepositionUpdate?.(document.uri.toString(), null);
+        }
     } else if (exitCode === 1 && stderr) {
         const match = stderr.match(/Error: (.+)/);
         if (match) {
@@ -236,6 +324,11 @@ export async function validateDocument(
                 ),
             ];
         }
+        clearDepositionStatusBar(ctx.depositionStatusBarItem);
+        ctx.onDepositionUpdate?.(document.uri.toString(), null);
+    } else {
+        clearDepositionStatusBar(ctx.depositionStatusBarItem);
+        ctx.onDepositionUpdate?.(document.uri.toString(), null);
     }
 
     diagnosticCollection.set(document.uri, diagnostics);

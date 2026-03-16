@@ -34,6 +34,7 @@ from download import get_cache_dir, get_cached_dictionary_path, download_diction
 from dict_parser import DictionaryParser
 from cif_parser import MmCIFParser
 from validator import MmCIFValidator
+from metadata_completeness import compute_metadata_completeness
 
 # Module-level logger for library integration with existing logging mechanisms
 logger = logging.getLogger(__name__)
@@ -46,17 +47,18 @@ def validate(dict_path: Path, cif_path: Path) -> List[ValidationError]:
     Raises DictionaryNotFoundError if dict_path does not exist.
     Raises CifNotFoundError if cif_path does not exist.
     """
-    return ValidatorFactory.validate(dict_path, cif_path)
+    errors, _, _ = ValidatorFactory.validate(dict_path, cif_path)
+    return errors
 
 
 class ValidatorFactory:
     """Factory for parsing and validating mmCIF files against a dictionary."""
 
     @staticmethod
-    def validate(dict_path: Path, cif_path: Path) -> List[ValidationError]:
+    def validate(dict_path: Path, cif_path: Path) -> tuple:
         """
-        Parse dictionary, parse mmCIF file, run validation, and return list of validation errors.
-        Can be used from CLI (main) or from other code as a library.
+        Parse dictionary, parse mmCIF file, run validation. Returns (errors, dictionary, mmcif).
+        Caller can use dictionary and mmcif for deposition-readiness computation.
         Raises DictionaryNotFoundError if dict_path does not exist.
         Raises CifNotFoundError if cif_path does not exist.
         """
@@ -72,7 +74,8 @@ class ValidatorFactory:
         logger.debug("Found %d items in mmCIF file", len(mmcif.items))
         logger.debug("Validating...")
         validator = MmCIFValidator(dictionary, mmcif)
-        return validator.validate()
+        errors = validator.validate()
+        return errors, dictionary, mmcif
 
 
 def cmd_download_dictionary() -> int:
@@ -202,29 +205,36 @@ Examples:
             raise CifNotFoundError(f"mmCIF file not found: {cif_path}")
         
         try:
-            errors = ValidatorFactory.validate(dict_path, cif_path)
+            errors, dictionary, mmcif = ValidatorFactory.validate(dict_path, cif_path)
         finally:
             if cleanup_temp_file and dict_path is not None and dict_path.exists():
                 dict_path.unlink()
-        
+
+        # Build JSON output for VSCode extension (always include metadata_completeness when available)
+        json_output = validation_result_from_errors(errors)
+        try:
+            dep = compute_metadata_completeness(dictionary, mmcif, validation_errors=errors)
+            json_output["metadata_completeness"] = dep.to_dict()
+        except Exception as e:
+            logger.debug("Metadata completeness computation skipped: %s", e)
+
         # Output results
         if errors:
             logger.info("Found %d validation issue(s)", len(errors))
             for error in errors:
                 logger.info("%s: Line %d, Item '%s' - %s", error.severity.upper(), error.line, error.item, error.message)
-            
+
             print(f"\nFound {len(errors)} validation issue(s):\n")
             for error in errors:
                 print(f"{error.severity.upper()}: Line {error.line}, Item '{error.item}'")
                 print(f"  {error.message}\n")
-            
-            # Output JSON for VSCode extension (protocol-defined format)
-            json_output = validation_result_from_errors(errors)
+
             print(json.dumps(json_output, indent=2))
             return 1
         else:
             logger.info("Validation passed - no errors found")
             print("\nValidation passed! No errors found.")
+            print(json.dumps(json_output, indent=2))
             return 0
     except DictionaryNotFoundError as e:
         logger.error("%s", e)

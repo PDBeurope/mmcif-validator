@@ -35,6 +35,12 @@ jobs:
         working-directory: vscode-extension
         run: npx --yes @vscode/vsce package --no-dependencies
 
+      - name: Publish to Open VSX Registry
+        uses: HaaLeo/publish-vscode-extension@v2
+        with:
+          pat: ${{ secrets.OPEN_VSX_TOKEN }}
+          extensionFile: vscode-extension/*.vsix
+
       - name: Create release and upload .vsix
         uses: softprops/action-gh-release@v2
         with:
