@@ -1,0 +1,9 @@
+data_TEST_VALUE_OUT_OF_RANGE
+#
+_entry.id TEST_VALUE_OUT_OF_RANGE
+#
+_em_image_scans.entry_id TEST_VALUE_OUT_OF_RANGE
+_em_image_scans.id 1
+_em_image_scans.dimension_height 0
+_em_image_scans.dimension_width 0
+

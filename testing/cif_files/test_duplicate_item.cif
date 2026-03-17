@@ -1,0 +1,10 @@
+data_TEST_DUP_ITEM
+#
+_entry.id TEST_DUP_ITEM
+#
+_audit_conform.dict_name       mmcif_pdbx.dic
+_audit_conform.dict_version    5.410
+_audit_conform.dict_location   http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic
+#
+_entry.id TEST_DUP_ITEM_SECOND
+

@@ -1,0 +1,6 @@
+data_TEST_ADVISORY_RANGE
+#
+_entry.id TEST_ADVISORY_RANGE
+#
+_exptl_crystal.density_Matthews 10.0
+

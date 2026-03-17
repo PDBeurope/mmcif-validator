@@ -1,6 +1,6 @@
 # PDBe mmCIF Validator - Python Script
 
-**Version 0.1.71**
+**Version 0.1.8**
 
 A standalone Python script to validate mmCIF/CIF files against the PDBx/mmCIF dictionary or any CIF dictionary.
 

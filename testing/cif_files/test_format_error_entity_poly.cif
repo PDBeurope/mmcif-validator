@@ -1,0 +1,31 @@
+data_TEST_FORMAT_ENTITY_POLY
+#
+_entry.id TEST_FORMAT_ENTITY_POLY
+#
+loop_
+_entity_poly.entity_id
+_entity_poly.type
+_entity_poly.pdbx_strand_id
+_entity_poly.pdbx_seq_one_letter_code
+A polypeptide(L) A,B,C,D ?
+#
+_entity_poly.nstd_chirality '?'
+_entity_poly.nstd_linkage '?'
+_entity_poly.nstd_monomer '?'
+_entity_poly.number_of_monomers '?'
+_entity_poly.type_details '?'
+_entity_poly.pdbx_seq_one_letter_code_can '?'
+_entity_poly.pdbx_target_identifier '?'
+_entity_poly.pdbx_seq_one_letter_code_sample '?'
+_entity_poly.pdbx_explicit_linking_flag '?'
+_entity_poly.pdbx_sequence_evidence_code '?'
+_entity_poly.pdbx_build_self_reference '?'
+_entity_poly.pdbx_N_terminal_seq_one_letter_code '?'
+_entity_poly.pdbx_C_terminal_seq_one_letter_code '?'
+_entity_poly.pdbx_seq_three_letter_code '?'
+_entity_poly.pdbx_seq_db_name '?'
+_entity_poly.pdbx_seq_db_id '?'
+_entity_poly.pdbx_seq_align_begin '?'
+_entity_poly.pdbx_seq_align_end '?'
+_entity_poly.id 1
+

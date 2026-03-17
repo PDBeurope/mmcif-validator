@@ -1,0 +1,6142 @@
+================================================================================
+mmCIF Validator test suite
+Dictionary: http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic
+Test directory: <REPO>/testing\cif_files
+CIF files: 23
+================================================================================
+
+--------------------------------------------------------------------------------
+FILE: 6ijw.cif
+--------------------------------------------------------------------------------
+
+Validation passed! No errors found.
+{
+  "errors": [],
+  "metadata_completeness": {
+    "percentage": 80.4,
+    "filled_count": 168,
+    "total_count": 209,
+    "method_detected": "nmr",
+    "message": null,
+    "missing_categories": [
+      "pdbx_audit_support",
+      "pdbx_nmr_chem_shift_reference",
+      "pdbx_contact_author",
+      "pdbx_nmr_systematic_chem_shift_offset",
+      "pdbx_nmr_constraint_file",
+      "pdbx_nmr_assigned_chem_shift_list",
+      "pdbx_nmr_chem_shift_ref",
+      "struct_ref_seq_dif"
+    ],
+    "missing_items": [
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.details",
+        "row_index": 0,
+        "row_key": "1"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.ordinal"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.funding_organization"
+      },
+      {
+        "category": "pdbx_nmr_chem_shift_reference",
+        "item": "_pdbx_nmr_chem_shift_reference.id"
+      },
+      {
+        "category": "pdbx_nmr_chem_shift_reference",
+        "item": "_pdbx_nmr_chem_shift_reference.label"
+      },
+      {
+        "category": "pdbx_nmr_chem_shift_reference",
+        "item": "_pdbx_nmr_chem_shift_reference.entry_id"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_first"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.role"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.email"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.identifier_ORCID"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_last"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.id"
+      },
+      {
+        "category": "pdbx_nmr_ensemble",
+        "item": "_pdbx_nmr_ensemble.representative_conformer",
+        "row_index": 0,
+        "row_key": "6IJW"
+      },
+      {
+        "category": "pdbx_nmr_systematic_chem_shift_offset",
+        "item": "_pdbx_nmr_systematic_chem_shift_offset.entry_id"
+      },
+      {
+        "category": "pdbx_nmr_systematic_chem_shift_offset",
+        "item": "_pdbx_nmr_systematic_chem_shift_offset.assigned_chem_shift_list_id"
+      },
+      {
+        "category": "pdbx_nmr_systematic_chem_shift_offset",
+        "item": "_pdbx_nmr_systematic_chem_shift_offset.ordinal"
+      },
+      {
+        "category": "pdbx_nmr_constraint_file",
+        "item": "_pdbx_nmr_constraint_file.entry_id"
+      },
+      {
+        "category": "pdbx_nmr_constraint_file",
+        "item": "_pdbx_nmr_constraint_file.constraint_subtype"
+      },
+      {
+        "category": "pdbx_nmr_constraint_file",
+        "item": "_pdbx_nmr_constraint_file.software_name"
+      },
+      {
+        "category": "pdbx_nmr_constraint_file",
+        "item": "_pdbx_nmr_constraint_file.constraint_number"
+      },
+      {
+        "category": "pdbx_nmr_constraint_file",
+        "item": "_pdbx_nmr_constraint_file.constraint_filename"
+      },
+      {
+        "category": "pdbx_nmr_constraint_file",
+        "item": "_pdbx_nmr_constraint_file.constraint_type"
+      },
+      {
+        "category": "pdbx_nmr_assigned_chem_shift_list",
+        "item": "_pdbx_nmr_assigned_chem_shift_list.chem_shift_reference_id"
+      },
+      {
+        "category": "pdbx_nmr_assigned_chem_shift_list",
+        "item": "_pdbx_nmr_assigned_chem_shift_list.data_file_name"
+      },
+      {
+        "category": "pdbx_nmr_assigned_chem_shift_list",
+        "item": "_pdbx_nmr_assigned_chem_shift_list.conditions_id"
+      },
+      {
+        "category": "pdbx_nmr_assigned_chem_shift_list",
+        "item": "_pdbx_nmr_assigned_chem_shift_list.label"
+      },
+      {
+        "category": "pdbx_nmr_assigned_chem_shift_list",
+        "item": "_pdbx_nmr_assigned_chem_shift_list.entry_id"
+      },
+      {
+        "category": "pdbx_nmr_chem_shift_ref",
+        "item": "_pdbx_nmr_chem_shift_ref.indirect_shift_ratio"
+      },
+      {
+        "category": "pdbx_nmr_chem_shift_ref",
+        "item": "_pdbx_nmr_chem_shift_ref.atom_isotope_number"
+      },
+      {
+        "category": "pdbx_nmr_chem_shift_ref",
+        "item": "_pdbx_nmr_chem_shift_ref.ref_type"
+      },
+      {
+        "category": "pdbx_nmr_chem_shift_ref",
+        "item": "_pdbx_nmr_chem_shift_ref.chem_shift_val"
+      },
+      {
+        "category": "pdbx_nmr_chem_shift_ref",
+        "item": "_pdbx_nmr_chem_shift_ref.atom_type"
+      },
+      {
+        "category": "pdbx_nmr_chem_shift_ref",
+        "item": "_pdbx_nmr_chem_shift_ref.mol_common_name"
+      },
+      {
+        "category": "pdbx_nmr_chem_shift_ref",
+        "item": "_pdbx_nmr_chem_shift_ref.entry_id"
+      },
+      {
+        "category": "pdbx_nmr_chem_shift_ref",
+        "item": "_pdbx_nmr_chem_shift_ref.chem_shift_reference_id"
+      },
+      {
+        "category": "pdbx_nmr_chem_shift_ref",
+        "item": "_pdbx_nmr_chem_shift_ref.ref_method"
+      },
+      {
+        "category": "pdbx_nmr_chem_shift_ref",
+        "item": "_pdbx_nmr_chem_shift_ref.atom_group"
+      },
+      {
+        "category": "pdbx_nmr_chem_shift_ref",
+        "item": "_pdbx_nmr_chem_shift_ref.chem_shift_units"
+      },
+      {
+        "category": "struct_ref_seq_dif",
+        "item": "_struct_ref_seq_dif.pdbx_ordinal"
+      }
+    ]
+  }
+}
+
+EXIT_CODE: 0
+
+--------------------------------------------------------------------------------
+FILE: 6qvt.cif
+--------------------------------------------------------------------------------
+
+Found 1 validation issue(s):
+
+WARNING: Line 1922, Item '_refine_ls_shell.d_res_low'
+  Out of advisory range: Value '48.346' is above maximum advised value '10'
+
+{
+  "errors": [
+    {
+      "line": 1922,
+      "item": "_refine_ls_shell.d_res_low",
+      "message": "Out of advisory range: Value '48.346' is above maximum advised value '10'",
+      "severity": "warning",
+      "column": 2,
+      "start_char": 27,
+      "end_char": 33
+    }
+  ],
+  "metadata_completeness": {
+    "percentage": 98.5,
+    "filled_count": 674,
+    "total_count": 684,
+    "method_detected": "xray",
+    "message": null,
+    "missing_categories": [
+      "struct_ref_seq_dif",
+      "pdbx_contact_author"
+    ],
+    "missing_items": [
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.details",
+        "row_index": 0,
+        "row_key": "1"
+      },
+      {
+        "category": "struct_ref_seq_dif",
+        "item": "_struct_ref_seq_dif.pdbx_ordinal"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.id"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.identifier_ORCID"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_first"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.email"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.role"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_last"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type"
+      }
+    ]
+  }
+}
+
+EXIT_CODE: 1
+
+--------------------------------------------------------------------------------
+FILE: 6ssp.cif
+--------------------------------------------------------------------------------
+
+Found 4 validation issue(s):
+
+WARNING: Line 5161, Item '_reflns.B_iso_Wilson_estimate'
+  Out of advisory range: Value '105.940' is above maximum advised value '80'
+
+WARNING: Line 5250, Item '_reflns_shell.d_res_high'
+  Out of advisory range: Value '10.270' is above maximum advised value '8'
+
+WARNING: Line 5250, Item '_reflns_shell.d_res_low'
+  Out of advisory range: Value '48.320' is above maximum advised value '10'
+
+WARNING: Line 5259, Item '_refine.B_iso_mean'
+  Out of advisory range: Value '104.7300' is above maximum advised value '70'
+
+{
+  "errors": [
+    {
+      "line": 5161,
+      "item": "_reflns.B_iso_Wilson_estimate",
+      "message": "Out of advisory range: Value '105.940' is above maximum advised value '80'",
+      "severity": "warning",
+      "column": 0,
+      "start_char": 41,
+      "end_char": 48
+    },
+    {
+      "line": 5250,
+      "item": "_reflns_shell.d_res_high",
+      "message": "Out of advisory range: Value '10.270' is above maximum advised value '8'",
+      "severity": "warning",
+      "column": 0,
+      "start_char": 0,
+      "end_char": 6
+    },
+    {
+      "line": 5250,
+      "item": "_reflns_shell.d_res_low",
+      "message": "Out of advisory range: Value '48.320' is above maximum advised value '10'",
+      "severity": "warning",
+      "column": 1,
+      "start_char": 7,
+      "end_char": 13
+    },
+    {
+      "line": 5259,
+      "item": "_refine.B_iso_mean",
+      "message": "Out of advisory range: Value '104.7300' is above maximum advised value '70'",
+      "severity": "warning",
+      "column": 0,
+      "start_char": 49,
+      "end_char": 57
+    }
+  ],
+  "metadata_completeness": {
+    "percentage": 99.1,
+    "filled_count": 1119,
+    "total_count": 1129,
+    "method_detected": "xray",
+    "message": null,
+    "missing_categories": [
+      "pdbx_contact_author"
+    ],
+    "missing_items": [
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.identifier_ORCID"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.id"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.email"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_first"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_last"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.role"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.details",
+        "row_index": 0,
+        "row_key": "1"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.details",
+        "row_index": 1,
+        "row_key": "2"
+      }
+    ]
+  }
+}
+
+EXIT_CODE: 1
+
+--------------------------------------------------------------------------------
+FILE: 7q5a.cif
+--------------------------------------------------------------------------------
+
+Validation passed! No errors found.
+{
+  "errors": [],
+  "metadata_completeness": {
+    "percentage": 86.7,
+    "filled_count": 370,
+    "total_count": 427,
+    "method_detected": "em",
+    "message": null,
+    "missing_categories": [
+      "em_author_list",
+      "em_tomography",
+      "em_volume_selection",
+      "em_support_film",
+      "em_euler_angle_assignment",
+      "em_single_particle_entity",
+      "em_map",
+      "em_final_classification",
+      "struct_ref_seq_dif"
+    ],
+    "missing_items": [
+      {
+        "category": "em_author_list",
+        "item": "_em_author_list.ordinal"
+      },
+      {
+        "category": "em_author_list",
+        "item": "_em_author_list.author"
+      },
+      {
+        "category": "em_tomography",
+        "item": "_em_tomography.imaging_id"
+      },
+      {
+        "category": "em_tomography",
+        "item": "_em_tomography.id"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country",
+        "row_index": 0,
+        "row_key": "3"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type",
+        "row_index": 0,
+        "row_key": "3"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country",
+        "row_index": 1,
+        "row_key": "4"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type",
+        "row_index": 1,
+        "row_key": "4"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country",
+        "row_index": 2,
+        "row_key": "5"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type",
+        "row_index": 2,
+        "row_key": "5"
+      },
+      {
+        "category": "em_volume_selection",
+        "item": "_em_volume_selection.image_processing_id"
+      },
+      {
+        "category": "em_volume_selection",
+        "item": "_em_volume_selection.id"
+      },
+      {
+        "category": "em_volume_selection",
+        "item": "_em_volume_selection.num_volumes_extracted"
+      },
+      {
+        "category": "em_volume_selection",
+        "item": "_em_volume_selection.num_tomograms"
+      },
+      {
+        "category": "em_support_film",
+        "item": "_em_support_film.sample_support_id"
+      },
+      {
+        "category": "em_support_film",
+        "item": "_em_support_film.id"
+      },
+      {
+        "category": "em_euler_angle_assignment",
+        "item": "_em_euler_angle_assignment.id"
+      },
+      {
+        "category": "em_euler_angle_assignment",
+        "item": "_em_euler_angle_assignment.order"
+      },
+      {
+        "category": "em_euler_angle_assignment",
+        "item": "_em_euler_angle_assignment.image_processing_id"
+      },
+      {
+        "category": "em_euler_angle_assignment",
+        "item": "_em_euler_angle_assignment.type"
+      },
+      {
+        "category": "em_single_particle_entity",
+        "item": "_em_single_particle_entity.id"
+      },
+      {
+        "category": "em_single_particle_entity",
+        "item": "_em_single_particle_entity.entry_id"
+      },
+      {
+        "category": "em_single_particle_entity",
+        "item": "_em_single_particle_entity.image_processing_id"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.data_type"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.origin_sec"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.spacing_y"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.dimensions_sec"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_b"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.entry_id"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.spacing_x"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.spacing_z"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.origin_col"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.origin_row"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.pixel_spacing_y"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.dimensions_row"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.endian_type"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_beta"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.pixel_spacing_x"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.size_kb"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.id"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.axis_order_medium"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.partition"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_c"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_a"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.dimensions_col"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.pixel_spacing_z"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.axis_order_slow"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.symmetry_space_group"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.format"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_alpha"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.axis_order_fast"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.type"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_gamma"
+      },
+      {
+        "category": "em_final_classification",
+        "item": "_em_final_classification.image_processing_id"
+      },
+      {
+        "category": "em_final_classification",
+        "item": "_em_final_classification.id"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.details",
+        "row_index": 0,
+        "row_key": "1"
+      },
+      {
+        "category": "struct_ref_seq_dif",
+        "item": "_struct_ref_seq_dif.pdbx_ordinal"
+      }
+    ]
+  }
+}
+
+EXIT_CODE: 0
+
+--------------------------------------------------------------------------------
+FILE: 8ozl.cif
+--------------------------------------------------------------------------------
+
+Found 6 validation issue(s):
+
+WARNING: Line 4306, Item '_refine.B_iso_mean'
+  Out of advisory range: Value '129.622' is above maximum advised value '70'
+
+WARNING: Line 4325, Item '_refine.ls_d_res_low'
+  Out of advisory range: Value '3.4' is below minimum advised value '5'
+
+WARNING: Line 4346, Item '_refine.ls_R_factor_obs'
+  Out of advisory range: Value '0.31658' is above maximum advised value '0.3'
+
+WARNING: Line 4350, Item '_refine.ls_R_factor_R_work'
+  Out of advisory range: Value '0.31658' is above maximum advised value '0.3'
+
+WARNING: Line 4502, Item '_refine_ls_shell.number_reflns_R_free'
+  Out of advisory range: Value '0' is below minimum advised value '1'
+
+WARNING: Line 4509, Item '_refine_ls_shell.R_factor_R_work'
+  Out of advisory range: Value '2.166' is above maximum advised value '1'
+
+{
+  "errors": [
+    {
+      "line": 4306,
+      "item": "_refine.B_iso_mean",
+      "message": "Out of advisory range: Value '129.622' is above maximum advised value '70'",
+      "severity": "warning",
+      "column": 0,
+      "start_char": 49,
+      "end_char": 56
+    },
+    {
+      "line": 4325,
+      "item": "_refine.ls_d_res_low",
+      "message": "Out of advisory range: Value '3.4' is below minimum advised value '5'",
+      "severity": "warning",
+      "column": 0,
+      "start_char": 49,
+      "end_char": 52
+    },
+    {
+      "line": 4346,
+      "item": "_refine.ls_R_factor_obs",
+      "message": "Out of advisory range: Value '0.31658' is above maximum advised value '0.3'",
+      "severity": "warning",
+      "column": 0,
+      "start_char": 49,
+      "end_char": 56
+    },
+    {
+      "line": 4350,
+      "item": "_refine.ls_R_factor_R_work",
+      "message": "Out of advisory range: Value '0.31658' is above maximum advised value '0.3'",
+      "severity": "warning",
+      "column": 0,
+      "start_char": 49,
+      "end_char": 56
+    },
+    {
+      "line": 4502,
+      "item": "_refine_ls_shell.number_reflns_R_free",
+      "message": "Out of advisory range: Value '0' is below minimum advised value '1'",
+      "severity": "warning",
+      "column": 0,
+      "start_char": 50,
+      "end_char": 51
+    },
+    {
+      "line": 4509,
+      "item": "_refine_ls_shell.R_factor_R_work",
+      "message": "Out of advisory range: Value '2.166' is above maximum advised value '1'",
+      "severity": "warning",
+      "column": 0,
+      "start_char": 50,
+      "end_char": 55
+    }
+  ],
+  "metadata_completeness": {
+    "percentage": 96.6,
+    "filled_count": 1417,
+    "total_count": 1467,
+    "method_detected": "em",
+    "message": null,
+    "missing_categories": [
+      "em_author_list",
+      "em_map",
+      "em_tomography",
+      "em_support_film",
+      "struct_ref_seq_dif",
+      "em_volume_selection",
+      "em_euler_angle_assignment",
+      "em_final_classification"
+    ],
+    "missing_items": [
+      {
+        "category": "em_author_list",
+        "item": "_em_author_list.ordinal"
+      },
+      {
+        "category": "em_author_list",
+        "item": "_em_author_list.author"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.origin_row"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.axis_order_slow"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.dimensions_col"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.axis_order_medium"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.spacing_y"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_c"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.symmetry_space_group"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.endian_type"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.partition"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.pixel_spacing_z"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.data_type"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.format"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.axis_order_fast"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.size_kb"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_beta"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.dimensions_sec"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.dimensions_row"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.pixel_spacing_x"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_a"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.id"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.spacing_z"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.type"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.origin_sec"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_gamma"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_b"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.spacing_x"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.entry_id"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_alpha"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.origin_col"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.pixel_spacing_y"
+      },
+      {
+        "category": "em_tomography",
+        "item": "_em_tomography.imaging_id"
+      },
+      {
+        "category": "em_tomography",
+        "item": "_em_tomography.id"
+      },
+      {
+        "category": "em_support_film",
+        "item": "_em_support_film.sample_support_id"
+      },
+      {
+        "category": "em_support_film",
+        "item": "_em_support_film.id"
+      },
+      {
+        "category": "struct_ref_seq_dif",
+        "item": "_struct_ref_seq_dif.pdbx_ordinal"
+      },
+      {
+        "category": "em_volume_selection",
+        "item": "_em_volume_selection.num_tomograms"
+      },
+      {
+        "category": "em_volume_selection",
+        "item": "_em_volume_selection.image_processing_id"
+      },
+      {
+        "category": "em_volume_selection",
+        "item": "_em_volume_selection.num_volumes_extracted"
+      },
+      {
+        "category": "em_volume_selection",
+        "item": "_em_volume_selection.id"
+      },
+      {
+        "category": "em_euler_angle_assignment",
+        "item": "_em_euler_angle_assignment.order"
+      },
+      {
+        "category": "em_euler_angle_assignment",
+        "item": "_em_euler_angle_assignment.type"
+      },
+      {
+        "category": "em_euler_angle_assignment",
+        "item": "_em_euler_angle_assignment.image_processing_id"
+      },
+      {
+        "category": "em_euler_angle_assignment",
+        "item": "_em_euler_angle_assignment.id"
+      },
+      {
+        "category": "em_final_classification",
+        "item": "_em_final_classification.image_processing_id"
+      },
+      {
+        "category": "em_final_classification",
+        "item": "_em_final_classification.id"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type",
+        "row_index": 0,
+        "row_key": "2"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country",
+        "row_index": 0,
+        "row_key": "2"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.details",
+        "row_index": 0,
+        "row_key": "1"
+      }
+    ]
+  }
+}
+
+EXIT_CODE: 1
+
+--------------------------------------------------------------------------------
+FILE: 8pps.cif
+--------------------------------------------------------------------------------
+
+Found 3 validation issue(s):
+
+WARNING: Line 1916, Item '_refine_ls_shell.d_res_high'
+  Out of advisory range: Value '10.052' is above maximum advised value '8'
+
+WARNING: Line 1915, Item '_refine_ls_shell.d_res_low'
+  Out of advisory range: Value '10.052' is above maximum advised value '10'
+
+WARNING: Line 1916, Item '_refine_ls_shell.d_res_low'
+  Out of advisory range: Value '46.040' is above maximum advised value '10'
+
+{
+  "errors": [
+    {
+      "line": 1916,
+      "item": "_refine_ls_shell.d_res_high",
+      "message": "Out of advisory range: Value '10.052' is above maximum advised value '8'",
+      "severity": "warning",
+      "column": 1,
+      "start_char": 20,
+      "end_char": 26
+    },
+    {
+      "line": 1915,
+      "item": "_refine_ls_shell.d_res_low",
+      "message": "Out of advisory range: Value '10.052' is above maximum advised value '10'",
+      "severity": "warning",
+      "column": 2,
+      "start_char": 27,
+      "end_char": 33
+    },
+    {
+      "line": 1916,
+      "item": "_refine_ls_shell.d_res_low",
+      "message": "Out of advisory range: Value '46.040' is above maximum advised value '10'",
+      "severity": "warning",
+      "column": 2,
+      "start_char": 27,
+      "end_char": 33
+    }
+  ],
+  "metadata_completeness": {
+    "percentage": 99.2,
+    "filled_count": 719,
+    "total_count": 725,
+    "method_detected": "xray",
+    "message": null,
+    "missing_categories": [],
+    "missing_items": [
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type",
+        "row_index": 0,
+        "row_key": "2"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country",
+        "row_index": 0,
+        "row_key": "2"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type",
+        "row_index": 1,
+        "row_key": "3"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country",
+        "row_index": 1,
+        "row_key": "3"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type",
+        "row_index": 2,
+        "row_key": "4"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country",
+        "row_index": 2,
+        "row_key": "4"
+      }
+    ]
+  }
+}
+
+EXIT_CODE: 1
+
+--------------------------------------------------------------------------------
+FILE: 8pwh.cif
+--------------------------------------------------------------------------------
+
+Found 1 validation issue(s):
+
+WARNING: Line 3464, Item '_refine.B_iso_mean'
+  Out of advisory range: Value '224.85' is above maximum advised value '70'
+
+{
+  "errors": [
+    {
+      "line": 3464,
+      "item": "_refine.B_iso_mean",
+      "message": "Out of advisory range: Value '224.85' is above maximum advised value '70'",
+      "severity": "warning",
+      "column": 0,
+      "start_char": 49,
+      "end_char": 55
+    }
+  ],
+  "metadata_completeness": {
+    "percentage": 98.3,
+    "filled_count": 3164,
+    "total_count": 3218,
+    "method_detected": "em",
+    "message": null,
+    "missing_categories": [
+      "em_author_list",
+      "em_final_classification",
+      "em_imaging_optics",
+      "em_volume_selection",
+      "struct_ref_seq_dif",
+      "em_single_particle_entity",
+      "em_euler_angle_assignment",
+      "em_tomography",
+      "em_support_film",
+      "em_map"
+    ],
+    "missing_items": [
+      {
+        "category": "em_author_list",
+        "item": "_em_author_list.author"
+      },
+      {
+        "category": "em_author_list",
+        "item": "_em_author_list.ordinal"
+      },
+      {
+        "category": "em_final_classification",
+        "item": "_em_final_classification.id"
+      },
+      {
+        "category": "em_final_classification",
+        "item": "_em_final_classification.image_processing_id"
+      },
+      {
+        "category": "em_imaging_optics",
+        "item": "_em_imaging_optics.id"
+      },
+      {
+        "category": "em_imaging_optics",
+        "item": "_em_imaging_optics.imaging_id"
+      },
+      {
+        "category": "em_volume_selection",
+        "item": "_em_volume_selection.num_volumes_extracted"
+      },
+      {
+        "category": "em_volume_selection",
+        "item": "_em_volume_selection.image_processing_id"
+      },
+      {
+        "category": "em_volume_selection",
+        "item": "_em_volume_selection.id"
+      },
+      {
+        "category": "em_volume_selection",
+        "item": "_em_volume_selection.num_tomograms"
+      },
+      {
+        "category": "struct_ref_seq_dif",
+        "item": "_struct_ref_seq_dif.pdbx_ordinal"
+      },
+      {
+        "category": "em_single_particle_entity",
+        "item": "_em_single_particle_entity.image_processing_id"
+      },
+      {
+        "category": "em_single_particle_entity",
+        "item": "_em_single_particle_entity.entry_id"
+      },
+      {
+        "category": "em_single_particle_entity",
+        "item": "_em_single_particle_entity.id"
+      },
+      {
+        "category": "em_euler_angle_assignment",
+        "item": "_em_euler_angle_assignment.image_processing_id"
+      },
+      {
+        "category": "em_euler_angle_assignment",
+        "item": "_em_euler_angle_assignment.order"
+      },
+      {
+        "category": "em_euler_angle_assignment",
+        "item": "_em_euler_angle_assignment.type"
+      },
+      {
+        "category": "em_euler_angle_assignment",
+        "item": "_em_euler_angle_assignment.id"
+      },
+      {
+        "category": "em_tomography",
+        "item": "_em_tomography.imaging_id"
+      },
+      {
+        "category": "em_tomography",
+        "item": "_em_tomography.id"
+      },
+      {
+        "category": "em_support_film",
+        "item": "_em_support_film.sample_support_id"
+      },
+      {
+        "category": "em_support_film",
+        "item": "_em_support_film.id"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type",
+        "row_index": 0,
+        "row_key": "3"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country",
+        "row_index": 0,
+        "row_key": "3"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.spacing_y"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.pixel_spacing_x"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.spacing_z"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_gamma"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.dimensions_sec"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.type"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.spacing_x"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.id"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.symmetry_space_group"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_a"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.pixel_spacing_z"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.size_kb"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.axis_order_slow"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.endian_type"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.data_type"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_alpha"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.partition"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.axis_order_medium"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.origin_sec"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.format"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.origin_row"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.axis_order_fast"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.entry_id"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_b"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_beta"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_c"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.dimensions_col"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.origin_col"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.dimensions_row"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.pixel_spacing_y"
+      }
+    ]
+  }
+}
+
+EXIT_CODE: 1
+
+--------------------------------------------------------------------------------
+FILE: 8q6j.cif
+--------------------------------------------------------------------------------
+
+Validation passed! No errors found.
+{
+  "errors": [],
+  "metadata_completeness": {
+    "percentage": 98.3,
+    "filled_count": 3158,
+    "total_count": 3212,
+    "method_detected": "em",
+    "message": null,
+    "missing_categories": [
+      "em_euler_angle_assignment",
+      "em_volume_selection",
+      "em_map",
+      "em_author_list",
+      "em_tomography",
+      "em_final_classification",
+      "em_imaging_optics",
+      "em_single_particle_entity",
+      "struct_ref_seq_dif",
+      "em_support_film"
+    ],
+    "missing_items": [
+      {
+        "category": "em_euler_angle_assignment",
+        "item": "_em_euler_angle_assignment.image_processing_id"
+      },
+      {
+        "category": "em_euler_angle_assignment",
+        "item": "_em_euler_angle_assignment.id"
+      },
+      {
+        "category": "em_euler_angle_assignment",
+        "item": "_em_euler_angle_assignment.type"
+      },
+      {
+        "category": "em_euler_angle_assignment",
+        "item": "_em_euler_angle_assignment.order"
+      },
+      {
+        "category": "em_volume_selection",
+        "item": "_em_volume_selection.image_processing_id"
+      },
+      {
+        "category": "em_volume_selection",
+        "item": "_em_volume_selection.id"
+      },
+      {
+        "category": "em_volume_selection",
+        "item": "_em_volume_selection.num_volumes_extracted"
+      },
+      {
+        "category": "em_volume_selection",
+        "item": "_em_volume_selection.num_tomograms"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.dimensions_sec"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_c"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.endian_type"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.id"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.entry_id"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.data_type"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.pixel_spacing_x"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.origin_row"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.symmetry_space_group"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.pixel_spacing_z"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_beta"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.dimensions_row"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.spacing_z"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.pixel_spacing_y"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.axis_order_medium"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.axis_order_fast"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.type"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.format"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.size_kb"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_a"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.spacing_x"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_gamma"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_b"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.origin_col"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.axis_order_slow"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_alpha"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.spacing_y"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.partition"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.dimensions_col"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.origin_sec"
+      },
+      {
+        "category": "em_author_list",
+        "item": "_em_author_list.ordinal"
+      },
+      {
+        "category": "em_author_list",
+        "item": "_em_author_list.author"
+      },
+      {
+        "category": "em_tomography",
+        "item": "_em_tomography.imaging_id"
+      },
+      {
+        "category": "em_tomography",
+        "item": "_em_tomography.id"
+      },
+      {
+        "category": "em_final_classification",
+        "item": "_em_final_classification.id"
+      },
+      {
+        "category": "em_final_classification",
+        "item": "_em_final_classification.image_processing_id"
+      },
+      {
+        "category": "em_imaging_optics",
+        "item": "_em_imaging_optics.id"
+      },
+      {
+        "category": "em_imaging_optics",
+        "item": "_em_imaging_optics.imaging_id"
+      },
+      {
+        "category": "em_single_particle_entity",
+        "item": "_em_single_particle_entity.id"
+      },
+      {
+        "category": "em_single_particle_entity",
+        "item": "_em_single_particle_entity.image_processing_id"
+      },
+      {
+        "category": "em_single_particle_entity",
+        "item": "_em_single_particle_entity.entry_id"
+      },
+      {
+        "category": "struct_ref_seq_dif",
+        "item": "_struct_ref_seq_dif.pdbx_ordinal"
+      },
+      {
+        "category": "em_support_film",
+        "item": "_em_support_film.id"
+      },
+      {
+        "category": "em_support_film",
+        "item": "_em_support_film.sample_support_id"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type",
+        "row_index": 0,
+        "row_key": "3"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country",
+        "row_index": 0,
+        "row_key": "3"
+      }
+    ]
+  }
+}
+
+EXIT_CODE: 0
+
+--------------------------------------------------------------------------------
+FILE: test_advisory_range_warning.cif
+--------------------------------------------------------------------------------
+
+Found 1 validation issue(s):
+
+WARNING: Line 5, Item '_exptl_crystal.density_Matthews'
+  Out of advisory range: Value '10.0' is above maximum advised value '5.6'
+
+{
+  "errors": [
+    {
+      "line": 5,
+      "item": "_exptl_crystal.density_Matthews",
+      "message": "Out of advisory range: Value '10.0' is above maximum advised value '5.6'",
+      "severity": "warning",
+      "column": 0,
+      "start_char": 32,
+      "end_char": 37
+    }
+  ],
+  "metadata_completeness": {
+    "percentage": 0.0,
+    "filled_count": 0,
+    "total_count": 90,
+    "method_detected": "xray",
+    "message": null,
+    "missing_categories": [
+      "[entity_src_group]",
+      "pdbx_struct_assembly",
+      "exptl",
+      "entity",
+      "entity_poly",
+      "diffrn",
+      "struct_ref_seq_dif",
+      "exptl_crystal_grow",
+      "pdbx_initial_refinement_model",
+      "pdbx_audit_support",
+      "struct",
+      "reflns_shell",
+      "citation_author",
+      "diffrn_detector",
+      "pdbx_struct_assembly_gen",
+      "refine",
+      "entity_poly_seq",
+      "software",
+      "struct_keywords",
+      "struct_ref",
+      "reflns",
+      "diffrn_radiation_wavelength",
+      "audit_author",
+      "pdbx_contact_author",
+      "citation",
+      "pdbx_struct_oper_list",
+      "diffrn_radiation",
+      "pdbx_struct_assembly_auth_evidence",
+      "diffrn_source",
+      "refine_ls_shell"
+    ],
+    "missing_items": [
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.entity_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_ncbi_taxonomy_id"
+      },
+      {
+        "category": "pdbx_struct_assembly",
+        "item": "_pdbx_struct_assembly.details"
+      },
+      {
+        "category": "exptl",
+        "item": "_exptl.method"
+      },
+      {
+        "category": "entity",
+        "item": "_entity.pdbx_description"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.pdbx_seq_one_letter_code"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.entity_id"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.type"
+      },
+      {
+        "category": "diffrn",
+        "item": "_diffrn.pdbx_serial_crystal_experiment"
+      },
+      {
+        "category": "diffrn",
+        "item": "_diffrn.ambient_temp"
+      },
+      {
+        "category": "struct_ref_seq_dif",
+        "item": "_struct_ref_seq_dif.pdbx_ordinal"
+      },
+      {
+        "category": "exptl_crystal_grow",
+        "item": "_exptl_crystal_grow.pdbx_details"
+      },
+      {
+        "category": "exptl_crystal_grow",
+        "item": "_exptl_crystal_grow.temp"
+      },
+      {
+        "category": "exptl_crystal_grow",
+        "item": "_exptl_crystal_grow.method"
+      },
+      {
+        "category": "pdbx_initial_refinement_model",
+        "item": "_pdbx_initial_refinement_model.id"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.ordinal"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.funding_organization"
+      },
+      {
+        "category": "struct",
+        "item": "_struct.title"
+      },
+      {
+        "category": "reflns_shell",
+        "item": "_reflns_shell.pdbx_ordinal"
+      },
+      {
+        "category": "reflns_shell",
+        "item": "_reflns_shell.number_unique_obs"
+      },
+      {
+        "category": "reflns_shell",
+        "item": "_reflns_shell.d_res_high"
+      },
+      {
+        "category": "reflns_shell",
+        "item": "_reflns_shell.d_res_low"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.ordinal"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.name"
+      },
+      {
+        "category": "diffrn_detector",
+        "item": "_diffrn_detector.pdbx_collection_date"
+      },
+      {
+        "category": "diffrn_detector",
+        "item": "_diffrn_detector.detector"
+      },
+      {
+        "category": "diffrn_detector",
+        "item": "_diffrn_detector.type"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.oper_expression"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.asym_id_list"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.assembly_id"
+      },
+      {
+        "category": "refine",
+        "item": "_refine.ls_percent_reflns_obs"
+      },
+      {
+        "category": "refine",
+        "item": "_refine.ls_d_res_low"
+      },
+      {
+        "category": "refine",
+        "item": "_refine.pdbx_method_to_determine_struct"
+      },
+      {
+        "category": "refine",
+        "item": "_refine.pdbx_refine_id"
+      },
+      {
+        "category": "refine",
+        "item": "_refine.ls_number_reflns_obs"
+      },
+      {
+        "category": "refine",
+        "item": "_refine.ls_d_res_high"
+      },
+      {
+        "category": "refine",
+        "item": "_refine.entry_id"
+      },
+      {
+        "category": "refine",
+        "item": "_refine.pdbx_ls_cross_valid_method"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.mon_id"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.entity_id"
+      },
+      {
+        "category": "software",
+        "item": "_software.pdbx_ordinal"
+      },
+      {
+        "category": "software",
+        "item": "_software.classification"
+      },
+      {
+        "category": "software",
+        "item": "_software.name"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.pdbx_keywords"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.text"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_code"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_name"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.d_resolution_low"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.number_obs"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.pdbx_netI_over_sigmaI"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.pdbx_diffrn_id"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.d_resolution_high"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.pdbx_ordinal"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.percent_possible_obs"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.pdbx_redundancy"
+      },
+      {
+        "category": "diffrn_radiation_wavelength",
+        "item": "_diffrn_radiation_wavelength.wavelength"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.pdbx_ordinal"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.name"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.id"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_last"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.identifier_ORCID"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.email"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.role"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_first"
+      },
+      {
+        "category": "citation",
+        "item": "_citation.title"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.id"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.type"
+      },
+      {
+        "category": "diffrn_radiation",
+        "item": "_diffrn_radiation.pdbx_scattering_type"
+      },
+      {
+        "category": "diffrn_radiation",
+        "item": "_diffrn_radiation.pdbx_monochromatic_or_laue_m_l"
+      },
+      {
+        "category": "diffrn_radiation",
+        "item": "_diffrn_radiation.pdbx_diffrn_protocol"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.id"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.experimental_support"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.details"
+      },
+      {
+        "category": "diffrn_source",
+        "item": "_diffrn_source.source"
+      },
+      {
+        "category": "diffrn_source",
+        "item": "_diffrn_source.type"
+      },
+      {
+        "category": "diffrn_source",
+        "item": "_diffrn_source.pdbx_wavelength_list"
+      },
+      {
+        "category": "refine_ls_shell",
+        "item": "_refine_ls_shell.pdbx_refine_id"
+      }
+    ]
+  }
+}
+
+EXIT_CODE: 1
+
+--------------------------------------------------------------------------------
+FILE: test_asym_id_valid_invalid.cif
+--------------------------------------------------------------------------------
+
+Found 5 validation issue(s):
+
+ERROR: Line 6, Item '_atom_site.label_atom_id'
+  Mandatory item '_atom_site.label_atom_id' is missing
+
+ERROR: Line 6, Item '_atom_site.label_alt_id'
+  Mandatory item '_atom_site.label_alt_id' is missing
+
+ERROR: Line 6, Item '_atom_site.label_entity_id'
+  Mandatory item '_atom_site.label_entity_id' is missing
+
+ERROR: Line 6, Item '_atom_site.type_symbol'
+  Mandatory item '_atom_site.type_symbol' is missing
+
+ERROR: Line 15, Item '_atom_site.label_comp_id'
+  Child item '_atom_site.label_comp_id' has values but parent category 'chem_comp' is missing
+
+{
+  "errors": [
+    {
+      "line": 6,
+      "item": "_atom_site.label_atom_id",
+      "message": "Mandatory item '_atom_site.label_atom_id' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 6,
+      "item": "_atom_site.label_alt_id",
+      "message": "Mandatory item '_atom_site.label_alt_id' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 6,
+      "item": "_atom_site.label_entity_id",
+      "message": "Mandatory item '_atom_site.label_entity_id' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 6,
+      "item": "_atom_site.type_symbol",
+      "message": "Mandatory item '_atom_site.type_symbol' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 15,
+      "item": "_atom_site.label_comp_id",
+      "message": "Child item '_atom_site.label_comp_id' has values but parent category 'chem_comp' is missing",
+      "severity": "error",
+      "column": 4,
+      "start_char": 11,
+      "end_char": 14
+    }
+  ],
+  "metadata_completeness": {
+    "percentage": 0.0,
+    "filled_count": 0,
+    "total_count": 49,
+    "method_detected": null,
+    "message": "Experimental method could not be determined from this file. Only common mandatory categories are counted; maximum score is 50%.",
+    "missing_categories": [
+      "[entity_src_group]",
+      "pdbx_contact_author",
+      "pdbx_struct_assembly_gen",
+      "struct",
+      "struct_ref_seq_dif",
+      "citation_author",
+      "entity",
+      "entity_poly_seq",
+      "entity_poly",
+      "struct_keywords",
+      "citation",
+      "struct_ref",
+      "audit_author",
+      "pdbx_struct_assembly_auth_evidence",
+      "pdbx_struct_oper_list",
+      "pdbx_audit_support",
+      "pdbx_struct_assembly"
+    ],
+    "missing_items": [
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.entity_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_scientific_name"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.identifier_ORCID"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.role"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.email"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.id"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_first"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_last"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.asym_id_list"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.oper_expression"
+      },
+      {
+        "category": "struct",
+        "item": "_struct.title"
+      },
+      {
+        "category": "struct_ref_seq_dif",
+        "item": "_struct_ref_seq_dif.pdbx_ordinal"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.name"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.ordinal"
+      },
+      {
+        "category": "entity",
+        "item": "_entity.pdbx_description"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.entity_id"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.mon_id"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.pdbx_seq_one_letter_code"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.entity_id"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.type"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.text"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.pdbx_keywords"
+      },
+      {
+        "category": "citation",
+        "item": "_citation.title"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_code"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_name"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.name"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.pdbx_ordinal"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.details"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.experimental_support"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.id"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.type"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.id"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.ordinal"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.funding_organization"
+      },
+      {
+        "category": "pdbx_struct_assembly",
+        "item": "_pdbx_struct_assembly.details"
+      }
+    ]
+  }
+}
+
+EXIT_CODE: 1
+
+--------------------------------------------------------------------------------
+FILE: test_composite_fk_mismatch.cif
+--------------------------------------------------------------------------------
+
+Found 5 validation issue(s):
+
+ERROR: Line 6, Item '_atom_site.label_atom_id'
+  Mandatory item '_atom_site.label_atom_id' is missing
+
+ERROR: Line 6, Item '_atom_site.label_entity_id'
+  Mandatory item '_atom_site.label_entity_id' is missing
+
+ERROR: Line 6, Item '_atom_site.label_alt_id'
+  Mandatory item '_atom_site.label_alt_id' is missing
+
+ERROR: Line 6, Item '_atom_site.type_symbol'
+  Mandatory item '_atom_site.type_symbol' is missing
+
+ERROR: Line 14, Item '_atom_site.label_comp_id'
+  Child item '_atom_site.label_comp_id' has values but parent category 'chem_comp' is missing
+
+{
+  "errors": [
+    {
+      "line": 6,
+      "item": "_atom_site.label_atom_id",
+      "message": "Mandatory item '_atom_site.label_atom_id' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 6,
+      "item": "_atom_site.label_entity_id",
+      "message": "Mandatory item '_atom_site.label_entity_id' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 6,
+      "item": "_atom_site.label_alt_id",
+      "message": "Mandatory item '_atom_site.label_alt_id' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 6,
+      "item": "_atom_site.type_symbol",
+      "message": "Mandatory item '_atom_site.type_symbol' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 14,
+      "item": "_atom_site.label_comp_id",
+      "message": "Child item '_atom_site.label_comp_id' has values but parent category 'chem_comp' is missing",
+      "severity": "error",
+      "column": 3,
+      "start_char": 9,
+      "end_char": 12
+    }
+  ],
+  "metadata_completeness": {
+    "percentage": 0.0,
+    "filled_count": 0,
+    "total_count": 49,
+    "method_detected": null,
+    "message": "Experimental method could not be determined from this file. Only common mandatory categories are counted; maximum score is 50%.",
+    "missing_categories": [
+      "[entity_src_group]",
+      "pdbx_struct_assembly",
+      "struct_ref_seq_dif",
+      "struct_ref",
+      "entity",
+      "pdbx_struct_oper_list",
+      "struct_keywords",
+      "citation",
+      "pdbx_struct_assembly_gen",
+      "pdbx_contact_author",
+      "pdbx_struct_assembly_auth_evidence",
+      "audit_author",
+      "struct",
+      "pdbx_audit_support",
+      "entity_poly",
+      "entity_poly_seq",
+      "citation_author"
+    ],
+    "missing_items": [
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.entity_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_scientific_name"
+      },
+      {
+        "category": "pdbx_struct_assembly",
+        "item": "_pdbx_struct_assembly.details"
+      },
+      {
+        "category": "struct_ref_seq_dif",
+        "item": "_struct_ref_seq_dif.pdbx_ordinal"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_code"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_name"
+      },
+      {
+        "category": "entity",
+        "item": "_entity.pdbx_description"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.type"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.id"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.text"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.pdbx_keywords"
+      },
+      {
+        "category": "citation",
+        "item": "_citation.title"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.oper_expression"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.asym_id_list"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.role"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.id"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.email"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.identifier_ORCID"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_last"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_first"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.experimental_support"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.details"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.id"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.name"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.pdbx_ordinal"
+      },
+      {
+        "category": "struct",
+        "item": "_struct.title"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.ordinal"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.funding_organization"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.entity_id"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.type"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.pdbx_seq_one_letter_code"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.entity_id"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.mon_id"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.name"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.ordinal"
+      }
+    ]
+  }
+}
+
+EXIT_CODE: 1
+
+--------------------------------------------------------------------------------
+FILE: test_duplicate_category.cif
+--------------------------------------------------------------------------------
+
+Found 3 validation issue(s):
+
+ERROR: Line 8, Item '_entity.'
+  Duplicate category 'entity' (first occurrence at line 5)
+
+ERROR: Line 8, Item '_entity.id'
+  Duplicate item '_entity.id' (first occurrence at line 5)
+
+ERROR: Line 9, Item '_entity.type'
+  Duplicate item '_entity.type' (first occurrence at line 6)
+
+{
+  "errors": [
+    {
+      "line": 8,
+      "item": "_entity.",
+      "message": "Duplicate category 'entity' (first occurrence at line 5)",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 8,
+      "item": "_entity.id",
+      "message": "Duplicate item '_entity.id' (first occurrence at line 5)",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 9,
+      "item": "_entity.type",
+      "message": "Duplicate item '_entity.type' (first occurrence at line 6)",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    }
+  ],
+  "metadata_completeness": {
+    "percentage": 0.0,
+    "filled_count": 0,
+    "total_count": 50,
+    "method_detected": null,
+    "message": "Experimental method could not be determined from this file. Only common mandatory categories are counted; maximum score is 50%.",
+    "missing_categories": [
+      "[entity_src_group]",
+      "pdbx_struct_assembly_auth_evidence",
+      "pdbx_struct_assembly",
+      "citation_author",
+      "audit_author",
+      "struct",
+      "struct_ref_seq_dif",
+      "entity_poly",
+      "pdbx_contact_author",
+      "citation",
+      "struct_ref",
+      "pdbx_struct_assembly_gen",
+      "pdbx_struct_oper_list",
+      "struct_keywords",
+      "entity_poly_seq",
+      "pdbx_audit_support"
+    ],
+    "missing_items": [
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.entity_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.ncbi_taxonomy_id"
+      },
+      {
+        "category": "entity",
+        "item": "_entity.pdbx_description",
+        "row_index": 0,
+        "row_key": "1"
+      },
+      {
+        "category": "entity",
+        "item": "_entity.pdbx_description",
+        "row_index": 1,
+        "row_key": "2"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.experimental_support"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.details"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.id"
+      },
+      {
+        "category": "pdbx_struct_assembly",
+        "item": "_pdbx_struct_assembly.details"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.ordinal"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.name"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.name"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.pdbx_ordinal"
+      },
+      {
+        "category": "struct",
+        "item": "_struct.title"
+      },
+      {
+        "category": "struct_ref_seq_dif",
+        "item": "_struct_ref_seq_dif.pdbx_ordinal"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.entity_id"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.type"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.pdbx_seq_one_letter_code"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.role"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_last"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.id"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_first"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.identifier_ORCID"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.email"
+      },
+      {
+        "category": "citation",
+        "item": "_citation.title"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_code"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_name"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.asym_id_list"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.oper_expression"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.id"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.type"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.text"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.pdbx_keywords"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.entity_id"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.mon_id"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.funding_organization"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.ordinal"
+      }
+    ]
+  }
+}
+
+EXIT_CODE: 1
+
+--------------------------------------------------------------------------------
+FILE: test_duplicate_item.cif
+--------------------------------------------------------------------------------
+
+Found 2 validation issue(s):
+
+ERROR: Line 9, Item '_entry.'
+  Duplicate category 'entry' (first occurrence at line 3)
+
+ERROR: Line 9, Item '_entry.id'
+  Duplicate item '_entry.id' (first occurrence at line 3)
+
+{
+  "errors": [
+    {
+      "line": 9,
+      "item": "_entry.",
+      "message": "Duplicate category 'entry' (first occurrence at line 3)",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 9,
+      "item": "_entry.id",
+      "message": "Duplicate item '_entry.id' (first occurrence at line 3)",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    }
+  ],
+  "metadata_completeness": {
+    "percentage": 0.0,
+    "filled_count": 0,
+    "total_count": 49,
+    "method_detected": null,
+    "message": "Experimental method could not be determined from this file. Only common mandatory categories are counted; maximum score is 50%.",
+    "missing_categories": [
+      "[entity_src_group]",
+      "pdbx_audit_support",
+      "entity",
+      "struct_ref_seq_dif",
+      "audit_author",
+      "citation_author",
+      "struct_ref",
+      "entity_poly",
+      "citation",
+      "pdbx_struct_oper_list",
+      "entity_poly_seq",
+      "pdbx_contact_author",
+      "pdbx_struct_assembly",
+      "struct",
+      "pdbx_struct_assembly_auth_evidence",
+      "pdbx_struct_assembly_gen",
+      "struct_keywords"
+    ],
+    "missing_items": [
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.entity_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_scientific_name"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.ordinal"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.funding_organization"
+      },
+      {
+        "category": "entity",
+        "item": "_entity.pdbx_description"
+      },
+      {
+        "category": "struct_ref_seq_dif",
+        "item": "_struct_ref_seq_dif.pdbx_ordinal"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.name"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.pdbx_ordinal"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.ordinal"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.name"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_name"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_code"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.type"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.entity_id"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.pdbx_seq_one_letter_code"
+      },
+      {
+        "category": "citation",
+        "item": "_citation.title"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.id"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.type"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.entity_id"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.mon_id"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.role"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.id"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.identifier_ORCID"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_first"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.email"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_last"
+      },
+      {
+        "category": "pdbx_struct_assembly",
+        "item": "_pdbx_struct_assembly.details"
+      },
+      {
+        "category": "struct",
+        "item": "_struct.title"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.details"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.experimental_support"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.id"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.asym_id_list"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.oper_expression"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.text"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.pdbx_keywords"
+      }
+    ]
+  }
+}
+
+EXIT_CODE: 1
+
+--------------------------------------------------------------------------------
+FILE: test_enum_invalid_em_software.cif
+--------------------------------------------------------------------------------
+
+Validation passed! No errors found.
+{
+  "errors": [],
+  "metadata_completeness": {
+    "percentage": 1.2,
+    "filled_count": 2,
+    "total_count": 160,
+    "method_detected": "em",
+    "message": null,
+    "missing_categories": [
+      "[entity_src_group]",
+      "struct_ref_seq_dif",
+      "em_image_processing",
+      "em_entity_assembly",
+      "struct_keywords",
+      "em_specimen",
+      "entity_poly_seq",
+      "pdbx_struct_assembly_gen",
+      "em_admin",
+      "em_image_recording",
+      "em_ctf_correction",
+      "pdbx_struct_oper_list",
+      "struct_ref",
+      "pdbx_struct_assembly_auth_evidence",
+      "em_volume_selection",
+      "em_buffer",
+      "citation_author",
+      "em_final_classification",
+      "em_sample_support",
+      "em_support_film",
+      "pdbx_struct_assembly",
+      "pdbx_contact_author",
+      "em_experiment",
+      "em_imaging",
+      "entity_poly",
+      "em_entity_assembly_naturalsource",
+      "em_map",
+      "pdbx_audit_support",
+      "em_single_particle_entity",
+      "struct",
+      "em_euler_angle_assignment",
+      "em_3d_fitting",
+      "em_tomography",
+      "entity",
+      "em_imaging_optics",
+      "em_vitrification",
+      "citation",
+      "em_3d_reconstruction",
+      "em_author_list",
+      "audit_author"
+    ],
+    "missing_items": [
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.entity_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_ncbi_taxonomy_id"
+      },
+      {
+        "category": "struct_ref_seq_dif",
+        "item": "_struct_ref_seq_dif.pdbx_ordinal"
+      },
+      {
+        "category": "em_image_processing",
+        "item": "_em_image_processing.id"
+      },
+      {
+        "category": "em_image_processing",
+        "item": "_em_image_processing.image_recording_id"
+      },
+      {
+        "category": "em_entity_assembly",
+        "item": "_em_entity_assembly.id"
+      },
+      {
+        "category": "em_entity_assembly",
+        "item": "_em_entity_assembly.name"
+      },
+      {
+        "category": "em_entity_assembly",
+        "item": "_em_entity_assembly.parent_id"
+      },
+      {
+        "category": "em_entity_assembly",
+        "item": "_em_entity_assembly.type"
+      },
+      {
+        "category": "em_entity_assembly",
+        "item": "_em_entity_assembly.source"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.text"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.pdbx_keywords"
+      },
+      {
+        "category": "em_specimen",
+        "item": "_em_specimen.vitrification_applied"
+      },
+      {
+        "category": "em_specimen",
+        "item": "_em_specimen.experiment_id"
+      },
+      {
+        "category": "em_specimen",
+        "item": "_em_specimen.shadowing_applied"
+      },
+      {
+        "category": "em_specimen",
+        "item": "_em_specimen.id"
+      },
+      {
+        "category": "em_specimen",
+        "item": "_em_specimen.embedding_applied"
+      },
+      {
+        "category": "em_specimen",
+        "item": "_em_specimen.staining_applied"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.mon_id"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.entity_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.asym_id_list"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.oper_expression"
+      },
+      {
+        "category": "em_admin",
+        "item": "_em_admin.last_update"
+      },
+      {
+        "category": "em_admin",
+        "item": "_em_admin.entry_id"
+      },
+      {
+        "category": "em_admin",
+        "item": "_em_admin.deposition_site"
+      },
+      {
+        "category": "em_admin",
+        "item": "_em_admin.current_status"
+      },
+      {
+        "category": "em_admin",
+        "item": "_em_admin.title"
+      },
+      {
+        "category": "em_admin",
+        "item": "_em_admin.deposition_date"
+      },
+      {
+        "category": "em_image_recording",
+        "item": "_em_image_recording.avg_electron_dose_per_image"
+      },
+      {
+        "category": "em_image_recording",
+        "item": "_em_image_recording.film_or_detector_model"
+      },
+      {
+        "category": "em_image_recording",
+        "item": "_em_image_recording.imaging_id"
+      },
+      {
+        "category": "em_image_recording",
+        "item": "_em_image_recording.id"
+      },
+      {
+        "category": "em_ctf_correction",
+        "item": "_em_ctf_correction.type"
+      },
+      {
+        "category": "em_ctf_correction",
+        "item": "_em_ctf_correction.id"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.id"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.type"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_name"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_code"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.details"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.id"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.experimental_support"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.assembly_id"
+      },
+      {
+        "category": "em_volume_selection",
+        "item": "_em_volume_selection.id"
+      },
+      {
+        "category": "em_volume_selection",
+        "item": "_em_volume_selection.num_tomograms"
+      },
+      {
+        "category": "em_volume_selection",
+        "item": "_em_volume_selection.num_volumes_extracted"
+      },
+      {
+        "category": "em_volume_selection",
+        "item": "_em_volume_selection.image_processing_id"
+      },
+      {
+        "category": "em_buffer",
+        "item": "_em_buffer.pH"
+      },
+      {
+        "category": "em_buffer",
+        "item": "_em_buffer.id"
+      },
+      {
+        "category": "em_buffer",
+        "item": "_em_buffer.specimen_id"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.ordinal"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.name"
+      },
+      {
+        "category": "em_final_classification",
+        "item": "_em_final_classification.id"
+      },
+      {
+        "category": "em_final_classification",
+        "item": "_em_final_classification.image_processing_id"
+      },
+      {
+        "category": "em_sample_support",
+        "item": "_em_sample_support.id"
+      },
+      {
+        "category": "em_sample_support",
+        "item": "_em_sample_support.specimen_id"
+      },
+      {
+        "category": "em_support_film",
+        "item": "_em_support_film.sample_support_id"
+      },
+      {
+        "category": "em_support_film",
+        "item": "_em_support_film.id"
+      },
+      {
+        "category": "pdbx_struct_assembly",
+        "item": "_pdbx_struct_assembly.details"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_first"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_last"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.email"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.id"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.identifier_ORCID"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.role"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country"
+      },
+      {
+        "category": "em_experiment",
+        "item": "_em_experiment.reconstruction_method"
+      },
+      {
+        "category": "em_experiment",
+        "item": "_em_experiment.entry_id"
+      },
+      {
+        "category": "em_experiment",
+        "item": "_em_experiment.id"
+      },
+      {
+        "category": "em_experiment",
+        "item": "_em_experiment.entity_assembly_id"
+      },
+      {
+        "category": "em_experiment",
+        "item": "_em_experiment.aggregation_state"
+      },
+      {
+        "category": "em_imaging",
+        "item": "_em_imaging.id"
+      },
+      {
+        "category": "em_imaging",
+        "item": "_em_imaging.accelerating_voltage"
+      },
+      {
+        "category": "em_imaging",
+        "item": "_em_imaging.illumination_mode"
+      },
+      {
+        "category": "em_imaging",
+        "item": "_em_imaging.microscope_model"
+      },
+      {
+        "category": "em_imaging",
+        "item": "_em_imaging.specimen_id"
+      },
+      {
+        "category": "em_imaging",
+        "item": "_em_imaging.entry_id"
+      },
+      {
+        "category": "em_imaging",
+        "item": "_em_imaging.electron_source"
+      },
+      {
+        "category": "em_imaging",
+        "item": "_em_imaging.mode"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.pdbx_seq_one_letter_code"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.type"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.entity_id"
+      },
+      {
+        "category": "em_entity_assembly_naturalsource",
+        "item": "_em_entity_assembly_naturalsource.id"
+      },
+      {
+        "category": "em_entity_assembly_naturalsource",
+        "item": "_em_entity_assembly_naturalsource.ncbi_tax_id"
+      },
+      {
+        "category": "em_entity_assembly_naturalsource",
+        "item": "_em_entity_assembly_naturalsource.organism"
+      },
+      {
+        "category": "em_entity_assembly_naturalsource",
+        "item": "_em_entity_assembly_naturalsource.entity_assembly_id"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.pixel_spacing_y"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_gamma"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.data_type"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.spacing_y"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.origin_row"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.spacing_z"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_beta"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.dimensions_col"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.spacing_x"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.symmetry_space_group"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.id"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_b"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.axis_order_slow"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.partition"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.entry_id"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.pixel_spacing_z"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_alpha"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.origin_col"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_a"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.endian_type"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.dimensions_row"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.axis_order_medium"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.size_kb"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.origin_sec"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.type"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.format"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.axis_order_fast"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.cell_c"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.dimensions_sec"
+      },
+      {
+        "category": "em_map",
+        "item": "_em_map.pixel_spacing_x"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.funding_organization"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.ordinal"
+      },
+      {
+        "category": "em_single_particle_entity",
+        "item": "_em_single_particle_entity.image_processing_id"
+      },
+      {
+        "category": "em_single_particle_entity",
+        "item": "_em_single_particle_entity.id"
+      },
+      {
+        "category": "em_single_particle_entity",
+        "item": "_em_single_particle_entity.entry_id"
+      },
+      {
+        "category": "struct",
+        "item": "_struct.title"
+      },
+      {
+        "category": "em_euler_angle_assignment",
+        "item": "_em_euler_angle_assignment.image_processing_id"
+      },
+      {
+        "category": "em_euler_angle_assignment",
+        "item": "_em_euler_angle_assignment.id"
+      },
+      {
+        "category": "em_euler_angle_assignment",
+        "item": "_em_euler_angle_assignment.type"
+      },
+      {
+        "category": "em_euler_angle_assignment",
+        "item": "_em_euler_angle_assignment.order"
+      },
+      {
+        "category": "em_3d_fitting",
+        "item": "_em_3d_fitting.id"
+      },
+      {
+        "category": "em_3d_fitting",
+        "item": "_em_3d_fitting.entry_id"
+      },
+      {
+        "category": "em_tomography",
+        "item": "_em_tomography.imaging_id"
+      },
+      {
+        "category": "em_tomography",
+        "item": "_em_tomography.id"
+      },
+      {
+        "category": "entity",
+        "item": "_entity.pdbx_description"
+      },
+      {
+        "category": "em_imaging_optics",
+        "item": "_em_imaging_optics.id"
+      },
+      {
+        "category": "em_imaging_optics",
+        "item": "_em_imaging_optics.imaging_id"
+      },
+      {
+        "category": "em_vitrification",
+        "item": "_em_vitrification.id"
+      },
+      {
+        "category": "em_vitrification",
+        "item": "_em_vitrification.specimen_id"
+      },
+      {
+        "category": "em_vitrification",
+        "item": "_em_vitrification.cryogen_name"
+      },
+      {
+        "category": "em_vitrification",
+        "item": "_em_vitrification.entry_id"
+      },
+      {
+        "category": "citation",
+        "item": "_citation.title"
+      },
+      {
+        "category": "em_3d_reconstruction",
+        "item": "_em_3d_reconstruction.num_particles"
+      },
+      {
+        "category": "em_3d_reconstruction",
+        "item": "_em_3d_reconstruction.symmetry_type"
+      },
+      {
+        "category": "em_3d_reconstruction",
+        "item": "_em_3d_reconstruction.entry_id"
+      },
+      {
+        "category": "em_3d_reconstruction",
+        "item": "_em_3d_reconstruction.image_processing_id"
+      },
+      {
+        "category": "em_3d_reconstruction",
+        "item": "_em_3d_reconstruction.id"
+      },
+      {
+        "category": "em_author_list",
+        "item": "_em_author_list.ordinal"
+      },
+      {
+        "category": "em_author_list",
+        "item": "_em_author_list.author"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.pdbx_ordinal"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.name"
+      }
+    ]
+  }
+}
+
+EXIT_CODE: 0
+
+--------------------------------------------------------------------------------
+FILE: test_fk_missing_parent.cif
+--------------------------------------------------------------------------------
+
+Found 6 validation issue(s):
+
+ERROR: Line 11, Item '_atom_site.label_entity_id'
+  Mandatory item '_atom_site.label_entity_id' is missing
+
+ERROR: Line 11, Item '_atom_site.type_symbol'
+  Mandatory item '_atom_site.type_symbol' is missing
+
+ERROR: Line 11, Item '_atom_site.label_atom_id'
+  Mandatory item '_atom_site.label_atom_id' is missing
+
+ERROR: Line 11, Item '_atom_site.label_alt_id'
+  Mandatory item '_atom_site.label_alt_id' is missing
+
+ERROR: Line 19, Item '_atom_site.label_comp_id'
+  Child item '_atom_site.label_comp_id' has values but parent category 'chem_comp' is missing
+
+ERROR: Line 8, Item '_struct_asym.entity_id'
+  Child item '_struct_asym.entity_id' has values but parent category 'entity' is missing
+
+{
+  "errors": [
+    {
+      "line": 11,
+      "item": "_atom_site.label_entity_id",
+      "message": "Mandatory item '_atom_site.label_entity_id' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 11,
+      "item": "_atom_site.type_symbol",
+      "message": "Mandatory item '_atom_site.type_symbol' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 11,
+      "item": "_atom_site.label_atom_id",
+      "message": "Mandatory item '_atom_site.label_atom_id' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 11,
+      "item": "_atom_site.label_alt_id",
+      "message": "Mandatory item '_atom_site.label_alt_id' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 19,
+      "item": "_atom_site.label_comp_id",
+      "message": "Child item '_atom_site.label_comp_id' has values but parent category 'chem_comp' is missing",
+      "severity": "error",
+      "column": 3,
+      "start_char": 9,
+      "end_char": 12
+    },
+    {
+      "line": 8,
+      "item": "_struct_asym.entity_id",
+      "message": "Child item '_struct_asym.entity_id' has values but parent category 'entity' is missing",
+      "severity": "error",
+      "column": 1,
+      "start_char": 2,
+      "end_char": 4
+    }
+  ],
+  "metadata_completeness": {
+    "percentage": 0.0,
+    "filled_count": 0,
+    "total_count": 49,
+    "method_detected": null,
+    "message": "Experimental method could not be determined from this file. Only common mandatory categories are counted; maximum score is 50%.",
+    "missing_categories": [
+      "[entity_src_group]",
+      "pdbx_audit_support",
+      "pdbx_struct_assembly",
+      "struct_keywords",
+      "struct_ref_seq_dif",
+      "citation",
+      "pdbx_struct_oper_list",
+      "entity",
+      "citation_author",
+      "struct_ref",
+      "pdbx_struct_assembly_auth_evidence",
+      "entity_poly_seq",
+      "pdbx_struct_assembly_gen",
+      "audit_author",
+      "struct",
+      "pdbx_contact_author",
+      "entity_poly"
+    ],
+    "missing_items": [
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.entity_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_organism_scientific"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.ordinal"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.funding_organization"
+      },
+      {
+        "category": "pdbx_struct_assembly",
+        "item": "_pdbx_struct_assembly.details"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.text"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.pdbx_keywords"
+      },
+      {
+        "category": "struct_ref_seq_dif",
+        "item": "_struct_ref_seq_dif.pdbx_ordinal"
+      },
+      {
+        "category": "citation",
+        "item": "_citation.title"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.id"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.type"
+      },
+      {
+        "category": "entity",
+        "item": "_entity.pdbx_description"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.name"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.ordinal"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_name"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_code"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.details"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.experimental_support"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.id"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.mon_id"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.entity_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.oper_expression"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.asym_id_list"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.name"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.pdbx_ordinal"
+      },
+      {
+        "category": "struct",
+        "item": "_struct.title"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_first"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.identifier_ORCID"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.role"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_last"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.email"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.id"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.entity_id"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.type"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.pdbx_seq_one_letter_code"
+      }
+    ]
+  }
+}
+
+EXIT_CODE: 1
+
+--------------------------------------------------------------------------------
+FILE: test_format_error_entity_poly.cif
+--------------------------------------------------------------------------------
+
+Found 1 validation issue(s):
+
+ERROR: Line 10, Item '_entity_poly.entity_id'
+  Child item '_entity_poly.entity_id' has values but parent category 'entity' is missing
+
+{
+  "errors": [
+    {
+      "line": 10,
+      "item": "_entity_poly.entity_id",
+      "message": "Child item '_entity_poly.entity_id' has values but parent category 'entity' is missing",
+      "severity": "error",
+      "column": 0,
+      "start_char": 0,
+      "end_char": 1
+    }
+  ],
+  "metadata_completeness": {
+    "percentage": 2.0,
+    "filled_count": 1,
+    "total_count": 49,
+    "method_detected": null,
+    "message": "Experimental method could not be determined from this file. Only common mandatory categories are counted; maximum score is 50%.",
+    "missing_categories": [
+      "[entity_src_group]",
+      "pdbx_struct_assembly",
+      "struct_ref",
+      "pdbx_audit_support",
+      "pdbx_struct_assembly_gen",
+      "struct_keywords",
+      "entity_poly_seq",
+      "citation",
+      "pdbx_struct_oper_list",
+      "struct",
+      "audit_author",
+      "pdbx_contact_author",
+      "struct_ref_seq_dif",
+      "entity",
+      "citation_author",
+      "pdbx_struct_assembly_auth_evidence"
+    ],
+    "missing_items": [
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.entity_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.organism_scientific"
+      },
+      {
+        "category": "pdbx_struct_assembly",
+        "item": "_pdbx_struct_assembly.details"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_name"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_code"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.funding_organization"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.ordinal"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.asym_id_list"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.oper_expression"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.pdbx_keywords"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.text"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.entity_id"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.mon_id"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.entity_id",
+        "row_index": 0,
+        "has_validation_error": true,
+        "row_key": "A"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.pdbx_seq_one_letter_code",
+        "row_index": 0,
+        "row_key": "A"
+      },
+      {
+        "category": "citation",
+        "item": "_citation.title"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.id"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.type"
+      },
+      {
+        "category": "struct",
+        "item": "_struct.title"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.name"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.pdbx_ordinal"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_last"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.role"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.email"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_first"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.id"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.identifier_ORCID"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country"
+      },
+      {
+        "category": "struct_ref_seq_dif",
+        "item": "_struct_ref_seq_dif.pdbx_ordinal"
+      },
+      {
+        "category": "entity",
+        "item": "_entity.pdbx_description"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.ordinal"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.name"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.details"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.experimental_support"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.id"
+      }
+    ]
+  }
+}
+
+EXIT_CODE: 1
+
+--------------------------------------------------------------------------------
+FILE: test_loop_row_mismatch.cif
+--------------------------------------------------------------------------------
+
+Validation passed! No errors found.
+{
+  "errors": [],
+  "metadata_completeness": {
+    "percentage": 0.0,
+    "filled_count": 0,
+    "total_count": 49,
+    "method_detected": null,
+    "message": "Experimental method could not be determined from this file. Only common mandatory categories are counted; maximum score is 50%.",
+    "missing_categories": [
+      "[entity_src_group]",
+      "pdbx_struct_assembly_gen",
+      "pdbx_struct_assembly",
+      "pdbx_struct_assembly_auth_evidence",
+      "struct_ref_seq_dif",
+      "pdbx_struct_oper_list",
+      "entity_poly",
+      "struct_keywords",
+      "entity_poly_seq",
+      "struct_ref",
+      "citation_author",
+      "citation",
+      "entity",
+      "audit_author",
+      "struct",
+      "pdbx_contact_author",
+      "pdbx_audit_support"
+    ],
+    "missing_items": [
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.entity_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_ncbi_taxonomy_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.asym_id_list"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.oper_expression"
+      },
+      {
+        "category": "pdbx_struct_assembly",
+        "item": "_pdbx_struct_assembly.details"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.details"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.id"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.experimental_support"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.assembly_id"
+      },
+      {
+        "category": "struct_ref_seq_dif",
+        "item": "_struct_ref_seq_dif.pdbx_ordinal"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.type"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.id"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.type"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.pdbx_seq_one_letter_code"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.entity_id"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.pdbx_keywords"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.text"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.entity_id"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.mon_id"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_name"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_code"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.name"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.ordinal"
+      },
+      {
+        "category": "citation",
+        "item": "_citation.title"
+      },
+      {
+        "category": "entity",
+        "item": "_entity.pdbx_description"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.pdbx_ordinal"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.name"
+      },
+      {
+        "category": "struct",
+        "item": "_struct.title"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_last"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.id"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.identifier_ORCID"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.role"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_first"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.email"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.funding_organization"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.ordinal"
+      }
+    ]
+  }
+}
+
+EXIT_CODE: 0
+
+--------------------------------------------------------------------------------
+FILE: test_mandatory_missing_item.cif
+--------------------------------------------------------------------------------
+
+Validation passed! No errors found.
+{
+  "errors": [],
+  "metadata_completeness": {
+    "percentage": 0.0,
+    "filled_count": 0,
+    "total_count": 49,
+    "method_detected": null,
+    "message": "Experimental method could not be determined from this file. Only common mandatory categories are counted; maximum score is 50%.",
+    "missing_categories": [
+      "[entity_src_group]",
+      "entity_poly",
+      "pdbx_struct_oper_list",
+      "citation_author",
+      "entity_poly_seq",
+      "struct_keywords",
+      "pdbx_audit_support",
+      "struct_ref",
+      "struct_ref_seq_dif",
+      "citation",
+      "pdbx_contact_author",
+      "audit_author",
+      "struct",
+      "pdbx_struct_assembly_gen",
+      "pdbx_struct_assembly",
+      "pdbx_struct_assembly_auth_evidence"
+    ],
+    "missing_items": [
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.entity_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_scientific_name"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.type"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.entity_id"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.pdbx_seq_one_letter_code"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.id"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.type"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.name"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.ordinal"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.entity_id"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.mon_id"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.text"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.pdbx_keywords"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.ordinal"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.funding_organization"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_code"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_name"
+      },
+      {
+        "category": "struct_ref_seq_dif",
+        "item": "_struct_ref_seq_dif.pdbx_ordinal"
+      },
+      {
+        "category": "citation",
+        "item": "_citation.title"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_last"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.role"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.identifier_ORCID"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.email"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_first"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.id"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.pdbx_ordinal"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.name"
+      },
+      {
+        "category": "struct",
+        "item": "_struct.title"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.oper_expression"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.asym_id_list"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_assembly",
+        "item": "_pdbx_struct_assembly.details"
+      },
+      {
+        "category": "entity",
+        "item": "_entity.pdbx_description",
+        "row_index": 0
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.details"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.id"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.experimental_support"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.assembly_id"
+      }
+    ]
+  }
+}
+
+EXIT_CODE: 0
+
+--------------------------------------------------------------------------------
+FILE: test_multiline_and_quoted_values.cif
+--------------------------------------------------------------------------------
+
+Validation passed! No errors found.
+{
+  "errors": [],
+  "metadata_completeness": {
+    "percentage": 5.9,
+    "filled_count": 3,
+    "total_count": 51,
+    "method_detected": null,
+    "message": "Experimental method could not be determined from this file. Only common mandatory categories are counted; maximum score is 50%.",
+    "missing_categories": [
+      "[entity_src_group]",
+      "pdbx_struct_oper_list",
+      "struct_keywords",
+      "struct_ref",
+      "entity_poly_seq",
+      "entity",
+      "pdbx_struct_assembly",
+      "struct",
+      "pdbx_contact_author",
+      "struct_ref_seq_dif",
+      "pdbx_audit_support",
+      "entity_poly",
+      "audit_author",
+      "pdbx_struct_assembly_auth_evidence",
+      "pdbx_struct_assembly_gen",
+      "citation_author"
+    ],
+    "missing_items": [
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.entity_id"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.id"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.type"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.pdbx_keywords"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.text"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_name"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_code"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.mon_id"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.entity_id"
+      },
+      {
+        "category": "entity",
+        "item": "_entity.pdbx_description"
+      },
+      {
+        "category": "pdbx_struct_assembly",
+        "item": "_pdbx_struct_assembly.details"
+      },
+      {
+        "category": "struct",
+        "item": "_struct.title"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_last"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.identifier_ORCID"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_first"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.role"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.email"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.id"
+      },
+      {
+        "category": "struct_ref_seq_dif",
+        "item": "_struct_ref_seq_dif.pdbx_ordinal"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.ordinal"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.funding_organization"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.entity_id"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.type"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.pdbx_seq_one_letter_code"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.pdbx_ordinal"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.name"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.experimental_support"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.id"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.details"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.asym_id_list"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.oper_expression"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.assembly_id"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.name"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.ordinal"
+      }
+    ]
+  }
+}
+
+EXIT_CODE: 0
+
+--------------------------------------------------------------------------------
+FILE: test_multiple_data_blocks.cif
+--------------------------------------------------------------------------------
+
+Validation passed! No errors found.
+{
+  "errors": [],
+  "metadata_completeness": {
+    "percentage": 0.0,
+    "filled_count": 0,
+    "total_count": 49,
+    "method_detected": null,
+    "message": "Experimental method could not be determined from this file. Only common mandatory categories are counted; maximum score is 50%.",
+    "missing_categories": [
+      "[entity_src_group]",
+      "pdbx_struct_assembly",
+      "entity_poly_seq",
+      "struct",
+      "citation",
+      "audit_author",
+      "struct_keywords",
+      "pdbx_struct_assembly_auth_evidence",
+      "entity",
+      "citation_author",
+      "pdbx_struct_oper_list",
+      "pdbx_audit_support",
+      "struct_ref_seq_dif",
+      "pdbx_contact_author",
+      "pdbx_struct_assembly_gen",
+      "entity_poly",
+      "struct_ref"
+    ],
+    "missing_items": [
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.entity_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_organism_scientific"
+      },
+      {
+        "category": "pdbx_struct_assembly",
+        "item": "_pdbx_struct_assembly.details"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.entity_id"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.mon_id"
+      },
+      {
+        "category": "struct",
+        "item": "_struct.title"
+      },
+      {
+        "category": "citation",
+        "item": "_citation.title"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.name"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.pdbx_ordinal"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.text"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.pdbx_keywords"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.id"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.details"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.experimental_support"
+      },
+      {
+        "category": "entity",
+        "item": "_entity.pdbx_description"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.ordinal"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.name"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.id"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.type"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.ordinal"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.funding_organization"
+      },
+      {
+        "category": "struct_ref_seq_dif",
+        "item": "_struct_ref_seq_dif.pdbx_ordinal"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_last"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.identifier_ORCID"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.id"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.role"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_first"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.email"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.asym_id_list"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.oper_expression"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.assembly_id"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.entity_id"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.type"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.pdbx_seq_one_letter_code"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_name"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_code"
+      }
+    ]
+  }
+}
+
+EXIT_CODE: 0
+
+--------------------------------------------------------------------------------
+FILE: test_type_checks_pdb_id_and_date.cif
+--------------------------------------------------------------------------------
+
+Found 4 validation issue(s):
+
+ERROR: Line 9, Item '_pdbx_database_status.'
+  Duplicate category 'pdbx_database_status' (first occurrence at line 8)
+
+ERROR: Line 9, Item '_pdbx_database_status.recvd_initial_deposition_date'
+  Duplicate item '_pdbx_database_status.recvd_initial_deposition_date' (first occurrence at line 8)
+
+ERROR: Line 8, Item '_pdbx_database_status.status_code'
+  Mandatory item '_pdbx_database_status.status_code' is missing
+
+ERROR: Line 8, Item '_pdbx_database_status.entry_id'
+  Mandatory item '_pdbx_database_status.entry_id' is missing
+
+{
+  "errors": [
+    {
+      "line": 9,
+      "item": "_pdbx_database_status.",
+      "message": "Duplicate category 'pdbx_database_status' (first occurrence at line 8)",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 9,
+      "item": "_pdbx_database_status.recvd_initial_deposition_date",
+      "message": "Duplicate item '_pdbx_database_status.recvd_initial_deposition_date' (first occurrence at line 8)",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 8,
+      "item": "_pdbx_database_status.status_code",
+      "message": "Mandatory item '_pdbx_database_status.status_code' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 8,
+      "item": "_pdbx_database_status.entry_id",
+      "message": "Mandatory item '_pdbx_database_status.entry_id' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    }
+  ],
+  "metadata_completeness": {
+    "percentage": 0.0,
+    "filled_count": 0,
+    "total_count": 49,
+    "method_detected": null,
+    "message": "Experimental method could not be determined from this file. Only common mandatory categories are counted; maximum score is 50%.",
+    "missing_categories": [
+      "[entity_src_group]",
+      "citation_author",
+      "citation",
+      "audit_author",
+      "pdbx_struct_assembly_gen",
+      "pdbx_contact_author",
+      "struct_ref",
+      "pdbx_audit_support",
+      "entity_poly",
+      "pdbx_struct_assembly_auth_evidence",
+      "struct",
+      "struct_keywords",
+      "struct_ref_seq_dif",
+      "entity_poly_seq",
+      "entity",
+      "pdbx_struct_oper_list",
+      "pdbx_struct_assembly"
+    ],
+    "missing_items": [
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.entity_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_scientific_name"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.ordinal"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.name"
+      },
+      {
+        "category": "citation",
+        "item": "_citation.title"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.pdbx_ordinal"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.name"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.asym_id_list"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.oper_expression"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_first"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.email"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_last"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.identifier_ORCID"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.role"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.id"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_name"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_code"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.ordinal"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.funding_organization"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.pdbx_seq_one_letter_code"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.type"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.entity_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.details"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.id"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.experimental_support"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.assembly_id"
+      },
+      {
+        "category": "struct",
+        "item": "_struct.title"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.pdbx_keywords"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.text"
+      },
+      {
+        "category": "struct_ref_seq_dif",
+        "item": "_struct_ref_seq_dif.pdbx_ordinal"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.mon_id"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.entity_id"
+      },
+      {
+        "category": "entity",
+        "item": "_entity.pdbx_description"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.id"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.type"
+      },
+      {
+        "category": "pdbx_struct_assembly",
+        "item": "_pdbx_struct_assembly.details"
+      }
+    ]
+  }
+}
+
+EXIT_CODE: 1
+
+--------------------------------------------------------------------------------
+FILE: test_undefined_items.cif
+--------------------------------------------------------------------------------
+
+Validation passed! No errors found.
+{
+  "errors": [],
+  "metadata_completeness": {
+    "percentage": 0.0,
+    "filled_count": 0,
+    "total_count": 49,
+    "method_detected": null,
+    "message": "Experimental method could not be determined from this file. Only common mandatory categories are counted; maximum score is 50%.",
+    "missing_categories": [
+      "[entity_src_group]",
+      "struct_ref_seq_dif",
+      "citation",
+      "struct",
+      "pdbx_audit_support",
+      "struct_ref",
+      "entity",
+      "pdbx_struct_oper_list",
+      "entity_poly",
+      "pdbx_struct_assembly",
+      "pdbx_contact_author",
+      "pdbx_struct_assembly_gen",
+      "citation_author",
+      "audit_author",
+      "struct_keywords",
+      "entity_poly_seq",
+      "pdbx_struct_assembly_auth_evidence"
+    ],
+    "missing_items": [
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.entity_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_src_id"
+      },
+      {
+        "category": "struct_ref_seq_dif",
+        "item": "_struct_ref_seq_dif.pdbx_ordinal"
+      },
+      {
+        "category": "citation",
+        "item": "_citation.title"
+      },
+      {
+        "category": "struct",
+        "item": "_struct.title"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.ordinal"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.funding_organization"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_name"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_code"
+      },
+      {
+        "category": "entity",
+        "item": "_entity.pdbx_description"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.type"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.id"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.pdbx_seq_one_letter_code"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.entity_id"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.type"
+      },
+      {
+        "category": "pdbx_struct_assembly",
+        "item": "_pdbx_struct_assembly.details"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.email"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.role"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_first"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.id"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.identifier_ORCID"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_last"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.oper_expression"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.asym_id_list"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.name"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.ordinal"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.pdbx_ordinal"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.name"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.pdbx_keywords"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.text"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.mon_id"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.entity_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.details"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.experimental_support"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.id"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.assembly_id"
+      }
+    ]
+  }
+}
+
+EXIT_CODE: 0
+
+--------------------------------------------------------------------------------
+FILE: test_value_out_of_range.cif
+--------------------------------------------------------------------------------
+
+Found 3 validation issue(s):
+
+ERROR: Line 5, Item '_em_image_scans.image_recording_id'
+  Mandatory item '_em_image_scans.image_recording_id' is missing
+
+ERROR: Line 7, Item '_em_image_scans.dimension_height'
+  Value '0' does not match expected type 'positive_int'
+
+ERROR: Line 8, Item '_em_image_scans.dimension_width'
+  Value '0' does not match expected type 'positive_int'
+
+{
+  "errors": [
+    {
+      "line": 5,
+      "item": "_em_image_scans.image_recording_id",
+      "message": "Mandatory item '_em_image_scans.image_recording_id' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 7,
+      "item": "_em_image_scans.dimension_height",
+      "message": "Value '0' does not match expected type 'positive_int'",
+      "severity": "error",
+      "column": 0,
+      "start_char": 33,
+      "end_char": 35
+    },
+    {
+      "line": 8,
+      "item": "_em_image_scans.dimension_width",
+      "message": "Value '0' does not match expected type 'positive_int'",
+      "severity": "error",
+      "column": 0,
+      "start_char": 32,
+      "end_char": 34
+    }
+  ],
+  "metadata_completeness": {
+    "percentage": 0.0,
+    "filled_count": 0,
+    "total_count": 49,
+    "method_detected": null,
+    "message": "Experimental method could not be determined from this file. Only common mandatory categories are counted; maximum score is 50%.",
+    "missing_categories": [
+      "[entity_src_group]",
+      "pdbx_struct_oper_list",
+      "citation_author",
+      "citation",
+      "entity_poly_seq",
+      "entity",
+      "entity_poly",
+      "pdbx_struct_assembly",
+      "struct_keywords",
+      "struct",
+      "struct_ref",
+      "pdbx_audit_support",
+      "pdbx_struct_assembly_auth_evidence",
+      "audit_author",
+      "struct_ref_seq_dif",
+      "pdbx_contact_author",
+      "pdbx_struct_assembly_gen"
+    ],
+    "missing_items": [
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.entity_id"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.type"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.id"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.ordinal"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.name"
+      },
+      {
+        "category": "citation",
+        "item": "_citation.title"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.entity_id"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.mon_id"
+      },
+      {
+        "category": "entity",
+        "item": "_entity.pdbx_description"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.entity_id"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.type"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.pdbx_seq_one_letter_code"
+      },
+      {
+        "category": "pdbx_struct_assembly",
+        "item": "_pdbx_struct_assembly.details"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.pdbx_keywords"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.text"
+      },
+      {
+        "category": "struct",
+        "item": "_struct.title"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_name"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_code"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.ordinal"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.funding_organization"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.experimental_support"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.details"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.id"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.name"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.pdbx_ordinal"
+      },
+      {
+        "category": "struct_ref_seq_dif",
+        "item": "_struct_ref_seq_dif.pdbx_ordinal"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.email"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.id"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_last"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.role"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.identifier_ORCID"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_first"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.oper_expression"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.asym_id_list"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.assembly_id"
+      }
+    ]
+  }
+}
+
+EXIT_CODE: 1
+
+================================================================================
+SUMMARY: 14 file(s) had validation issues, 9 passed.
+================================================================================

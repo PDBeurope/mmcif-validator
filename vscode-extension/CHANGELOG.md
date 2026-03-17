@@ -4,6 +4,17 @@ All notable changes to the PDBe mmCIF Validator extension will be documented in 
 
 # Released
 
+## [0.1.8] - 2026-03-17
+
+### Added
+- **Testing suite** (`testing/`): Regression test suite for the validator.
+  - **Runner**: `testing/run_validation_suite.py` runs the validator on all CIFs, saves combined output for diff-based regression (baseline vs output).
+  - **Test files** in `testing/cif_files/`:
+    - **Real PDB entries** (6ijw, 6qvt, 6ssp, 7q5a, 8ozl, 8pps, 8pwh, 8q6j): Exercise metadata completeness and method detection (NMR, X-ray, EM).
+    - **Synthetic tests** (`test_*.cif`): Duplicate item/category, format error (entity_poly), loop row mismatch, multiple data blocks, value out of range, type checks (pdb_id/date), enumeration (em_software.name), asym_id validity, mandatory missing, foreign-key missing parent, composite FK, undefined items, advisory range warning, multi-line and quoted loop values.
+  - **Default dictionary**: Suite uses the same dictionary URL as the extension (`http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic`) by default; optional `--dict` for a local path or other URL.
+  - **Documentation**: `testing/README.md` with usage, regression workflow, and a table describing each test file and the case(s) it covers.
+
 ## [0.1.71] - 2026-03-16
 
 ### Added

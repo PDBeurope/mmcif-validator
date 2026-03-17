@@ -1,0 +1,11 @@
+data_TEST_ENUM_INVALID_EM_SOFTWARE
+#
+_entry.id TEST_ENUM_INVALID_EM_SOFTWARE
+#
+loop_
+_em_software.category
+_em_software.id
+_em_software.name
+'MODEL FITTING' 1 RELION
+'MODEL FITTING' 2 phaser_voyager.em_placement
+

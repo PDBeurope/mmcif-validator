@@ -1,0 +1,10 @@
+data_TEST_LOOP_ROW_MISMATCH
+#
+_entry.id TEST_LOOP_ROW_MISMATCH
+#
+loop_
+_atom_type.symbol
+_atom_type.number_electrons
+C 6
+O
+

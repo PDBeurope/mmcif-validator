@@ -1,0 +1,8 @@
+data_TEST_UNDEFINED_ITEMS
+#
+_entry.id TEST_UNDEFINED_ITEMS
+#
+_my_local_category.foo 1
+_my_local_category.bar 'test'
+_not_defined_item 42
+

@@ -1,0 +1,10 @@
+data_TEST_DUP_CATEGORY
+#
+_entry.id TEST_DUP_CATEGORY
+#
+_entity.id   1
+_entity.type polymer
+#
+_entity.id   2
+_entity.type polymer
+

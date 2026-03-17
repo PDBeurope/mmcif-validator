@@ -1,0 +1,10 @@
+data_TEST_TYPES
+#
+_entry.id TEST_TYPES
+#
+_database_2.database_id PDB
+_database_2.database_code 0ABC
+#
+_pdbx_database_status.recvd_initial_deposition_date 2025-01-15
+_pdbx_database_status.recvd_initial_deposition_date 2025-13-40
+
