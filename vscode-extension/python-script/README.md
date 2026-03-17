@@ -1,8 +1,15 @@
 # PDBe mmCIF Validator - Python Script
 
-**Version 0.1.71**
+**Version 0.1.8**
 
 A standalone Python script to validate mmCIF/CIF files against the PDBx/mmCIF dictionary or any CIF dictionary.
+
+In 0.1.8 the Python validator gains more robust handling of real-world dictionaries and files:
+
+- Correct handling of loops that are followed by key–value pairs of the same category.
+- Stricter `_atom_site.label_asym_id` / `_atom_site.auth_asym_id` checks using the `asym_id` type pattern where defined in the dictionary.
+- Support for loop-style item definitions in dictionaries and for `_pdbx_item_enumeration`-based enumerations (e.g. `_em_software.name`).
+- Deterministic ordering of errors, warnings, and metadata-completeness missing categories/items to make automated regression comparisons reliable.
 
 ## Features
 

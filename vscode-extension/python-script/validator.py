@@ -178,8 +178,27 @@ class MmCIFValidator:
     def _validate_type_for_item(self, item_name: str, item_def: Dict, values: List[ItemValue]) -> None:
         """Add errors for values that do not match the item's type."""
         item_type = item_def['type']
+        # Special-case: label_asym_id / auth_asym_id should follow the asym_id pattern
+        enforce_asym_id = (
+            (item_name.endswith('.label_asym_id') or item_name.endswith('.auth_asym_id'))
+            and 'asym_id' in getattr(self.dictionary, 'type_regex_patterns', {})
+        )
         for iv in self._present_values(values):
             # Handle '?' and '.' as valid (missing/unknown values) - _present_values already skips them
+            # First, enforce asym_id pattern when applicable
+            if enforce_asym_id and not self._validate_type(iv.value, 'asym_id'):
+                self.errors.append(self._create_validation_error(
+                    line_num=iv.line_num,
+                    item_name=item_name,
+                    message=f"Value '{iv.value}' does not match expected type 'asym_id' (alphanumeric only)",
+                    severity="error",
+                    global_column_index=iv.global_column_index,
+                    local_column_index=iv.local_column_index,
+                    value=iv.value
+                ))
+                # Skip further type checks for this value to avoid duplicate messages
+                continue
+
             if not self._validate_type(iv.value, item_type):
                 self.errors.append(self._create_validation_error(
                     line_num=iv.line_num,

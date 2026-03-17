@@ -1,0 +1,14 @@
+data_TEST_MULTILINE_QUOTED
+#
+_entry.id TEST_MULTILINE_QUOTED
+#
+loop_
+_citation.id
+_citation.title
+_citation.details
+1 'Simple title' ;
+This is a
+multi-line details field.
+;
+2 'Title with spaces' 'Single-line details with spaces'
+

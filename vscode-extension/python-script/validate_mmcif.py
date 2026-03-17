@@ -40,6 +40,30 @@ from metadata_completeness import compute_metadata_completeness
 logger = logging.getLogger(__name__)
 
 
+def _sorted_validation_errors(errors: List[ValidationError]) -> List[ValidationError]:
+    """
+    Return errors sorted for stable, predictable reporting.
+
+    Order: category, item, severity (errors before warnings), line.
+    Category is derived from the item name (e.g. '_pdbx_contact_author.email' -> 'pdbx_contact_author').
+    """
+    severity_rank = {"error": 0, "warning": 1}
+
+    def _key(e: ValidationError) -> tuple:
+        item = getattr(e, "item", "") or ""
+        category = ""
+        if item.startswith("_") and "." in item:
+            category = item[1:].split(".")[0]
+        return (
+            category,
+            item,
+            severity_rank.get(getattr(e, "severity", "error"), 99),
+            getattr(e, "line", 0),
+        )
+
+    return sorted(errors, key=_key)
+
+
 def validate(dict_path: Path, cif_path: Path) -> List[ValidationError]:
     """
     Library entry point: parse dictionary, parse mmCIF, validate, and return errors.
@@ -48,7 +72,7 @@ def validate(dict_path: Path, cif_path: Path) -> List[ValidationError]:
     Raises CifNotFoundError if cif_path does not exist.
     """
     errors, _, _ = ValidatorFactory.validate(dict_path, cif_path)
-    return errors
+    return _sorted_validation_errors(errors)
 
 
 class ValidatorFactory:
@@ -206,6 +230,7 @@ Examples:
         
         try:
             errors, dictionary, mmcif = ValidatorFactory.validate(dict_path, cif_path)
+            errors = _sorted_validation_errors(errors)
         finally:
             if cleanup_temp_file and dict_path is not None and dict_path.exists():
                 dict_path.unlink()

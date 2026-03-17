@@ -1,0 +1,16 @@
+data_TEST_COMPOSITE_FK
+#
+_entry.id TEST_COMPOSITE_FK
+#
+loop_
+_atom_site.group_PDB
+_atom_site.id
+_atom_site.label_asym_id
+_atom_site.label_comp_id
+_atom_site.label_seq_id
+_atom_site.Cartn_x
+_atom_site.Cartn_y
+_atom_site.Cartn_z
+ATOM 1 A ALA 1 0.0 0.0 0.0
+ATOM 2 A ALA 9999 1.0 1.0 1.0
+
