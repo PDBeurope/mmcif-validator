@@ -178,13 +178,23 @@ def compute_metadata_completeness(
         if cap_at_50 and percentage > 50.0:
             percentage = 50.0
 
+    # Sort missing items for stable, predictable reporting: category, item, row_index, row_key
+    def _missing_item_sort_key(entry: dict) -> tuple:
+        return (
+            entry.get("category", ""),
+            entry.get("item", ""),
+            entry.get("row_index", -1),
+            entry.get("row_key", ""),
+        )
+
     return MetadataCompleteness(
         percentage=round(percentage, 1),
         filled_count=filled_count,
         total_count=total_count,
         method_detected=method_detected,
         message=message,
-        missing_categories=missing_categories,
-        missing_items=missing_items,
+        # Sort missing categories alphabetically for stable, predictable reporting
+        missing_categories=sorted(missing_categories),
+        missing_items=sorted(missing_items, key=_missing_item_sort_key),
     )
 

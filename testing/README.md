@@ -54,6 +54,21 @@ python testing/run_validation_suite.py --generate-baseline -o path/to/my_baselin
 
 By default the suite uses the PDBx/mmCIF dictionary from `http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic`; you can override this with `--dict`.
 
+### Logging
+
+The suite logs to **stderr** so you can redirect or diff the main output file without mixing in log lines. It logs:
+
+- Dictionary source, test directory, and output file path
+- Number of CIF files to process
+- With `--verbose` / `-v`: each file as it is validated and its exit code (passed/failed)
+- Final line: where output was written and how many files had validation issues
+
+Example with verbose:
+
+```bash
+python testing/run_validation_suite.py -v
+```
+
 ---
 
 ## Test files overview

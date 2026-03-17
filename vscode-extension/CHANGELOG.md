@@ -15,6 +15,18 @@ All notable changes to the PDBe mmCIF Validator extension will be documented in 
   - **Default dictionary**: Suite uses the same dictionary URL as the extension (`http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic`) by default; optional `--dict` for a local path or other URL.
   - **Documentation**: `testing/README.md` with usage, regression workflow, and a table describing each test file and the case(s) it covers.
 
+### Changed
+
+- **Validator robustness and dictionary parsing**
+  - **loop handling**: Fixed a parsing bug where a `loop_` immediately followed by key–value pairs of the same category was not recorded as a loop block. The validator now sees both the loop and the subsequent frame block, so malformed sections produce duplicate/format errors as expected.
+  - **Asym ID validation**: Values for `_atom_site.label_asym_id` and `_atom_site.auth_asym_id` are now validated against the `asym_id` type regex (alphanumeric chain IDs) when available in the dictionary, rejecting values such as `B:Axp`.
+  - **Loop-style item definitions**: The dictionary parser now understands item definitions that use a `loop_` over `_item.name`, `_item.category_id`, and `_item.mandatory_code` (e.g. `_atom_site.auth_asym_id`), so these items are included in `dictionary.items` and participate fully in type/mandatory checks.
+  - **PDBx enumerations**: Added support for `_pdbx_item_enumeration` loops in dictionaries. Items like `_em_software.name` now load their enumerations correctly and out-of-enumeration values are reported as errors.
+
+- **Deterministic reporting for easier diffing**
+  - **Error/warning order**: Validation errors and warnings are now sorted by category, item, severity (errors before warnings), and line number before being printed and included in the JSON output. This makes repeated runs stable and improves readability.
+  - **Metadata completeness output**: The `metadata_completeness` object now reports `missing_categories` in alphabetical order and `missing_items` sorted by category, item, row index, and row key (when present). This stabilises the order of missing categories/items across runs and makes regression diffs more meaningful.
+
 ## [0.1.71] - 2026-03-16
 
 ### Added

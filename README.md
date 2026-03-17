@@ -4,6 +4,13 @@
 
 Real-time VSCode extension and standalone Python script for validating mmCIF/CIF files against the PDBx/mmCIF dictionary or any CIF dictionary.
 
+In 0.1.8, alongside a new regression testing suite, the core validator and dictionary parser were improved:
+
+- Fixed loop parsing so mixed loop/frame blocks are recorded correctly and malformed sections produce duplicate/format errors.
+- Tightened `label_asym_id` / `auth_asym_id` validation by applying the `asym_id` type pattern (when present in the dictionary), rejecting non-alphanumeric chain IDs like `B:Axp`.
+- Taught the dictionary parser to understand loop-style `_item.name` / `_item.category_id` / `_item.mandatory_code` blocks and to load enumerations from `_pdbx_item_enumeration` (e.g. for `_em_software.name`).
+- Made error, warning, and metadata-completeness missing categories/items outputs deterministic (sorted), simplifying regression testing and diffs.
+
 ## Overview
 
 The PDBe mmCIF Validator provides comprehensive validation of mmCIF files against CIF dictionaries, available in two complementary implementations:

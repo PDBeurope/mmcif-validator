@@ -40,7 +40,12 @@ class DictionaryParser:
             # Parse item definitions
             if block_name.startswith('_') and '.' in block_name:
                 item_name = block_name
+                # First try the standard single-item block format
                 item_info = self._parse_item_block(block_content)
+                # Fallback: some items (e.g. _atom_site.auth_asym_id) are defined only
+                # via a loop_ over _item.name/_item.category_id/_item.mandatory_code.
+                if not item_info:
+                    item_info = self._parse_item_block_loop_format(item_name, block_content)
                 if item_info:
                     self.items[item_name] = item_info
                     if item_info.get('mandatory') == 'yes':
@@ -107,7 +112,7 @@ class DictionaryParser:
         if linked_match:
             item_info['is_linked'] = True
         
-        # Extract enumerations
+        # Extract enumerations from _item_enumeration
         # Look for loop_ followed by enumeration headers, then data lines
         # Pattern must handle multiple cases:
         # 1. loop_ with _item_enumeration.name, _item_enumeration.value, _item_enumeration.detail
@@ -152,6 +157,34 @@ class DictionaryParser:
                     values = self._parse_enumeration_line(line)
                     if values and len(values) > value_column_index:
                         item_info['enumerations'].append(values[value_column_index])
+
+        # If no enumerations yet, also support _pdbx_item_enumeration (Issue 3)
+        if not item_info.get('enumerations'):
+            pdbx_enum_pattern = r'loop_\s*\n((?:\s*_pdbx_item_enumeration\.(?:name|value|detail)\s*\n)+)(.*?)(?=\s*#|save_|$)'
+            pdbx_enum_match = re.search(pdbx_enum_pattern, content, re.DOTALL)
+            if not pdbx_enum_match:
+                pdbx_enum_pattern = r'loop_\s+((?:_pdbx_item_enumeration\.(?:name|value|detail)\s+)+)\s*\n(.*?)(?=\s*#|save_|$)'
+                pdbx_enum_match = re.search(pdbx_enum_pattern, content, re.DOTALL)
+            if pdbx_enum_match:
+                header_lines = pdbx_enum_match.group(1).strip()
+                enum_data = pdbx_enum_match.group(2).strip()
+                item_info['enumerations'] = []
+
+                header_columns = re.findall(r'_pdbx_item_enumeration\.(name|value|detail)', header_lines)
+                value_column_index = None
+                for idx, col_type in enumerate(header_columns):
+                    if col_type == 'value':
+                        value_column_index = idx
+                        break
+                if value_column_index is None:
+                    value_column_index = 0
+
+                for line in enum_data.split('\n'):
+                    line = line.strip()
+                    if line and not line.startswith('#'):
+                        values = self._parse_enumeration_line(line)
+                        if values and len(values) > value_column_index:
+                            item_info['enumerations'].append(values[value_column_index])
         
         # Extract range constraints
         # Parse both _item_range (strictly Allowed Boundary Conditions) and 
@@ -273,6 +306,58 @@ class DictionaryParser:
                             item_info['advisory_range_max'] = max_val
         
         return item_info
+
+    def _parse_item_block_loop_format(self, block_name: str, content: str) -> Optional[Dict]:
+        """
+        Fallback parser for item definitions that use a loop_ over _item.name/category_id/mandatory_code.
+
+        Example (from _atom_site.auth_asym_id block):
+
+            loop_
+            _item.name
+            _item.category_id
+            _item.mandatory_code
+              "_atom_site.auth_asym_id"  atom_site  yes
+              ...
+
+        This builds item_info with name, category, mandatory, and type (if present elsewhere
+        in the block via _item_type.code).
+        """
+        loop_pattern = r'loop_\s*\n\s*_item\.name\s*\n\s*_item\.category_id\s*\n\s*_item\.mandatory_code\s*\n(.*?)(?=\s*#|save_|$)'
+        match = re.search(loop_pattern, content, re.DOTALL)
+        if not match:
+            return None
+
+        data_section = match.group(1).strip()
+        for line in data_section.split('\n'):
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue
+            values = self._parse_enumeration_line(line)
+            if len(values) < 3:
+                continue
+            name = values[0].strip().strip("'\"")
+            if name != block_name:
+                continue
+            category_id = values[1].strip()
+            mandatory_code = values[2].strip()
+
+            item_info: Dict[str, object] = {}
+            item_info['name'] = name
+            item_info['category'] = category_id
+            item_info['mandatory'] = mandatory_code
+
+            # Try to pick up type and pdbx_mandatory from the same block if present
+            type_match = re.search(r'_item_type\.code\s+([^\s\n#]+)', content)
+            if type_match:
+                item_info['type'] = type_match.group(1).strip()
+            pdbx_mandatory_match = re.search(r'_pdbx_item\.mandatory_code\s+(\w+)', content)
+            if pdbx_mandatory_match:
+                item_info['pdbx_mandatory'] = pdbx_mandatory_match.group(1).strip()
+
+            return item_info
+
+        return None
     
     def _parse_enumeration_line(self, line: str) -> List[str]:
         """Parse a line of enumeration data, handling quoted values."""

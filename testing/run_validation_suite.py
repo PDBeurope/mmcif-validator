@@ -16,11 +16,13 @@ Or from the testing/ directory:
 """
 
 import argparse
+import logging
 import subprocess
 import sys
 from pathlib import Path
 from typing import Tuple
 
+logger = logging.getLogger(__name__)
 
 # This script lives in testing/; repo root is parent
 TESTING_DIR = Path(__file__).resolve().parent
@@ -52,6 +54,7 @@ def run_validator(dict_source: str, cif_path: Path) -> Tuple[str, str, int]:
         dict_source,
         str(cif_path),
     ]
+    logger.debug("Running: %s", " ".join(cmd))
     result = subprocess.run(
         cmd,
         capture_output=True,
@@ -70,8 +73,13 @@ def run_suite(
     """Run validator on all CIFs, write combined output to output_path. Returns number of failed validations."""
     cif_files = find_cif_files(tests_dir)
     if not cif_files:
-        print(f"No .cif files found in {tests_dir}", file=sys.stderr)
+        logger.error("No .cif files found in %s", tests_dir)
         return 1
+
+    logger.info("Dictionary: %s", dict_source)
+    logger.info("Test directory: %s", tests_dir)
+    logger.info("Output file: %s", output_path)
+    logger.info("CIF files to process: %d", len(cif_files))
 
     lines = []
     # Represent dictionary source in a portable way (URLs are left as-is)
@@ -98,13 +106,19 @@ def run_suite(
     lines.append("=" * 80)
 
     failed_count = 0
-    for cif_path in cif_files:
+    for i, cif_path in enumerate(cif_files, 1):
         name = cif_path.name
+        logger.info("[%d/%d] Validating %s", i, len(cif_files), name)
         lines.append("")
         lines.append("-" * 80)
         lines.append(f"FILE: {name}")
         lines.append("-" * 80)
         stdout, stderr, returncode = run_validator(dict_source, cif_path)
+        if returncode != 0:
+            failed_count += 1
+            logger.debug("  %s -> exit code %d (validation issues)", name, returncode)
+        else:
+            logger.debug("  %s -> exit code 0 (passed)", name)
         if stdout:
             lines.append(stdout.rstrip())
         if stderr:
@@ -113,8 +127,6 @@ def run_suite(
             lines.append(stderr.rstrip())
         lines.append("")
         lines.append(f"EXIT_CODE: {returncode}")
-        if returncode != 0:
-            failed_count += 1
 
     lines.append("")
     lines.append("=" * 80)
@@ -127,7 +139,7 @@ def run_suite(
             out_text = out_text.replace(path_form, "<REPO>")
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(out_text, encoding="utf-8")
-    print(f"Wrote output to {output_path}")
+    logger.info("Wrote output to %s (%d files, %d with validation issues)", output_path, len(cif_files), failed_count)
     return failed_count
 
 
@@ -161,30 +173,43 @@ def main():
         default=None,
         help="Write output to this file (default: testing/validation_output.txt or validation_baseline.txt)",
     )
+    parser.add_argument(
+        "--verbose", "-v",
+        action="store_true",
+        help="Enable debug logging (per-file pass/fail)",
+    )
     args = parser.parse_args()
+
+    logging.basicConfig(
+        level=logging.DEBUG if args.verbose else logging.INFO,
+        format="%(message)s",
+        stream=sys.stderr,
+    )
 
     dict_source = args.dict  # may be URL or path; validator CLI will decide
     tests_dir = args.tests.resolve()
 
     if not tests_dir.exists():
-        print(f"Test directory not found: {tests_dir}", file=sys.stderr)
+        logger.error("Test directory not found: %s", tests_dir)
         return 1
 
     if args.output is not None:
         output_path = args.output.resolve()
     else:
         output_path = TESTING_DIR / (BASELINE_FILE if args.generate_baseline else OUTPUT_FILE)
+    if args.generate_baseline:
+        logger.info("Mode: generating baseline")
 
     failed = run_suite(dict_source, tests_dir, output_path)
 
     if args.generate_baseline:
-        print("Baseline saved. After code changes, run without --generate-baseline and diff the output.")
+        logger.info("Baseline saved. After code changes, run without --generate-baseline and diff the output.")
     else:
         baseline_path = TESTING_DIR / BASELINE_FILE
         if baseline_path.exists():
-            print(f"\nTo compare with baseline: diff (or fc) {baseline_path} {output_path}")
+            logger.info("\nTo compare with baseline: diff (or fc) %s %s", baseline_path, output_path)
         else:
-            print(f"\nNo baseline found at {baseline_path}. Run with --generate-baseline first.")
+            logger.info("No baseline found at %s. Run with --generate-baseline first.", baseline_path)
 
     return 0
 

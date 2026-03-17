@@ -132,6 +132,11 @@ class MmCIFParser:
                             # Item name with value - this ends the loop, finish any partial row
                             if partial_row_values and current_loop_items:
                                 self._assign_loop_row(current_loop_items, partial_row_values, partial_row_line_nums)
+                            # Record this loop block before leaving loop mode (for duplicate category/item detection)
+                            if is_real_loop and current_loop_items:
+                                first_item_name = current_loop_items[0][0]
+                                cat = first_item_name[1:].split('.')[0] if (first_item_name.startswith('_') and '.' in first_item_name) else ''
+                                self.loop_blocks.append((loop_start_line, cat, list(current_loop_items)))
                             in_loop = False
                             is_real_loop = False
                             current_loop_items = []
