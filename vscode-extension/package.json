@@ -35,6 +35,13 @@
     "onLanguage:cif"
   ],
   "contributes": {
+    "commands": [
+      {
+        "command": "mmcif.validate",
+        "title": "mmCIF: Validate",
+        "category": "mmCIF"
+      }
+    ],
     "languages": [
       {
         "id": "cif",
