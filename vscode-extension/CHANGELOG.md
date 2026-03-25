@@ -4,6 +4,18 @@ All notable changes to the PDBe mmCIF Validator extension will be documented in 
 
 # Released
 
+## [0.1.82] - 2026-03-25
+
+### Added
+
+- **VS Code**: The `mmcif.validate` command is declared under `contributes.commands` with title **mmCIF: Validate** and category **mmCIF**, so it appears in the Command Palette alongside the existing handler in code.
+
+### Changed
+
+- **Python packaging**: `pyproject.toml` lists `metadata_completeness` in `py-modules` and `packages = ["completeness"]`, so the metadata-completeness module and the `completeness` package (mandatory category lists and helpers) are included in wheel/sdist installs.
+- **VS Code — validation subprocess errors**: When the Python process exits with a positive code and stdout is not valid protocol JSON, the extension now treats any non-zero exit code (not only `1`). The diagnostic message prefers an `Error: …` line from stderr, otherwise trimmed stderr, otherwise a short message that includes the exit code.
+- **VS Code — default Python command**: `mmcifValidator.pythonPath` defaults to empty; when unset, the extension uses `python` on Windows and `python3` on Linux and macOS. This matches systems such as Ubuntu 24.04 where `python` is not installed and only `python3` is available (previously required manually setting `python3`).
+
 ## [0.1.81] - 2026-03-17
 
 ### Added
