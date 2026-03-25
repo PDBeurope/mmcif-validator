@@ -313,17 +313,23 @@ export async function validateDocument(
             clearDepositionStatusBar(ctx.depositionStatusBarItem);
             ctx.onDepositionUpdate?.(document.uri.toString(), null);
         }
-    } else if (exitCode === 1 && stderr) {
-        const match = stderr.match(/Error: (.+)/);
-        if (match) {
-            diagnostics = [
-                new vscode.Diagnostic(
-                    new vscode.Range(0, 0, 0, Number.MAX_VALUE),
-                    match[1],
-                    vscode.DiagnosticSeverity.Error
-                ),
-            ];
+    } else if (exitCode !== undefined && exitCode > 0) {
+        let message = `Validation script failed (exit code ${exitCode}).`;
+        if (stderr) {
+            const match = stderr.match(/Error: (.+)/);
+            if (match && match[1]) {
+                message = match[1];
+            } else if (stderr.trim()) {
+                message = stderr.trim();
+            }
         }
+        diagnostics = [
+            new vscode.Diagnostic(
+                new vscode.Range(0, 0, 0, Number.MAX_VALUE),
+                message,
+                vscode.DiagnosticSeverity.Error
+            ),
+        ];
         clearDepositionStatusBar(ctx.depositionStatusBarItem);
         ctx.onDepositionUpdate?.(document.uri.toString(), null);
     } else {
