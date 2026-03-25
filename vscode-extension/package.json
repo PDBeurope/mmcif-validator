@@ -2,7 +2,7 @@
   "name": "pdbe-mmcif-validator",
   "displayName": "PDBe mmCIF Validator",
   "description": "Validates mmCIF/CIF files against the PDBx/mmCIF dictionary or any CIF dictionary with real-time error checking",
-  "version": "0.1.81",
+  "version": "0.1.82",
   "author": "Deborah Harrus <Protein Data Bank in Europe (PDBe), EMBL-EBI>",
   "publisher": "PDBEurope",
   "icon": "icon.png",
@@ -70,8 +70,8 @@
         },
         "mmcifValidator.pythonPath": {
           "type": "string",
-          "default": "python",
-          "description": "Path to Python executable"
+          "default": "",
+          "description": "Path or command for Python (e.g. python3, python, or a full path). Leave empty to use python on Windows and python3 on Linux and macOS (Ubuntu 24.04+ often has no python command)."
         },
         "mmcifValidator.enabled": {
           "type": "boolean",

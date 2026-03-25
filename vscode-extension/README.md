@@ -1,6 +1,6 @@
 # PDBe mmCIF Validator
 
-**Version 0.1.81**
+**Version 0.1.82**
 
 A Visual Studio Code extension to validate mmCIF/CIF files against the PDBx/mmCIF dictionary (or any CIF dictionary) with real-time error checking.
 
@@ -75,8 +75,8 @@ The extension works with sensible defaults, but you can customize it in VSCode s
   - Use this to validate against any CIF dictionary file (not just PDBx/mmCIF).
   - If not set, the extension will look for common dictionary filenames in the workspace.
   
-- **`mmcifValidator.pythonPath`** (default: `python`)
-  - Path to Python executable. Use this if Python is not in your PATH.
+- **`mmcifValidator.pythonPath`** (default: empty — uses `python` on Windows, `python3` on Linux and macOS)
+  - Path or command for Python. Set explicitly if the automatic default is wrong for your environment (e.g. a venv or full path to the interpreter).
   
 - **`mmcifValidator.enabled`** (default: `true`)
   - Enable/disable validation

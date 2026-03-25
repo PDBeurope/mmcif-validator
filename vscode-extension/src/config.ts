@@ -8,6 +8,15 @@ import * as fs from 'fs';
 
 const COMMON_DICT_NAMES = ['mmcif_pdbx_v5_next.dic', 'mmcif_pdbx_5408.dic', 'mmcif_pdbx.dic'];
 
+/**
+ * When `mmcifValidator.pythonPath` is empty, pick a sensible default.
+ * Ubuntu 24.04+ and other Linux installs often have `python3` but no `python` on PATH.
+ * Windows Python installs typically expose `python` (not always `python3`).
+ */
+function defaultPythonExecutable(): string {
+    return process.platform === 'win32' ? 'python' : 'python3';
+}
+
 export interface ValidatorSettings {
     enabled: boolean;
     dictionaryPath: string;
@@ -19,11 +28,16 @@ export interface ValidatorSettings {
 export function getSettings(): ValidatorSettings {
     const config = vscode.workspace.getConfiguration('mmcifValidator');
     const validationTimeoutSeconds = config.get<number>('validationTimeoutSeconds', 60);
+    const pythonPathRaw = config.get<string>('pythonPath', '');
+    const pythonPath =
+        pythonPathRaw !== undefined && pythonPathRaw.trim() !== ''
+            ? pythonPathRaw.trim()
+            : defaultPythonExecutable();
     return {
         enabled: config.get<boolean>('enabled', true),
         dictionaryPath: config.get<string>('dictionaryPath', ''),
         dictionaryUrl: config.get<string>('dictionaryUrl', 'http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic'),
-        pythonPath: config.get<string>('pythonPath', 'python'),
+        pythonPath,
         validationTimeoutMs: Math.max(5000, Math.min(600000, validationTimeoutSeconds * 1000)),
     };
 }
