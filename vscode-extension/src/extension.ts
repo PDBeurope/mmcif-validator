@@ -14,6 +14,9 @@ import { createHoverProvider } from './hover';
 import { validateDocument, updateMetadataCompletenessUIFromCache } from './validation';
 import { MetadataCompleteness } from './types';
 import { updateDepositionReadiness, registerDepositionView } from './depositionView';
+import { CifFoldingRangeProvider } from './folding';
+import { CifDocumentSymbolProvider } from './symbols';
+import { createLoopLabelDecoration, updateLoopLabels } from './loopLabels';
 
 export function activate(context: vscode.ExtensionContext): void {
     const outputChannel = vscode.window.createOutputChannel('PDBe mmCIF Validator');
@@ -59,6 +62,8 @@ export function activate(context: vscode.ExtensionContext): void {
     }
 
     const metadataByUri = new Map<string, MetadataCompleteness | null>();
+    const loopLabelDecoration = createLoopLabelDecoration();
+    context.subscriptions.push(loopLabelDecoration);
 
     const validationCtx = {
         outputChannel,
@@ -89,11 +94,16 @@ export function activate(context: vscode.ExtensionContext): void {
             updateMetadataCompletenessUIFromCache(null, validationCtx);
             updateDepositionReadiness(null);
         }
+        updateLoopLabels(editor, loopLabelDecoration);
     });
 
     vscode.workspace.onDidOpenTextDocument((document) => {
         if (document.languageId === 'cif' || document.fileName.endsWith('.cif')) {
             validateDocument(document, diagnosticCollection, validationCtx);
+        }
+        const activeEditor = vscode.window.activeTextEditor;
+        if (activeEditor && activeEditor.document.uri.toString() === document.uri.toString()) {
+            updateLoopLabels(activeEditor, loopLabelDecoration);
         }
     });
 
@@ -101,11 +111,19 @@ export function activate(context: vscode.ExtensionContext): void {
         if (document.languageId === 'cif' || document.fileName.endsWith('.cif')) {
             validateDocument(document, diagnosticCollection, validationCtx);
         }
+        const activeEditor = vscode.window.activeTextEditor;
+        if (activeEditor && activeEditor.document.uri.toString() === document.uri.toString()) {
+            updateLoopLabels(activeEditor, loopLabelDecoration);
+        }
     });
 
     let timeout: NodeJS.Timeout | undefined;
     vscode.workspace.onDidChangeTextDocument((event) => {
         if (event.document.languageId === 'cif' || event.document.fileName.endsWith('.cif')) {
+            const activeEditor = vscode.window.activeTextEditor;
+            if (activeEditor && activeEditor.document.uri.toString() === event.document.uri.toString()) {
+                updateLoopLabels(activeEditor, loopLabelDecoration);
+            }
             if (timeout) clearTimeout(timeout);
             timeout = setTimeout(() => {
                 validateDocument(event.document, diagnosticCollection, validationCtx);
@@ -126,11 +144,19 @@ export function activate(context: vscode.ExtensionContext): void {
     const hoverProvider = vscode.languages.registerHoverProvider('cif', createHoverProvider(outputChannel));
     context.subscriptions.push(hoverProvider);
 
+    const foldingProvider = vscode.languages.registerFoldingRangeProvider('cif', new CifFoldingRangeProvider());
+    context.subscriptions.push(foldingProvider);
+
+    const symbolProvider = vscode.languages.registerDocumentSymbolProvider('cif', new CifDocumentSymbolProvider());
+    context.subscriptions.push(symbolProvider);
+
     vscode.workspace.textDocuments.forEach((document) => {
         if (document.languageId === 'cif' || document.fileName.endsWith('.cif')) {
             validateDocument(document, diagnosticCollection, validationCtx);
         }
     });
+
+    updateLoopLabels(vscode.window.activeTextEditor, loopLabelDecoration);
 }
 
 export function deactivate(): void {}

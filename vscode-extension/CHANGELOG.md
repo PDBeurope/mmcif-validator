@@ -4,6 +4,14 @@ All notable changes to the PDBe mmCIF Validator extension will be documented in 
 
 # Released
 
+## [0.1.83] - 2026-04-08
+
+### Added
+
+- **VS Code — loop folding**: Added a CIF folding provider so `loop_` blocks can be collapsed/expanded reliably in large files (ends at next structural keyword or EOF).
+- **VS Code — loop context labels**: Added inline loop labels that show the loop category name after `loop_` (derived from the first loop tag, e.g. `loop_ atom_site`) to make folded sections easier to identify.
+- **VS Code — loop symbols for navigation**: Added a CIF document-symbol provider that emits loop symbols (e.g. `loop_ _atom_site.group_PDB`) for improved Outline/Sticky Scroll context.
+
 ## [0.1.82] - 2026-03-25
 
 ### Added
