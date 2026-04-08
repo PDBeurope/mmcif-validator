@@ -1,12 +1,10 @@
 # PDBe mmCIF Validator
 
-**Version 0.1.82**
+**Version 0.1.83**
 
 Real-time VSCode extension and standalone Python script for validating mmCIF/CIF files against the PDBx/mmCIF dictionary or any CIF dictionary.
 
-Release **0.1.82** fixes PyPI/wheel packaging so `metadata_completeness` and the `completeness` package ship with the install, declares **mmCIF: Validate** in the extension manifest for the Command Palette, and improves VS Code diagnostics when the validation subprocess exits with a non-zero code (clearer stderr / exit-code messaging).
-
-**0.1.81** added a regression testing suite and improved the core validator and dictionary parser: loop/frame handling, `asym_id` checks, dictionary enumerations and loop-style item definitions, and deterministic ordering of errors and metadata-completeness output.
+Release **0.1.83** adds loop folding for CIF `loop_` blocks and inline loop category labels (for easier navigation when folded), while keeping the previous packaging and validation subprocess robustness improvements.
 
 ## Overview
 
@@ -87,7 +85,7 @@ For detailed information about all validation checks, error severity levels, and
 
 Pre-built VS Code extension packages (`.vsix`) are published on the [GitHub Releases](https://github.com/PDBeurope/mmcif-validator/releases) page. To install a specific version, download the `.vsix` from the desired release and install it via **Extensions → ⋯ → Install from VSIX...**.
 
-Releases are created from git tags (e.g. `v0.1.82`). Pushing a version tag triggers a GitHub Action that builds the extension and attaches the `.vsix` to the corresponding release.
+Releases are created from git tags (e.g. `v0.1.83`). Pushing a version tag triggers a GitHub Action that builds the extension and attaches the `.vsix` to the corresponding release.
 
 ## Contributing
 
