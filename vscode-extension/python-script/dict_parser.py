@@ -135,15 +135,18 @@ class DictionaryParser:
             header_lines = enum_match.group(1).strip()
             enum_data = enum_match.group(2).strip()
             item_info['enumerations'] = []
+            item_info['enumeration_details'] = {}
             
             # Determine which column contains the value by checking the header
             # Count how many _item_enumeration columns there are and find value position
             header_columns = re.findall(r'_item_enumeration\.(name|value|detail)', header_lines)
             value_column_index = None
+            detail_column_index = None
             for idx, col_type in enumerate(header_columns):
                 if col_type == 'value':
                     value_column_index = idx
-                    break
+                elif col_type == 'detail':
+                    detail_column_index = idx
             
             # Fallback: if we couldn't find value in header, assume it's first column (index 0)
             if value_column_index is None:
@@ -156,7 +159,14 @@ class DictionaryParser:
                     # Parse the line - handle quoted and unquoted values
                     values = self._parse_enumeration_line(line)
                     if values and len(values) > value_column_index:
-                        item_info['enumerations'].append(values[value_column_index])
+                        enum_value = values[value_column_index]
+                        item_info['enumerations'].append(enum_value)
+                        if detail_column_index is not None and len(values) > detail_column_index:
+                            detail_value = values[detail_column_index].strip()
+                            if detail_value and detail_value not in ('.', '?'):
+                                details = [v.strip() for v in detail_value.split(',') if v.strip()]
+                                if details:
+                                    item_info['enumeration_details'][enum_value] = details
 
         # If no enumerations yet, also support _pdbx_item_enumeration (Issue 3)
         if not item_info.get('enumerations'):
@@ -169,13 +179,16 @@ class DictionaryParser:
                 header_lines = pdbx_enum_match.group(1).strip()
                 enum_data = pdbx_enum_match.group(2).strip()
                 item_info['enumerations'] = []
+                item_info['enumeration_details'] = {}
 
                 header_columns = re.findall(r'_pdbx_item_enumeration\.(name|value|detail)', header_lines)
                 value_column_index = None
+                detail_column_index = None
                 for idx, col_type in enumerate(header_columns):
                     if col_type == 'value':
                         value_column_index = idx
-                        break
+                    elif col_type == 'detail':
+                        detail_column_index = idx
                 if value_column_index is None:
                     value_column_index = 0
 
@@ -184,7 +197,14 @@ class DictionaryParser:
                     if line and not line.startswith('#'):
                         values = self._parse_enumeration_line(line)
                         if values and len(values) > value_column_index:
-                            item_info['enumerations'].append(values[value_column_index])
+                            enum_value = values[value_column_index]
+                            item_info['enumerations'].append(enum_value)
+                            if detail_column_index is not None and len(values) > detail_column_index:
+                                detail_value = values[detail_column_index].strip()
+                                if detail_value and detail_value not in ('.', '?'):
+                                    details = [v.strip() for v in detail_value.split(',') if v.strip()]
+                                    if details:
+                                        item_info['enumeration_details'][enum_value] = details
         
         # Extract range constraints
         # Parse both _item_range (strictly Allowed Boundary Conditions) and 

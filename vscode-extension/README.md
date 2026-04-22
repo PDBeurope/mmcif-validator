@@ -1,8 +1,10 @@
 # PDBe mmCIF Validator
 
-**Version 0.1.9**
+**Version 0.1.91**
 
 A Visual Studio Code extension to validate mmCIF/CIF files against the PDBx/mmCIF dictionary (or any CIF dictionary) with real-time error checking.
+
+Release notes for this version are in [CHANGELOG.md](CHANGELOG.md) (same folder as this README).
 
 ## Features
 

@@ -1,0 +1,9 @@
+data_test_cross_check_date_order_invalid_form_after_initial
+#
+_entry.id TEST_DATE_ORDER_FORM_INVALID
+#
+_pdbx_database_status.entry_id TEST_DATE_ORDER_FORM_INVALID
+_pdbx_database_status.status_code REL
+_pdbx_database_status.date_deposition_form 2021-06-01
+_pdbx_database_status.recvd_initial_deposition_date 2020-06-01
+#

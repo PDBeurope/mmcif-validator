@@ -1,0 +1,7 @@
+data_test_procedural_struct_ref_seq_valid_genbank_accession
+#
+loop_
+_pdbx_struct_ref_seq_depositor_info.db_name
+_pdbx_struct_ref_seq_depositor_info.db_accession
+GB AB123456.1
+#

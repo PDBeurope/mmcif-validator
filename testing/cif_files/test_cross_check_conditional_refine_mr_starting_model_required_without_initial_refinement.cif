@@ -1,0 +1,11 @@
+data_test_cross_check_conditional_refine_mr_starting_model_required_without_initial_refinement
+#
+_entry.id TEST_MR_REQUIRE_STARTING_MODEL
+#
+_refine.entry_id TEST_MR_REQUIRE_STARTING_MODEL
+_refine.pdbx_refine_id 'X-RAY DIFFRACTION'
+_refine.ls_R_factor_obs 0.200
+_refine.ls_d_res_high 2.00
+_refine.pdbx_method_to_determine_struct 'MOLECULAR REPLACEMENT'
+_refine.pdbx_starting_model ?
+#

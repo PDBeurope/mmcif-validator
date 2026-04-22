@@ -1,0 +1,7 @@
+data_test_procedural_database_related_edge_non_target_db
+#
+loop_
+_pdbx_database_related.db_name
+_pdbx_database_related.db_id
+UNP INVALID
+#

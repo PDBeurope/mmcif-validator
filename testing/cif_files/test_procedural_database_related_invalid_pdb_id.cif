@@ -1,0 +1,7 @@
+data_test_procedural_database_related_invalid_pdb_id
+#
+loop_
+_pdbx_database_related.db_name
+_pdbx_database_related.db_id
+PDB INVALID
+#

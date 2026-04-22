@@ -1,0 +1,10 @@
+data_test_cross_check_uniqueness_valid_entity_ids
+#
+_entry.id TEST_UNIQ_ENTITY_VALID
+#
+loop_
+_entity.id
+_entity.type
+1 polymer
+2 polymer
+#

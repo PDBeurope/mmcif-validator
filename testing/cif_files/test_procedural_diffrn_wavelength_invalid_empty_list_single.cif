@@ -1,0 +1,12 @@
+data_test_procedural_diffrn_wavelength_invalid_empty_list_single
+#
+loop_
+_diffrn_source.diffrn_id
+_diffrn_source.pdbx_wavelength_list
+1 ''
+#
+loop_
+_diffrn_radiation.diffrn_id
+_diffrn_radiation.pdbx_diffrn_protocol
+1 'SINGLE WAVELENGTH'
+#

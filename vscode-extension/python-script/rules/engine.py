@@ -71,8 +71,8 @@ class RuleEngine:
     def __init__(self, rule_groups=None, config_path: Optional[Path] = None):
         self.rule_groups = rule_groups if rule_groups is not None else default_rule_groups(config_path=config_path)
 
-    def run(self, mmcif) -> List[ValidationError]:
+    def run(self, mmcif, dictionary=None, runtime_context: Optional[dict] = None) -> List[ValidationError]:
         errors: List[ValidationError] = []
         for rule_group in self.rule_groups:
-            errors.extend(rule_group.run(mmcif))
+            errors.extend(rule_group.run(mmcif, dictionary, runtime_context))
         return errors

@@ -4,6 +4,24 @@ All notable changes to the PDBe mmCIF Validator extension will be documented in 
 
 # Released
 
+## [0.1.91] - 2026-04-22
+
+### Added
+
+- **Uniqueness cross-checks**: Added `rules/data/cross_checks_uniqueness.json` and `_run_uniqueness` for duplicate keys within a category (`entity.id`, `struct_asym.id`, `entity_poly.entity_id`), with synthetic regression CIFs.
+- **Date order cross-checks**: Added `rules/data/cross_checks_pairwise_date_order.json` and `_run_pairwise_date_order` for same-row chronological checks on `_pdbx_database_status` (initial deposition vs coordinates / release request / form vs initial / begin vs end processing), with `mmcif_datetime_tuple` parsing (`yyyy-mm-dd` and optional `yyyy-mm-dd:hh:mm`) in `rules/utils.py`.
+- **Procedural validators (JSON-first)**: Added `rules/data/cross_checks_procedural_validators.json` and runtime dispatch in the imported cross-check rule group for depUI-style checks: wavelength list vs `pdbx_diffrn_protocol` (including empty `pdbx_wavelength_list` when protocol is LAUE or SINGLE WAVELENGTH), `pdbx_database_related` / `pdbx_struct_ref_seq_depositor_info` accession formats, conditional accession and integrative `source_name` on `pdbx_initial_refinement_model`, and poly-ALA warnings on `entity_poly.pdbx_seq_one_letter_code`. Synthetic regression CIFs and `testing/README.md` rows cover these cases.
+- **Loop parsing**: Quoted empty values (`''` / `""`) in loop rows are now preserved as empty strings so columns stay aligned with headers (required for empty-wavelength procedural tests and correct row shape elsewhere).
+- **Imported cross-check runtime coverage**: Added execution support for `cross_checks_dictionary_enum.json` (dictionary detail compatibility checks), `makeMandatorySubtypes` in `cross_checks_required_if_any_present.json`, and selector-gated execution (`expt`/`code`) for `cross_checks_cross_reference_full.json`.
+- **Runtime context hooks for selectors/subtypes**: Added optional runtime context support for `entry_subtypes`, `experiment_modes`, and `requested_codes`, with conservative fallback (selector-gated rules are skipped when required context is unavailable).
+- **Dictionary detail mapping support**: Extended dictionary parsing to capture enumeration detail mappings (`enumeration_details`) from `_item_enumeration.detail` and `_pdbx_item_enumeration.detail` for cross-item compatibility validation.
+- **Targeted regression inputs**: Added synthetic regression CIFs for dictionary-enum checks, subtype-gated mandatory checks, cross-reference selector-gated behavior, pairwise date order, within-category uniqueness, and procedural validators; updated `testing/README.md` accordingly.
+
+### Changed
+
+- **Conditional required (refine vs initial model)**: When `pdbx_initial_refinement_model` is present, the cross-check that required `refine.pdbx_starting_model` for molecular replacement no longer runs (supersedes legacy `_refine.pdbx_starting_model`). Implemented via optional `skip_if_any_category_present` on rules in `cross_checks_conditional_required.json`.
+- **Cross-check diagnostics rendering**: Added centralized message-template rendering in imported cross-check runtime to resolve placeholders consistently and strip unresolved placeholder tokens from user-facing diagnostics.
+
 ## [0.1.9] - 2026-04-22
 
 ### Added

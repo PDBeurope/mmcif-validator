@@ -1,0 +1,8 @@
+data_test_procedural_initial_refinement_invalid_pdbdev_accession
+#
+loop_
+_pdbx_initial_refinement_model.type
+_pdbx_initial_refinement_model.source_name
+_pdbx_initial_refinement_model.accession_code
+'integrative model' PDB-Dev INVALID
+#

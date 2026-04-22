@@ -1,0 +1,15 @@
+data_test_cross_check_uniqueness_invalid_struct_asym_id
+#
+_entry.id TEST_UNIQ_ASYM_INVALID
+#
+loop_
+_entity.id
+_entity.type
+1 polymer
+#
+loop_
+_struct_asym.id
+_struct_asym.entity_id
+A 1
+A 1
+#
