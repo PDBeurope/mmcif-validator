@@ -1,0 +1,10 @@
+data_test_cross_check_cross_reference_selectors
+#
+loop_
+_pdbx_struct_assembly_depositor_info.id
+1
+#
+loop_
+_pdbx_struct_assembly_auth_evidence_depositor_info.assembly_id
+2
+#

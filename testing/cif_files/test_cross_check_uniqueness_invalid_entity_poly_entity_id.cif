@@ -1,0 +1,20 @@
+data_test_cross_check_uniqueness_invalid_entity_poly_entity_id
+#
+_entry.id TEST_UNIQ_ENTITY_POLY_INVALID
+#
+loop_
+_entity.id
+_entity.type
+1 polymer
+#
+loop_
+_entity_poly.entity_id
+_entity_poly.type
+_entity_poly.nstd_linkage
+_entity_poly.nstd_monomer
+_entity_poly.pdbx_strand_id
+_entity_poly.pdbx_seq_one_letter_code
+_entity_poly.pdbx_seq_one_letter_code_can
+1 polypeptide(L) no no ? MKLL MKLL
+1 polypeptide(L) no no ? MVLL MVLL
+#

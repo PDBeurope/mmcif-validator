@@ -4,7 +4,8 @@ Shared utility helpers for rule groups.
 
 from __future__ import annotations
 
-from typing import Optional
+import re
+from typing import Optional, Tuple
 
 from mmcif_types import ItemValue
 
@@ -36,3 +37,28 @@ def item_value_to_number(iv: ItemValue) -> Optional[float]:
         return float(iv.value)
     except (TypeError, ValueError):
         return None
+
+
+# yyyy-mm-dd or yyyy-mm-dd:hh:mm (used by cross-check date ordering)
+_MMCIF_DATE = re.compile(
+    r"^(\d{4})-(\d{1,2})-(\d{1,2})(?::(\d{1,2}):(\d{1,2}))?$"
+)
+
+
+def mmcif_datetime_tuple(value: str) -> Optional[Tuple[int, int, int, int, int]]:
+    """
+    Parse PDBx-style date or date-time to a comparable tuple (Y, M, D, h, m).
+    Returns None if missing, empty, or not in a supported format.
+    """
+    if value is None:
+        return None
+    s = str(value).strip()
+    if not s or s in MISSING_VALUES:
+        return None
+    m = _MMCIF_DATE.match(s)
+    if not m:
+        return None
+    y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
+    h = int(m.group(4)) if m.group(4) is not None else 0
+    mi = int(m.group(5)) if m.group(5) is not None else 0
+    return (y, mo, d, h, mi)

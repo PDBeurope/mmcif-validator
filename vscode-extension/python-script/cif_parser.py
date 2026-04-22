@@ -371,9 +371,11 @@ class MmCIFParser:
                     current += char
             else:
                 if char == quote_char and (i == 0 or line[i-1] != '\\'):
-                    # Closing quote - don't include it
+                    # Closing quote - don't include it; append even when empty ('')
                     in_quotes = False
                     quote_char = None
+                    values.append(current)
+                    current = ""
                 else:
                     current += char
             

@@ -1,0 +1,18 @@
+data_test_cross_check_conditional_refine_mr_starting_model_skipped_when_initial_refinement_present
+#
+_entry.id TEST_MR_SKIP_STARTING_MODEL
+#
+_refine.entry_id TEST_MR_SKIP_STARTING_MODEL
+_refine.pdbx_refine_id 'X-RAY DIFFRACTION'
+_refine.ls_R_factor_obs 0.200
+_refine.ls_d_res_high 2.00
+_refine.pdbx_method_to_determine_struct 'MOLECULAR REPLACEMENT'
+_refine.pdbx_starting_model ?
+#
+loop_
+_pdbx_initial_refinement_model.id
+_pdbx_initial_refinement_model.type
+_pdbx_initial_refinement_model.source_name
+_pdbx_initial_refinement_model.accession_code
+1 'experimental model' PDB 1ABC
+#

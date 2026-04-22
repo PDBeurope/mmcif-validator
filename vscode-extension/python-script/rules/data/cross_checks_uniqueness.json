@@ -1,0 +1,28 @@
+{
+  "uniqueness_rules": [
+    {
+      "category": "entity",
+      "key_items": [
+        "id"
+      ],
+      "severity": "hard",
+      "message": "Duplicate _entity.id in this file: [{duplicate_display}]. Each entity id must appear at most once."
+    },
+    {
+      "category": "struct_asym",
+      "key_items": [
+        "id"
+      ],
+      "severity": "hard",
+      "message": "Duplicate _struct_asym.id in this file: [{duplicate_display}]. Each chain (asym) id must appear at most once."
+    },
+    {
+      "category": "entity_poly",
+      "key_items": [
+        "entity_id"
+      ],
+      "severity": "hard",
+      "message": "Duplicate _entity_poly.entity_id in this file: [{duplicate_display}]. Each polymer entity must have at most one entity_poly row."
+    }
+  ]
+}

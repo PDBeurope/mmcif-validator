@@ -163,7 +163,7 @@ class MmCIFValidator:
         """
         Apply additional registered cross-check rule groups.
         """
-        self.errors.extend(RuleEngine().run(self.mmcif))
+        self.errors.extend(RuleEngine().run(self.mmcif, self.dictionary))
 
     def _validate_enumeration(self, item_name: str, item_def: Dict, values: List[ItemValue]) -> None:
         """Add errors for values not in the item's enumeration."""

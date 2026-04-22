@@ -1,8 +1,10 @@
 # PDBe mmCIF Validator - Python Script
 
-**Version 0.1.9**
+**Version 0.1.91**
 
 A standalone Python script to validate mmCIF/CIF files against the PDBx/mmCIF dictionary or any CIF dictionary.
+
+**0.1.91** — JSON-first procedural cross-checks (`cross_checks_procedural_validators.json`), pairwise date ordering (`cross_checks_pairwise_date_order.json`), within-category uniqueness (`cross_checks_uniqueness.json`), preservation of quoted empty loop values (`''` / `""`), dictionary-enum / subtype / cross-reference selector coverage, and centralized message-template rendering. Details: [extension CHANGELOG](../CHANGELOG.md).
 
 **0.1.9** — Added a scalable cross-check architecture: reusable rule utilities, grouped JSON rule families, rule engine/registry, configurable rule-group toggles, expanded imported cross-check runtime coverage, and harmonized error-message formatting (including compared-value insertion).
 
@@ -313,34 +315,28 @@ If `enabled_rule_groups` is omitted, all registered rule groups are enabled by d
 Imported cross-check families are stored as grouped JSON files under `rules/data/` using a shared prefix:
 
 - `cross_checks_pairwise_comparison.json`
+- `cross_checks_pairwise_date_order.json` — same-category date/datetime ordering (chronological constraints, currently `pdbx_database_status`)
+- `cross_checks_uniqueness.json` — duplicate detection for configured key columns within one category (e.g. `entity.id`)
 - `cross_checks_linked_presence_and_comparison.json`
-- `cross_checks_conditional_required.json`
+- `cross_checks_conditional_required.json` — rules may include **`skip_if_any_category_present`** (list of category names): when any listed category has at least one row, the rule is skipped (e.g. skip legacy `refine.pdbx_starting_model` when `pdbx_initial_refinement_model` is present).
 - `cross_checks_conditional_regex.json`
 - `cross_checks_conditional_enumeration.json`
 - `cross_checks_conditional_category_item.json`
 - `cross_checks_required_if_any_present.json`
 - `cross_checks_cross_reference_full.json`
+- `cross_checks_procedural_validators.json` — procedural checks (data-driven `kind` values: wavelength vs protocol including empty list, accession format rules, conditional accession/source rules on `pdbx_initial_refinement_model`, sequence predicate warnings on `entity_poly.pdbx_seq_one_letter_code`). See extension **CHANGELOG** `[0.1.91]` for the full list.
 
 Keeping related checks together in a consistent JSON family format makes future re-imports and diff reviews simpler.
 
-### Importing external cross-checks (grouped data)
+### Maintaining grouped cross-check data
 
-To import cross-check constants from an external source into grouped rule data files (maintainer workflow):
+Add or change rules by editing the JSON files under `rules/data/`. Each file is loaded by **`ImportedCrossChecksRuleGroup`** in `rules/imported_cross_checks.py` (or the shared rule engine where registered). Prefer small, reviewable JSON diffs and matching runtime tests under `testing/cif_files/`.
 
-```bash
-python .internal-tools/import_cross_checks_source.py
-```
+### Roadmap (cross-check families)
 
-This generates grouped JSON files directly under `rules/data/`.
-
-Including groups such as:
-- `cross_pairwise_comparison.json`
-- `cross_linked_presence_and_comparison.json`
-- `cross_conditional_required.json`
-- `cross_conditional_regex.json`
-- `cross_conditional_enumeration.json`
-
-The import is data-only; rule groups can be wired into validator behavior incrementally and safely.
+- **Date/time (in progress)**: `cross_checks_pairwise_date_order.json` covers same-row ordering on `_pdbx_database_status`. Next steps are more rows in that file (other date pairs) or additional categories such as `_database_PDB_rev` and `_audit_*` once row alignment rules are clear.
+- **Uniqueness**: first slice shipped as `cross_checks_uniqueness.json` (`entity`, `struct_asym`, `entity_poly`). Extend with `key_items` lists for composite keys (for example several `atom_site` columns) where file-level uniqueness is required.
+- **Taxonomy / source**: conditional or linked rules across `entity` / `entity_src_*` without external NCBI calls, unless you later bundle a taxonomy table.
 
 ## Error vs Warning Severity
 

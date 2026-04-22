@@ -279,6 +279,9 @@
           "MOLECULAR REPLACEMENT"
         ]
       },
+      "skip_if_any_category_present": [
+        "pdbx_initial_refinement_model"
+      ],
       "error": true,
       "error_text": "No value present for this mandatory item.",
       "item": [

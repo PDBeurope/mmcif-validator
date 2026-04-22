@@ -1,0 +1,36 @@
+{
+  "date_order_rules": [
+    {
+      "category": "pdbx_database_status",
+      "left_item": "recvd_initial_deposition_date",
+      "right_item": "date_coordinates",
+      "op": "<=",
+      "severity": "hard",
+      "message": "Initial deposition date must not be after the date coordinates were received (coordinates date: [{right_value}])."
+    },
+    {
+      "category": "pdbx_database_status",
+      "left_item": "recvd_initial_deposition_date",
+      "right_item": "date_author_release_request",
+      "op": "<=",
+      "severity": "hard",
+      "message": "Initial deposition date must not be after the author release request date (release request date: [{right_value}])."
+    },
+    {
+      "category": "pdbx_database_status",
+      "left_item": "date_deposition_form",
+      "right_item": "recvd_initial_deposition_date",
+      "op": "<=",
+      "severity": "hard",
+      "message": "Deposition form date must not be after the initial deposition received date (initial deposition date: [{right_value}])."
+    },
+    {
+      "category": "pdbx_database_status",
+      "left_item": "date_begin_deposition",
+      "right_item": "date_end_processing",
+      "op": "<=",
+      "severity": "hard",
+      "message": "Begin processing date must not be after end processing date (end processing date: [{right_value}])."
+    }
+  ]
+}

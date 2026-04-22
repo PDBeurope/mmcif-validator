@@ -1,0 +1,9 @@
+data_test_cross_check_date_order_valid_deposition_coords
+#
+_entry.id TEST_DATE_ORDER_COORDS_VALID
+#
+_pdbx_database_status.entry_id TEST_DATE_ORDER_COORDS_VALID
+_pdbx_database_status.status_code REL
+_pdbx_database_status.recvd_initial_deposition_date 2020-06-01
+_pdbx_database_status.date_coordinates 2020-06-15
+#

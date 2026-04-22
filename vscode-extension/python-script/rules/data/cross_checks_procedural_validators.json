@@ -1,0 +1,182 @@
+{
+  "procedural_checks": [
+    {
+      "kind": "wavelength_protocol_consistency",
+      "id": "diffrn_source_wavelength_vs_protocol",
+      "source": {
+        "category": "diffrn_source",
+        "item": "pdbx_wavelength_list",
+        "key": "diffrn_id"
+      },
+      "target": {
+        "category": "diffrn_radiation",
+        "item": "pdbx_diffrn_protocol",
+        "key": "diffrn_id"
+      },
+      "rules": [
+        {
+          "protocol": "LAUE",
+          "requires": "multi",
+          "severity": "error",
+          "message": "Wavelength list is inconsistent with diffraction protocol 'LAUE'; provide multiple wavelengths or a wavelength range."
+        },
+        {
+          "protocol": "SINGLE WAVELENGTH",
+          "requires": "single",
+          "severity": "error",
+          "message": "Wavelength list is inconsistent with diffraction protocol 'SINGLE WAVELENGTH'; provide a single wavelength value."
+        }
+      ],
+      "empty_list_when_protocol_any_of": {
+        "protocols": [
+          "LAUE",
+          "SINGLE WAVELENGTH"
+        ],
+        "severity": "hard",
+        "message": "pdbx_wavelength_list must not be empty when pdbx_diffrn_protocol is LAUE or SINGLE WAVELENGTH for the same diffrn_id."
+      }
+    },
+    {
+      "kind": "accession_format_rule",
+      "id": "pdbx_database_related_db_id",
+      "category": "pdbx_database_related",
+      "item": "db_id",
+      "driver_item": "db_name",
+      "rules": [
+        {
+          "driver_value": "PDB",
+          "accepted_formats": [
+            "pdb_id",
+            "deposition_id"
+          ],
+          "severity": "error",
+          "message": "Invalid PDB accession code format."
+        },
+        {
+          "driver_value": "EMDB",
+          "accepted_formats": [
+            "emdb_id",
+            "deposition_id"
+          ],
+          "severity": "error",
+          "message": "Invalid EMDB accession code format."
+        }
+      ]
+    },
+    {
+      "kind": "accession_format_rule",
+      "id": "pdbx_struct_ref_seq_depositor_info_db_accession",
+      "category": "pdbx_struct_ref_seq_depositor_info",
+      "item": "db_accession",
+      "driver_item": "db_name",
+      "skip_if_empty": true,
+      "rules": [
+        {
+          "driver_value": "GB",
+          "accepted_formats": [
+            "genbank_id"
+          ],
+          "severity": "error",
+          "message": "Invalid GenBank accession code format. The format should be 'A12345.1' or 'AB123456.1'."
+        },
+        {
+          "driver_value": "UNP",
+          "accepted_formats": [
+            "uniprot_id"
+          ],
+          "severity": "error",
+          "message": "Invalid UniProt accession code format."
+        }
+      ]
+    },
+    {
+      "kind": "conditional_accession_format_rule",
+      "id": "pdbx_initial_refinement_model_accession_code",
+      "category": "pdbx_initial_refinement_model",
+      "item": "accession_code",
+      "rules": [
+        {
+          "conditions": {
+            "type": "experimental model",
+            "source_name": "PDB"
+          },
+          "accepted_formats": [
+            "pdb_id"
+          ],
+          "severity": "error",
+          "message": "Invalid PDB accession code format."
+        },
+        {
+          "conditions": {
+            "type": "integrative model",
+            "source_name": "PDB-Dev"
+          },
+          "accepted_formats": [
+            "pdbdev_id"
+          ],
+          "severity": "error",
+          "message": "Invalid PDB-Dev accession code format."
+        },
+        {
+          "conditions": {
+            "type": "in silico model",
+            "source_name": "AlphaFold"
+          },
+          "accepted_formats": [
+            "alphafold_id"
+          ],
+          "severity": "error",
+          "message": "Invalid AlphaFold accession code format."
+        },
+        {
+          "conditions": {
+            "type": "in silico model",
+            "source_name": "ModelArchive"
+          },
+          "accepted_formats": [
+            "modelarchive_id"
+          ],
+          "severity": "error",
+          "message": "Invalid ModelArchive accession code format."
+        }
+      ]
+    },
+    {
+      "kind": "conditional_value_rule",
+      "id": "pdbx_initial_refinement_model_integrative_source_name",
+      "category": "pdbx_initial_refinement_model",
+      "item": "source_name",
+      "rules": [
+        {
+          "conditions": {
+            "type": "integrative model"
+          },
+          "allowed_values": [
+            "PDB-Dev"
+          ],
+          "severity": "error",
+          "message": "Source name for integrative model type can be only PDB-Dev."
+        }
+      ]
+    },
+    {
+      "kind": "sequence_predicate_warning",
+      "id": "entity_poly_pdbx_seq_one_letter_code_poly_ala",
+      "category": "entity_poly",
+      "item": "pdbx_seq_one_letter_code",
+      "rules": [
+        {
+          "predicate": "homopolymer_ala",
+          "severity": "soft",
+          "message": "We detected one or more chain(s) composed only of poly-ALA. If the residues have poorly defined side chains, they should be called by the register. If the register is unknown, the residues should be called UNK rather than ALA."
+        },
+        {
+          "predicate": "substring",
+          "substring": "AAAAAAAAAA",
+          "severity": "soft",
+          "message": "We detected one or more chain(s) containing stretches of poly-ALA. If the residues have poorly defined side chains, they should be called by the register."
+        }
+      ]
+    }
+  ]
+}

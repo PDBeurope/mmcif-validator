@@ -1,0 +1,8 @@
+data_test_cross_check_dictionary_enum
+#
+loop_
+_diffrn_detector.id
+_diffrn_detector.type
+_diffrn_detector.detector
+1 "ADSC QUANTUM 315" PIXEL
+#
