@@ -1,10 +1,10 @@
 # PDBe mmCIF Validator
 
-**Version 0.1.83**
+**Version 0.1.9**
 
 Real-time VSCode extension and standalone Python script for validating mmCIF/CIF files against the PDBx/mmCIF dictionary or any CIF dictionary.
 
-Release **0.1.83** adds loop folding for CIF `loop_` blocks and inline loop category labels (for easier navigation when folded), while keeping the previous packaging and validation subprocess robustness improvements.
+Release **0.1.9** adds a scalable cross-check framework for grouped JSON rule families, including a rule engine/registry, shared rule utilities, configurable rule-group toggles, and expanded imported cross-check coverage with harmonized messages.
 
 ## Overview
 
@@ -85,7 +85,7 @@ For detailed information about all validation checks, error severity levels, and
 
 Pre-built VS Code extension packages (`.vsix`) are published on the [GitHub Releases](https://github.com/PDBeurope/mmcif-validator/releases) page. To install a specific version, download the `.vsix` from the desired release and install it via **Extensions → ⋯ → Install from VSIX...**.
 
-Releases are created from git tags (e.g. `v0.1.83`). Pushing a version tag triggers a GitHub Action that builds the extension and attaches the `.vsix` to the corresponding release.
+Releases are created from git tags (e.g. `v0.1.9`). Pushing a version tag triggers a GitHub Action that builds the extension and attaches the `.vsix` to the corresponding release.
 
 ## Contributing
 

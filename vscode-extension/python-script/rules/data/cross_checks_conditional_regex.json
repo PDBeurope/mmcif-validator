@@ -1,0 +1,14 @@
+{
+  "em_3d_fitting_list": [
+    {
+      "condition": {
+        "item": "source_name",
+        "value": "PDB"
+      },
+      "error": true,
+      "error_text": "Please provide a valid PDB accession code e.g. 1csb, pdb_00001csb",
+      "item": "accession_code",
+      "regex": "^(pdb_0000)?[\\w\\d]{4}$"
+    }
+  ]
+}

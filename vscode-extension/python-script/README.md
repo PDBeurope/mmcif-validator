@@ -1,10 +1,10 @@
 # PDBe mmCIF Validator - Python Script
 
-**Version 0.1.83**
+**Version 0.1.9**
 
 A standalone Python script to validate mmCIF/CIF files against the PDBx/mmCIF dictionary or any CIF dictionary.
 
-**0.1.83** — Version alignment release for the extension/package set (no standalone Python CLI behavior changes).
+**0.1.9** — Added a scalable cross-check architecture: reusable rule utilities, grouped JSON rule families, rule engine/registry, configurable rule-group toggles, expanded imported cross-check runtime coverage, and harmonized error-message formatting (including compared-value insertion).
 
 **0.1.81** improved real-world dictionary and file handling: loops followed by key–value pairs of the same category, stricter `asym_id` checks, loop-style item definitions and `_pdbx_item_enumeration`, and deterministic ordering for regression comparisons.
 
@@ -281,6 +281,66 @@ The validator performs the following checks:
    - Example: If `oper_expression` is `(1-60)`, validates that operation IDs 1 through 60 all exist
 10. **Category-aware validation**: Only checks mandatory items for categories that are actually present in the mmCIF file
 11. **First data block only**: By default, only validates the first data block in files containing multiple data blocks (each starting with `data_`)
+
+## Adding New Rule Groups
+
+Additional cross-check rule groups are managed by the rule engine and registry under `rules/`.
+
+### Steps
+
+1. Create a new rule-group class in `rules/` (JSON-backed grouped rule files are preferred for large imported families).
+2. Add it to `RULE_GROUP_REGISTRY` in `rules/engine.py` with a unique ID.
+3. Toggle it in `rules/rule_groups.json` as needed.
+
+### Example
+
+If your new rule group ID is `geometry_consistency`, your config can look like:
+
+```json
+{
+  "enabled_rule_groups": [
+    "imported_cross_checks",
+    "geometry_consistency"
+  ],
+  "disabled_rule_groups": []
+}
+```
+
+If `enabled_rule_groups` is omitted, all registered rule groups are enabled by default.
+
+### Grouped JSON rule format
+
+Imported cross-check families are stored as grouped JSON files under `rules/data/` using a shared prefix:
+
+- `cross_checks_pairwise_comparison.json`
+- `cross_checks_linked_presence_and_comparison.json`
+- `cross_checks_conditional_required.json`
+- `cross_checks_conditional_regex.json`
+- `cross_checks_conditional_enumeration.json`
+- `cross_checks_conditional_category_item.json`
+- `cross_checks_required_if_any_present.json`
+- `cross_checks_cross_reference_full.json`
+
+Keeping related checks together in a consistent JSON family format makes future re-imports and diff reviews simpler.
+
+### Importing external cross-checks (grouped data)
+
+To import cross-check constants from an external source into grouped rule data files (maintainer workflow):
+
+```bash
+python .internal-tools/import_cross_checks_source.py
+```
+
+This generates grouped JSON files directly under `rules/data/`.
+
+Including groups such as:
+- `cross_pairwise_comparison.json`
+- `cross_linked_presence_and_comparison.json`
+- `cross_conditional_required.json`
+- `cross_conditional_regex.json`
+- `cross_conditional_enumeration.json`
+
+The import is data-only; rule groups can be wired into validator behavior incrementally and safely.
 
 ## Error vs Warning Severity
 

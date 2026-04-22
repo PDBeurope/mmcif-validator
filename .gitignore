@@ -38,3 +38,4 @@ Thumbs.db
 
 # Maintainer-only (not for GitHub)
 vscode-extension/python-script/PUBLISH_PYPI.md
+vscode-extension/python-script/.internal-tools/

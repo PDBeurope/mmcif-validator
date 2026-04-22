@@ -1,5 +1,5 @@
 # Build the VS Code extension and publish the .vsix to GitHub Releases when a version tag is pushed.
-# Usage: create a tag (e.g. v0.1.83), push it, then find the .vsix on the Releases page.
+# Usage: create a tag (e.g. v0.1.9), push it, then find the .vsix on the Releases page.
 
 name: Release VS Code extension
 

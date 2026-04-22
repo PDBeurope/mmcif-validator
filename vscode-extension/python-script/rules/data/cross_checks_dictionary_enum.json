@@ -1,0 +1,14 @@
+{
+  "diffrn_detector": {
+    "type": "detector"
+  },
+  "diffrn_source": {
+    "type": "source"
+  },
+  "pdbx_database_related": {
+    "db_name": "content_type"
+  },
+  "software": {
+    "name": "classification"
+  }
+}

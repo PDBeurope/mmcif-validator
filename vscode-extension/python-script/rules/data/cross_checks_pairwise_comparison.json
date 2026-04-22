@@ -1,0 +1,132 @@
+{
+  "em_3d_reconstruction.resolution": [
+    [
+      "em_diffraction_stats",
+      "high_resolution",
+      "3D reconstruction resolution is higher than diffraction-statistics high-resolution limit [{item2CrossValue}].",
+      "<",
+      "hard",
+      ""
+    ]
+  ],
+  "em_diffraction_shell.high_resolution": [
+    [
+      "em_diffraction_stats",
+      "high_resolution",
+      "Diffraction-shell high-resolution limit is higher than diffraction-statistics high-resolution limit [{item2CrossValue}].",
+      "<",
+      "hard",
+      ""
+    ]
+  ],
+  "em_diffraction_shell.num_structure_factors": [
+    [
+      "em_diffraction_stats",
+      "num_structure_factors",
+      "Number of shell structure factors is higher than total collected structure factors [{item2CrossValue}].",
+      ">",
+      "hard",
+      ""
+    ]
+  ],
+  "em_focused_ion_beam.final_thickness": [
+    [
+      "em_focused_ion_beam",
+      "initial_thickness",
+      "Final thickness is larger than initial thickness [{item2CrossValue}].",
+      ">",
+      "hard",
+      ""
+    ]
+  ],
+  "em_imaging.recording_temperature_maximum": [
+    [
+      "em_imaging",
+      "recording_temperature_minimum",
+      "Maximum recording temperature is lower than minimum recording temperature [{item2CrossValue}].",
+      "<",
+      "hard",
+      ""
+    ]
+  ],
+  "em_imaging.recording_temperature_minimum": [
+    [
+      "em_imaging",
+      "recording_temperature_maximum",
+      "Minimum recording temperature is higher than maximum recording temperature [{item2CrossValue}].",
+      ">",
+      "hard",
+      ""
+    ]
+  ],
+  "pdbx_nmr_ensemble.conformers_submitted_total_number": [
+    [
+      "pdbx_nmr_ensemble",
+      "conformers_calculated_total_number",
+      "Submitted conformer count is higher than calculated conformer count [{item2CrossValue}].",
+      ">",
+      "hard",
+      ""
+    ]
+  ],
+  "pdbx_nmr_representative.conformer_id": [
+    [
+      "pdbx_nmr_ensemble",
+      "conformers_submitted_total_number",
+      "Representative conformer identifier is higher than submitted conformer count [{item2CrossValue}].",
+      ">",
+      "hard",
+      ""
+    ]
+  ],
+  "refine_ls_shell.R_factor_R_work": [
+    [
+      "refine_ls_shell",
+      "R_factor_R_free",
+      "Shell R_work is higher than shell R_free [{item2CrossValue}].",
+      ">",
+      "soft",
+      ""
+    ]
+  ],
+  "refine_ls_shell.d_res_high": [
+    [
+      "refine_ls_shell",
+      "d_res_low",
+      "Shell high-resolution limit is lower than shell low-resolution limit [{item2CrossValue}].",
+      ">",
+      "hard",
+      ""
+    ]
+  ],
+  "refine_ls_shell.d_res_low": [
+    [
+      "refine_ls_shell",
+      "d_res_high",
+      "Shell low-resolution limit is higher than shell high-resolution limit [{item2CrossValue}].",
+      "<",
+      "hard",
+      ""
+    ]
+  ],
+  "reflns_shell.d_res_high": [
+    [
+      "reflns_shell",
+      "d_res_low",
+      "Shell high-resolution limit is lower than shell low-resolution limit [{item2CrossValue}].",
+      ">",
+      "hard",
+      ""
+    ]
+  ],
+  "reflns_shell.d_res_low": [
+    [
+      "reflns_shell",
+      "d_res_high",
+      "Shell low-resolution limit is higher than shell high-resolution limit [{item2CrossValue}].",
+      "<",
+      "hard",
+      ""
+    ]
+  ]
+}

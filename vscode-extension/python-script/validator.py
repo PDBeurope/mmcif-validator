@@ -8,6 +8,7 @@ from typing import Dict, List, Literal, Optional, Set, Tuple
 from mmcif_types import ItemValue, ValidationError
 from dict_parser import DictionaryParser
 from cif_parser import MmCIFParser
+from rules.engine import RuleEngine
 
 
 class MmCIFValidator:
@@ -24,6 +25,7 @@ class MmCIFValidator:
         self._validate_duplicate_blocks()
         self._validate_undefined_and_mandatory_items()
         self._validate_item_values()
+        self._validate_registered_rule_groups()
         # Validate parent/child category relationships
         self._validate_parent_child_relationships()
         # Validate oper_expression foreign key relationships
@@ -156,6 +158,12 @@ class MmCIFValidator:
                 self._validate_advisory_ranges_multi(item_name, item_def, values)
             elif 'advisory_range_min' in item_def or 'advisory_range_max' in item_def:
                 self._validate_advisory_range_single(item_name, item_def, values)
+
+    def _validate_registered_rule_groups(self) -> None:
+        """
+        Apply additional registered cross-check rule groups.
+        """
+        self.errors.extend(RuleEngine().run(self.mmcif))
 
     def _validate_enumeration(self, item_name: str, item_def: Dict, values: List[ItemValue]) -> None:
         """Add errors for values not in the item's enumeration."""

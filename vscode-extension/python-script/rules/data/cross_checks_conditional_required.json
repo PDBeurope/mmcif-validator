@@ -1,0 +1,307 @@
+{
+  "em_3d_fitting_list": [
+    {
+      "conditions": {
+        "type": [
+          "other"
+        ]
+      },
+      "error": true,
+      "error_text": "Details must be provided.",
+      "item": [
+        "details"
+      ]
+    },
+    {
+      "conditions": {
+        "source_name": [
+          "Other"
+        ]
+      },
+      "error": true,
+      "error_text": "Details must be provided.",
+      "item": [
+        "details"
+      ]
+    },
+    {
+      "conditions": {
+        "source_name": [
+          "PDB"
+        ]
+      },
+      "error": true,
+      "error_text": "PDB accession code must be provided.",
+      "item": [
+        "accession_code"
+      ]
+    }
+  ],
+  "em_3d_reconstruction": [
+    {
+      "conditions": {
+        "resolution_method": [
+          "FSC 0.5 CUT-OFF",
+          "FSC 0.33 CUT-OFF",
+          "FSC 0.143 CUT-OFF",
+          "FSC 3 SIGMA CUT-OFF",
+          "FSC 1/2 BIT CUT-OFF"
+        ]
+      },
+      "error": true,
+      "error_text": "FSC type must be provided when an FSC resolution method is selected.",
+      "item": [
+        "fsc_type"
+      ]
+    }
+  ],
+  "em_entity_assembly_molwt": [
+    {
+      "conditions": {
+        "experimental_flag": [
+          "YES"
+        ]
+      },
+      "error": true,
+      "error_text": "Must be supplied when experimentally measured.",
+      "item": [
+        "units",
+        "value"
+      ]
+    }
+  ],
+  "em_software": [
+    {
+      "conditions": {
+        "category": [
+          "RECONSTRUCTION"
+        ]
+      },
+      "error": true,
+      "error_text": "Software name must be provided.",
+      "item": [
+        "name"
+      ]
+    },
+    {
+      "conditions": {
+        "category": [
+          "PARTICLE SELECTION"
+        ]
+      },
+      "error": true,
+      "error_text": "Software name must be provided.",
+      "item": [
+        "name"
+      ]
+    },
+    {
+      "conditions": {
+        "category": [
+          "VOLUME SELECTION"
+        ]
+      },
+      "error": true,
+      "error_text": "Software name must be provided.",
+      "item": [
+        "name"
+      ]
+    },
+    {
+      "conditions": {
+        "category": [
+          "SERIES ALIGNMENT"
+        ]
+      },
+      "error": true,
+      "error_text": "Software name must be provided.",
+      "item": [
+        "name"
+      ]
+    },
+    {
+      "conditions": {
+        "name": [
+          "RELION"
+        ]
+      },
+      "error": true,
+      "error_text": "RELION software version must be provided.",
+      "item": [
+        "version"
+      ]
+    }
+  ],
+  "em_start_model": [
+    {
+      "conditions": {
+        "type": [
+          "EMDB MAP"
+        ]
+      },
+      "error": true,
+      "error_text": "Must be supplied when EMDB map selected.",
+      "item": [
+        "emdb_id"
+      ]
+    },
+    {
+      "conditions": {
+        "type": [
+          "PDB ENTRY"
+        ]
+      },
+      "error": true,
+      "error_text": "Must be supplied when PDB entry selected.",
+      "item": [
+        "pdb_id"
+      ]
+    },
+    {
+      "conditions": {
+        "type": [
+          "ORTHOGONAL TILT"
+        ]
+      },
+      "error": true,
+      "error_text": "Must be supplied when orthogonal tilt selected.",
+      "item": [
+        "orthogonal_tilt_num_images"
+      ]
+    },
+    {
+      "conditions": {
+        "type": [
+          "ORTHOGONAL TILT"
+        ]
+      },
+      "error": true,
+      "error_text": "Must be supplied when orthogonal tilt selected.",
+      "item": [
+        "orthogonal_tilt_angle1"
+      ]
+    },
+    {
+      "conditions": {
+        "type": [
+          "ORTHOGONAL TILT"
+        ]
+      },
+      "error": true,
+      "error_text": "Must be supplied when orthogonal tilt selected.",
+      "item": [
+        "orthogonal_tilt_angle2"
+      ]
+    },
+    {
+      "conditions": {
+        "type": [
+          "RANDOM CONICAL TILT"
+        ]
+      },
+      "error": true,
+      "error_text": "Must be supplied when random conical tilt selected.",
+      "item": [
+        "random_conical_tilt_num_images"
+      ]
+    },
+    {
+      "conditions": {
+        "type": [
+          "RANDOM CONICAL TILT"
+        ]
+      },
+      "error": true,
+      "error_text": "Must be supplied when random conical tilt selected.",
+      "item": [
+        "random_conical_tilt_angle"
+      ]
+    }
+  ],
+  "pdbx_audit_support": [
+    {
+      "conditions": {
+        "funding_organization": [
+          "Other government",
+          "Other private"
+        ]
+      },
+      "error": true,
+      "error_text": "Country must be provided when funding organization is \"Other government\" or \"Other private\".",
+      "item": [
+        "country"
+      ]
+    },
+    {
+      "conditions": {
+        "funding_organization": [
+          "Other government",
+          "Other private"
+        ]
+      },
+      "error": true,
+      "error_text": "Funding organization details must be provided when funding organization is \"Other government\" or \"Other private\".",
+      "item": [
+        "details"
+      ]
+    }
+  ],
+  "pdbx_initial_refinement_model": [
+    {
+      "conditions": {
+        "source_name": [
+          "Other"
+        ]
+      },
+      "error": true,
+      "error_text": "Initial refinement model details must be provided.",
+      "item": [
+        "details"
+      ]
+    },
+    {
+      "conditions": {
+        "type": [
+          "other"
+        ]
+      },
+      "error": true,
+      "error_text": "Initial refinement model details must be provided.",
+      "item": [
+        "details"
+      ]
+    }
+  ],
+  "refine": [
+    {
+      "conditions": {
+        "pdbx_method_to_determine_struct": [
+          "MOLECULAR REPLACEMENT"
+        ]
+      },
+      "error": true,
+      "error_text": "No value present for this mandatory item.",
+      "item": [
+        "pdbx_starting_model"
+      ]
+    }
+  ],
+  "software": [
+    {
+      "conditions": {
+        "classification": [
+          "refinement"
+        ],
+        "name": [
+          "PHENIX",
+          "REFMAC"
+        ]
+      },
+      "error": true,
+      "error_text": "Refinement software version must be provided.",
+      "item": [
+        "version"
+      ]
+    }
+  ]
+}

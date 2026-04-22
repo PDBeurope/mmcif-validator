@@ -1,0 +1,412 @@
+{
+  "em_3d_fitting_list.source_name": [
+    {
+      "break": true,
+      "cat": "em_3d_fitting_list",
+      "cross": "id",
+      "item": "type",
+      "operator": "exists",
+      "text": "Source name must be provided."
+    },
+    {
+      "break": true,
+      "cat": "em_3d_fitting_list",
+      "cross": "id",
+      "item": "accession_code",
+      "operator": "exists",
+      "text": "Source name must be provided."
+    },
+    {
+      "break": true,
+      "cat": "em_3d_fitting_list",
+      "cross": "id",
+      "item": "details",
+      "operator": "exists",
+      "text": "Source name must be provided."
+    },
+    {
+      "break": true,
+      "cat": "em_3d_fitting_list",
+      "cross": "id",
+      "item": "chain_id",
+      "operator": "exists",
+      "text": "Source name must be provided."
+    },
+    {
+      "break": true,
+      "cat": "em_3d_fitting_list",
+      "cross": "id",
+      "item": "chain_residue_range",
+      "operator": "exists",
+      "text": "Source name must be provided."
+    }
+  ],
+  "em_3d_fitting_list.type": [
+    {
+      "break": true,
+      "cat": "em_3d_fitting_list",
+      "cross": "id",
+      "item": "source_name",
+      "operator": "exists",
+      "text": "Type must be provided."
+    },
+    {
+      "break": true,
+      "cat": "em_3d_fitting_list",
+      "cross": "id",
+      "item": "accession_code",
+      "operator": "exists",
+      "text": "Type must be provided."
+    },
+    {
+      "break": true,
+      "cat": "em_3d_fitting_list",
+      "cross": "id",
+      "item": "details",
+      "operator": "exists",
+      "text": "Type must be provided."
+    },
+    {
+      "break": true,
+      "cat": "em_3d_fitting_list",
+      "cross": "id",
+      "item": "chain_id",
+      "operator": "exists",
+      "text": "Type must be provided."
+    },
+    {
+      "break": true,
+      "cat": "em_3d_fitting_list",
+      "cross": "id",
+      "item": "chain_residue_range",
+      "operator": "exists",
+      "text": "Type must be provided."
+    }
+  ],
+  "em_buffer_component.concentration": [
+    {
+      "break": true,
+      "cat": "em_buffer_component",
+      "cross": "id",
+      "item": "name",
+      "operator": "exists",
+      "text": "Concentration must be provided when a buffer name is given."
+    },
+    {
+      "break": true,
+      "cat": "em_buffer_component",
+      "cross": "id",
+      "item": "concentration_units",
+      "operator": "exists",
+      "text": "Concentration must be provided when buffer concentration units are given."
+    },
+    {
+      "break": true,
+      "cat": "em_buffer_component",
+      "cross": "id",
+      "item": "formula",
+      "operator": "exists",
+      "text": "Concentration must be provided when a buffer formula is given."
+    }
+  ],
+  "em_buffer_component.concentration_units": [
+    {
+      "break": true,
+      "cat": "em_buffer_component",
+      "cross": "id",
+      "item": "name",
+      "operator": "exists",
+      "text": "Concentration units must be provided when a buffer name is given."
+    },
+    {
+      "break": true,
+      "cat": "em_buffer_component",
+      "cross": "id",
+      "item": "concentration",
+      "operator": "exists",
+      "text": "Concentration units must be provided when a buffer concentration is given."
+    },
+    {
+      "break": true,
+      "cat": "em_buffer_component",
+      "cross": "id",
+      "item": "formula",
+      "operator": "exists",
+      "text": "Concentration units must be provided when a buffer formula is given."
+    }
+  ],
+  "em_buffer_component.name": [
+    {
+      "break": true,
+      "cat": "em_buffer_component",
+      "cross": "id",
+      "item": "concentration",
+      "operator": "exists",
+      "text": "Name must be provided when a buffer concentration is given."
+    },
+    {
+      "break": true,
+      "cat": "em_buffer_component",
+      "cross": "id",
+      "item": "concentration_units",
+      "operator": "exists",
+      "text": "Name must be provided when buffer concentration units are given."
+    },
+    {
+      "break": true,
+      "cat": "em_buffer_component",
+      "cross": "id",
+      "item": "formula",
+      "operator": "exists",
+      "text": "Name must be provided when a buffer formula is given."
+    }
+  ],
+  "em_entity_assembly_molwt.experimental_flag": [
+    {
+      "break": true,
+      "cat": "em_entity_assembly_molwt",
+      "cross": "id",
+      "item": "value",
+      "operator": "exists",
+      "text": "Molecular weight value must be provided when related fields are present."
+    },
+    {
+      "break": true,
+      "cat": "em_entity_assembly_molwt",
+      "cross": "id",
+      "item": "units",
+      "operator": "exists",
+      "text": "Experimental flag must be provided when molecular weight units are given."
+    }
+  ],
+  "em_entity_assembly_molwt.units": [
+    {
+      "break": true,
+      "cat": "em_entity_assembly_molwt",
+      "cross": "id",
+      "item": "value",
+      "operator": "exists",
+      "text": "Molecular weight units must be provided when molecular weight value is given."
+    }
+  ],
+  "em_entity_assembly_molwt.value": [
+    {
+      "break": true,
+      "cat": "em_entity_assembly_molwt",
+      "cross": "id",
+      "item": "units",
+      "operator": "exists",
+      "text": "Molecular weight value must be provided when molecular weight units are given."
+    }
+  ],
+  "em_imaging.calibrated_defocus_max": [
+    {
+      "absolute": true,
+      "cat": "em_imaging",
+      "cross": "id",
+      "item": "calibrated_defocus_min",
+      "operator": "<",
+      "text": "Absolute minimum calibrated defocus is greater than absolute maximum calibrated defocus."
+    }
+  ],
+  "em_imaging.calibrated_defocus_min": [
+    {
+      "absolute": true,
+      "cat": "em_imaging",
+      "cross": "id",
+      "item": "calibrated_defocus_max",
+      "operator": ">",
+      "text": "Absolute minimum calibrated defocus is greater than absolute maximum calibrated defocus."
+    }
+  ],
+  "em_imaging.nominal_defocus_max": [
+    {
+      "absolute": true,
+      "cat": "em_imaging",
+      "cross": "id",
+      "item": "nominal_defocus_min",
+      "operator": "<",
+      "text": "Absolute minimum nominal defocus is greater than absolute maximum nominal defocus."
+    }
+  ],
+  "em_imaging.nominal_defocus_min": [
+    {
+      "absolute": true,
+      "cat": "em_imaging",
+      "cross": "id",
+      "item": "nominal_defocus_max",
+      "operator": ">",
+      "text": "Absolute minimum nominal defocus is greater than absolute maximum nominal defocus."
+    }
+  ],
+  "em_sample_support.grid_type": [
+    {
+      "break": true,
+      "cat": "em_support_film",
+      "cross": "id",
+      "cross2": "sample_support_id",
+      "item": "material",
+      "operator": "exists",
+      "text": "Grid information must be provided when support film information is present."
+    },
+    {
+      "break": true,
+      "cat": "em_support_film",
+      "cross": "id",
+      "cross2": "sample_support_id",
+      "item": "topology",
+      "operator": "exists",
+      "text": "Grid information must be provided when support film information is present."
+    },
+    {
+      "break": true,
+      "cat": "em_support_film",
+      "cross": "id",
+      "cross2": "sample_support_id",
+      "item": "thickness",
+      "operator": "exists",
+      "text": "Grid information must be provided when support film information is present."
+    },
+    {
+      "break": true,
+      "cat": "em_grid_pretreatment",
+      "cross": "id",
+      "cross2": "sample_support_id",
+      "item": "atmosphere",
+      "operator": "exists",
+      "text": "Grid information must be provided when grid pretreatment information is present."
+    },
+    {
+      "break": true,
+      "cat": "em_grid_pretreatment",
+      "cross": "id",
+      "cross2": "sample_support_id",
+      "item": "pressure",
+      "operator": "exists",
+      "text": "Grid information must be provided when grid pretreatment information is present."
+    },
+    {
+      "break": true,
+      "cat": "em_grid_pretreatment",
+      "cross": "id",
+      "cross2": "sample_support_id",
+      "item": "time",
+      "operator": "exists",
+      "text": "Grid information must be provided when grid pretreatment information is present."
+    },
+    {
+      "break": true,
+      "cat": "em_grid_pretreatment",
+      "cross": "id",
+      "cross2": "sample_support_id",
+      "item": "type",
+      "operator": "exists",
+      "text": "Grid information must be provided when grid pretreatment information is present."
+    }
+  ],
+  "refine.ls_R_factor_R_work": [
+    {
+      "cat": "refine",
+      "cross": "pdbx_diffrn_id",
+      "item": "ls_R_factor_R_free",
+      "operator": ">",
+      "text": "R_work is higher than R_free [{item2CrossValue}]",
+      "warning": true
+    }
+  ],
+  "refine.ls_d_res_high": [
+    {
+      "cat": "reflns",
+      "cross": "pdbx_diffrn_id",
+      "item": "d_resolution_high",
+      "operator": "<",
+      "text": "Refined high-resolution limit is higher than collected data high-resolution limit [{item2CrossValue}]"
+    },
+    {
+      "cat": "refine",
+      "cross": "pdbx_diffrn_id",
+      "item": "ls_d_res_low",
+      "operator": ">",
+      "text": "Refined high-resolution limit is lower than refined low-resolution limit [{item2CrossValue}]"
+    }
+  ],
+  "refine.ls_d_res_low": [
+    {
+      "cat": "reflns",
+      "cross": "pdbx_diffrn_id",
+      "item": "d_resolution_low",
+      "operator": ">",
+      "text": "Refined low-resolution limit is lower than collected data low-resolution limit [{item2CrossValue}]"
+    },
+    {
+      "cat": "refine",
+      "cross": "pdbx_refine_id",
+      "item": "ls_d_res_high",
+      "operator": "<",
+      "text": "Refined low-resolution limit is higher than refined high-resolution limit [{item2CrossValue}]"
+    }
+  ],
+  "refine_ls_shell.d_res_high": [
+    {
+      "cat": "refine",
+      "cross": "pdbx_refine_id",
+      "item": "ls_d_res_high",
+      "operator": "<",
+      "text": "Shell high-resolution limit is higher than overall refined high-resolution limit [{item2CrossValue}]"
+    }
+  ],
+  "refine_ls_shell.d_res_low": [
+    {
+      "cat": "refine",
+      "cross": "pdbx_refine_id",
+      "item": "ls_d_res_low",
+      "operator": ">",
+      "text": "Shell low-resolution limit is lower than overall refined low-resolution limit [{item2CrossValue}]"
+    }
+  ],
+  "reflns.d_resolution_high": [
+    {
+      "cat": "refine",
+      "cross": "pdbx_diffrn_id",
+      "item": "ls_d_res_high",
+      "operator": ">",
+      "text": "Collected data high-resolution limit is lower than high-resolution limit used in refinement [{item2CrossValue}]"
+    }
+  ],
+  "reflns.d_resolution_low": [
+    {
+      "cat": "refine",
+      "cross": "pdbx_diffrn_id",
+      "item": "ls_d_res_low",
+      "operator": "<",
+      "text": "Collected data low-resolution limit is higher than low-resolution limit used in refinement [{item2CrossValue}]"
+    }
+  ],
+  "reflns.number_all": [
+    {
+      "cat": "refine",
+      "cross": "pdbx_diffrn_id",
+      "item": "ls_number_reflns_obs",
+      "operator": "<",
+      "text": "Total collected reflections is lower than total reflections used in refinement [{item2CrossValue}]"
+    }
+  ],
+  "reflns.number_obs": [
+    {
+      "cat": "refine",
+      "cross": "pdbx_diffrn_id",
+      "item": "ls_number_reflns_obs",
+      "operator": "<",
+      "text": "Observed reflections is lower than total reflections used in refinement [{item2CrossValue}]"
+    }
+  ],
+  "reflns_shell.d_res_high": [
+    {
+      "cat": "reflns",
+      "cross": "pdbx_diffrn_id",
+      "item": "d_resolution_high",
+      "operator": "<",
+      "text": "Shell high-resolution limit is higher than overall collected data high-resolution limit [{item2CrossValue}]"
+    }
+  ]
+}

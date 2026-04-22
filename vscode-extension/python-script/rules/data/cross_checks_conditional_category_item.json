@@ -1,0 +1,26 @@
+{
+  "pdbx_initial_refinement_model": [
+    {
+      "condition": {
+        "category": "refine",
+        "item": "pdbx_method_to_determine_struct",
+        "value": "MOLECULAR REPLACEMENT"
+      },
+      "error": true,
+      "error_text": "This field cannot be empty when \"MOLECULAR REPLACEMENT\" is selected.",
+      "item": "type",
+      "regex": "^.+$"
+    },
+    {
+      "condition": {
+        "category": "refine",
+        "item": "pdbx_method_to_determine_struct",
+        "value": "MOLECULAR REPLACEMENT"
+      },
+      "error": true,
+      "error_text": "This field cannot be empty when \"MOLECULAR REPLACEMENT\" is selected.",
+      "item": "source_name",
+      "regex": "^.+$"
+    }
+  ]
+}
