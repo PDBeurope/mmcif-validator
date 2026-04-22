@@ -11,15 +11,12 @@ All notable changes to the PDBe mmCIF Validator extension will be documented in 
 - **Python rules framework**: Added shared rule utilities (`rules/utils.py`) and shared operator helpers (`rules/operators.py`) for reusable cross-check operations.
 - **Rule engine/registry**: Added `RuleEngine` and `RULE_GROUP_REGISTRY` to register and execute additional cross-check rule groups in a plug-in style.
 - **Configurable rule toggles**: Added `rules/rule_groups.json` with `enabled_rule_groups` and `disabled_rule_groups` to control active rule groups without code edits.
-- **Grouped cross-check import**: Added an internal importer to extract external cross-check definitions into grouped JSON datasets (`cross_pairwise_comparison`, `cross_linked_presence_and_comparison`, `cross_conditional_required`, `cross_conditional_regex`, `cross_conditional_enumeration`, and related groups).
-
-### Changed
-
-- **Consolidated cross-check source**: Removed the dedicated `data_collection_vs_refinement_statistics.csv` rule source and now run those checks from grouped JSON families in `rules/data/cross_checks_*.json` to keep import/re-import aligned with source constants.
-- **Expanded imported runtime coverage**: `imported_cross_checks` now executes pairwise comparison, linked presence/comparison, conditional required, conditional regex, conditional enumeration, conditional category-item, required-if-any-present, and cross-reference-full families.
-- **Operator semantics alignment**: Imported comparison operators now follow source semantics as violation conditions (instead of pass conditions), reducing inverted/false-positive behavior.
-- **Message formatting improvements**: Removed legacy source-prefix text from errors, harmonized sentence style across rule families, removed page-reference wording, and added runtime replacement for compared-value placeholders (`[{item2CrossValue}]`).
-- **Documentation**: Updated Python README with rule-group authoring guidance and grouped JSON family conventions.
+- **Grouped cross-check import**: Added an internal importer to extract external cross-check definitions into grouped JSON datasets under `rules/data/cross_checks_*.json` (`pairwise`, `linked`, `conditional required`, `conditional regex`, `conditional enumeration`, and related families).
+- **Grouped JSON cross-check source**: Added consolidated cross-check families in `rules/data/cross_checks_*.json` so future imports stay aligned with source constants.
+- **Imported runtime coverage**: Added execution of pairwise comparison, linked presence/comparison, conditional required, conditional regex, conditional enumeration, conditional category-item, required-if-any-present, and cross-reference-full families.
+- **Operator semantics alignment**: Added source-aligned violation-condition evaluation for imported comparison operators to reduce inverted/false-positive behavior.
+- **Message formatting improvements**: Added harmonized sentence style across rule families, removed page-reference wording and legacy source-prefix text, and added runtime replacement for compared-value placeholders (`[{item2CrossValue}]`).
+- **Documentation update**: Added Python README guidance for rule-group authoring and grouped JSON family conventions.
 
 ## [0.1.83] - 2026-04-08
 

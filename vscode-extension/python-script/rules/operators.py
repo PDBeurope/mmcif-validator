@@ -20,11 +20,6 @@ _OPERATORS: Dict[str, OperatorFn] = {
 }
 
 
-def is_supported_operator(op: str) -> bool:
-    """Return True when the operator token is supported."""
-    return op in _OPERATORS
-
-
 def compare_numeric(left: float, op: str, right: float) -> bool:
     """
     Compare two numeric values with a supported operator token.
