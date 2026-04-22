@@ -15,7 +15,7 @@ from typing import Dict, List, Optional, Tuple
 
 from mmcif_types import ItemValue, ValidationError
 from rules.operators import compare_numeric
-from rules.utils import MISSING_VALUES, category_from_item_name, item_name_for_category, item_value_to_number
+from rules.utils import MISSING_VALUES, item_name_for_category, item_value_to_number
 
 
 class ImportedCrossChecksRuleGroup:
