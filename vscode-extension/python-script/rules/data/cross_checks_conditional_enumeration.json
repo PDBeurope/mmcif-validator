@@ -1,0 +1,81 @@
+{
+  "em_3d_fitting_list": [
+    {
+      "affected_item": "source_name",
+      "conditions": [
+        {
+          "error_text": "For type \"experimental model\", source name must be PDB or Other.",
+          "validate": [
+            "PDB",
+            "Other"
+          ],
+          "value": "experimental model"
+        },
+        {
+          "error_text": "For type \"integrative model\", source name must be Other.",
+          "validate": [
+            "Other"
+          ],
+          "value": "integrative model"
+        },
+        {
+          "error_text": "For type \"other\", source name must be Other.",
+          "validate": [
+            "Other"
+          ],
+          "value": "other"
+        }
+      ],
+      "item": "type"
+    },
+    {
+      "affected_item": "type",
+      "conditions": [
+        {
+          "error_text": "For source name \"PDB\", type must be \"experimental model\".",
+          "validate": [
+            "experimental model"
+          ],
+          "value": "PDB"
+        }
+      ],
+      "item": "source_name"
+    }
+  ],
+  "pdbx_initial_refinement_model": [
+    {
+      "affected_item": "source_name",
+      "conditions": [
+        {
+          "error_text": "For type \"experimental model\", source name must be PDB or Other.",
+          "validate": [
+            "PDB",
+            "Other"
+          ],
+          "value": "experimental model"
+        },
+        {
+          "error_text": "For type \"other\", source name must be Other.",
+          "validate": [
+            "Other"
+          ],
+          "value": "other"
+        }
+      ],
+      "item": "type"
+    },
+    {
+      "affected_item": "type",
+      "conditions": [
+        {
+          "error_text": "For source name \"PDB\", type must be \"experimental model\".",
+          "validate": [
+            "experimental model"
+          ],
+          "value": "PDB"
+        }
+      ],
+      "item": "source_name"
+    }
+  ]
+}

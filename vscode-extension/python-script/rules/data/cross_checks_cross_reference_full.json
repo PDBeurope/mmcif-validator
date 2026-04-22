@@ -1,0 +1,351 @@
+{
+  "cross_reference_full": [
+    {
+      "category": "entity_poly",
+      "cross_category": "entity_src_gen",
+      "cross_item": "entity_id",
+      "expt": "all",
+      "item": "entity_id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "entity_poly",
+      "cross_category": "entity_src_nat",
+      "cross_item": "entity_id",
+      "expt": "all",
+      "item": "entity_id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "entity_poly",
+      "cross_category": "pdbx_entity_src_syn",
+      "cross_item": "entity_id",
+      "expt": "all",
+      "item": "entity_id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "exptl_crystal_grow",
+      "cross_category": "exptl_crystal",
+      "cross_item": "id",
+      "expt": [
+        "xray",
+        "nd",
+        "fd",
+        "ec"
+      ],
+      "item": "crystal_id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "diffrn",
+      "cross_category": "exptl_crystal",
+      "cross_item": "id",
+      "expt": [
+        "xray",
+        "nd",
+        "fd"
+      ],
+      "item": "crystal_id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "diffrn_detector",
+      "cross_category": "diffrn",
+      "cross_item": "id",
+      "expt": [
+        "xray",
+        "nd",
+        "fd"
+      ],
+      "item": "diffrn_id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "diffrn_radiation",
+      "cross_category": "diffrn",
+      "cross_item": "id",
+      "expt": [
+        "xray",
+        "nd",
+        "fd"
+      ],
+      "item": "diffrn_id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "diffrn_source",
+      "cross_category": "diffrn",
+      "cross_item": "id",
+      "expt": [
+        "xray",
+        "nd",
+        "fd"
+      ],
+      "item": "diffrn_id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "pdbx_serial_crystallography_measurement",
+      "cross_category": "diffrn",
+      "cross_item": "id",
+      "expt": [
+        "xray"
+      ],
+      "item": "diffrn_id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "pdbx_serial_crystallography_sample_delivery",
+      "cross_category": "diffrn",
+      "cross_item": "id",
+      "expt": [
+        "xray"
+      ],
+      "item": "diffrn_id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "pdbx_serial_crystallography_sample_delivery_injection",
+      "cross_category": "diffrn",
+      "cross_item": "id",
+      "expt": [
+        "xray"
+      ],
+      "item": "diffrn_id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "pdbx_serial_crystallography_sample_delivery_fixed_target",
+      "cross_category": "diffrn",
+      "cross_item": "id",
+      "expt": [
+        "xray"
+      ],
+      "item": "diffrn_id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "pdbx_serial_crystallography_data_reduction",
+      "cross_category": "diffrn",
+      "cross_item": "id",
+      "expt": [
+        "xray"
+      ],
+      "item": "diffrn_id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "pdbx_struct_assembly_depositor_info",
+      "code": "PDB",
+      "cross_category": "pdbx_struct_assembly_auth_evidence_depositor_info",
+      "cross_item": "assembly_id",
+      "expt": "coded",
+      "item": "id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "pdbx_struct_assembly_depositor_info",
+      "code": "PDB",
+      "cross_category": "pdbx_struct_assembly_gen_depositor_info",
+      "cross_item": "assembly_id",
+      "expt": "coded",
+      "item": "id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "pdbx_nmr_exptl_sample",
+      "cross_category": "pdbx_nmr_sample_details",
+      "cross_item": "solution_id",
+      "expt": [
+        "nmr",
+        "ssnmr"
+      ],
+      "item": "solution_id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "pdbx_nmr_chem_shift_reference",
+      "cross_category": "pdbx_nmr_chem_shift_ref",
+      "cross_item": "chem_shift_reference_id",
+      "expt": [
+        "nmr",
+        "ssnmr"
+      ],
+      "item": "id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "pdbx_nmr_assigned_chem_shift_list",
+      "cross_category": "pdbx_nmr_chem_shift_experiment",
+      "cross_item": "assigned_chem_shift_list_id",
+      "expt": [
+        "nmr",
+        "ssnmr"
+      ],
+      "item": "id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "pdbx_nmr_assigned_chem_shift_list",
+      "cross_category": "pdbx_nmr_chem_shift_software",
+      "cross_item": "assigned_chem_shift_list_id",
+      "expt": [
+        "nmr",
+        "ssnmr"
+      ],
+      "item": "id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "pdbx_nmr_assigned_chem_shift_list",
+      "cross_category": "pdbx_nmr_systematic_chem_shift_offset",
+      "cross_item": "assigned_chem_shift_list_id",
+      "expt": [
+        "nmr",
+        "ssnmr"
+      ],
+      "item": "id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "em_specimen",
+      "cross_category": "em_experiment",
+      "cross_item": "id",
+      "expt": [
+        "em",
+        "ec"
+      ],
+      "item": "experiment_id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "em_imaging_optics",
+      "cross_category": "em_imaging",
+      "cross_item": "id",
+      "expt": [
+        "em",
+        "ec"
+      ],
+      "item": "imaging_id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "em_image_scans",
+      "cross_category": "em_image_recording",
+      "cross_item": "id",
+      "expt": [
+        "em",
+        "ec"
+      ],
+      "item": "image_recording_id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "em_particle_selection",
+      "cross_category": "em_image_processing",
+      "cross_item": "id",
+      "expt": [
+        "em",
+        "ec"
+      ],
+      "item": "image_processing_id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "em_volume_selection",
+      "cross_category": "em_image_processing",
+      "cross_item": "id",
+      "expt": [
+        "em"
+      ],
+      "item": "image_processing_id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "em_ctf_correction",
+      "cross_category": "em_image_processing",
+      "cross_item": "id",
+      "expt": [
+        "em",
+        "ec"
+      ],
+      "item": "em_image_processing_id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "em_start_model",
+      "cross_category": "em_image_processing",
+      "cross_item": "id",
+      "expt": [
+        "em",
+        "ec"
+      ],
+      "item": "image_processing_id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "em_3d_reconstruction",
+      "cross_category": "em_image_processing",
+      "cross_item": "id",
+      "expt": [
+        "em",
+        "ec"
+      ],
+      "item": "image_processing_id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "em_final_classification",
+      "cross_category": "em_image_processing",
+      "cross_item": "id",
+      "expt": [
+        "em",
+        "ec"
+      ],
+      "item": "image_processing_id",
+      "subtype": "full",
+      "type": "cross"
+    },
+    {
+      "category": "em_3d_fitting_list",
+      "cross_category": "em_3d_fitting",
+      "cross_item": "id",
+      "expt": [
+        "em",
+        "ec"
+      ],
+      "item": "3d_fitting_id",
+      "subtype": "full",
+      "type": "cross"
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "makeMandatory": {
+    "em_imaging": {
+      "to_check": [
+        "nominal_defocus_min",
+        "nominal_defocus_max"
+      ]
+    },
+    "pdbx_database_related": {
+      "exclude": [
+        "content_type"
+      ],
+      "to_check": [
+        "db_name"
+      ]
+    },
+    "refine_ls_shell": {
+      "exclude": [
+        "pdbx_refine_id",
+        "pdbx_ordinal"
+      ],
+      "to_check": [
+        "d_res_high",
+        "d_res_low"
+      ]
+    }
+  },
+  "makeMandatorySubtypes": {
+    "EC": {
+      "em_3d_reconstruction": {
+        "to_check": [
+          "resolution",
+          "resolution_method"
+        ]
+      }
+    },
+    "EM-helical": {
+      "em_3d_reconstruction": {
+        "to_check": [
+          "resolution",
+          "resolution_method"
+        ]
+      }
+    },
+    "EM-single_part": {
+      "em_3d_reconstruction": {
+        "to_check": [
+          "resolution",
+          "resolution_method"
+        ]
+      }
+    },
+    "EM-subtomogram": {
+      "em_3d_reconstruction": {
+        "to_check": [
+          "resolution",
+          "resolution_method"
+        ]
+      },
+      "em_image_recording": {
+        "to_check": [
+          "avg_electron_dose_per_subtomogram"
+        ]
+      }
+    }
+  },
+  "oneOfFollowing": {
+    "refine": [
+      "ls_R_factor_obs",
+      "ls_R_factor_R_work",
+      "ls_R_factor_R_free"
+    ],
+    "reflns": [
+      "pdbx_CC_half",
+      "pdbx_Rmerge_I_obs",
+      "pdbx_Rsym_value",
+      "pdbx_Rpim_I_all",
+      "pdbx_Rrim_I_all",
+      "pdbx_R_split"
+    ],
+    "reflns_shell": [
+      "pdbx_CC_half",
+      "Rmerge_I_obs",
+      "pdbx_Rsym_value",
+      "pdbx_Rpim_I_all",
+      "pdbx_Rrim_I_all",
+      "pdbx_R_split"
+    ]
+  }
+}
