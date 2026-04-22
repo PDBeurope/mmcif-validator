@@ -14,8 +14,7 @@ All notable changes to the PDBe mmCIF Validator extension will be documented in 
 - **Grouped cross-check import**: Added an internal importer to extract external cross-check definitions into grouped JSON datasets under `rules/data/cross_checks_*.json` (`pairwise`, `linked`, `conditional required`, `conditional regex`, `conditional enumeration`, and related families).
 - **Grouped JSON cross-check source**: Added consolidated cross-check families in `rules/data/cross_checks_*.json` so future imports stay aligned with source constants.
 - **Imported runtime coverage**: Added execution of pairwise comparison, linked presence/comparison, conditional required, conditional regex, conditional enumeration, conditional category-item, required-if-any-present, and cross-reference-full families.
-- **Operator semantics alignment**: Added source-aligned violation-condition evaluation for imported comparison operators to reduce inverted/false-positive behavior.
-- **Message formatting improvements**: Added harmonized sentence style across rule families, removed page-reference wording and legacy source-prefix text, and added runtime replacement for compared-value placeholders (`[{item2CrossValue}]`).
+- **Message formatting improvements**: Added harmonized sentence style across rule families and runtime replacement for compared-value placeholders (`[{item2CrossValue}]`).
 - **Documentation update**: Added Python README guidance for rule-group authoring and grouped JSON family conventions.
 
 ## [0.1.83] - 2026-04-08
