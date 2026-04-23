@@ -44,4 +44,4 @@ validate-mmcif = "validate_mmcif:main"
 
 [tool.setuptools]
 py-modules = ["validate_mmcif", "protocol", "mmcif_types", "download", "dict_parser", "cif_parser", "validator", "metadata_completeness"]
-packages = ["completeness"]
+packages = ["completeness", "rules"]
