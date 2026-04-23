@@ -2,7 +2,7 @@
   "name": "pdbe-mmcif-validator",
   "displayName": "PDBe mmCIF Validator",
   "description": "Validates mmCIF/CIF files against the PDBx/mmCIF dictionary or any CIF dictionary with real-time error checking",
-  "version": "0.1.91",
+  "version": "0.1.92",
   "author": "Deborah Harrus <Protein Data Bank in Europe (PDBe), EMBL-EBI>",
   "publisher": "PDBEurope",
   "icon": "icon.png",

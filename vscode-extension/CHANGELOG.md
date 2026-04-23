@@ -4,6 +4,17 @@ All notable changes to the PDBe mmCIF Validator extension will be documented in 
 
 # Released
 
+## [0.1.92] - 2026-04-23
+
+### Added
+
+- **Cross-check rules catalog workflow**: Added `tools/generate_cross_check_rules_catalog.py` to generate `docs/cross_check_rules_catalog.txt` directly from `vscode-extension/python-script/rules/data/cross_checks_*.json`.
+
+### Changed
+
+- **Documentation**: Updated docs/readmes to document cross-check catalog generation and explicitly require rerunning the generator whenever JSON cross-check rule files are added or modified.
+- **Version bump**: Updated extension/package/docs version references from `0.1.9` to `0.1.92`.
+
 ## [0.1.91] - 2026-04-22
 
 ### Added
