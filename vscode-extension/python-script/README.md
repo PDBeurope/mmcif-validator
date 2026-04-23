@@ -1,14 +1,14 @@
 # PDBe mmCIF Validator - Python Script
 
-**Version 0.1.91**
+**Version 0.1.92**
 
 A standalone Python script to validate mmCIF/CIF files against the PDBx/mmCIF dictionary or any CIF dictionary.
+
+**0.1.92** — Added cross-check rules catalog generation workflow via `tools/generate_cross_check_rules_catalog.py`, which produces `docs/cross_check_rules_catalog.txt` and should be rerun whenever grouped JSON rule files change.
 
 **0.1.91** — JSON-first procedural cross-checks (`cross_checks_procedural_validators.json`), pairwise date ordering (`cross_checks_pairwise_date_order.json`), within-category uniqueness (`cross_checks_uniqueness.json`), preservation of quoted empty loop values (`''` / `""`), dictionary-enum / subtype / cross-reference selector coverage, and centralized message-template rendering. Details: [extension CHANGELOG](../CHANGELOG.md).
 
 **0.1.9** — Added a scalable cross-check architecture: reusable rule utilities, grouped JSON rule families, rule engine/registry, configurable rule-group toggles, expanded imported cross-check runtime coverage, and harmonized error-message formatting (including compared-value insertion).
-
-**0.1.81** improved real-world dictionary and file handling: loops followed by key–value pairs of the same category, stricter `asym_id` checks, loop-style item definitions and `_pdbx_item_enumeration`, and deterministic ordering for regression comparisons.
 
 ## Features
 

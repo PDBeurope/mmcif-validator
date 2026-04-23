@@ -1,10 +1,10 @@
 # PDBe mmCIF Validator
 
-**Version 0.1.91**
+**Version 0.1.92**
 
 Real-time VSCode extension and standalone Python script for validating mmCIF/CIF files against the PDBx/mmCIF dictionary or any CIF dictionary.
 
-Release **0.1.91** adds JSON-first procedural cross-checks, pairwise date-order and within-category uniqueness cross-checks, quoted-empty loop parsing, dictionary-enum and selector-gated cross-reference runtime coverage, and related cross-check refinements (see [CHANGELOG](vscode-extension/CHANGELOG.md)). Release **0.1.9** introduced the scalable grouped JSON rule framework (rule engine, shared utilities, toggles).
+Release **0.1.92** documents and automates the cross-check rules catalog workflow (`tools/generate_cross_check_rules_catalog.py`), including guidance to regenerate the catalog whenever `rules/data/cross_checks_*.json` changes. Release **0.1.91** adds JSON-first procedural cross-checks, pairwise date-order and within-category uniqueness cross-checks, quoted-empty loop parsing, dictionary-enum and selector-gated cross-reference runtime coverage, and related cross-check refinements (see [CHANGELOG](vscode-extension/CHANGELOG.md)). Release **0.1.9** introduced the scalable grouped JSON rule framework (rule engine, shared utilities, toggles).
 
 ## Overview
 
@@ -80,12 +80,13 @@ For detailed information about all validation checks, error severity levels, and
 - **[Extension Documentation](vscode-extension/README.md)** - Complete guide for VSCode extension users
 - **[Python Script Documentation](vscode-extension/python-script/README.md)** - Command-line usage and API details
 - **[Testing Suite](testing/README.md)** - Regression test suite (run validator on CIFs, diff against baseline)
+- **[Cross-check Rules Catalog](docs/cross_check_rules_catalog.txt)** - Generated catalog of grouped cross-check rules
 
 ## Releases
 
 Pre-built VS Code extension packages (`.vsix`) are published on the [GitHub Releases](https://github.com/PDBeurope/mmcif-validator/releases) page. To install a specific version, download the `.vsix` from the desired release and install it via **Extensions → ⋯ → Install from VSIX...**.
 
-Releases are created from git tags (e.g. `v0.1.91`). Pushing a version tag triggers a GitHub Action that builds the extension and attaches the `.vsix` to the corresponding release.
+Releases are created from git tags (e.g. `v0.1.92`). Pushing a version tag triggers a GitHub Action that builds the extension and attaches the `.vsix` to the corresponding release.
 
 ## Contributing
 
