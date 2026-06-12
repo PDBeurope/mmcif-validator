@@ -5,7 +5,7 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
-import { exec } from 'child_process';
+import { execFile } from 'child_process';
 import { promisify } from 'util';
 import {
     ValidationErrorItem,
@@ -20,7 +20,7 @@ import {
 import { getSettings, getDictionarySource, getScriptPath } from './config';
 import { getCachedDictionaryPath, downloadAndCacheDictionary } from './dictionary';
 
-const execAsync = promisify(exec);
+const execFileAsync = promisify(execFile);
 
 export interface ValidationContext {
     outputChannel: vscode.OutputChannel;
@@ -262,18 +262,20 @@ export async function validateDocument(
     }
 
     const pythonPath = settings.pythonPath;
-    const command = useUrl
-        ? `"${pythonPath}" "${scriptPath}" --url "${dictSource}" "${document.fileName}"`
-        : `"${pythonPath}" "${scriptPath}" --file "${dictSource}" "${document.fileName}"`;
+    const args = useUrl
+        ? [scriptPath, '--url', dictSource, document.fileName]
+        : [scriptPath, '--file', dictSource, document.fileName];
 
-    outputChannel.appendLine(`Running: ${command}`);
+    outputChannel.appendLine(
+        `Running: ${pythonPath} ${args.map(a => JSON.stringify(a)).join(' ')}`
+    );
 
     let stdout = '';
     let stderr = '';
     let exitCode: number | undefined;
 
     try {
-        const result = await execAsync(command, { timeout: settings.validationTimeoutMs });
+        const result = await execFileAsync(pythonPath, args, { timeout: settings.validationTimeoutMs });
         stdout = result.stdout ?? '';
         stderr = result.stderr ?? '';
     } catch (err: unknown) {

@@ -4,10 +4,10 @@
 
 import * as path from 'path';
 import * as fs from 'fs';
-import { exec } from 'child_process';
+import { execFile } from 'child_process';
 import { promisify } from 'util';
 
-const execAsync = promisify(exec);
+const execFileAsync = promisify(execFile);
 
 const CACHE_DIR_NAME = 'mmcif-validator-cache';
 const CACHE_FILENAME = 'mmcif_pdbx.dic';
@@ -58,8 +58,8 @@ export async function downloadAndCacheDictionary(
 
     outputChannel.appendLine(`Downloading dictionary from ${url}... (via Python script)`);
     try {
-        const command = `"${pythonPath}" "${scriptPath}" download-dictionary --url "${url}"`;
-        const { stdout } = await execAsync(command, { timeout: 120000 });
+        const args = [scriptPath, 'download-dictionary', '--url', url];
+        const { stdout } = await execFileAsync(pythonPath, args, { timeout: 120000 });
         const lines = stdout.split('\n');
         for (const line of lines) {
             const trimmed = line.trim();
