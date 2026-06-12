@@ -98,16 +98,17 @@ export function getDictionarySource(workspaceFolder: vscode.WorkspaceFolder | un
 
 export function getScriptPath(extensionPath: string | undefined): string | null {
     const workspacePath = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '';
-    const possiblePaths = [
-        path.join(__dirname, '..', 'python-script', 'validate_mmcif.py'),
-        path.join(extensionPath || '', 'python-script', 'validate_mmcif.py'),
-        path.join(workspacePath, 'python-script', 'validate_mmcif.py'),
-        path.join(workspacePath, 'validate_mmcif.py'),
-    ];
+    const possiblePaths = [path.join(__dirname, '..', 'python-script', 'validate_mmcif.py')];
     if (extensionPath) {
         possiblePaths.push(
             path.join(extensionPath, 'python-script', 'validate_mmcif.py'),
             path.join(extensionPath, 'validate_mmcif.py')
+        );
+    }
+    if (workspacePath) {
+        possiblePaths.push(
+            path.join(workspacePath, 'python-script', 'validate_mmcif.py'),
+            path.join(workspacePath, 'validate_mmcif.py')
         );
     }
     return possiblePaths.find(p => fs.existsSync(p)) ?? null;
