@@ -225,7 +225,7 @@ export async function validateDocument(
     if (!scriptPath || !fs.existsSync(scriptPath)) {
         outputChannel.appendLine('ERROR: Validation script not found.');
         vscode.window.showErrorMessage(
-            'Validation script not found. Please ensure validate_mmcif.py is in the extension or workspace.'
+            'Validation script not found. Please ensure the extension is installed correctly.'
         );
         diagnosticCollection.delete(document.uri);
         clearDepositionStatusBar(ctx.depositionStatusBarItem);

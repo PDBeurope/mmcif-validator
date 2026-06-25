@@ -96,20 +96,54 @@ export function getDictionarySource(workspaceFolder: vscode.WorkspaceFolder | un
     return dictSource ? { dictSource, useUrl } : null;
 }
 
+const SCRIPT_RELATIVE = path.join('python-script', 'validate_mmcif.py');
+
+function isPathInsideRoot(candidate: string, root: string): boolean {
+    const resolved = path.resolve(candidate);
+    const resolvedRoot = path.resolve(root);
+    const rel = path.relative(resolvedRoot, resolved);
+    return rel !== '' && !rel.startsWith('..') && !path.isAbsolute(rel);
+}
+
+function resolveTrustedScriptPath(candidate: string, trustedRoot: string): string | null {
+    if (candidate.includes('\0')) {
+        return null;
+    }
+    const resolved = path.resolve(candidate);
+    if (!isPathInsideRoot(resolved, trustedRoot)) {
+        return null;
+    }
+    try {
+        const stat = fs.statSync(resolved);
+        if (!stat.isFile()) {
+            return null;
+        }
+    } catch {
+        return null;
+    }
+    return resolved;
+}
+
+/** Resolve the bundled validation script from the extension install only. */
 export function getScriptPath(extensionPath: string | undefined): string | null {
-    const workspacePath = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath || '';
-    const possiblePaths = [path.join(__dirname, '..', 'python-script', 'validate_mmcif.py')];
+    const candidates: Array<{ path: string; trustedRoot: string }> = [];
     if (extensionPath) {
-        possiblePaths.push(
-            path.join(extensionPath, 'python-script', 'validate_mmcif.py'),
-            path.join(extensionPath, 'validate_mmcif.py')
-        );
+        candidates.push({
+            path: path.join(extensionPath, SCRIPT_RELATIVE),
+            trustedRoot: extensionPath,
+        });
     }
-    if (workspacePath) {
-        possiblePaths.push(
-            path.join(workspacePath, 'python-script', 'validate_mmcif.py'),
-            path.join(workspacePath, 'validate_mmcif.py')
-        );
+    const bundledRoot = path.resolve(__dirname, '..');
+    candidates.push({
+        path: path.join(bundledRoot, SCRIPT_RELATIVE),
+        trustedRoot: bundledRoot,
+    });
+
+    for (const { path: candidate, trustedRoot } of candidates) {
+        const resolved = resolveTrustedScriptPath(candidate, trustedRoot);
+        if (resolved) {
+            return resolved;
+        }
     }
-    return possiblePaths.find(p => fs.existsSync(p)) ?? null;
+    return null;
 }
