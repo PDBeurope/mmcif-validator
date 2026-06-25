@@ -1,34 +1,82 @@
 # PDBe mmCIF Validator
 
+<img src="https://raw.githubusercontent.com/PDBeurope/mmcif-validator/main/img/logo-validator.png" alt="PDBe mmCIF Validator" width="200">
+
 **Version 0.1.92**
 
 A Visual Studio Code extension to validate mmCIF/CIF files against the PDBx/mmCIF dictionary (or any CIF dictionary) with real-time error checking.
 
-Release notes for this version are in [CHANGELOG.md](CHANGELOG.md) (same folder as this README).
+- [![PyPI](https://img.shields.io/pypi/v/pdbe-mmcif-validator?label=PyPI&color=blue)](https://pypi.org/project/pdbe-mmcif-validator/)
+- [![VS Code Marketplace](https://img.shields.io/badge/VS%20Marketplace-install-blue)](https://marketplace.visualstudio.com/items?itemName=PDBEurope.pdbe-mmcif-validator)
+- [![Open VSX](https://img.shields.io/open-vsx/v/PDBEurope/pdbe-mmcif-validator?label=Open%20VSX)](https://open-vsx.org/extension/PDBEurope/pdbe-mmcif-validator)
+- [![Overview demo](https://img.shields.io/badge/demo-overview-red?logo=youtube)](https://www.youtube.com/watch?v=CCkC9Bc6FY8)
+- [![Metadata completeness demo](https://img.shields.io/badge/demo-metadata%20completeness-red?logo=youtube)](https://www.youtube.com/watch?v=li7ETeSA8FI)
+- [GitHub repository](https://github.com/PDBeurope/mmcif-validator)
+- [Python script documentation](python-script/README.md)
+
+<p align="center">
+  <strong>====&gt; <a href="https://wwwdev.ebi.ac.uk/pdbe/mmcif-validator/">Try this online</a> &lt;====</strong>
+</p>
+
+Release notes for this version are in [CHANGELOG.md](CHANGELOG.md).
 
 ## Features
 
-- ✅ **Real-time validation** - Automatically validates mmCIF files as you edit
-- ✅ **Error highlighting** - Errors and warnings are highlighted directly in the editor with precise character positioning
-- ✅ **Syntax highlighting** - Full syntax highlighting for CIF files (tags, values, data blocks, loops, etc.)
-- ✅ **Hover information** - Hover over any value to see its corresponding key (`_tag`) and data block
-- ✅ **Dictionary support** - Works with the PDBx/mmCIF dictionary or any CIF dictionary format
-- ✅ **Flexible dictionary sources** - Uses local dictionary files or downloads from URL
-- ✅ **Auto-detection** - Automatically finds dictionary files in your workspace
-- ✅ **Comprehensive checks** - Validates mandatory items, enumerations, schema compliance, and duplicate category/item detection
-- ✅ **Works out-of-the-box** - No configuration required!
-- ✅ **Metadata completeness** - Shows how complete the file metadata is (percentage in status bar and Explorer view), with missing mandatory categories and items listed; validation errors count as not filled
+### Validation
+
+<img align="right" width="220" src="https://raw.githubusercontent.com/PDBeurope/mmcif-validator/main/img/validation.png" alt="Validation checks against the mmCIF dictionary">
+
+- **Dictionary flexibility** — Works with PDBx/mmCIF dictionary or any CIF dictionary format; local files, URLs, or auto-detection in the workspace
+- **Works out-of-the-box** — No configuration required (uses default dictionary URL)
+- **Comprehensive checks** — Mandatory items, enumerations, data types, ranges, foreign keys, composite keys, cross-checks, and more
+
+The validator performs comprehensive checks including:
+
+- Item definition validation
+- Mandatory item presence (category-aware)
+- Enumeration value validation
+- Data type validation (including regex patterns from dictionary)
+- Range constraints (strictly allowed vs advisory)
+- Parent/child category relationships
+- Foreign key integrity
+- Composite key validation
+- Complex operation expression parsing
+- Duplicate category and item detection (loop and frame format)
+
+See [Validation Checks](#validation-checks) below for full details and [Error vs Warning Severity](#error-vs-warning-severity).
+
+<br clear="all">
+
+### Metadata completeness
+
+<img align="right" width="220" src="https://raw.githubusercontent.com/PDBeurope/mmcif-validator/main/img/metadata_completeness.png" alt="Metadata completeness score and missing items">
+
+The **metadata completeness** score (0–100%) reflects missing categories and items against method-aware mandatory lists (X-ray / EM / NMR from bundled lists), including an entity-source group where any one of several categories is sufficient, and deposition-mandatory items from the dictionary. The extension shows the percentage in the Status bar and **Metadata Completeness** view in the Explorer sidebar; missing categories and items (including row-level missing or invalid values) are listed in the sidebar and Output channel. Validation errors count as not filled. If the experimental method cannot be determined from the file, only common categories are used and the score is capped at 50%.
+
+[![Metadata completeness demo](https://img.shields.io/badge/demo-metadata%20completeness-red?logo=youtube)](https://www.youtube.com/watch?v=li7ETeSA8FI)
+
+<br clear="all">
+
+### Editor integration
+
+<img align="right" src="https://raw.githubusercontent.com/PDBeurope/mmcif-validator/main/img/editor_features.png" alt="VS Code editor with syntax highlighting and validation errors">
+
+- **Real-time validation** — Automatically validates mmCIF/CIF files as you edit (on open, save, and changes with 1 second debounce)
+- **Error highlighting** — Errors and warnings highlighted directly in the editor with precise character positioning
+- **Syntax highlighting** — Full syntax highlighting for CIF files (tags, values, data blocks, loops, etc.)
+- **Hover information** — Hover over any value to see its corresponding key (`_tag`), data block, and loop context
+- **Configurable validation timeout** — Increase timeout for very large files (extension setting, default 60s, max 10 min)
+
+<br clear="all">
 
 ## Installation
 
-1. Open Visual Studio Code
-2. Go to Extensions (Ctrl+Shift+X)
-3. Search for "PDBe mmCIF Validator"
-4. Click Install
+Install from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=PDBEurope.pdbe-mmcif-validator) or [Open VSX](https://open-vsx.org/extension/PDBEurope/pdbe-mmcif-validator), or search **PDBe mmCIF Validator** in the Extensions view (Ctrl+Shift+X).
 
 ## Quick Start
 
 The extension works out-of-the-box! By default, it will automatically:
+
 - Download and cache the PDBx/mmCIF dictionary from the official wwPDB website (http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic)
 - Cache the dictionary locally for one month to balance freshness with download efficiency
 - Dictionary updates are usually released in conjunction with OneDep software releases (average update frequency ~43 days)
@@ -36,31 +84,24 @@ The extension works out-of-the-box! By default, it will automatically:
 - Show errors and warnings in the Problems panel with precise character positioning
 - Show **metadata completeness** (percentage and missing items) in the status bar and in the **Metadata Completeness** view in the Explorer sidebar
 
-**No configuration required!** However, you can also use any other CIF dictionary by configuring the `dictionaryPath` or `dictionaryUrl` settings (see Configuration section below).
+**No configuration required!** However, you can also use any other CIF dictionary by configuring the `dictionaryPath` or `dictionaryUrl` settings (see [Configuration](#configuration) below).
 
 ## Usage
 
 1. Open a `.cif` file in VSCode
-2. The extension will automatically:
-   - Apply syntax highlighting to make the file easier to read
-   - Validate the file (on open, save, and changes with 1 second debounce)
-3. **Hover over any value** to see:
-   - The corresponding key (`_tag`)
-   - The data block name (`DATA_*`)
-   - Loop information (if in a loop)
+2. The extension will automatically apply syntax highlighting and validate the file
+3. **Hover over any value** to see the corresponding key (`_tag`), data block name (`DATA_*`), and loop information (if in a loop)
 4. Errors and warnings will be highlighted in the editor
-5. Use the Command Palette (`Ctrl+Shift+P`) and run "mmCIF: Validate" to manually trigger validation
-6. **Metadata completeness**: In the status bar (bottom right) you’ll see e.g. "Metadata: 75%". Click it or open **Explorer → Metadata Completeness** to see which mandatory categories or items are missing or have validation errors.
+5. Use the Command Palette (`Ctrl+Shift+P`) and run **mmCIF: Validate** to manually trigger validation
+6. **Metadata completeness**: In the status bar (bottom right) you’ll see e.g. `Metadata: 75%`. Click it or open **Explorer → Metadata Completeness** for missing categories or items
 
 ## Metadata Completeness
 
-The extension computes a **metadata-completeness** score (0–100%) for the open mmCIF file, based on mandatory categories (for the detected experimental method: xray, em, or nmr) and mandatory items from the dictionary. For some category families (such as entity-source categories listed in `entity_src_cat.list`), the score treats them as a group where at least one category must be present, rather than requiring every category individually. This helps you see how complete the file metadata is without over-penalising equivalent representations.
-
 - **Status bar** (bottom right): Shows e.g. `Metadata: 75% (xray)`. Hover for a short summary and a note to see the Output channel or the **Metadata Completeness** view in the Explorer sidebar for the full list of missing items.
-- **Output channel**: View → Output → select "PDBe mmCIF Validator". After each validation run, a "Metadata completeness" section lists the percentage, detected method, missing categories, and missing items (with row and key when applicable). Items that have a validation error (e.g. wrong type) are marked with `[validation error]`.
+- **Output channel**: View → Output → select **PDBe mmCIF Validator**. After each validation run, a **Metadata completeness** section lists the percentage, detected method, missing categories, and missing items (with row and key when applicable). Items that have a validation error (e.g. wrong type) are marked with `[validation error]`.
 - **Metadata Completeness view**: In the Explorer sidebar (left), scroll to the **Metadata Completeness** section. Expand it to see the summary, **Missing categories**, and **Missing items**. Each missing item can show row index and key (e.g. author id) and "(validation error)" when the value is present but invalid.
 
-**Behaviour**: The score uses row-level checks (every row in a mandatory loop must have all mandatory items filled). If the experimental method cannot be determined from the file, only categories common to all methods are used and the maximum score is 50%. Items that trigger a validation error (severity "error") are counted as not filled and appear in the missing list with a validation-error flag.
+**Behaviour**: The score uses row-level checks (every row in a mandatory loop must have all mandatory items filled). Items that trigger a validation error (severity "error") are counted as not filled and appear in the missing list with a validation-error flag.
 
 ## Configuration
 
@@ -218,7 +259,8 @@ These are advisory issues that may indicate problems but are not strictly requir
 
 ## Standalone Python Script
 
-This extension includes a standalone Python validation script that can be used independently of VSCode. See the `python-script/` folder for:
+This extension includes a standalone Python validation script that can be used independently of VSCode. It is also published on [PyPI](https://pypi.org/project/pdbe-mmcif-validator/) as `pdbe-mmcif-validator`. See the `python-script/` folder for:
+
 - The Python validation script (`validate_mmcif.py`)
 - Command-line usage instructions
 - Standalone validation without VSCode

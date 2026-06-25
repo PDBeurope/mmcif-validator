@@ -38,6 +38,7 @@ dev = []
 Homepage = "https://github.com/PDBeurope/mmcif-validator"
 Documentation = "https://github.com/PDBeurope/mmcif-validator/blob/main/vscode-extension/python-script/README.md"
 Repository = "https://github.com/PDBeurope/mmcif-validator"
+"Try online" = "https://wwwdev.ebi.ac.uk/pdbe/mmcif-validator/"
 
 [project.scripts]
 validate-mmcif = "validate_mmcif:main"

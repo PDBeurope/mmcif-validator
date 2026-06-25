@@ -1,33 +1,76 @@
 # PDBe mmCIF Validator - Python Script
 
+<img src="https://raw.githubusercontent.com/PDBeurope/mmcif-validator/main/img/logo-validator.png" alt="PDBe mmCIF Validator" width="200">
+
 **Version 0.1.92**
 
-A standalone Python script to validate mmCIF/CIF files against the PDBx/mmCIF dictionary or any CIF dictionary.
+A standalone Python script and PyPI package to validate mmCIF/CIF files against the PDBx/mmCIF dictionary or any CIF dictionary.
 
-**0.1.92** — Added cross-check rules catalog generation workflow via `tools/generate_cross_check_rules_catalog.py`, which produces `docs/cross_check_rules_catalog.txt` and should be rerun whenever grouped JSON rule files change.
+- [![PyPI](https://img.shields.io/pypi/v/pdbe-mmcif-validator?label=PyPI&color=blue)](https://pypi.org/project/pdbe-mmcif-validator/)
+- [![VS Code Marketplace](https://img.shields.io/badge/VS%20Marketplace-install-blue)](https://marketplace.visualstudio.com/items?itemName=PDBEurope.pdbe-mmcif-validator)
+- [![Open VSX](https://img.shields.io/open-vsx/v/PDBEurope/pdbe-mmcif-validator?label=Open%20VSX)](https://open-vsx.org/extension/PDBEurope/pdbe-mmcif-validator)
+- [![Overview demo](https://img.shields.io/badge/demo-overview-red?logo=youtube)](https://www.youtube.com/watch?v=CCkC9Bc6FY8)
+- [![Metadata completeness demo](https://img.shields.io/badge/demo-metadata%20completeness-red?logo=youtube)](https://www.youtube.com/watch?v=li7ETeSA8FI)
+- [GitHub repository](https://github.com/PDBeurope/mmcif-validator)
+- [Extension documentation](../README.md)
 
-**0.1.91** — JSON-first procedural cross-checks (`cross_checks_procedural_validators.json`), pairwise date ordering (`cross_checks_pairwise_date_order.json`), within-category uniqueness (`cross_checks_uniqueness.json`), preservation of quoted empty loop values (`''` / `""`), dictionary-enum / subtype / cross-reference selector coverage, and centralized message-template rendering. Details: [extension CHANGELOG](../CHANGELOG.md).
+<p align="center">
+  <strong>====&gt; <a href="https://wwwdev.ebi.ac.uk/pdbe/mmcif-validator/">Try this online</a> &lt;====</strong>
+</p>
 
-**0.1.9** — Added a scalable cross-check architecture: reusable rule utilities, grouped JSON rule families, rule engine/registry, configurable rule-group toggles, expanded imported cross-check runtime coverage, and harmonized error-message formatting (including compared-value insertion).
+See the full [CHANGELOG](../CHANGELOG.md).
 
 ## Features
 
-- ✅ Validates mmCIF/CIF files against any CIF dictionary schema
-- ✅ Checks for missing mandatory items (only for categories present in file)
-- ✅ Validates item values against enumerations
-- ✅ **Data type validation** - Automatically validates types with regex patterns from dictionary (email, phone, orcid_id, pdb_id, fax, etc.) plus hardcoded validations for dates, integers, floats, booleans
-- ✅ **Range validation** - Distinguishes between strictly allowed boundary conditions (errors) and advisory boundary conditions (warnings)
-- ✅ **Parent/child category relationship validation** - Ensures parent categories exist when child categories are present
-- ✅ **Foreign key integrity validation** - Ensures referenced data exists in parent items
-- ✅ **Composite key validation** - Validates that combinations of multiple child items together match corresponding combinations in parent categories
-- ✅ **Operation expression validation** - Parses and validates complex operation expressions like `(1-60)`, `(1,2,5)`, `(X0)(1-5,11-15)`
-- ✅ **Duplicate category and item detection** - Reports when a category or item is duplicated (in loop or frame format)
-- ✅ Supports local dictionary files or downloading from URL (works with PDBx/mmCIF dictionary or any CIF dictionary format)
-- ✅ **Enhanced JSON output** - Includes precise character positions and column indices for programmatic error handling
-- ✅ **Exit codes** - Returns 0 for success, 1 for errors (useful for CI/CD integration)
-- ✅ **Metadata completeness in JSON** - When validation runs, the JSON output includes an optional `metadata_completeness` object (percentage, filled/total counts, detected method, missing categories, missing items with row/key and validation-error flag)
+### Validation
+
+<img align="right" width="220" src="https://raw.githubusercontent.com/PDBeurope/mmcif-validator/main/img/validation.png" alt="Validation checks against the mmCIF dictionary">
+
+- **Dictionary flexibility** — Works with PDBx/mmCIF dictionary or any CIF dictionary format; local files or URLs
+- **Works out-of-the-box** — No pip dependencies beyond the standard library
+- **CI/CD friendly** — Exit codes (0 success, 1 errors) and JSON output with line/column positions
+
+The validator performs comprehensive checks including:
+
+- Item definition validation
+- Mandatory item presence (category-aware)
+- Enumeration value validation
+- Data type validation (including regex patterns from dictionary)
+- Range constraints (strictly allowed vs advisory)
+- Parent/child category relationships
+- Foreign key integrity
+- Composite key validation
+- Complex operation expression parsing
+- Duplicate category and item detection (loop and frame format)
+
+See [Validation Checks](#validation-checks) below for full details and [Error vs Warning Severity](#error-vs-warning-severity).
+
+<br clear="all">
+
+### Metadata completeness
+
+<img align="right" width="220" src="https://raw.githubusercontent.com/PDBeurope/mmcif-validator/main/img/metadata_completeness.png" alt="Metadata completeness score and missing items">
+
+The **metadata completeness** score (0–100%) reflects missing categories and items against method-aware mandatory lists (X-ray / EM / NMR from bundled lists), including an entity-source group where any one of several categories is sufficient, and deposition-mandatory items from the dictionary. JSON output includes a `metadata_completeness` object (`percentage`, `filled_count`, `total_count`, `method_detected`, `missing_categories`, `missing_items` with row/key and validation-error flags). Validation errors count as not filled. If the experimental method cannot be determined from the file, only common categories are used and the score is capped at 50%.
+
+[![Metadata completeness demo](https://img.shields.io/badge/demo-metadata%20completeness-red?logo=youtube)](https://www.youtube.com/watch?v=li7ETeSA8FI)
+
+<br clear="all">
+
+### Command-line and library
+
+- **`validate-mmcif` console script** — Available after `pip install pdbe-mmcif-validator`
+- **Enhanced JSON output** — Precise character positions and column indices for programmatic error handling
+- **Python API** — Import `validate()` or `ValidatorFactory` for use in pipelines and other tools (see [Library usage](#library-usage))
+- **VS Code extension** — Same validation engine with real-time editor integration ([extension documentation](../README.md))
+
+<br clear="all">
 
 ## Installation
+
+```bash
+pip install pdbe-mmcif-validator
+```
 
 ### Prerequisites
 
@@ -405,22 +448,6 @@ python validate_mmcif.py mmcif_pdbx_v5_next.dic 6qvt.cif > validation_results.tx
 - **Note**: Some foreign key validation errors may be false positives if relationships are optional or conditional. The validator checks all defined parent/child relationships from `_pdbx_item_linked_group_list`.
 - **Note**: For categories with both label and auth fields (like `struct_conn`), the validator will attempt to validate using label fields first, then fall back to auth fields if label fields are incomplete. This ensures proper validation even when some fields are missing (e.g., when `label_seq_id` is "." for non-polymer entities).
 - Data type validation uses regex patterns from the dictionary when available. Types like `email`, `phone`, `orcid_id`, `pdb_id`, etc. are automatically validated if they have regex patterns defined in `_item_type_list.construct`. Types without regex patterns fall back to hardcoded validation (dates, int, positive_int, float, float-range, boolean) or are accepted without format validation.
-
-## Implemented Features
-
-The validator currently implements comprehensive validation including:
-
-- [x] **Data type validation** - Validates int, float, date, etc., plus automatic validation of any type with regex pattern in dictionary (email, phone, orcid_id, pdb_id, fax, etc.)
-- [x] **Range validation** - Checks min/max values from dictionary constraints
-- [x] **Parent/child category validation** - Validates category hierarchies
-- [x] **Foreign key integrity validation** - Ensures referenced data exists
-- [x] **Composite key validation** - Validates that combinations of multiple child items match corresponding combinations in parent categories
-- [x] **Label/auth field composite key handling** - Special validation for categories with both label and auth fields (struct_conn, geom_*, etc.) that intelligently falls back between label and auth fields when some values are missing
-- [x] **Operation expression validation** - Parses and validates complex `oper_expression` values
-- [x] **Regular expression validation** - Automatically extracts and uses regex patterns from dictionary for type validation
-- [x] **Conditional relationship validation** - Entity type-based validation for polymer/non-polymer relationships
-- [x] **Loop structure parsing** - Parses and validates loop structures in mmCIF files
-- [x] **Category key extraction** - Extracts and uses category keys from dictionary definitions
 
 ## License
 
