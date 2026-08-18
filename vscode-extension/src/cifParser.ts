@@ -115,38 +115,10 @@ export function getCifContext(document: vscode.TextDocument, position: vscode.Po
         
         // Now find the tag for the current position
         if (inLoop && loopTags.length > 0) {
-            // In a loop - count values to determine which tag
-            let valueCount = 0;
-            
-            // Count all values from loop start to current position
-            for (let i = loopStartLine + 1; i <= currentLine; i++) {
-                const line = lines[i];
-                
-                // Skip tag lines and comments
-                if (!line || line.trim().startsWith('_') || line.trim().startsWith('#') ||
-                    /^(DATA_|LOOP_|SAVE_|GLOBAL_|STOP_)/i.test(line.trim())) {
-                    continue;
-                }
-                
-                // Count values on this line
-                const values = extractValuesFromLine(line);
-                
-                // Check if current position is on this line
-                if (i === currentLine) {
-                    // Find which value on this line contains the cursor
-                    for (const value of values) {
-                        if (value.start <= currentChar && value.end >= currentChar) {
-                            // Found the value - determine tag
-                            const tagIndex = valueCount % loopTags.length;
-                            context.currentTag = loopTags[tagIndex];
-                            return context;
-                        }
-                        valueCount++;
-                    }
-                } else {
-                    // Not on current line, just count values
-                    valueCount += values.length;
-                }
+            const tag = findLoopTagAtPosition(lines, loopStartLine, loopTags, currentLine, currentChar);
+            if (tag) {
+                context.currentTag = tag;
+                return context;
             }
         } else {
             // Not in a loop - look for tag on current line or previous lines
@@ -207,6 +179,113 @@ interface ValueRange {
     end: number;
 }
 
+function isStructuralKeyword(line: string): boolean {
+    return /^(DATA_|LOOP_|SAVE_|GLOBAL_|STOP_)/i.test(line.trim());
+}
+
+function isLoopTagLine(line: string): boolean {
+    const trimmed = line.trim();
+    return trimmed.startsWith('_');
+}
+
+/**
+ * Semicolon-delimited CIF text fields start and end with ';' as the first
+ * character of a line (STAR/CIF spec). Continuation lines and the closing
+ * ';' are part of that one value, not additional loop tokens.
+ */
+function isSemicolonTextLine(line: string): boolean {
+    return line.length > 0 && line[0] === ';';
+}
+
+function tagAtCount(loopTags: string[], valueCount: number): string {
+    return loopTags[((valueCount % loopTags.length) + loopTags.length) % loopTags.length];
+}
+
+function valuesAfterClosingSemicolon(line: string): ValueRange[] {
+    // Tokens after the closing ';' on the same line are further loop values.
+    const rest = extractValuesFromLine(line.slice(1));
+    return rest.map((value) => ({ start: value.start + 1, end: value.end + 1 }));
+}
+
+/**
+ * Map a cursor position in a loop to the loop tag for that value.
+ * Counts semicolon-delimited text fields as a single value, matching gemmi.
+ */
+export function findLoopTagAtPosition(
+    lines: string[],
+    loopStartLine: number,
+    loopTags: string[],
+    currentLine: number,
+    currentChar: number
+): string | null {
+    if (loopTags.length === 0) {
+        return null;
+    }
+
+    let valueCount = 0;
+    let inSemicolonText = false;
+
+    for (let i = loopStartLine + 1; i <= currentLine; i++) {
+        const line = lines[i] ?? '';
+        const onCurrentLine = i === currentLine;
+
+        if (inSemicolonText) {
+            if (isSemicolonTextLine(line)) {
+                // Closing ';' ends the text field already counted at the opener.
+                inSemicolonText = false;
+                if (onCurrentLine) {
+                    if (currentChar <= 0) {
+                        return tagAtCount(loopTags, valueCount - 1);
+                    }
+                    const trailing = valuesAfterClosingSemicolon(line);
+                    for (const value of trailing) {
+                        if (value.start <= currentChar && value.end >= currentChar) {
+                            return tagAtCount(loopTags, valueCount);
+                        }
+                        valueCount++;
+                    }
+                    return null;
+                }
+                valueCount += valuesAfterClosingSemicolon(line).length;
+                continue;
+            }
+
+            // Continuation line of the current semicolon-delimited value.
+            if (onCurrentLine) {
+                return tagAtCount(loopTags, valueCount - 1);
+            }
+            continue;
+        }
+
+        if (!line.trim() || isLoopTagLine(line) || line.trim().startsWith('#') || isStructuralKeyword(line)) {
+            continue;
+        }
+
+        if (isSemicolonTextLine(line)) {
+            if (onCurrentLine) {
+                return tagAtCount(loopTags, valueCount);
+            }
+            valueCount++;
+            inSemicolonText = true;
+            continue;
+        }
+
+        const values = extractValuesFromLine(line);
+        if (onCurrentLine) {
+            for (const value of values) {
+                if (value.start <= currentChar && value.end >= currentChar) {
+                    return tagAtCount(loopTags, valueCount);
+                }
+                valueCount++;
+            }
+            return null;
+        }
+        valueCount += values.length;
+    }
+
+    return null;
+}
+
 function extractValuesFromLine(line: string): ValueRange[] {
     const values: ValueRange[] = [];
     let pos = 0;
@@ -245,12 +324,8 @@ function extractValuesFromLine(line: string): ValueRange[] {
                 end = spaceIndex > 0 ? spaceIndex : line.length;
             }
         }
-        // Multiline string (starts with ;)
-        else if (line[pos] === ';') {
-            // For simplicity, take to end of line (multiline strings span lines)
-            end = line.length;
-        }
-        // Unquoted value
+        // Unquoted value. A ';' here is an ordinary token; semicolon-delimited
+        // text fields are handled by findLoopTagAtPosition (must start at column 0).
         else {
             const spaceIndex = line.indexOf(' ', pos);
             const commentIndex = line.indexOf('#', pos);
