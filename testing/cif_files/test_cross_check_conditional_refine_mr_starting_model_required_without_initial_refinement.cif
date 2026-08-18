@@ -6,6 +6,10 @@ _refine.entry_id TEST_MR_REQUIRE_STARTING_MODEL
 _refine.pdbx_refine_id 'X-RAY DIFFRACTION'
 _refine.ls_R_factor_obs 0.200
 _refine.ls_d_res_high 2.00
+_refine.ls_d_res_low 8.00
+_refine.ls_number_reflns_obs 5000
+_refine.ls_percent_reflns_obs 80.0
 _refine.pdbx_method_to_determine_struct 'MOLECULAR REPLACEMENT'
+_refine.pdbx_ls_cross_valid_method THROUGHOUT
 _refine.pdbx_starting_model ?
 #

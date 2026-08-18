@@ -36,6 +36,9 @@ Thumbs.db
 *.tmp
 .cache/
 
+# Testing: latest suite run (baseline is tracked)
+testing/validation_output.txt
+
 # Maintainer-only (not for GitHub)
 vscode-extension/python-script/PUBLISH_PYPI.md
 vscode-extension/python-script/.internal-tools/

@@ -4,6 +4,21 @@ All notable changes to the PDBe mmCIF Validator extension will be documented in 
 
 # Released
 
+## [0.1.93] - 2026-08-18
+
+### Fixed
+
+- **Exclusive single-pair ranges**: Non-loop `_item_range` / `_pdbx_item_range` bounds are now exclusive, matching DDL and OneDep. A value of `0.000` against `_item_range.minimum 0.0` / `maximum .` (for example `_reflns_shell.pdbx_Rpim_I_all` and `pdbx_Rrim_I_all`) is reported as an **error**, not only an advisory warning.
+- **Deposition-mandatory items**: Items with `_pdbx_item.mandatory_code yes` (required for PDB deposition, even when `_item.mandatory_code` is `no`) are now flagged when the category is present. Missing items and unfilled values (`?`, `.`, empty) are errors. This covers `_refine.pdbx_ls_cross_valid_method` and other deposition-mandatory dictionary items.
+
+### Added
+
+- **Regression tests**: `test_item_range_exclusive_zero.cif`, `test_pdbx_mandatory_cross_valid_method_missing.cif`, and `test_pdbx_mandatory_cross_valid_method_unknown.cif`.
+
+### Changed
+
+- **Version bump**: Updated extension/package/docs version references from `0.1.92` to `0.1.93`.
+
 ## [0.1.92] - 2026-04-23
 
 ### Added

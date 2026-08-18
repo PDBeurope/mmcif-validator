@@ -2,16 +2,66 @@
 mmCIF Validator test suite
 Dictionary: http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic
 Test directory: <REPO>/testing\cif_files
-CIF files: 69
+CIF files: 72
 ================================================================================
 
 --------------------------------------------------------------------------------
 FILE: 6ijw.cif
 --------------------------------------------------------------------------------
 
-Validation passed! No errors found.
+Found 4 validation issue(s):
+
+ERROR: Line 82, Item '_pdbx_database_status.dep_release_code_coordinates'
+  Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing
+
+ERROR: Line 82, Item '_pdbx_database_status.dep_release_code_sequence'
+  Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing
+
+ERROR: Line 1244, Item '_pdbx_nmr_ensemble.representative_conformer'
+  No value present for this mandatory item.
+
+ERROR: Line 359, Item '_pdbx_struct_assembly_auth_evidence.details'
+  No value present for this mandatory item.
+
 {
-  "errors": [],
+  "errors": [
+    {
+      "line": 82,
+      "item": "_pdbx_database_status.dep_release_code_coordinates",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 82,
+      "item": "_pdbx_database_status.dep_release_code_sequence",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 1244,
+      "item": "_pdbx_nmr_ensemble.representative_conformer",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 65,
+      "end_char": 66
+    },
+    {
+      "line": 359,
+      "item": "_pdbx_struct_assembly_auth_evidence.details",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 59,
+      "end_char": 60
+    }
+  ],
   "metadata_completeness": {
     "percentage": 80.4,
     "filled_count": 168,
@@ -201,13 +251,22 @@ Validation passed! No errors found.
   }
 }
 
-EXIT_CODE: 0
+EXIT_CODE: 1
 
 --------------------------------------------------------------------------------
 FILE: 6qvt.cif
 --------------------------------------------------------------------------------
 
-Found 3 validation issue(s):
+Found 6 validation issue(s):
+
+ERROR: Line 94, Item '_pdbx_database_status.dep_release_code_coordinates'
+  Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing
+
+ERROR: Line 94, Item '_pdbx_database_status.dep_release_code_sequence'
+  Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing
+
+ERROR: Line 2006, Item '_pdbx_struct_assembly_auth_evidence.details'
+  No value present for this mandatory item.
 
 WARNING: Line 1908, Item '_refine_ls_shell.R_factor_R_work'
   Shell R_work is higher than shell R_free 0.1784. (value=0.1803, condition > _refine_ls_shell.R_factor_R_free)
@@ -220,6 +279,33 @@ WARNING: Line 1922, Item '_refine_ls_shell.d_res_low'
 
 {
   "errors": [
+    {
+      "line": 94,
+      "item": "_pdbx_database_status.dep_release_code_coordinates",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 94,
+      "item": "_pdbx_database_status.dep_release_code_sequence",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 2006,
+      "item": "_pdbx_struct_assembly_auth_evidence.details",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 59,
+      "end_char": 60
+    },
     {
       "line": 1908,
       "item": "_refine_ls_shell.R_factor_R_work",
@@ -311,13 +397,25 @@ EXIT_CODE: 1
 FILE: 6ssp.cif
 --------------------------------------------------------------------------------
 
-Found 6 validation issue(s):
+Found 10 validation issue(s):
 
 ERROR: Line 7849, Item '_pdbx_audit_support.funding_organization'
   Value 'Research Foundation - Flanders' is not in enumeration examples: ['ATIP-Avenir', 'Aarhus University Research Foundation', 'Academia Sinica (Taiwan)', 'Academy of Finland', 'Accelerated Early staGe drug dIScovery (AEGIS)', 'Adaptimmune Ltd', 'Agence Nationale de Recherches Sur le Sida et les Hepatites Virales (ANRS)', 'Agence Nationale de la Recherche (ANR)', 'Agencia Estatal de Investigacion (AEI)', 'Agencia Nacional de Investigacion e Innovacion (ANII)', 'Agencia Nacional de Promocion Cientifica y Tecnologica (FONCYT)', 'Ake Wiberg Foundation', 'Alexander von Humboldt Foundation', 'Alexs Lemonade Stand Foundation for Cancer', 'Aligning Science Across Parkinsons (ASAP)', 'Almirall, LLC', 'Alzheimer Forschung Initiative e.V.', 'Alzheimers Drug Discovery Foundation (ADDF)', 'Alzheimers Research UK (ARUK)', 'American Cancer Society', 'American Diabetes Association', 'American Epilepsy Society', 'American Heart Association', 'Amyloidosis Foundation', 'Aprea Therapeutics AB', 'Australian Research Council (ARC)', 'Australian Science and Industry Endowment Fund (SIEF)', 'Austrian Research Promotion Agency', 'Austrian Science Fund', 'Autonomous Community of Madrid', 'Baden-Wuerttemberg-Stiftung', 'Banting Postdoctoral Fellowships', 'Bavarian State Ministry for Education, Culture, Science and Arts', 'Becton-Dickinson and Company', 'Belarusian Republican Foundation for Fundamental Research', 'Belgian Foundation against Cancer', 'BigC Cancer Charity', 'Bill & Melinda Gates Foundation', 'Biotechnology and Biological Sciences Research Council (BBSRC)', 'Birkbeck College', 'Bloodwise', 'Board of Research in Nuclear Sciences (BRNS)', 'Boehringer Ingelheim Fonds (BIF)', 'Brain & Behavior Research Foundation', 'Branco Weiss Fellowship - Society in Science', 'Brazilian National Council for Scientific and Technological Development (CNPq)', 'Breast Cancer Now', 'British Heart Foundation', 'Brookhaven National Laboratory (BNL)', 'Bulgarian National Science Fund', 'Burroughs Wellcome Fund', 'Business Finland', 'CAMS Innovation Fund for Medical Sciences (CIFMS)', 'CHDI Foundation', 'CIFAR Azrieli Global Scholars', 'CRDF Global', 'Canada Excellence Research Chair Award', 'Canada Foundation for Innovation', 'Canada Research Chairs', 'Canadian Glycomics Network (GLYCONET)', 'Canadian Institute for Advanced Research (CIFAR)', 'Canadian Institutes of Health Research (CIHR)', 'Cancer Council WA', 'Cancer Prevention and Research Institute of Texas (CPRIT)', 'Cancer Research UK', 'Cancer and Polio Research Fund', 'CancerGenomiCs.nl', 'Cancerfonden', 'Carl Trygger Foundation', 'Centre National de la Recherche Scientifique (CNRS)', 'Chan Zuckerberg Initiative', 'Childrens Discovery Institute of Washington University and St. Louis Childrens Hospital', 'Chinese Academy of Sciences', 'Chinese Scholarship Council', 'Christian Doppler Forschungsgesellschaft', 'Clas Groschinsky Memorial Fund', 'Columbia Technology Ventures', 'Comision Nacional Cientifica y Technologica (CONICYT)', 'Commonwealth Scholarship Commission (United Kingdom)', 'Commonwealth Scientific and Industrial Research Organisation (CSIRO)', 'Compagnia di San Paolo Foundation', 'Comunidad de Madrid', 'Consejo Nacional de Ciencia y Tecnologia (CONACYT)', 'Consortia for HIV/AIDS Vaccine Development', 'Coordination for the Improvement of Higher Education Personnel', 'Council of Scientific & Industrial Research (CSIR)', 'Croatian Science Foundation', 'Crohns and Colitis Foundation', 'Cystic Fibrosis Foundation', 'Cystic Fibrosis Trust', 'Czech Academy of Sciences', 'Czech Science Foundation', 'DOC Fellowship of the Austrian Academy of Sciences', 'Damon Runyon Cancer Research Foundation', 'DanScatt', 'Danish Agency for Science Technology and Innovation', 'Danish Council for Independent Research', 'Danish National Research Foundation', 'David and Lucile Packard Foundation', 'Defence Science and Technology Laboratory (DSTL)', 'Defense Advanced Research Projects Agency (DARPA)', 'Defense Threat Reduction Agency (DTRA)', 'Dementia Research Institute (DRI)', 'Department of Biotechnology (DBT, India)', 'Department of Defense (DOD, United States)', 'Department of Education of the Basque Government', 'Department of Energy (DOE, United States)', 'Department of Health & Human Services (HHS)', 'Department of Science & Technology (DST, India)', 'Department of Science and Innovation, South Africa', 'Department of Veterans Affairs (VA, United States)', 'Diamond Light Source', 'Dorothea Schloezer Program from the Georg-August University of Goettingen', 'Dutch Kidney Foundation', 'EIPOD fellowship under Marie Sklodowska-Curie Actions COFUND', 'ETH Zurich', 'Ecole polytechnique', 'Elite Network of Bavaria', 'Emergence program from Universite Grenoble Alpes', 'Emerson Collective', 'Engineering and Physical Sciences Research Council', 'Enterprise Ireland', 'Erik, Karin and Gosta Selander Foundation', 'Estonian Research Council', 'European Commission', 'European Communitys Seventh Framework Programme', 'European Cooperation in Science and Technology (COST) action', 'European Foundation for the Study of Diabetes (EFSD)', 'European Institute of Chemistry and Biology (IECB)', 'European Molecular Biology Organization (EMBO)', 'European Regional Development Fund', 'European Research Council (ERC)', 'European Union (EU)', 'F. Hoffmann-La Roche LTD', 'Finnish Cultural Foundation', 'Flanders Innovation & Entrepreneurship (VLAIO)', 'Florence Instruct-ERIC Center', 'Fondation ARC', 'Fondation pour la Recherche Medicale (FRM)', 'Fondazione CARIPLO', 'Fondazione Ricerca Fibrosi Cistica', 'Fonds National de la Recherche Scientifique (FNRS)', 'Fonds de Recherche du Quebec - Nature et Technologies (FRQNT)', 'Fonds de Recherche du Quebec - Sante (FRQS)', 'Fonds de la Recherche Scientifique (FNRS)', 'Foundation for Barnes-Jewish Hospital', 'Foundation for Medical Research (France)', 'Foundation for Polish Science', 'Foundation for Science and Technology (FCT)', 'Foundation for Science and Technology (FST)', 'Fraunhofer Cluster of Excellence Immune-Mediated Diseases', 'French Alternative Energies and Atomic Energy Commission (CEA)', 'French Infrastructure for Integrated Structural Biology (FRISBI)', 'French League Against Cancer', 'French Ministry of Armed Forces', 'French Muscular Dystrophy Association', 'French National Institute of Agricultural Research (INRAE)', 'French National Research Agency', 'Friedreichs Ataxia Research Alliance (FARA)', 'Fundacao para a Ciencia e a Tecnologia', 'Future Leader Fellowship', 'GHR Foundation', 'Gatsby Charitable Foundation', 'General Secretariat for Research and Technology (GSRT)', 'Generalitat Valenciana', 'Generalitat de Catalunya', 'German Academic Scholarship Foundation', 'German Federal Ministry for Economic Affairs and Energy', 'German Federal Ministry for Education and Research', 'German Research Foundation (DFG)', 'German-Israeli Foundation for Research and Development', 'Germanys Excellence Strategy', 'Gerty Cori Programme, Medical Faculty, University of Munster', 'Ghent University Special Research Fund (BOF)', 'Global Challenges Research Fund', 'Global Health Innovative Technology Fund', 'Grant Agency of the Czech Republic', 'Grenoble Alliance for Integrated Structural Cell Biology (GRAL)', 'Grenoble Instruct-ERIC Center (ISBG)', 'H2020 Marie Curie Actions of the European Commission', 'Health Research Council (HRC)', 'Health-Holland', 'Heidelberg ImmunoTherapeutics GmbH', 'Helen Hay Whitney Foundation', 'Hellenic Foundation for Research and Innovation (HFRI)', 'Helmholtz Association', 'Heritage Medical Research Institute', 'Herman Frasch Foundation', 'Hessian Ministry of Science, Higher Education and Art (HMWK)', 'Higher Education Funding Council for England', 'Howard Hughes Medical Institute (HHMI)', 'Human Frontier Science Program (HFSP)', 'Hungarian Academy of Sciences', 'Hungarian Ministry of Finance', 'Hungarian National Research, Development and Innovation Office', 'IdEx Universite Paris Cite', 'Imperial College London', 'Independent Research Fund Denmark - Medical Sciences', 'Independent Research Fund Denmark - Technology and Production Sciences', 'Indian Council of Medical Research', 'Innosuisse', 'Innovate UK', 'Innovative Medicines Initiative', 'Innoviris', 'Institut Laue-Langevin', 'Institut National de la Sante et de la Recherche Medicale (INSERM)', 'Institut National du Cancer (inCA)', 'Institute for Integrative Biology of the Cell (I2BC)', 'Institute of Chemical Physics Russian Academy of Science', 'Instruct-ERIC Center (Helsinki)', 'Instruct-ERIC Center (Strasbourg Centre)', 'International AIDS Vaccine Initiative', 'Irish Research Council', 'Isaac Newton Trust', 'Israel Ministry of Science and Technology', 'Israel Science Foundation', 'Italian Association for Cancer Research', 'Italian Medicines Agency', 'Italian Ministry of Education', 'Italian Ministry of Health', 'Italian National Research Council (CNR)', 'Jack Ma Foundation', 'Jacob and Lena Joels Memorial Foundation, Hebrew University of Jerusalem', 'Jane Coffin Childs (JCC) Fund', 'Jane and Aatos Erkko Foundation', 'Japan Agency for Medical Research and Development (AMED)', 'Japan Science and Technology', 'Japan Society for the Promotion of Science (JSPS)', 'Jardine Foundation', 'Joachim Herz Stiftung', 'John Innes Foundation', 'Johns Hopkins University', 'Joint Supercomputer Center of the Russian Academy of Sciences', 'Junta de Castilla y Leon, Consejeria de Educacion y Cultura y Fondo Social Europeo', 'KU Leuven', 'Kay Kendall Leukaemia Fund', 'Kempe Foundation', 'Kidney Research UK', 'Knut and Alice Wallenberg Foundation', 'LOEWE Center DRUID', 'LOreal-UNESCO', 'La Caixa Foundation', 'La Region Occitanie', 'La ligue contre le cancer', 'Laboratories of Excellence (LabEx)', 'Leducq Foundation', 'Leibniz Association', 'Leukemia & Lymphoma Society', 'Leverhulme Trust', 'Life Sciences Research Foundation', 'Louis-Jeantet Foundation', 'Ludwig Institute for Cancer Research (LICR)', 'Lundbeckfonden', 'Lustgarten Foundation', 'Luxembourg Centre for Systems Biomedicine (LCSB), University of Luxembourg', 'Maersk Foundation', 'Marie Sklodowska-Curie Actions, FragNET ITN', 'Marsden Fund', 'Maryland Stem Cell Research Fund', 'Massachusetts Consortium on Pathogen Readiness (MassCPR)', 'Max IV Laboratory', 'Max Planck Bristol Centre for Minimal Biology - University of Bristol', 'Max Planck Society', 'McKnight Foundation', 'Medical Research Council (MRC, Canada)', 'Medical Research Council (MRC, United Kingdom)', 'Mercatus Center', 'Michael J. Fox Foundation', 'Minas Gerais State Agency for Research and Development (FAPEMIG)', 'Ministerio de Ciencia e Innovacion (MCIN)', 'Ministero dell Universita e della Ricerca', 'Ministry of Agriculture, Forestry and Fisheries (MAFF)', 'Ministry of Business, Innovation and Employment (New Zealand)', 'Ministry of Economy and Competitiveness (MINECO)', 'Ministry of Education (MoE, China)', 'Ministry of Education (MoE, Czech Republic)', 'Ministry of Education (MoE, Korea)', 'Ministry of Education (MoE, Singapore)', 'Ministry of Education and Science of the Republic of Kazakhstan', 'Ministry of Education and Science of the Russian Federation', 'Ministry of Education, Culture, Sports, Science and Technology (Japan)', 'Ministry of Education, Youth and Sports of the Czech Republic', 'Ministry of Human Capacities', 'Ministry of Science and Higher Education (Poland)', 'Ministry of Science and Higher Education of the Russian Federation', 'Ministry of Science and Technology (MoST, China)', 'Ministry of Science and Technology (MoST, Taiwan)', 'Ministry of Science, Education and Sports of the Republic of Croatia', 'Ministry of Science, ICT and Future Planning (MSIP)', 'Ministry of Science, Technology and Innovation (MOSTI, Malaysia)', 'Mizutani Foundation for Glycoscience', 'Molecular and Cell Biology and Postgenomic Technologies', 'Monash University/ARC Centre of Excellence in Advanced Molecular Imaging Alliance', 'Monash Warwick Alliance', 'Montpellier University of Excellence (MUSE)', 'NATO Science for Peace and Security Program', 'National Aeronautics and Space Administration (NASA, United States)', 'National Authority for Scientific Research in Romania (ANCS)', 'National Basic Research Program of China (973 Program)', 'National Center for Genetic Engineering and Biotechnology (Thailand)', 'National Center for Research and Development (Poland)', 'National Fund for Scientific Research', 'National Health and Medical Research Council (NHMRC, Australia)', 'National Institute of Food and Agriculture (NIFA, United States)', 'National Institutes of Health/Eunice Kennedy Shriver National Institute of Child Health & Human Development (NIH/NICHD)', 'National Institutes of Health/John E. Fogarty International Center (NIH/FIC)', 'National Institutes of Health/National Cancer Institute (NIH/NCI)', 'National Institutes of Health/National Center for Advancing Translational Sciences (NIH/NCATS)', 'National Institutes of Health/National Center for Complementary and Integrative Health (NIH/NCCIH)', 'National Institutes of Health/National Center for Research Resources (NIH/NCRR)', 'National Institutes of Health/National Eye Institute (NIH/NEI)', 'National Institutes of Health/National Heart, Lung, and Blood Institute (NIH/NHLBI)', 'National Institutes of Health/National Human Genome Research Institute (NIH/NHGRI)', 'National Institutes of Health/National Institute Of Allergy and Infectious Diseases (NIH/NIAID)', 'National Institutes of Health/National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIH/NIAMS)', 'National Institutes of Health/National Institute of Biomedical Imaging and Bioengineering (NIH/NIBIB)', 'National Institutes of Health/National Institute of Dental and Craniofacial Research (NIH/NIDCR)', 'National Institutes of Health/National Institute of Diabetes and Digestive and Kidney Disease (NIH/NIDDK)', 'National Institutes of Health/National Institute of Environmental Health Sciences (NIH/NIEHS)', 'National Institutes of Health/National Institute of General Medical Sciences (NIH/NIGMS)', 'National Institutes of Health/National Institute of Mental Health (NIH/NIMH)', 'National Institutes of Health/National Institute of Neurological Disorders and Stroke (NIH/NINDS)', 'National Institutes of Health/National Institute on Aging (NIH/NIA)', 'National Institutes of Health/National Institute on Alcohol Abuse and Alcoholism (NIH/NIAAA)', 'National Institutes of Health/National Institute on Deafness and Other Communication Disorders (NIH/NIDCD)', 'National Institutes of Health/National Institute on Drug Abuse (NIH/NIDA)', 'National Institutes of Health/National Institute on Minority Health and Health Disparities (NIH/NIMHD)', 'National Institutes of Health/National Library of Medicine (NIH/NLM)', 'National Institutes of Health/Office of the Director', 'National Natural Science Foundation of China (NSFC)', 'National Research Council (NRC, Argentina)', 'National Research Development and Innovation Office (NKFIH)', 'National Research Foundation (NRF, Korea)', 'National Research Foundation (NRF, Singapore)', 'National Research Foundation in South Africa', 'National Science Council (NSC, Taiwan)', 'National Science Foundation (NSF, China)', 'National Science Foundation (NSF, United States)', 'National Scientific and Technical Research Council (CONICET)', 'National Virtual Biotechnology Laboratory (NVBL)', 'Natural Environment Research Council (NERC)', 'Natural Sciences and Engineering Research Council (NSERC, Canada)', 'Netherlands Organisation for Scientific Research (NWO)', 'New Energy and Industrial Technology Development Organization (NEDO)', 'NextGenerationEU-MUR PNRR Extended Partnership initiative on Emerging Infectious Diseases (INF-ACT)', 'Norwegian Cancer Society', 'Norwegian Research Council', 'Not funded', 'Novartis FreeNovation', 'Novo Nordisk Foundation', 'Obel Family Foundation', 'Office of Naval Research (ONR)', 'Oncode Institute', 'Ontario Early Researcher Awards', 'Ontario Institute for Cancer Research', 'Ontario Ministry of Colleges and Universities', 'Ontario Research Fund', 'OpenPlant', 'Other government', 'Other private', 'Palacky University in Olomouc', 'Parker Institute for Cancer Immunotherapy', 'Partnership for Structural Biology (PSB)', 'Pasteur Institute', 'Polish National Science Centre', 'Programa de Apoyo a Proyectos de Investigacion e Innovacion Tecnologica (PAPIIT)', 'Promedica Siftung', 'Qatar Foundation', 'Queen Mary University of London', 'ROME Therapeutics, Inc.', 'Region Auvergne Rhone Alpes', 'Regione Lazio (Italy)', 'Research Council of Lithuania', 'Research Council of Norway', 'Research England', 'Research Foundation - Flanders (FWO)', 'Richard and Susan Smith Family Foundation', 'Rita Allen Foundation', 'Robert A. Welch Foundation', 'Roechling Stiftung', 'Rosetrees Trust', 'Royal Society', 'Royal Society of New Zealand', 'Rural Development Administration', 'Russian Federation President Grant', 'Russian Foundation for Basic Research', 'Russian Science Foundation', 'Samsung Science and Technology Foundation', 'Sao Paulo Research Foundation (FAPESP)', 'Sarcoma UK', 'Saudi Ministry of Education', 'Science Foundation Ireland', 'Science and Engineering Research Board (SERB)', 'Science and Technology Funding Council', 'Seneca Foundation', 'Service public de Wallonie', 'Shapiro-Silverberg Fund for the Advancement of Translational Research', 'Shirley Boyde Foundation', 'Sigrid Juselius Foundation', 'Simons Foundation', 'Slovenian Research Agency', 'South African Medical Research Council self-initiated research grant (SAMRC SIR Grant)', 'Spanish Ministry of Economy and Competitiveness', 'Spanish Ministry of Science, Innovation, and Universities', 'Spanish National Research Council', 'Spar Nord Foundation', 'St. Petersburg State University', 'Sven and Dagmar Salens Foundation', 'Sven och Lilly Lawskis fond for naturvetenskaplig forskning', 'Swedish Energy Agency', 'Swedish Research Council', 'Swiss Cancer League', 'Swiss Nanoscience Institute', 'Swiss National Science Foundation', 'Swiss State Secretariat for Education, Research and Innovation', 'Synchrotron Light Research Institute (SLRI)', 'TESS Research Foundation', 'Techical University of Denmark (DTU)', 'Technology Agency of the Czech Republic', 'The Australian Cancer Research Fund', 'The Brian M. Davis Charitable Foundation Centenary Fellowship', 'The Carlsberg Foundation', 'The Carnegie Trust for the Universities of Scotland', 'The Comammox Research Platform', 'The Crafoord Foundation', 'The Ehlers-Danlos Society', 'The Foundation for Barnes-Jewish Hospital', 'The Francis Crick Institute', 'The French Muscular Dystrophy Telethon (AFM-Telethon)', 'The G. Harold and Leila Y. Mathers Foundation', 'The Giovanni Armenise-Harvard Foundation', 'The Grant Agency of The University of South Bohemia', 'The Helen and Milton A. Kimmelman Center for Biomolecular Structure and Assembly', 'The Hospital For Sick Children Foundation', 'The Institute of Cancer Research (ICR)', 'The Lister Institute of Preventive Medicine', 'The Mark Foundation', 'The Pew Charitable Trusts', 'The Robertson Foundation', 'The Structural Genomics Consortium (SGC)', 'The Swedish Foundation for Strategic Research', 'The Swedish Society of Medicine', 'The Thailand Research Fund (TRF)', 'The University Grants Committee, Research Grants Council (RGC)', 'The Vallee Foundation Inc.', 'The Walter and Eliza Hall Institute of Medical Research', 'The Yanmar Environmental Sustainability Support Association', 'Tobacco-Related Disease Research Program (TRDRP)', 'Tower Cancer Research Foundation', 'Translational Therapeutics Accelerator (TRx)', 'Tuberous Sclerosis Association', 'UK Research and Innovation (UKRI)', 'USC Zumberge Award', 'United States - Israel Binational Science Foundation (BSF)', 'United States Department of Agriculture (USDA)', 'Universite de Toulouse', 'University and Research - University of Milan', 'University of Alicante', 'University of Bologna', 'University of Cambridge', 'University of College London', 'University of Helsinki', 'University of Helsinki Research Foundation', 'University of Naples Federico II', 'University of Oxford, Medical Sciences Internal Fund (MSIF)', 'University of Patras', 'University of Southampton', 'University of Vienna Research Platform Comammox', 'University of Warwick', 'University of Zurich', 'Uppsala Antibiotic Center', 'V Foundation for Cancer Research', 'Velux Stiftung', 'Vidyasirimedhi Institute of Science and Technology (VISTEC)', 'Vienna Science and Technology Fund (WWTF)', 'Vinnova', 'Volkswagen Foundation', 'Vrije Universiteit Brussel', 'W. M. Keck Foundation', 'Walloon Excellence in Lifesciences & BIOtechnology (WELBIO)', 'Welch Foundation', 'Wellcome Trust', 'Wenner-Gren Foundation', 'Weston Havens Foundation', 'Willowcroft Foundation', 'Wolfson Foundation', 'World Health Organization (WHO)', 'Worldwide Cancer Research', 'Yousef Jameel Scholarship', 'iNEXT', 'iNEXT-Discovery']
 
 ERROR: Line 7850, Item '_pdbx_audit_support.funding_organization'
   Value 'Research Foundation - Flanders' is not in enumeration examples: ['ATIP-Avenir', 'Aarhus University Research Foundation', 'Academia Sinica (Taiwan)', 'Academy of Finland', 'Accelerated Early staGe drug dIScovery (AEGIS)', 'Adaptimmune Ltd', 'Agence Nationale de Recherches Sur le Sida et les Hepatites Virales (ANRS)', 'Agence Nationale de la Recherche (ANR)', 'Agencia Estatal de Investigacion (AEI)', 'Agencia Nacional de Investigacion e Innovacion (ANII)', 'Agencia Nacional de Promocion Cientifica y Tecnologica (FONCYT)', 'Ake Wiberg Foundation', 'Alexander von Humboldt Foundation', 'Alexs Lemonade Stand Foundation for Cancer', 'Aligning Science Across Parkinsons (ASAP)', 'Almirall, LLC', 'Alzheimer Forschung Initiative e.V.', 'Alzheimers Drug Discovery Foundation (ADDF)', 'Alzheimers Research UK (ARUK)', 'American Cancer Society', 'American Diabetes Association', 'American Epilepsy Society', 'American Heart Association', 'Amyloidosis Foundation', 'Aprea Therapeutics AB', 'Australian Research Council (ARC)', 'Australian Science and Industry Endowment Fund (SIEF)', 'Austrian Research Promotion Agency', 'Austrian Science Fund', 'Autonomous Community of Madrid', 'Baden-Wuerttemberg-Stiftung', 'Banting Postdoctoral Fellowships', 'Bavarian State Ministry for Education, Culture, Science and Arts', 'Becton-Dickinson and Company', 'Belarusian Republican Foundation for Fundamental Research', 'Belgian Foundation against Cancer', 'BigC Cancer Charity', 'Bill & Melinda Gates Foundation', 'Biotechnology and Biological Sciences Research Council (BBSRC)', 'Birkbeck College', 'Bloodwise', 'Board of Research in Nuclear Sciences (BRNS)', 'Boehringer Ingelheim Fonds (BIF)', 'Brain & Behavior Research Foundation', 'Branco Weiss Fellowship - Society in Science', 'Brazilian National Council for Scientific and Technological Development (CNPq)', 'Breast Cancer Now', 'British Heart Foundation', 'Brookhaven National Laboratory (BNL)', 'Bulgarian National Science Fund', 'Burroughs Wellcome Fund', 'Business Finland', 'CAMS Innovation Fund for Medical Sciences (CIFMS)', 'CHDI Foundation', 'CIFAR Azrieli Global Scholars', 'CRDF Global', 'Canada Excellence Research Chair Award', 'Canada Foundation for Innovation', 'Canada Research Chairs', 'Canadian Glycomics Network (GLYCONET)', 'Canadian Institute for Advanced Research (CIFAR)', 'Canadian Institutes of Health Research (CIHR)', 'Cancer Council WA', 'Cancer Prevention and Research Institute of Texas (CPRIT)', 'Cancer Research UK', 'Cancer and Polio Research Fund', 'CancerGenomiCs.nl', 'Cancerfonden', 'Carl Trygger Foundation', 'Centre National de la Recherche Scientifique (CNRS)', 'Chan Zuckerberg Initiative', 'Childrens Discovery Institute of Washington University and St. Louis Childrens Hospital', 'Chinese Academy of Sciences', 'Chinese Scholarship Council', 'Christian Doppler Forschungsgesellschaft', 'Clas Groschinsky Memorial Fund', 'Columbia Technology Ventures', 'Comision Nacional Cientifica y Technologica (CONICYT)', 'Commonwealth Scholarship Commission (United Kingdom)', 'Commonwealth Scientific and Industrial Research Organisation (CSIRO)', 'Compagnia di San Paolo Foundation', 'Comunidad de Madrid', 'Consejo Nacional de Ciencia y Tecnologia (CONACYT)', 'Consortia for HIV/AIDS Vaccine Development', 'Coordination for the Improvement of Higher Education Personnel', 'Council of Scientific & Industrial Research (CSIR)', 'Croatian Science Foundation', 'Crohns and Colitis Foundation', 'Cystic Fibrosis Foundation', 'Cystic Fibrosis Trust', 'Czech Academy of Sciences', 'Czech Science Foundation', 'DOC Fellowship of the Austrian Academy of Sciences', 'Damon Runyon Cancer Research Foundation', 'DanScatt', 'Danish Agency for Science Technology and Innovation', 'Danish Council for Independent Research', 'Danish National Research Foundation', 'David and Lucile Packard Foundation', 'Defence Science and Technology Laboratory (DSTL)', 'Defense Advanced Research Projects Agency (DARPA)', 'Defense Threat Reduction Agency (DTRA)', 'Dementia Research Institute (DRI)', 'Department of Biotechnology (DBT, India)', 'Department of Defense (DOD, United States)', 'Department of Education of the Basque Government', 'Department of Energy (DOE, United States)', 'Department of Health & Human Services (HHS)', 'Department of Science & Technology (DST, India)', 'Department of Science and Innovation, South Africa', 'Department of Veterans Affairs (VA, United States)', 'Diamond Light Source', 'Dorothea Schloezer Program from the Georg-August University of Goettingen', 'Dutch Kidney Foundation', 'EIPOD fellowship under Marie Sklodowska-Curie Actions COFUND', 'ETH Zurich', 'Ecole polytechnique', 'Elite Network of Bavaria', 'Emergence program from Universite Grenoble Alpes', 'Emerson Collective', 'Engineering and Physical Sciences Research Council', 'Enterprise Ireland', 'Erik, Karin and Gosta Selander Foundation', 'Estonian Research Council', 'European Commission', 'European Communitys Seventh Framework Programme', 'European Cooperation in Science and Technology (COST) action', 'European Foundation for the Study of Diabetes (EFSD)', 'European Institute of Chemistry and Biology (IECB)', 'European Molecular Biology Organization (EMBO)', 'European Regional Development Fund', 'European Research Council (ERC)', 'European Union (EU)', 'F. Hoffmann-La Roche LTD', 'Finnish Cultural Foundation', 'Flanders Innovation & Entrepreneurship (VLAIO)', 'Florence Instruct-ERIC Center', 'Fondation ARC', 'Fondation pour la Recherche Medicale (FRM)', 'Fondazione CARIPLO', 'Fondazione Ricerca Fibrosi Cistica', 'Fonds National de la Recherche Scientifique (FNRS)', 'Fonds de Recherche du Quebec - Nature et Technologies (FRQNT)', 'Fonds de Recherche du Quebec - Sante (FRQS)', 'Fonds de la Recherche Scientifique (FNRS)', 'Foundation for Barnes-Jewish Hospital', 'Foundation for Medical Research (France)', 'Foundation for Polish Science', 'Foundation for Science and Technology (FCT)', 'Foundation for Science and Technology (FST)', 'Fraunhofer Cluster of Excellence Immune-Mediated Diseases', 'French Alternative Energies and Atomic Energy Commission (CEA)', 'French Infrastructure for Integrated Structural Biology (FRISBI)', 'French League Against Cancer', 'French Ministry of Armed Forces', 'French Muscular Dystrophy Association', 'French National Institute of Agricultural Research (INRAE)', 'French National Research Agency', 'Friedreichs Ataxia Research Alliance (FARA)', 'Fundacao para a Ciencia e a Tecnologia', 'Future Leader Fellowship', 'GHR Foundation', 'Gatsby Charitable Foundation', 'General Secretariat for Research and Technology (GSRT)', 'Generalitat Valenciana', 'Generalitat de Catalunya', 'German Academic Scholarship Foundation', 'German Federal Ministry for Economic Affairs and Energy', 'German Federal Ministry for Education and Research', 'German Research Foundation (DFG)', 'German-Israeli Foundation for Research and Development', 'Germanys Excellence Strategy', 'Gerty Cori Programme, Medical Faculty, University of Munster', 'Ghent University Special Research Fund (BOF)', 'Global Challenges Research Fund', 'Global Health Innovative Technology Fund', 'Grant Agency of the Czech Republic', 'Grenoble Alliance for Integrated Structural Cell Biology (GRAL)', 'Grenoble Instruct-ERIC Center (ISBG)', 'H2020 Marie Curie Actions of the European Commission', 'Health Research Council (HRC)', 'Health-Holland', 'Heidelberg ImmunoTherapeutics GmbH', 'Helen Hay Whitney Foundation', 'Hellenic Foundation for Research and Innovation (HFRI)', 'Helmholtz Association', 'Heritage Medical Research Institute', 'Herman Frasch Foundation', 'Hessian Ministry of Science, Higher Education and Art (HMWK)', 'Higher Education Funding Council for England', 'Howard Hughes Medical Institute (HHMI)', 'Human Frontier Science Program (HFSP)', 'Hungarian Academy of Sciences', 'Hungarian Ministry of Finance', 'Hungarian National Research, Development and Innovation Office', 'IdEx Universite Paris Cite', 'Imperial College London', 'Independent Research Fund Denmark - Medical Sciences', 'Independent Research Fund Denmark - Technology and Production Sciences', 'Indian Council of Medical Research', 'Innosuisse', 'Innovate UK', 'Innovative Medicines Initiative', 'Innoviris', 'Institut Laue-Langevin', 'Institut National de la Sante et de la Recherche Medicale (INSERM)', 'Institut National du Cancer (inCA)', 'Institute for Integrative Biology of the Cell (I2BC)', 'Institute of Chemical Physics Russian Academy of Science', 'Instruct-ERIC Center (Helsinki)', 'Instruct-ERIC Center (Strasbourg Centre)', 'International AIDS Vaccine Initiative', 'Irish Research Council', 'Isaac Newton Trust', 'Israel Ministry of Science and Technology', 'Israel Science Foundation', 'Italian Association for Cancer Research', 'Italian Medicines Agency', 'Italian Ministry of Education', 'Italian Ministry of Health', 'Italian National Research Council (CNR)', 'Jack Ma Foundation', 'Jacob and Lena Joels Memorial Foundation, Hebrew University of Jerusalem', 'Jane Coffin Childs (JCC) Fund', 'Jane and Aatos Erkko Foundation', 'Japan Agency for Medical Research and Development (AMED)', 'Japan Science and Technology', 'Japan Society for the Promotion of Science (JSPS)', 'Jardine Foundation', 'Joachim Herz Stiftung', 'John Innes Foundation', 'Johns Hopkins University', 'Joint Supercomputer Center of the Russian Academy of Sciences', 'Junta de Castilla y Leon, Consejeria de Educacion y Cultura y Fondo Social Europeo', 'KU Leuven', 'Kay Kendall Leukaemia Fund', 'Kempe Foundation', 'Kidney Research UK', 'Knut and Alice Wallenberg Foundation', 'LOEWE Center DRUID', 'LOreal-UNESCO', 'La Caixa Foundation', 'La Region Occitanie', 'La ligue contre le cancer', 'Laboratories of Excellence (LabEx)', 'Leducq Foundation', 'Leibniz Association', 'Leukemia & Lymphoma Society', 'Leverhulme Trust', 'Life Sciences Research Foundation', 'Louis-Jeantet Foundation', 'Ludwig Institute for Cancer Research (LICR)', 'Lundbeckfonden', 'Lustgarten Foundation', 'Luxembourg Centre for Systems Biomedicine (LCSB), University of Luxembourg', 'Maersk Foundation', 'Marie Sklodowska-Curie Actions, FragNET ITN', 'Marsden Fund', 'Maryland Stem Cell Research Fund', 'Massachusetts Consortium on Pathogen Readiness (MassCPR)', 'Max IV Laboratory', 'Max Planck Bristol Centre for Minimal Biology - University of Bristol', 'Max Planck Society', 'McKnight Foundation', 'Medical Research Council (MRC, Canada)', 'Medical Research Council (MRC, United Kingdom)', 'Mercatus Center', 'Michael J. Fox Foundation', 'Minas Gerais State Agency for Research and Development (FAPEMIG)', 'Ministerio de Ciencia e Innovacion (MCIN)', 'Ministero dell Universita e della Ricerca', 'Ministry of Agriculture, Forestry and Fisheries (MAFF)', 'Ministry of Business, Innovation and Employment (New Zealand)', 'Ministry of Economy and Competitiveness (MINECO)', 'Ministry of Education (MoE, China)', 'Ministry of Education (MoE, Czech Republic)', 'Ministry of Education (MoE, Korea)', 'Ministry of Education (MoE, Singapore)', 'Ministry of Education and Science of the Republic of Kazakhstan', 'Ministry of Education and Science of the Russian Federation', 'Ministry of Education, Culture, Sports, Science and Technology (Japan)', 'Ministry of Education, Youth and Sports of the Czech Republic', 'Ministry of Human Capacities', 'Ministry of Science and Higher Education (Poland)', 'Ministry of Science and Higher Education of the Russian Federation', 'Ministry of Science and Technology (MoST, China)', 'Ministry of Science and Technology (MoST, Taiwan)', 'Ministry of Science, Education and Sports of the Republic of Croatia', 'Ministry of Science, ICT and Future Planning (MSIP)', 'Ministry of Science, Technology and Innovation (MOSTI, Malaysia)', 'Mizutani Foundation for Glycoscience', 'Molecular and Cell Biology and Postgenomic Technologies', 'Monash University/ARC Centre of Excellence in Advanced Molecular Imaging Alliance', 'Monash Warwick Alliance', 'Montpellier University of Excellence (MUSE)', 'NATO Science for Peace and Security Program', 'National Aeronautics and Space Administration (NASA, United States)', 'National Authority for Scientific Research in Romania (ANCS)', 'National Basic Research Program of China (973 Program)', 'National Center for Genetic Engineering and Biotechnology (Thailand)', 'National Center for Research and Development (Poland)', 'National Fund for Scientific Research', 'National Health and Medical Research Council (NHMRC, Australia)', 'National Institute of Food and Agriculture (NIFA, United States)', 'National Institutes of Health/Eunice Kennedy Shriver National Institute of Child Health & Human Development (NIH/NICHD)', 'National Institutes of Health/John E. Fogarty International Center (NIH/FIC)', 'National Institutes of Health/National Cancer Institute (NIH/NCI)', 'National Institutes of Health/National Center for Advancing Translational Sciences (NIH/NCATS)', 'National Institutes of Health/National Center for Complementary and Integrative Health (NIH/NCCIH)', 'National Institutes of Health/National Center for Research Resources (NIH/NCRR)', 'National Institutes of Health/National Eye Institute (NIH/NEI)', 'National Institutes of Health/National Heart, Lung, and Blood Institute (NIH/NHLBI)', 'National Institutes of Health/National Human Genome Research Institute (NIH/NHGRI)', 'National Institutes of Health/National Institute Of Allergy and Infectious Diseases (NIH/NIAID)', 'National Institutes of Health/National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIH/NIAMS)', 'National Institutes of Health/National Institute of Biomedical Imaging and Bioengineering (NIH/NIBIB)', 'National Institutes of Health/National Institute of Dental and Craniofacial Research (NIH/NIDCR)', 'National Institutes of Health/National Institute of Diabetes and Digestive and Kidney Disease (NIH/NIDDK)', 'National Institutes of Health/National Institute of Environmental Health Sciences (NIH/NIEHS)', 'National Institutes of Health/National Institute of General Medical Sciences (NIH/NIGMS)', 'National Institutes of Health/National Institute of Mental Health (NIH/NIMH)', 'National Institutes of Health/National Institute of Neurological Disorders and Stroke (NIH/NINDS)', 'National Institutes of Health/National Institute on Aging (NIH/NIA)', 'National Institutes of Health/National Institute on Alcohol Abuse and Alcoholism (NIH/NIAAA)', 'National Institutes of Health/National Institute on Deafness and Other Communication Disorders (NIH/NIDCD)', 'National Institutes of Health/National Institute on Drug Abuse (NIH/NIDA)', 'National Institutes of Health/National Institute on Minority Health and Health Disparities (NIH/NIMHD)', 'National Institutes of Health/National Library of Medicine (NIH/NLM)', 'National Institutes of Health/Office of the Director', 'National Natural Science Foundation of China (NSFC)', 'National Research Council (NRC, Argentina)', 'National Research Development and Innovation Office (NKFIH)', 'National Research Foundation (NRF, Korea)', 'National Research Foundation (NRF, Singapore)', 'National Research Foundation in South Africa', 'National Science Council (NSC, Taiwan)', 'National Science Foundation (NSF, China)', 'National Science Foundation (NSF, United States)', 'National Scientific and Technical Research Council (CONICET)', 'National Virtual Biotechnology Laboratory (NVBL)', 'Natural Environment Research Council (NERC)', 'Natural Sciences and Engineering Research Council (NSERC, Canada)', 'Netherlands Organisation for Scientific Research (NWO)', 'New Energy and Industrial Technology Development Organization (NEDO)', 'NextGenerationEU-MUR PNRR Extended Partnership initiative on Emerging Infectious Diseases (INF-ACT)', 'Norwegian Cancer Society', 'Norwegian Research Council', 'Not funded', 'Novartis FreeNovation', 'Novo Nordisk Foundation', 'Obel Family Foundation', 'Office of Naval Research (ONR)', 'Oncode Institute', 'Ontario Early Researcher Awards', 'Ontario Institute for Cancer Research', 'Ontario Ministry of Colleges and Universities', 'Ontario Research Fund', 'OpenPlant', 'Other government', 'Other private', 'Palacky University in Olomouc', 'Parker Institute for Cancer Immunotherapy', 'Partnership for Structural Biology (PSB)', 'Pasteur Institute', 'Polish National Science Centre', 'Programa de Apoyo a Proyectos de Investigacion e Innovacion Tecnologica (PAPIIT)', 'Promedica Siftung', 'Qatar Foundation', 'Queen Mary University of London', 'ROME Therapeutics, Inc.', 'Region Auvergne Rhone Alpes', 'Regione Lazio (Italy)', 'Research Council of Lithuania', 'Research Council of Norway', 'Research England', 'Research Foundation - Flanders (FWO)', 'Richard and Susan Smith Family Foundation', 'Rita Allen Foundation', 'Robert A. Welch Foundation', 'Roechling Stiftung', 'Rosetrees Trust', 'Royal Society', 'Royal Society of New Zealand', 'Rural Development Administration', 'Russian Federation President Grant', 'Russian Foundation for Basic Research', 'Russian Science Foundation', 'Samsung Science and Technology Foundation', 'Sao Paulo Research Foundation (FAPESP)', 'Sarcoma UK', 'Saudi Ministry of Education', 'Science Foundation Ireland', 'Science and Engineering Research Board (SERB)', 'Science and Technology Funding Council', 'Seneca Foundation', 'Service public de Wallonie', 'Shapiro-Silverberg Fund for the Advancement of Translational Research', 'Shirley Boyde Foundation', 'Sigrid Juselius Foundation', 'Simons Foundation', 'Slovenian Research Agency', 'South African Medical Research Council self-initiated research grant (SAMRC SIR Grant)', 'Spanish Ministry of Economy and Competitiveness', 'Spanish Ministry of Science, Innovation, and Universities', 'Spanish National Research Council', 'Spar Nord Foundation', 'St. Petersburg State University', 'Sven and Dagmar Salens Foundation', 'Sven och Lilly Lawskis fond for naturvetenskaplig forskning', 'Swedish Energy Agency', 'Swedish Research Council', 'Swiss Cancer League', 'Swiss Nanoscience Institute', 'Swiss National Science Foundation', 'Swiss State Secretariat for Education, Research and Innovation', 'Synchrotron Light Research Institute (SLRI)', 'TESS Research Foundation', 'Techical University of Denmark (DTU)', 'Technology Agency of the Czech Republic', 'The Australian Cancer Research Fund', 'The Brian M. Davis Charitable Foundation Centenary Fellowship', 'The Carlsberg Foundation', 'The Carnegie Trust for the Universities of Scotland', 'The Comammox Research Platform', 'The Crafoord Foundation', 'The Ehlers-Danlos Society', 'The Foundation for Barnes-Jewish Hospital', 'The Francis Crick Institute', 'The French Muscular Dystrophy Telethon (AFM-Telethon)', 'The G. Harold and Leila Y. Mathers Foundation', 'The Giovanni Armenise-Harvard Foundation', 'The Grant Agency of The University of South Bohemia', 'The Helen and Milton A. Kimmelman Center for Biomolecular Structure and Assembly', 'The Hospital For Sick Children Foundation', 'The Institute of Cancer Research (ICR)', 'The Lister Institute of Preventive Medicine', 'The Mark Foundation', 'The Pew Charitable Trusts', 'The Robertson Foundation', 'The Structural Genomics Consortium (SGC)', 'The Swedish Foundation for Strategic Research', 'The Swedish Society of Medicine', 'The Thailand Research Fund (TRF)', 'The University Grants Committee, Research Grants Council (RGC)', 'The Vallee Foundation Inc.', 'The Walter and Eliza Hall Institute of Medical Research', 'The Yanmar Environmental Sustainability Support Association', 'Tobacco-Related Disease Research Program (TRDRP)', 'Tower Cancer Research Foundation', 'Translational Therapeutics Accelerator (TRx)', 'Tuberous Sclerosis Association', 'UK Research and Innovation (UKRI)', 'USC Zumberge Award', 'United States - Israel Binational Science Foundation (BSF)', 'United States Department of Agriculture (USDA)', 'Universite de Toulouse', 'University and Research - University of Milan', 'University of Alicante', 'University of Bologna', 'University of Cambridge', 'University of College London', 'University of Helsinki', 'University of Helsinki Research Foundation', 'University of Naples Federico II', 'University of Oxford, Medical Sciences Internal Fund (MSIF)', 'University of Patras', 'University of Southampton', 'University of Vienna Research Platform Comammox', 'University of Warwick', 'University of Zurich', 'Uppsala Antibiotic Center', 'V Foundation for Cancer Research', 'Velux Stiftung', 'Vidyasirimedhi Institute of Science and Technology (VISTEC)', 'Vienna Science and Technology Fund (WWTF)', 'Vinnova', 'Volkswagen Foundation', 'Vrije Universiteit Brussel', 'W. M. Keck Foundation', 'Walloon Excellence in Lifesciences & BIOtechnology (WELBIO)', 'Welch Foundation', 'Wellcome Trust', 'Wenner-Gren Foundation', 'Weston Havens Foundation', 'Willowcroft Foundation', 'Wolfson Foundation', 'World Health Organization (WHO)', 'Worldwide Cancer Research', 'Yousef Jameel Scholarship', 'iNEXT', 'iNEXT-Discovery']
+
+ERROR: Line 91, Item '_pdbx_database_status.dep_release_code_coordinates'
+  Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing
+
+ERROR: Line 91, Item '_pdbx_database_status.dep_release_code_sequence'
+  Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing
+
+ERROR: Line 5665, Item '_pdbx_struct_assembly_auth_evidence.details'
+  No value present for this mandatory item.
+
+ERROR: Line 5666, Item '_pdbx_struct_assembly_auth_evidence.details'
+  No value present for this mandatory item.
 
 WARNING: Line 5259, Item '_refine.B_iso_mean'
   Out of advisory range: Value '104.7300' is above maximum advised value '70'
@@ -350,6 +448,42 @@ WARNING: Line 5250, Item '_reflns_shell.d_res_low'
       "column": 0,
       "start_char": 0,
       "end_char": 32
+    },
+    {
+      "line": 91,
+      "item": "_pdbx_database_status.dep_release_code_coordinates",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 91,
+      "item": "_pdbx_database_status.dep_release_code_sequence",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 5665,
+      "item": "_pdbx_struct_assembly_auth_evidence.details",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 3,
+      "start_char": 9,
+      "end_char": 10
+    },
+    {
+      "line": 5666,
+      "item": "_pdbx_struct_assembly_auth_evidence.details",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 3,
+      "start_char": 9,
+      "end_char": 10
     },
     {
       "line": 5259,
@@ -466,13 +600,46 @@ EXIT_CODE: 1
 FILE: 7q5a.cif
 --------------------------------------------------------------------------------
 
-Found 2 validation issue(s):
+Found 13 validation issue(s):
 
 ERROR: Line 1055, Item '_em_3d_reconstruction.fsc_type'
   FSC type must be provided when an FSC resolution method is selected.
 
+ERROR: Line 1094, Item '_em_image_scans.scanner_model'
+  No value present for this mandatory item.
+
+ERROR: Line 81, Item '_pdbx_contact_author.country'
+  Mandatory item '_pdbx_contact_author.country' is missing
+
+ERROR: Line 81, Item '_pdbx_contact_author.organization_type'
+  Mandatory item '_pdbx_contact_author.organization_type' is missing
+
+ERROR: Line 62, Item '_pdbx_database_status.dep_release_code_coordinates'
+  Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing
+
+ERROR: Line 62, Item '_pdbx_database_status.dep_release_code_sequence'
+  Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing
+
+ERROR: Line 567, Item '_pdbx_struct_assembly_auth_evidence.details'
+  No value present for this mandatory item.
+
 ERROR: Line 369, Item '_refine.ls_R_factor_obs'
   At least one related item must be provided.
+
+ERROR: Line 394, Item '_refine.ls_d_res_high'
+  No value present for this mandatory item.
+
+ERROR: Line 395, Item '_refine.ls_d_res_low'
+  No value present for this mandatory item.
+
+ERROR: Line 409, Item '_refine.ls_number_reflns_obs'
+  No value present for this mandatory item.
+
+ERROR: Line 413, Item '_refine.ls_percent_reflns_obs'
+  No value present for this mandatory item.
+
+ERROR: Line 457, Item '_refine.pdbx_method_to_determine_struct'
+  No value present for this mandatory item.
 
 {
   "errors": [
@@ -486,6 +653,60 @@ ERROR: Line 369, Item '_refine.ls_R_factor_obs'
       "end_char": null
     },
     {
+      "line": 1094,
+      "item": "_em_image_scans.scanner_model",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 40,
+      "end_char": 41
+    },
+    {
+      "line": 81,
+      "item": "_pdbx_contact_author.country",
+      "message": "Mandatory item '_pdbx_contact_author.country' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 81,
+      "item": "_pdbx_contact_author.organization_type",
+      "message": "Mandatory item '_pdbx_contact_author.organization_type' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 62,
+      "item": "_pdbx_database_status.dep_release_code_coordinates",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 62,
+      "item": "_pdbx_database_status.dep_release_code_sequence",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 567,
+      "item": "_pdbx_struct_assembly_auth_evidence.details",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 59,
+      "end_char": 60
+    },
+    {
       "line": 369,
       "item": "_refine.ls_R_factor_obs",
       "message": "At least one related item must be provided.",
@@ -493,6 +714,51 @@ ERROR: Line 369, Item '_refine.ls_R_factor_obs'
       "column": null,
       "start_char": null,
       "end_char": null
+    },
+    {
+      "line": 394,
+      "item": "_refine.ls_d_res_high",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 49,
+      "end_char": 50
+    },
+    {
+      "line": 395,
+      "item": "_refine.ls_d_res_low",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 49,
+      "end_char": 50
+    },
+    {
+      "line": 409,
+      "item": "_refine.ls_number_reflns_obs",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 49,
+      "end_char": 50
+    },
+    {
+      "line": 413,
+      "item": "_refine.ls_percent_reflns_obs",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 49,
+      "end_char": 50
+    },
+    {
+      "line": 457,
+      "item": "_refine.pdbx_method_to_determine_struct",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 49,
+      "end_char": 50
     }
   ],
   "metadata_completeness": {
@@ -765,10 +1031,13 @@ EXIT_CODE: 1
 FILE: 8ozl.cif
 --------------------------------------------------------------------------------
 
-Found 13 validation issue(s):
+Found 21 validation issue(s):
 
 ERROR: Line 4743, Item '_em_3d_reconstruction.fsc_type'
   FSC type must be provided when an FSC resolution method is selected.
+
+ERROR: Line 4781, Item '_em_image_scans.scanner_model'
+  No value present for this mandatory item.
 
 ERROR: Line 8118, Item '_em_software.version'
   RELION software version must be provided.
@@ -778,6 +1047,21 @@ ERROR: Line 8119, Item '_em_software.version'
 
 ERROR: Line 8121, Item '_em_software.version'
   RELION software version must be provided.
+
+ERROR: Line 143, Item '_pdbx_contact_author.country'
+  Mandatory item '_pdbx_contact_author.country' is missing
+
+ERROR: Line 143, Item '_pdbx_contact_author.organization_type'
+  Mandatory item '_pdbx_contact_author.organization_type' is missing
+
+ERROR: Line 103, Item '_pdbx_database_status.dep_release_code_coordinates'
+  Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing
+
+ERROR: Line 103, Item '_pdbx_database_status.dep_release_code_sequence'
+  Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing
+
+ERROR: Line 4624, Item '_pdbx_struct_assembly_auth_evidence.details'
+  No value present for this mandatory item.
 
 WARNING: Line 4306, Item '_refine.B_iso_mean'
   Out of advisory range: Value '129.622' is above maximum advised value '70'
@@ -790,6 +1074,12 @@ WARNING: Line 4346, Item '_refine.ls_R_factor_obs'
 
 WARNING: Line 4325, Item '_refine.ls_d_res_low'
   Out of advisory range: Value '3.4' is below minimum advised value '5'
+
+ERROR: Line 4386, Item '_refine.pdbx_ls_cross_valid_method'
+  No value present for this mandatory item.
+
+ERROR: Line 4387, Item '_refine.pdbx_method_to_determine_struct'
+  No value present for this mandatory item.
 
 WARNING: Line 4509, Item '_refine_ls_shell.R_factor_R_work'
   Out of advisory range: Value '2.166' is above maximum advised value '1'
@@ -818,6 +1108,15 @@ WARNING: Line 4502, Item '_refine_ls_shell.number_reflns_R_free'
       "end_char": null
     },
     {
+      "line": 4781,
+      "item": "_em_image_scans.scanner_model",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 40,
+      "end_char": 41
+    },
+    {
       "line": 8118,
       "item": "_em_software.version",
       "message": "RELION software version must be provided.",
@@ -843,6 +1142,51 @@ WARNING: Line 4502, Item '_refine_ls_shell.number_reflns_R_free'
       "column": 7,
       "start_char": null,
       "end_char": null
+    },
+    {
+      "line": 143,
+      "item": "_pdbx_contact_author.country",
+      "message": "Mandatory item '_pdbx_contact_author.country' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 143,
+      "item": "_pdbx_contact_author.organization_type",
+      "message": "Mandatory item '_pdbx_contact_author.organization_type' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 103,
+      "item": "_pdbx_database_status.dep_release_code_coordinates",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 103,
+      "item": "_pdbx_database_status.dep_release_code_sequence",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 4624,
+      "item": "_pdbx_struct_assembly_auth_evidence.details",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 59,
+      "end_char": 60
     },
     {
       "line": 4306,
@@ -879,6 +1223,24 @@ WARNING: Line 4502, Item '_refine_ls_shell.number_reflns_R_free'
       "column": 0,
       "start_char": 49,
       "end_char": 52
+    },
+    {
+      "line": 4386,
+      "item": "_refine.pdbx_ls_cross_valid_method",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 49,
+      "end_char": 50
+    },
+    {
+      "line": 4387,
+      "item": "_refine.pdbx_method_to_determine_struct",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 49,
+      "end_char": 50
     },
     {
       "line": 4509,
@@ -1159,7 +1521,19 @@ EXIT_CODE: 1
 FILE: 8pps.cif
 --------------------------------------------------------------------------------
 
-Found 6 validation issue(s):
+Found 10 validation issue(s):
+
+ERROR: Line 86, Item '_pdbx_contact_author.country'
+  Mandatory item '_pdbx_contact_author.country' is missing
+
+ERROR: Line 86, Item '_pdbx_contact_author.organization_type'
+  Mandatory item '_pdbx_contact_author.organization_type' is missing
+
+ERROR: Line 72, Item '_pdbx_database_status.dep_release_code_coordinates'
+  Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing
+
+ERROR: Line 72, Item '_pdbx_database_status.dep_release_code_sequence'
+  Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing
 
 WARNING: Line 1897, Item '_refine_ls_shell.R_factor_R_work'
   Shell R_work is higher than shell R_free 0.304. (value=0.322, condition > _refine_ls_shell.R_factor_R_free)
@@ -1181,6 +1555,42 @@ WARNING: Line 1916, Item '_refine_ls_shell.d_res_low'
 
 {
   "errors": [
+    {
+      "line": 86,
+      "item": "_pdbx_contact_author.country",
+      "message": "Mandatory item '_pdbx_contact_author.country' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 86,
+      "item": "_pdbx_contact_author.organization_type",
+      "message": "Mandatory item '_pdbx_contact_author.organization_type' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 72,
+      "item": "_pdbx_database_status.dep_release_code_coordinates",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 72,
+      "item": "_pdbx_database_status.dep_release_code_sequence",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
     {
       "line": 1897,
       "item": "_refine_ls_shell.R_factor_R_work",
@@ -1290,10 +1700,13 @@ EXIT_CODE: 1
 FILE: 8pwh.cif
 --------------------------------------------------------------------------------
 
-Found 7 validation issue(s):
+Found 17 validation issue(s):
 
 ERROR: Line 4413, Item '_em_3d_reconstruction.fsc_type'
   FSC type must be provided when an FSC resolution method is selected.
+
+ERROR: Line 4452, Item '_em_image_scans.scanner_model'
+  No value present for this mandatory item.
 
 ERROR: Line 5507, Item '_em_software.name'
   Software name must be provided.
@@ -1307,11 +1720,38 @@ ERROR: Line 5529, Item '_pdbx_audit_support.country'
 ERROR: Line 5529, Item '_pdbx_audit_support.details'
   Funding organization details must be provided when funding organization is "Other government" or "Other private".
 
+ERROR: Line 101, Item '_pdbx_contact_author.country'
+  Mandatory item '_pdbx_contact_author.country' is missing
+
+ERROR: Line 101, Item '_pdbx_contact_author.organization_type'
+  Mandatory item '_pdbx_contact_author.organization_type' is missing
+
+ERROR: Line 78, Item '_pdbx_database_status.dep_release_code_coordinates'
+  Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing
+
+ERROR: Line 78, Item '_pdbx_database_status.dep_release_code_sequence'
+  Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing
+
 WARNING: Line 3464, Item '_refine.B_iso_mean'
   Out of advisory range: Value '224.85' is above maximum advised value '70'
 
 ERROR: Line 3457, Item '_refine.ls_R_factor_obs'
   At least one related item must be provided.
+
+ERROR: Line 3482, Item '_refine.ls_d_res_high'
+  No value present for this mandatory item.
+
+ERROR: Line 3483, Item '_refine.ls_d_res_low'
+  No value present for this mandatory item.
+
+ERROR: Line 3497, Item '_refine.ls_number_reflns_obs'
+  No value present for this mandatory item.
+
+ERROR: Line 3501, Item '_refine.ls_percent_reflns_obs'
+  No value present for this mandatory item.
+
+ERROR: Line 3545, Item '_refine.pdbx_method_to_determine_struct'
+  No value present for this mandatory item.
 
 {
   "errors": [
@@ -1323,6 +1763,15 @@ ERROR: Line 3457, Item '_refine.ls_R_factor_obs'
       "column": null,
       "start_char": null,
       "end_char": null
+    },
+    {
+      "line": 4452,
+      "item": "_em_image_scans.scanner_model",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 40,
+      "end_char": 41
     },
     {
       "line": 5507,
@@ -1361,6 +1810,42 @@ ERROR: Line 3457, Item '_refine.ls_R_factor_obs'
       "end_char": null
     },
     {
+      "line": 101,
+      "item": "_pdbx_contact_author.country",
+      "message": "Mandatory item '_pdbx_contact_author.country' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 101,
+      "item": "_pdbx_contact_author.organization_type",
+      "message": "Mandatory item '_pdbx_contact_author.organization_type' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 78,
+      "item": "_pdbx_database_status.dep_release_code_coordinates",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 78,
+      "item": "_pdbx_database_status.dep_release_code_sequence",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
       "line": 3464,
       "item": "_refine.B_iso_mean",
       "message": "Out of advisory range: Value '224.85' is above maximum advised value '70'",
@@ -1377,6 +1862,51 @@ ERROR: Line 3457, Item '_refine.ls_R_factor_obs'
       "column": null,
       "start_char": null,
       "end_char": null
+    },
+    {
+      "line": 3482,
+      "item": "_refine.ls_d_res_high",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 49,
+      "end_char": 50
+    },
+    {
+      "line": 3483,
+      "item": "_refine.ls_d_res_low",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 49,
+      "end_char": 50
+    },
+    {
+      "line": 3497,
+      "item": "_refine.ls_number_reflns_obs",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 49,
+      "end_char": 50
+    },
+    {
+      "line": 3501,
+      "item": "_refine.ls_percent_reflns_obs",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 49,
+      "end_char": 50
+    },
+    {
+      "line": 3545,
+      "item": "_refine.pdbx_method_to_determine_struct",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 49,
+      "end_char": 50
     }
   ],
   "metadata_completeness": {
@@ -1628,10 +2158,13 @@ EXIT_CODE: 1
 FILE: 8q6j.cif
 --------------------------------------------------------------------------------
 
-Found 4 validation issue(s):
+Found 15 validation issue(s):
 
 ERROR: Line 4387, Item '_em_3d_reconstruction.fsc_type'
   FSC type must be provided when an FSC resolution method is selected.
+
+ERROR: Line 4426, Item '_em_image_scans.scanner_model'
+  No value present for this mandatory item.
 
 ERROR: Line 5496, Item '_pdbx_audit_support.country'
   Country must be provided when funding organization is "Other government" or "Other private".
@@ -1639,8 +2172,38 @@ ERROR: Line 5496, Item '_pdbx_audit_support.country'
 ERROR: Line 5496, Item '_pdbx_audit_support.details'
   Funding organization details must be provided when funding organization is "Other government" or "Other private".
 
+ERROR: Line 99, Item '_pdbx_contact_author.country'
+  Mandatory item '_pdbx_contact_author.country' is missing
+
+ERROR: Line 99, Item '_pdbx_contact_author.organization_type'
+  Mandatory item '_pdbx_contact_author.organization_type' is missing
+
+ERROR: Line 81, Item '_pdbx_database_status.dep_release_code_coordinates'
+  Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing
+
+ERROR: Line 81, Item '_pdbx_database_status.dep_release_code_sequence'
+  Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing
+
 ERROR: Line 3495, Item '_refine.ls_R_factor_obs'
   At least one related item must be provided.
+
+ERROR: Line 3507, Item '_refine.ls_d_res_high'
+  No value present for this mandatory item.
+
+ERROR: Line 3506, Item '_refine.ls_d_res_low'
+  No value present for this mandatory item.
+
+ERROR: Line 3499, Item '_refine.ls_number_reflns_obs'
+  No value present for this mandatory item.
+
+ERROR: Line 3508, Item '_refine.ls_percent_reflns_obs'
+  No value present for this mandatory item.
+
+ERROR: Line 3536, Item '_refine.pdbx_ls_cross_valid_method'
+  No value present for this mandatory item.
+
+ERROR: Line 3539, Item '_refine.pdbx_method_to_determine_struct'
+  No value present for this mandatory item.
 
 {
   "errors": [
@@ -1652,6 +2215,15 @@ ERROR: Line 3495, Item '_refine.ls_R_factor_obs'
       "column": null,
       "start_char": null,
       "end_char": null
+    },
+    {
+      "line": 4426,
+      "item": "_em_image_scans.scanner_model",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 40,
+      "end_char": 41
     },
     {
       "line": 5496,
@@ -1672,6 +2244,42 @@ ERROR: Line 3495, Item '_refine.ls_R_factor_obs'
       "end_char": null
     },
     {
+      "line": 99,
+      "item": "_pdbx_contact_author.country",
+      "message": "Mandatory item '_pdbx_contact_author.country' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 99,
+      "item": "_pdbx_contact_author.organization_type",
+      "message": "Mandatory item '_pdbx_contact_author.organization_type' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 81,
+      "item": "_pdbx_database_status.dep_release_code_coordinates",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 81,
+      "item": "_pdbx_database_status.dep_release_code_sequence",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
       "line": 3495,
       "item": "_refine.ls_R_factor_obs",
       "message": "At least one related item must be provided.",
@@ -1679,6 +2287,60 @@ ERROR: Line 3495, Item '_refine.ls_R_factor_obs'
       "column": null,
       "start_char": null,
       "end_char": null
+    },
+    {
+      "line": 3507,
+      "item": "_refine.ls_d_res_high",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 49,
+      "end_char": 50
+    },
+    {
+      "line": 3506,
+      "item": "_refine.ls_d_res_low",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 49,
+      "end_char": 50
+    },
+    {
+      "line": 3499,
+      "item": "_refine.ls_number_reflns_obs",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 49,
+      "end_char": 50
+    },
+    {
+      "line": 3508,
+      "item": "_refine.ls_percent_reflns_obs",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 49,
+      "end_char": 50
+    },
+    {
+      "line": 3536,
+      "item": "_refine.pdbx_ls_cross_valid_method",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 49,
+      "end_char": 50
+    },
+    {
+      "line": 3539,
+      "item": "_refine.pdbx_method_to_determine_struct",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 49,
+      "end_char": 50
     }
   ],
   "metadata_completeness": {
@@ -2976,13 +3638,13 @@ FILE: test_cross_check_conditional_refine_mr_starting_model_required_without_ini
 
 Found 1 validation issue(s):
 
-ERROR: Line 10, Item '_refine.pdbx_starting_model'
+ERROR: Line 14, Item '_refine.pdbx_starting_model'
   No value present for this mandatory item.
 
 {
   "errors": [
     {
-      "line": 10,
+      "line": 14,
       "item": "_refine.pdbx_starting_model",
       "message": "No value present for this mandatory item.",
       "severity": "error",
@@ -2992,8 +3654,8 @@ ERROR: Line 10, Item '_refine.pdbx_starting_model'
     }
   ],
   "metadata_completeness": {
-    "percentage": 4.4,
-    "filled_count": 4,
+    "percentage": 8.9,
+    "filled_count": 8,
     "total_count": 90,
     "method_detected": "xray",
     "message": null,
@@ -3270,30 +3932,6 @@ ERROR: Line 10, Item '_refine.pdbx_starting_model'
         "item": "_pdbx_struct_oper_list.type"
       },
       {
-        "category": "refine",
-        "item": "_refine.ls_d_res_low",
-        "row_index": 0,
-        "row_key": "TEST_MR_REQUIRE_STARTING_MODEL"
-      },
-      {
-        "category": "refine",
-        "item": "_refine.ls_number_reflns_obs",
-        "row_index": 0,
-        "row_key": "TEST_MR_REQUIRE_STARTING_MODEL"
-      },
-      {
-        "category": "refine",
-        "item": "_refine.ls_percent_reflns_obs",
-        "row_index": 0,
-        "row_key": "TEST_MR_REQUIRE_STARTING_MODEL"
-      },
-      {
-        "category": "refine",
-        "item": "_refine.pdbx_ls_cross_valid_method",
-        "row_index": 0,
-        "row_key": "TEST_MR_REQUIRE_STARTING_MODEL"
-      },
-      {
         "category": "refine_ls_shell",
         "item": "_refine_ls_shell.pdbx_refine_id"
       },
@@ -3395,8 +4033,8 @@ Validation passed! No errors found.
 {
   "errors": [],
   "metadata_completeness": {
-    "percentage": 5.6,
-    "filled_count": 5,
+    "percentage": 10.0,
+    "filled_count": 9,
     "total_count": 90,
     "method_detected": "xray",
     "message": null,
@@ -3668,30 +4306,6 @@ Validation passed! No errors found.
         "item": "_pdbx_struct_oper_list.type"
       },
       {
-        "category": "refine",
-        "item": "_refine.ls_d_res_low",
-        "row_index": 0,
-        "row_key": "TEST_MR_SKIP_STARTING_MODEL"
-      },
-      {
-        "category": "refine",
-        "item": "_refine.ls_number_reflns_obs",
-        "row_index": 0,
-        "row_key": "TEST_MR_SKIP_STARTING_MODEL"
-      },
-      {
-        "category": "refine",
-        "item": "_refine.ls_percent_reflns_obs",
-        "row_index": 0,
-        "row_key": "TEST_MR_SKIP_STARTING_MODEL"
-      },
-      {
-        "category": "refine",
-        "item": "_refine.pdbx_ls_cross_valid_method",
-        "row_index": 0,
-        "row_key": "TEST_MR_SKIP_STARTING_MODEL"
-      },
-      {
         "category": "refine_ls_shell",
         "item": "_refine_ls_shell.pdbx_refine_id"
       },
@@ -3789,7 +4403,7 @@ EXIT_CODE: 0
 FILE: test_cross_check_cross_reference_selectors.cif
 --------------------------------------------------------------------------------
 
-Found 3 validation issue(s):
+Found 5 validation issue(s):
 
 ERROR: Line 9, Item '_pdbx_struct_assembly_auth_evidence_depositor_info.assembly_id'
   Foreign key value '2' in '_pdbx_struct_assembly_auth_evidence_depositor_info.assembly_id' does not exist in parent item '_pdbx_struct_assembly_depositor_info.id' (parent category 'pdbx_struct_assembly_depositor_info')
@@ -3799,6 +4413,12 @@ ERROR: Line 8, Item '_pdbx_struct_assembly_auth_evidence_depositor_info.experime
 
 ERROR: Line 8, Item '_pdbx_struct_assembly_auth_evidence_depositor_info.id'
   Mandatory item '_pdbx_struct_assembly_auth_evidence_depositor_info.id' is missing
+
+ERROR: Line 4, Item '_pdbx_struct_assembly_depositor_info.details'
+  Mandatory item '_pdbx_struct_assembly_depositor_info.details' is missing
+
+ERROR: Line 4, Item '_pdbx_struct_assembly_depositor_info.oligomeric_count'
+  Mandatory item '_pdbx_struct_assembly_depositor_info.oligomeric_count' is missing
 
 {
   "errors": [
@@ -3824,6 +4444,24 @@ ERROR: Line 8, Item '_pdbx_struct_assembly_auth_evidence_depositor_info.id'
       "line": 8,
       "item": "_pdbx_struct_assembly_auth_evidence_depositor_info.id",
       "message": "Mandatory item '_pdbx_struct_assembly_auth_evidence_depositor_info.id' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 4,
+      "item": "_pdbx_struct_assembly_depositor_info.details",
+      "message": "Mandatory item '_pdbx_struct_assembly_depositor_info.details' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 4,
+      "item": "_pdbx_struct_assembly_depositor_info.oligomeric_count",
+      "message": "Mandatory item '_pdbx_struct_assembly_depositor_info.oligomeric_count' is missing",
       "severity": "error",
       "column": null,
       "start_char": null,
@@ -4062,9 +4700,35 @@ EXIT_CODE: 1
 FILE: test_cross_check_date_order_edge_missing_coords.cif
 --------------------------------------------------------------------------------
 
-Validation passed! No errors found.
+Found 2 validation issue(s):
+
+ERROR: Line 5, Item '_pdbx_database_status.dep_release_code_coordinates'
+  Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing
+
+ERROR: Line 5, Item '_pdbx_database_status.dep_release_code_sequence'
+  Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing
+
 {
-  "errors": [],
+  "errors": [
+    {
+      "line": 5,
+      "item": "_pdbx_database_status.dep_release_code_coordinates",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 5,
+      "item": "_pdbx_database_status.dep_release_code_sequence",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    }
+  ],
   "metadata_completeness": {
     "percentage": 0.0,
     "filled_count": 0,
@@ -4291,16 +4955,22 @@ Validation passed! No errors found.
   }
 }
 
-EXIT_CODE: 0
+EXIT_CODE: 1
 
 --------------------------------------------------------------------------------
 FILE: test_cross_check_date_order_invalid_begin_after_end.cif
 --------------------------------------------------------------------------------
 
-Found 1 validation issue(s):
+Found 3 validation issue(s):
 
 ERROR: Line 8, Item '_pdbx_database_status.date_begin_deposition'
   Begin processing date must not be after end processing date (end processing date: 2020-07-01).
+
+ERROR: Line 5, Item '_pdbx_database_status.dep_release_code_coordinates'
+  Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing
+
+ERROR: Line 5, Item '_pdbx_database_status.dep_release_code_sequence'
+  Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing
 
 {
   "errors": [
@@ -4310,6 +4980,24 @@ ERROR: Line 8, Item '_pdbx_database_status.date_begin_deposition'
       "message": "Begin processing date must not be after end processing date (end processing date: 2020-07-01).",
       "severity": "error",
       "column": 0,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 5,
+      "item": "_pdbx_database_status.dep_release_code_coordinates",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 5,
+      "item": "_pdbx_database_status.dep_release_code_sequence",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing",
+      "severity": "error",
+      "column": null,
       "start_char": null,
       "end_char": null
     }
@@ -4546,13 +5234,37 @@ EXIT_CODE: 1
 FILE: test_cross_check_date_order_invalid_coords_before_deposition.cif
 --------------------------------------------------------------------------------
 
-Found 1 validation issue(s):
+Found 3 validation issue(s):
+
+ERROR: Line 5, Item '_pdbx_database_status.dep_release_code_coordinates'
+  Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing
+
+ERROR: Line 5, Item '_pdbx_database_status.dep_release_code_sequence'
+  Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing
 
 ERROR: Line 7, Item '_pdbx_database_status.recvd_initial_deposition_date'
   Initial deposition date must not be after the date coordinates were received (coordinates date: 2020-06-01).
 
 {
   "errors": [
+    {
+      "line": 5,
+      "item": "_pdbx_database_status.dep_release_code_coordinates",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 5,
+      "item": "_pdbx_database_status.dep_release_code_sequence",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
     {
       "line": 7,
       "item": "_pdbx_database_status.recvd_initial_deposition_date",
@@ -4795,10 +5507,16 @@ EXIT_CODE: 1
 FILE: test_cross_check_date_order_invalid_form_after_initial.cif
 --------------------------------------------------------------------------------
 
-Found 1 validation issue(s):
+Found 3 validation issue(s):
 
 ERROR: Line 7, Item '_pdbx_database_status.date_deposition_form'
   Deposition form date must not be after the initial deposition received date (initial deposition date: 2020-06-01).
+
+ERROR: Line 5, Item '_pdbx_database_status.dep_release_code_coordinates'
+  Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing
+
+ERROR: Line 5, Item '_pdbx_database_status.dep_release_code_sequence'
+  Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing
 
 {
   "errors": [
@@ -4808,6 +5526,24 @@ ERROR: Line 7, Item '_pdbx_database_status.date_deposition_form'
       "message": "Deposition form date must not be after the initial deposition received date (initial deposition date: 2020-06-01).",
       "severity": "error",
       "column": 0,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 5,
+      "item": "_pdbx_database_status.dep_release_code_coordinates",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 5,
+      "item": "_pdbx_database_status.dep_release_code_sequence",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing",
+      "severity": "error",
+      "column": null,
       "start_char": null,
       "end_char": null
     }
@@ -5044,9 +5780,35 @@ EXIT_CODE: 1
 FILE: test_cross_check_date_order_valid_deposition_coords.cif
 --------------------------------------------------------------------------------
 
-Validation passed! No errors found.
+Found 2 validation issue(s):
+
+ERROR: Line 5, Item '_pdbx_database_status.dep_release_code_coordinates'
+  Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing
+
+ERROR: Line 5, Item '_pdbx_database_status.dep_release_code_sequence'
+  Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing
+
 {
-  "errors": [],
+  "errors": [
+    {
+      "line": 5,
+      "item": "_pdbx_database_status.dep_release_code_coordinates",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 5,
+      "item": "_pdbx_database_status.dep_release_code_sequence",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    }
+  ],
   "metadata_completeness": {
     "percentage": 0.0,
     "filled_count": 0,
@@ -5273,15 +6035,41 @@ Validation passed! No errors found.
   }
 }
 
-EXIT_CODE: 0
+EXIT_CODE: 1
 
 --------------------------------------------------------------------------------
 FILE: test_cross_check_date_order_valid_same_day.cif
 --------------------------------------------------------------------------------
 
-Validation passed! No errors found.
+Found 2 validation issue(s):
+
+ERROR: Line 5, Item '_pdbx_database_status.dep_release_code_coordinates'
+  Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing
+
+ERROR: Line 5, Item '_pdbx_database_status.dep_release_code_sequence'
+  Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing
+
 {
-  "errors": [],
+  "errors": [
+    {
+      "line": 5,
+      "item": "_pdbx_database_status.dep_release_code_coordinates",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 5,
+      "item": "_pdbx_database_status.dep_release_code_sequence",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    }
+  ],
   "metadata_completeness": {
     "percentage": 0.0,
     "filled_count": 0,
@@ -5508,16 +6296,19 @@ Validation passed! No errors found.
   }
 }
 
-EXIT_CODE: 0
+EXIT_CODE: 1
 
 --------------------------------------------------------------------------------
 FILE: test_cross_check_dictionary_enum.cif
 --------------------------------------------------------------------------------
 
-Found 2 validation issue(s):
+Found 3 validation issue(s):
 
 ERROR: Line 4, Item '_diffrn_detector.diffrn_id'
   Mandatory item '_diffrn_detector.diffrn_id' is missing
+
+ERROR: Line 4, Item '_diffrn_detector.pdbx_collection_date'
+  Mandatory item '_diffrn_detector.pdbx_collection_date' is missing
 
 ERROR: Line 7, Item '_diffrn_detector.type'
   Value 'ADSC QUANTUM 315' is not compatible with '_diffrn_detector.detector=PIXEL'. Allowed values: CCD.
@@ -5528,6 +6319,15 @@ ERROR: Line 7, Item '_diffrn_detector.type'
       "line": 4,
       "item": "_diffrn_detector.diffrn_id",
       "message": "Mandatory item '_diffrn_detector.diffrn_id' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 4,
+      "item": "_diffrn_detector.pdbx_collection_date",
+      "message": "Mandatory item '_diffrn_detector.pdbx_collection_date' is missing",
       "severity": "error",
       "column": null,
       "start_char": null,
@@ -5950,13 +6750,19 @@ EXIT_CODE: 1
 FILE: test_cross_check_make_mandatory_subtypes.cif
 --------------------------------------------------------------------------------
 
-Found 2 validation issue(s):
+Found 4 validation issue(s):
 
 ERROR: Line 4, Item '_em_3d_reconstruction.entry_id'
   Mandatory item '_em_3d_reconstruction.entry_id' is missing
 
 ERROR: Line 4, Item '_em_3d_reconstruction.image_processing_id'
   Mandatory item '_em_3d_reconstruction.image_processing_id' is missing
+
+ERROR: Line 4, Item '_em_3d_reconstruction.num_particles'
+  Mandatory item '_em_3d_reconstruction.num_particles' is missing
+
+ERROR: Line 4, Item '_em_3d_reconstruction.symmetry_type'
+  Mandatory item '_em_3d_reconstruction.symmetry_type' is missing
 
 {
   "errors": [
@@ -5973,6 +6779,24 @@ ERROR: Line 4, Item '_em_3d_reconstruction.image_processing_id'
       "line": 4,
       "item": "_em_3d_reconstruction.image_processing_id",
       "message": "Mandatory item '_em_3d_reconstruction.image_processing_id' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 4,
+      "item": "_em_3d_reconstruction.num_particles",
+      "message": "Mandatory item '_em_3d_reconstruction.num_particles' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 4,
+      "item": "_em_3d_reconstruction.symmetry_type",
+      "message": "Mandatory item '_em_3d_reconstruction.symmetry_type' is missing",
       "severity": "error",
       "column": null,
       "start_char": null,
@@ -6678,13 +7502,16 @@ EXIT_CODE: 1
 FILE: test_cross_check_uniqueness_invalid_entity_id.cif
 --------------------------------------------------------------------------------
 
-Found 2 validation issue(s):
+Found 3 validation issue(s):
 
 ERROR: Line 8, Item '_entity.id'
   Duplicate _entity.id in this file: 1. Each entity id must appear at most once.
 
 ERROR: Line 9, Item '_entity.id'
   Duplicate _entity.id in this file: 1. Each entity id must appear at most once.
+
+ERROR: Line 6, Item '_entity.pdbx_description'
+  Mandatory item '_entity.pdbx_description' is missing
 
 {
   "errors": [
@@ -6703,6 +7530,15 @@ ERROR: Line 9, Item '_entity.id'
       "message": "Duplicate _entity.id in this file: 1. Each entity id must appear at most once.",
       "severity": "error",
       "column": 0,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 6,
+      "item": "_entity.pdbx_description",
+      "message": "Mandatory item '_entity.pdbx_description' is missing",
+      "severity": "error",
+      "column": null,
       "start_char": null,
       "end_char": null
     }
@@ -6946,7 +7782,10 @@ EXIT_CODE: 1
 FILE: test_cross_check_uniqueness_invalid_entity_poly_entity_id.cif
 --------------------------------------------------------------------------------
 
-Found 2 validation issue(s):
+Found 3 validation issue(s):
+
+ERROR: Line 6, Item '_entity.pdbx_description'
+  Mandatory item '_entity.pdbx_description' is missing
 
 ERROR: Line 18, Item '_entity_poly.entity_id'
   Duplicate _entity_poly.entity_id in this file: 1. Each polymer entity must have at most one entity_poly row.
@@ -6956,6 +7795,15 @@ ERROR: Line 19, Item '_entity_poly.entity_id'
 
 {
   "errors": [
+    {
+      "line": 6,
+      "item": "_entity.pdbx_description",
+      "message": "Mandatory item '_entity.pdbx_description' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
     {
       "line": 18,
       "item": "_entity_poly.entity_id",
@@ -7209,7 +8057,10 @@ EXIT_CODE: 1
 FILE: test_cross_check_uniqueness_invalid_struct_asym_id.cif
 --------------------------------------------------------------------------------
 
-Found 2 validation issue(s):
+Found 3 validation issue(s):
+
+ERROR: Line 6, Item '_entity.pdbx_description'
+  Mandatory item '_entity.pdbx_description' is missing
 
 ERROR: Line 13, Item '_struct_asym.id'
   Duplicate _struct_asym.id in this file: A. Each chain (asym) id must appear at most once.
@@ -7219,6 +8070,15 @@ ERROR: Line 14, Item '_struct_asym.id'
 
 {
   "errors": [
+    {
+      "line": 6,
+      "item": "_entity.pdbx_description",
+      "message": "Mandatory item '_entity.pdbx_description' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
     {
       "line": 13,
       "item": "_struct_asym.id",
@@ -7471,9 +8331,23 @@ EXIT_CODE: 1
 FILE: test_cross_check_uniqueness_valid_entity_ids.cif
 --------------------------------------------------------------------------------
 
-Validation passed! No errors found.
+Found 1 validation issue(s):
+
+ERROR: Line 6, Item '_entity.pdbx_description'
+  Mandatory item '_entity.pdbx_description' is missing
+
 {
-  "errors": [],
+  "errors": [
+    {
+      "line": 6,
+      "item": "_entity.pdbx_description",
+      "message": "Mandatory item '_entity.pdbx_description' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    }
+  ],
   "metadata_completeness": {
     "percentage": 0.0,
     "filled_count": 0,
@@ -7707,15 +8581,29 @@ Validation passed! No errors found.
   }
 }
 
-EXIT_CODE: 0
+EXIT_CODE: 1
 
 --------------------------------------------------------------------------------
 FILE: test_cross_check_uniqueness_valid_entity_poly_entity_id.cif
 --------------------------------------------------------------------------------
 
-Validation passed! No errors found.
+Found 1 validation issue(s):
+
+ERROR: Line 6, Item '_entity.pdbx_description'
+  Mandatory item '_entity.pdbx_description' is missing
+
 {
-  "errors": [],
+  "errors": [
+    {
+      "line": 6,
+      "item": "_entity.pdbx_description",
+      "message": "Mandatory item '_entity.pdbx_description' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    }
+  ],
   "metadata_completeness": {
     "percentage": 11.3,
     "filled_count": 6,
@@ -7936,15 +8824,29 @@ Validation passed! No errors found.
   }
 }
 
-EXIT_CODE: 0
+EXIT_CODE: 1
 
 --------------------------------------------------------------------------------
 FILE: test_cross_check_uniqueness_valid_struct_asym_ids.cif
 --------------------------------------------------------------------------------
 
-Validation passed! No errors found.
+Found 1 validation issue(s):
+
+ERROR: Line 6, Item '_entity.pdbx_description'
+  Mandatory item '_entity.pdbx_description' is missing
+
 {
-  "errors": [],
+  "errors": [
+    {
+      "line": 6,
+      "item": "_entity.pdbx_description",
+      "message": "Mandatory item '_entity.pdbx_description' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    }
+  ],
   "metadata_completeness": {
     "percentage": 0.0,
     "filled_count": 0,
@@ -8172,19 +9074,22 @@ Validation passed! No errors found.
   }
 }
 
-EXIT_CODE: 0
+EXIT_CODE: 1
 
 --------------------------------------------------------------------------------
 FILE: test_duplicate_category.cif
 --------------------------------------------------------------------------------
 
-Found 3 validation issue(s):
+Found 4 validation issue(s):
 
 ERROR: Line 8, Item '_entity.'
   Duplicate category 'entity' (first occurrence at line 5)
 
 ERROR: Line 8, Item '_entity.id'
   Duplicate item '_entity.id' (first occurrence at line 5)
+
+ERROR: Line 5, Item '_entity.pdbx_description'
+  Mandatory item '_entity.pdbx_description' is missing
 
 ERROR: Line 9, Item '_entity.type'
   Duplicate item '_entity.type' (first occurrence at line 6)
@@ -8204,6 +9109,15 @@ ERROR: Line 9, Item '_entity.type'
       "line": 8,
       "item": "_entity.id",
       "message": "Duplicate item '_entity.id' (first occurrence at line 5)",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 5,
+      "item": "_entity.pdbx_description",
+      "message": "Mandatory item '_entity.pdbx_description' is missing",
       "severity": "error",
       "column": null,
       "start_char": null,
@@ -9748,13 +10662,16 @@ EXIT_CODE: 1
 FILE: test_format_error_entity_poly.cif
 --------------------------------------------------------------------------------
 
-Found 2 validation issue(s):
+Found 3 validation issue(s):
 
 ERROR: Line 12, Item '_entity_poly.'
   Duplicate category 'entity_poly' (first occurrence at line 5)
 
 ERROR: Line 10, Item '_entity_poly.entity_id'
   Child item '_entity_poly.entity_id' has values but parent category 'entity' is missing
+
+ERROR: Line 10, Item '_entity_poly.pdbx_seq_one_letter_code'
+  No value present for this mandatory item.
 
 {
   "errors": [
@@ -9775,6 +10692,15 @@ ERROR: Line 10, Item '_entity_poly.entity_id'
       "column": 0,
       "start_char": 0,
       "end_char": 1
+    },
+    {
+      "line": 10,
+      "item": "_entity_poly.pdbx_seq_one_letter_code",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 3,
+      "start_char": 25,
+      "end_char": 27
     }
   ],
   "metadata_completeness": {
@@ -9974,6 +10900,439 @@ ERROR: Line 10, Item '_entity_poly.entity_id'
       {
         "category": "pdbx_struct_oper_list",
         "item": "_pdbx_struct_oper_list.type"
+      },
+      {
+        "category": "struct",
+        "item": "_struct.title"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.pdbx_keywords"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.text"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_code"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_name"
+      },
+      {
+        "category": "struct_ref_seq_dif",
+        "item": "_struct_ref_seq_dif.pdbx_ordinal"
+      }
+    ]
+  }
+}
+
+EXIT_CODE: 1
+
+--------------------------------------------------------------------------------
+FILE: test_item_range_exclusive_zero.cif
+--------------------------------------------------------------------------------
+
+Found 3 validation issue(s):
+
+ERROR: Line 12, Item '_reflns_shell.pdbx_Rpim_I_all'
+  Value '0.000' must be greater than '0.0'
+
+WARNING: Line 12, Item '_reflns_shell.pdbx_Rpim_I_all'
+  Out of advisory range: Value '0.000' is below minimum allowed value '0.01'
+
+ERROR: Line 12, Item '_reflns_shell.pdbx_Rrim_I_all'
+  Value '0.000' must be greater than '0.0'
+
+{
+  "errors": [
+    {
+      "line": 12,
+      "item": "_reflns_shell.pdbx_Rpim_I_all",
+      "message": "Value '0.000' must be greater than '0.0'",
+      "severity": "error",
+      "column": 4,
+      "start_char": 15,
+      "end_char": 20
+    },
+    {
+      "line": 12,
+      "item": "_reflns_shell.pdbx_Rpim_I_all",
+      "message": "Out of advisory range: Value '0.000' is below minimum allowed value '0.01'",
+      "severity": "warning",
+      "column": 4,
+      "start_char": 15,
+      "end_char": 20
+    },
+    {
+      "line": 12,
+      "item": "_reflns_shell.pdbx_Rrim_I_all",
+      "message": "Value '0.000' must be greater than '0.0'",
+      "severity": "error",
+      "column": 5,
+      "start_char": 21,
+      "end_char": 27
+    }
+  ],
+  "metadata_completeness": {
+    "percentage": 8.5,
+    "filled_count": 8,
+    "total_count": 94,
+    "method_detected": "xray",
+    "message": null,
+    "missing_categories": [
+      "[entity_src_group]",
+      "audit_author",
+      "citation",
+      "citation_author",
+      "diffrn",
+      "diffrn_detector",
+      "diffrn_radiation",
+      "diffrn_radiation_wavelength",
+      "diffrn_source",
+      "entity",
+      "entity_poly",
+      "entity_poly_seq",
+      "exptl",
+      "exptl_crystal_grow",
+      "pdbx_audit_support",
+      "pdbx_contact_author",
+      "pdbx_initial_refinement_model",
+      "pdbx_struct_assembly",
+      "pdbx_struct_assembly_auth_evidence",
+      "pdbx_struct_assembly_gen",
+      "pdbx_struct_oper_list",
+      "refine",
+      "refine_ls_shell",
+      "reflns",
+      "software",
+      "struct",
+      "struct_keywords",
+      "struct_ref",
+      "struct_ref_seq_dif"
+    ],
+    "missing_items": [
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.entity_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.pdbx_src_id"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.name"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.pdbx_ordinal"
+      },
+      {
+        "category": "citation",
+        "item": "_citation.title"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.name"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.ordinal"
+      },
+      {
+        "category": "diffrn",
+        "item": "_diffrn.ambient_temp"
+      },
+      {
+        "category": "diffrn",
+        "item": "_diffrn.pdbx_serial_crystal_experiment"
+      },
+      {
+        "category": "diffrn_detector",
+        "item": "_diffrn_detector.detector"
+      },
+      {
+        "category": "diffrn_detector",
+        "item": "_diffrn_detector.pdbx_collection_date"
+      },
+      {
+        "category": "diffrn_detector",
+        "item": "_diffrn_detector.type"
+      },
+      {
+        "category": "diffrn_radiation",
+        "item": "_diffrn_radiation.pdbx_diffrn_protocol"
+      },
+      {
+        "category": "diffrn_radiation",
+        "item": "_diffrn_radiation.pdbx_monochromatic_or_laue_m_l"
+      },
+      {
+        "category": "diffrn_radiation",
+        "item": "_diffrn_radiation.pdbx_scattering_type"
+      },
+      {
+        "category": "diffrn_radiation_wavelength",
+        "item": "_diffrn_radiation_wavelength.wavelength"
+      },
+      {
+        "category": "diffrn_source",
+        "item": "_diffrn_source.pdbx_wavelength_list"
+      },
+      {
+        "category": "diffrn_source",
+        "item": "_diffrn_source.source"
+      },
+      {
+        "category": "diffrn_source",
+        "item": "_diffrn_source.type"
+      },
+      {
+        "category": "entity",
+        "item": "_entity.pdbx_description"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.entity_id"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.pdbx_seq_one_letter_code"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.type"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.entity_id"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.mon_id"
+      },
+      {
+        "category": "exptl",
+        "item": "_exptl.method"
+      },
+      {
+        "category": "exptl_crystal_grow",
+        "item": "_exptl_crystal_grow.method"
+      },
+      {
+        "category": "exptl_crystal_grow",
+        "item": "_exptl_crystal_grow.pdbx_details"
+      },
+      {
+        "category": "exptl_crystal_grow",
+        "item": "_exptl_crystal_grow.temp"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.funding_organization"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.ordinal"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.email"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.id"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.identifier_ORCID"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_first"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_last"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.role"
+      },
+      {
+        "category": "pdbx_initial_refinement_model",
+        "item": "_pdbx_initial_refinement_model.id"
+      },
+      {
+        "category": "pdbx_struct_assembly",
+        "item": "_pdbx_struct_assembly.details"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.details"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.experimental_support"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.id"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.asym_id_list"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.oper_expression"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.id"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.type"
+      },
+      {
+        "category": "refine",
+        "item": "_refine.entry_id"
+      },
+      {
+        "category": "refine",
+        "item": "_refine.ls_d_res_high"
+      },
+      {
+        "category": "refine",
+        "item": "_refine.ls_d_res_low"
+      },
+      {
+        "category": "refine",
+        "item": "_refine.ls_number_reflns_obs"
+      },
+      {
+        "category": "refine",
+        "item": "_refine.ls_percent_reflns_obs"
+      },
+      {
+        "category": "refine",
+        "item": "_refine.pdbx_ls_cross_valid_method"
+      },
+      {
+        "category": "refine",
+        "item": "_refine.pdbx_method_to_determine_struct"
+      },
+      {
+        "category": "refine",
+        "item": "_refine.pdbx_refine_id"
+      },
+      {
+        "category": "refine_ls_shell",
+        "item": "_refine_ls_shell.pdbx_refine_id"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.d_resolution_high"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.d_resolution_low"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.number_obs"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.pdbx_diffrn_id"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.pdbx_netI_over_sigmaI"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.pdbx_ordinal"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.pdbx_redundancy"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.percent_possible_obs"
+      },
+      {
+        "category": "software",
+        "item": "_software.classification"
+      },
+      {
+        "category": "software",
+        "item": "_software.name"
+      },
+      {
+        "category": "software",
+        "item": "_software.pdbx_ordinal"
       },
       {
         "category": "struct",
@@ -10244,9 +11603,23 @@ EXIT_CODE: 0
 FILE: test_mandatory_missing_item.cif
 --------------------------------------------------------------------------------
 
-Validation passed! No errors found.
+Found 1 validation issue(s):
+
+ERROR: Line 5, Item '_entity.pdbx_description'
+  Mandatory item '_entity.pdbx_description' is missing
+
 {
-  "errors": [],
+  "errors": [
+    {
+      "line": 5,
+      "item": "_entity.pdbx_description",
+      "message": "Mandatory item '_entity.pdbx_description' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    }
+  ],
   "metadata_completeness": {
     "percentage": 0.0,
     "filled_count": 0,
@@ -10473,7 +11846,7 @@ Validation passed! No errors found.
   }
 }
 
-EXIT_CODE: 0
+EXIT_CODE: 1
 
 --------------------------------------------------------------------------------
 FILE: test_multiline_and_quoted_values.cif
@@ -10939,6 +12312,804 @@ Validation passed! No errors found.
 }
 
 EXIT_CODE: 0
+
+--------------------------------------------------------------------------------
+FILE: test_pdbx_mandatory_cross_valid_method_missing.cif
+--------------------------------------------------------------------------------
+
+Found 1 validation issue(s):
+
+ERROR: Line 5, Item '_refine.pdbx_ls_cross_valid_method'
+  Mandatory item '_refine.pdbx_ls_cross_valid_method' is missing
+
+{
+  "errors": [
+    {
+      "line": 5,
+      "item": "_refine.pdbx_ls_cross_valid_method",
+      "message": "Mandatory item '_refine.pdbx_ls_cross_valid_method' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    }
+  ],
+  "metadata_completeness": {
+    "percentage": 7.8,
+    "filled_count": 7,
+    "total_count": 90,
+    "method_detected": "xray",
+    "message": null,
+    "missing_categories": [
+      "[entity_src_group]",
+      "audit_author",
+      "citation",
+      "citation_author",
+      "diffrn",
+      "diffrn_detector",
+      "diffrn_radiation",
+      "diffrn_radiation_wavelength",
+      "diffrn_source",
+      "entity",
+      "entity_poly",
+      "entity_poly_seq",
+      "exptl",
+      "exptl_crystal_grow",
+      "pdbx_audit_support",
+      "pdbx_contact_author",
+      "pdbx_initial_refinement_model",
+      "pdbx_struct_assembly",
+      "pdbx_struct_assembly_auth_evidence",
+      "pdbx_struct_assembly_gen",
+      "pdbx_struct_oper_list",
+      "refine_ls_shell",
+      "reflns",
+      "reflns_shell",
+      "software",
+      "struct",
+      "struct_keywords",
+      "struct_ref",
+      "struct_ref_seq_dif"
+    ],
+    "missing_items": [
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.entity_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.pdbx_src_id"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.name"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.pdbx_ordinal"
+      },
+      {
+        "category": "citation",
+        "item": "_citation.title"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.name"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.ordinal"
+      },
+      {
+        "category": "diffrn",
+        "item": "_diffrn.ambient_temp"
+      },
+      {
+        "category": "diffrn",
+        "item": "_diffrn.pdbx_serial_crystal_experiment"
+      },
+      {
+        "category": "diffrn_detector",
+        "item": "_diffrn_detector.detector"
+      },
+      {
+        "category": "diffrn_detector",
+        "item": "_diffrn_detector.pdbx_collection_date"
+      },
+      {
+        "category": "diffrn_detector",
+        "item": "_diffrn_detector.type"
+      },
+      {
+        "category": "diffrn_radiation",
+        "item": "_diffrn_radiation.pdbx_diffrn_protocol"
+      },
+      {
+        "category": "diffrn_radiation",
+        "item": "_diffrn_radiation.pdbx_monochromatic_or_laue_m_l"
+      },
+      {
+        "category": "diffrn_radiation",
+        "item": "_diffrn_radiation.pdbx_scattering_type"
+      },
+      {
+        "category": "diffrn_radiation_wavelength",
+        "item": "_diffrn_radiation_wavelength.wavelength"
+      },
+      {
+        "category": "diffrn_source",
+        "item": "_diffrn_source.pdbx_wavelength_list"
+      },
+      {
+        "category": "diffrn_source",
+        "item": "_diffrn_source.source"
+      },
+      {
+        "category": "diffrn_source",
+        "item": "_diffrn_source.type"
+      },
+      {
+        "category": "entity",
+        "item": "_entity.pdbx_description"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.entity_id"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.pdbx_seq_one_letter_code"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.type"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.entity_id"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.mon_id"
+      },
+      {
+        "category": "exptl",
+        "item": "_exptl.method"
+      },
+      {
+        "category": "exptl_crystal_grow",
+        "item": "_exptl_crystal_grow.method"
+      },
+      {
+        "category": "exptl_crystal_grow",
+        "item": "_exptl_crystal_grow.pdbx_details"
+      },
+      {
+        "category": "exptl_crystal_grow",
+        "item": "_exptl_crystal_grow.temp"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.funding_organization"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.ordinal"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.email"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.id"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.identifier_ORCID"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_first"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_last"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.role"
+      },
+      {
+        "category": "pdbx_initial_refinement_model",
+        "item": "_pdbx_initial_refinement_model.id"
+      },
+      {
+        "category": "pdbx_struct_assembly",
+        "item": "_pdbx_struct_assembly.details"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.details"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.experimental_support"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.id"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.asym_id_list"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.oper_expression"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.id"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.type"
+      },
+      {
+        "category": "refine",
+        "item": "_refine.pdbx_ls_cross_valid_method",
+        "row_index": 0,
+        "row_key": "TEST_PDBX_MANDATORY_CROSS_VALID_MISSING"
+      },
+      {
+        "category": "refine_ls_shell",
+        "item": "_refine_ls_shell.pdbx_refine_id"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.d_resolution_high"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.d_resolution_low"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.number_obs"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.pdbx_diffrn_id"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.pdbx_netI_over_sigmaI"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.pdbx_ordinal"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.pdbx_redundancy"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.percent_possible_obs"
+      },
+      {
+        "category": "reflns_shell",
+        "item": "_reflns_shell.d_res_high"
+      },
+      {
+        "category": "reflns_shell",
+        "item": "_reflns_shell.d_res_low"
+      },
+      {
+        "category": "reflns_shell",
+        "item": "_reflns_shell.number_unique_obs"
+      },
+      {
+        "category": "reflns_shell",
+        "item": "_reflns_shell.pdbx_ordinal"
+      },
+      {
+        "category": "software",
+        "item": "_software.classification"
+      },
+      {
+        "category": "software",
+        "item": "_software.name"
+      },
+      {
+        "category": "software",
+        "item": "_software.pdbx_ordinal"
+      },
+      {
+        "category": "struct",
+        "item": "_struct.title"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.pdbx_keywords"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.text"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_code"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_name"
+      },
+      {
+        "category": "struct_ref_seq_dif",
+        "item": "_struct_ref_seq_dif.pdbx_ordinal"
+      }
+    ]
+  }
+}
+
+EXIT_CODE: 1
+
+--------------------------------------------------------------------------------
+FILE: test_pdbx_mandatory_cross_valid_method_unknown.cif
+--------------------------------------------------------------------------------
+
+Found 1 validation issue(s):
+
+ERROR: Line 13, Item '_refine.pdbx_ls_cross_valid_method'
+  No value present for this mandatory item.
+
+{
+  "errors": [
+    {
+      "line": 13,
+      "item": "_refine.pdbx_ls_cross_valid_method",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 0,
+      "start_char": 35,
+      "end_char": 37
+    }
+  ],
+  "metadata_completeness": {
+    "percentage": 7.8,
+    "filled_count": 7,
+    "total_count": 90,
+    "method_detected": "xray",
+    "message": null,
+    "missing_categories": [
+      "[entity_src_group]",
+      "audit_author",
+      "citation",
+      "citation_author",
+      "diffrn",
+      "diffrn_detector",
+      "diffrn_radiation",
+      "diffrn_radiation_wavelength",
+      "diffrn_source",
+      "entity",
+      "entity_poly",
+      "entity_poly_seq",
+      "exptl",
+      "exptl_crystal_grow",
+      "pdbx_audit_support",
+      "pdbx_contact_author",
+      "pdbx_initial_refinement_model",
+      "pdbx_struct_assembly",
+      "pdbx_struct_assembly_auth_evidence",
+      "pdbx_struct_assembly_gen",
+      "pdbx_struct_oper_list",
+      "refine_ls_shell",
+      "reflns",
+      "reflns_shell",
+      "software",
+      "struct",
+      "struct_keywords",
+      "struct_ref",
+      "struct_ref_seq_dif"
+    ],
+    "missing_items": [
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_gene_src_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_host_org_scientific_name"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_gen.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_entity_src_nat.pdbx_src_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.entity_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.ncbi_taxonomy_id"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.organism_scientific"
+      },
+      {
+        "category": "[entity_src_group]",
+        "item": "_pdbx_entity_src_syn.pdbx_src_id"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.name"
+      },
+      {
+        "category": "audit_author",
+        "item": "_audit_author.pdbx_ordinal"
+      },
+      {
+        "category": "citation",
+        "item": "_citation.title"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.name"
+      },
+      {
+        "category": "citation_author",
+        "item": "_citation_author.ordinal"
+      },
+      {
+        "category": "diffrn",
+        "item": "_diffrn.ambient_temp"
+      },
+      {
+        "category": "diffrn",
+        "item": "_diffrn.pdbx_serial_crystal_experiment"
+      },
+      {
+        "category": "diffrn_detector",
+        "item": "_diffrn_detector.detector"
+      },
+      {
+        "category": "diffrn_detector",
+        "item": "_diffrn_detector.pdbx_collection_date"
+      },
+      {
+        "category": "diffrn_detector",
+        "item": "_diffrn_detector.type"
+      },
+      {
+        "category": "diffrn_radiation",
+        "item": "_diffrn_radiation.pdbx_diffrn_protocol"
+      },
+      {
+        "category": "diffrn_radiation",
+        "item": "_diffrn_radiation.pdbx_monochromatic_or_laue_m_l"
+      },
+      {
+        "category": "diffrn_radiation",
+        "item": "_diffrn_radiation.pdbx_scattering_type"
+      },
+      {
+        "category": "diffrn_radiation_wavelength",
+        "item": "_diffrn_radiation_wavelength.wavelength"
+      },
+      {
+        "category": "diffrn_source",
+        "item": "_diffrn_source.pdbx_wavelength_list"
+      },
+      {
+        "category": "diffrn_source",
+        "item": "_diffrn_source.source"
+      },
+      {
+        "category": "diffrn_source",
+        "item": "_diffrn_source.type"
+      },
+      {
+        "category": "entity",
+        "item": "_entity.pdbx_description"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.entity_id"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.pdbx_seq_one_letter_code"
+      },
+      {
+        "category": "entity_poly",
+        "item": "_entity_poly.type"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.entity_id"
+      },
+      {
+        "category": "entity_poly_seq",
+        "item": "_entity_poly_seq.mon_id"
+      },
+      {
+        "category": "exptl",
+        "item": "_exptl.method"
+      },
+      {
+        "category": "exptl_crystal_grow",
+        "item": "_exptl_crystal_grow.method"
+      },
+      {
+        "category": "exptl_crystal_grow",
+        "item": "_exptl_crystal_grow.pdbx_details"
+      },
+      {
+        "category": "exptl_crystal_grow",
+        "item": "_exptl_crystal_grow.temp"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.funding_organization"
+      },
+      {
+        "category": "pdbx_audit_support",
+        "item": "_pdbx_audit_support.ordinal"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.country"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.email"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.id"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.identifier_ORCID"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_first"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.name_last"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.organization_type"
+      },
+      {
+        "category": "pdbx_contact_author",
+        "item": "_pdbx_contact_author.role"
+      },
+      {
+        "category": "pdbx_initial_refinement_model",
+        "item": "_pdbx_initial_refinement_model.id"
+      },
+      {
+        "category": "pdbx_struct_assembly",
+        "item": "_pdbx_struct_assembly.details"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.details"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.experimental_support"
+      },
+      {
+        "category": "pdbx_struct_assembly_auth_evidence",
+        "item": "_pdbx_struct_assembly_auth_evidence.id"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.assembly_id"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.asym_id_list"
+      },
+      {
+        "category": "pdbx_struct_assembly_gen",
+        "item": "_pdbx_struct_assembly_gen.oper_expression"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.id"
+      },
+      {
+        "category": "pdbx_struct_oper_list",
+        "item": "_pdbx_struct_oper_list.type"
+      },
+      {
+        "category": "refine",
+        "item": "_refine.pdbx_ls_cross_valid_method",
+        "row_index": 0,
+        "row_key": "TEST_PDBX_MANDATORY_CROSS_VALID_UNKNOWN"
+      },
+      {
+        "category": "refine_ls_shell",
+        "item": "_refine_ls_shell.pdbx_refine_id"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.d_resolution_high"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.d_resolution_low"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.number_obs"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.pdbx_diffrn_id"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.pdbx_netI_over_sigmaI"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.pdbx_ordinal"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.pdbx_redundancy"
+      },
+      {
+        "category": "reflns",
+        "item": "_reflns.percent_possible_obs"
+      },
+      {
+        "category": "reflns_shell",
+        "item": "_reflns_shell.d_res_high"
+      },
+      {
+        "category": "reflns_shell",
+        "item": "_reflns_shell.d_res_low"
+      },
+      {
+        "category": "reflns_shell",
+        "item": "_reflns_shell.number_unique_obs"
+      },
+      {
+        "category": "reflns_shell",
+        "item": "_reflns_shell.pdbx_ordinal"
+      },
+      {
+        "category": "software",
+        "item": "_software.classification"
+      },
+      {
+        "category": "software",
+        "item": "_software.name"
+      },
+      {
+        "category": "software",
+        "item": "_software.pdbx_ordinal"
+      },
+      {
+        "category": "struct",
+        "item": "_struct.title"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.pdbx_keywords"
+      },
+      {
+        "category": "struct_keywords",
+        "item": "_struct_keywords.text"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_code"
+      },
+      {
+        "category": "struct_ref",
+        "item": "_struct_ref.db_name"
+      },
+      {
+        "category": "struct_ref_seq_dif",
+        "item": "_struct_ref_seq_dif.pdbx_ordinal"
+      }
+    ]
+  }
+}
+
+EXIT_CODE: 1
 
 --------------------------------------------------------------------------------
 FILE: test_procedural_database_related_edge_non_target_db.cif
@@ -11715,13 +13886,28 @@ EXIT_CODE: 1
 FILE: test_procedural_diffrn_wavelength_edge_empty_mismatched_diffrn_id.cif
 --------------------------------------------------------------------------------
 
-Found 2 validation issue(s):
+Found 7 validation issue(s):
 
 ERROR: Line 11, Item '_diffrn_radiation.diffrn_id'
   Child item '_diffrn_radiation.diffrn_id' has values but parent category 'diffrn' is missing
 
+ERROR: Line 9, Item '_diffrn_radiation.pdbx_monochromatic_or_laue_m_l'
+  Mandatory item '_diffrn_radiation.pdbx_monochromatic_or_laue_m_l' is missing
+
+ERROR: Line 9, Item '_diffrn_radiation.pdbx_scattering_type'
+  Mandatory item '_diffrn_radiation.pdbx_scattering_type' is missing
+
 ERROR: Line 6, Item '_diffrn_source.diffrn_id'
   Child item '_diffrn_source.diffrn_id' has values but parent category 'diffrn' is missing
+
+ERROR: Line 6, Item '_diffrn_source.pdbx_wavelength_list'
+  No value present for this mandatory item.
+
+ERROR: Line 4, Item '_diffrn_source.source'
+  Mandatory item '_diffrn_source.source' is missing
+
+ERROR: Line 4, Item '_diffrn_source.type'
+  Mandatory item '_diffrn_source.type' is missing
 
 {
   "errors": [
@@ -11735,6 +13921,24 @@ ERROR: Line 6, Item '_diffrn_source.diffrn_id'
       "end_char": 1
     },
     {
+      "line": 9,
+      "item": "_diffrn_radiation.pdbx_monochromatic_or_laue_m_l",
+      "message": "Mandatory item '_diffrn_radiation.pdbx_monochromatic_or_laue_m_l' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 9,
+      "item": "_diffrn_radiation.pdbx_scattering_type",
+      "message": "Mandatory item '_diffrn_radiation.pdbx_scattering_type' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
       "line": 6,
       "item": "_diffrn_source.diffrn_id",
       "message": "Child item '_diffrn_source.diffrn_id' has values but parent category 'diffrn' is missing",
@@ -11742,6 +13946,33 @@ ERROR: Line 6, Item '_diffrn_source.diffrn_id'
       "column": 0,
       "start_char": 0,
       "end_char": 1
+    },
+    {
+      "line": 6,
+      "item": "_diffrn_source.pdbx_wavelength_list",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 1,
+      "start_char": 2,
+      "end_char": 4
+    },
+    {
+      "line": 4,
+      "item": "_diffrn_source.source",
+      "message": "Mandatory item '_diffrn_source.source' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 4,
+      "item": "_diffrn_source.type",
+      "message": "Mandatory item '_diffrn_source.type' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
     }
   ],
   "metadata_completeness": {
@@ -12157,13 +14388,28 @@ EXIT_CODE: 1
 FILE: test_procedural_diffrn_wavelength_edge_missing.cif
 --------------------------------------------------------------------------------
 
-Found 2 validation issue(s):
+Found 7 validation issue(s):
 
 ERROR: Line 11, Item '_diffrn_radiation.diffrn_id'
   Child item '_diffrn_radiation.diffrn_id' has values but parent category 'diffrn' is missing
 
+ERROR: Line 9, Item '_diffrn_radiation.pdbx_monochromatic_or_laue_m_l'
+  Mandatory item '_diffrn_radiation.pdbx_monochromatic_or_laue_m_l' is missing
+
+ERROR: Line 9, Item '_diffrn_radiation.pdbx_scattering_type'
+  Mandatory item '_diffrn_radiation.pdbx_scattering_type' is missing
+
 ERROR: Line 6, Item '_diffrn_source.diffrn_id'
   Child item '_diffrn_source.diffrn_id' has values but parent category 'diffrn' is missing
+
+ERROR: Line 6, Item '_diffrn_source.pdbx_wavelength_list'
+  No value present for this mandatory item.
+
+ERROR: Line 4, Item '_diffrn_source.source'
+  Mandatory item '_diffrn_source.source' is missing
+
+ERROR: Line 4, Item '_diffrn_source.type'
+  Mandatory item '_diffrn_source.type' is missing
 
 {
   "errors": [
@@ -12177,6 +14423,24 @@ ERROR: Line 6, Item '_diffrn_source.diffrn_id'
       "end_char": 1
     },
     {
+      "line": 9,
+      "item": "_diffrn_radiation.pdbx_monochromatic_or_laue_m_l",
+      "message": "Mandatory item '_diffrn_radiation.pdbx_monochromatic_or_laue_m_l' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 9,
+      "item": "_diffrn_radiation.pdbx_scattering_type",
+      "message": "Mandatory item '_diffrn_radiation.pdbx_scattering_type' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
       "line": 6,
       "item": "_diffrn_source.diffrn_id",
       "message": "Child item '_diffrn_source.diffrn_id' has values but parent category 'diffrn' is missing",
@@ -12184,6 +14448,33 @@ ERROR: Line 6, Item '_diffrn_source.diffrn_id'
       "column": 0,
       "start_char": 0,
       "end_char": 1
+    },
+    {
+      "line": 6,
+      "item": "_diffrn_source.pdbx_wavelength_list",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 1,
+      "start_char": 2,
+      "end_char": 4
+    },
+    {
+      "line": 4,
+      "item": "_diffrn_source.source",
+      "message": "Mandatory item '_diffrn_source.source' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 4,
+      "item": "_diffrn_source.type",
+      "message": "Mandatory item '_diffrn_source.type' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
     }
   ],
   "metadata_completeness": {
@@ -12599,16 +14890,31 @@ EXIT_CODE: 1
 FILE: test_procedural_diffrn_wavelength_invalid_empty_list_laue.cif
 --------------------------------------------------------------------------------
 
-Found 3 validation issue(s):
+Found 8 validation issue(s):
 
 ERROR: Line 11, Item '_diffrn_radiation.diffrn_id'
   Child item '_diffrn_radiation.diffrn_id' has values but parent category 'diffrn' is missing
+
+ERROR: Line 9, Item '_diffrn_radiation.pdbx_monochromatic_or_laue_m_l'
+  Mandatory item '_diffrn_radiation.pdbx_monochromatic_or_laue_m_l' is missing
+
+ERROR: Line 9, Item '_diffrn_radiation.pdbx_scattering_type'
+  Mandatory item '_diffrn_radiation.pdbx_scattering_type' is missing
 
 ERROR: Line 6, Item '_diffrn_source.diffrn_id'
   Child item '_diffrn_source.diffrn_id' has values but parent category 'diffrn' is missing
 
 ERROR: Line 6, Item '_diffrn_source.pdbx_wavelength_list'
+  No value present for this mandatory item.
+
+ERROR: Line 6, Item '_diffrn_source.pdbx_wavelength_list'
   pdbx_wavelength_list must not be empty when pdbx_diffrn_protocol is LAUE or SINGLE WAVELENGTH for the same diffrn_id.
+
+ERROR: Line 4, Item '_diffrn_source.source'
+  Mandatory item '_diffrn_source.source' is missing
+
+ERROR: Line 4, Item '_diffrn_source.type'
+  Mandatory item '_diffrn_source.type' is missing
 
 {
   "errors": [
@@ -12622,6 +14928,24 @@ ERROR: Line 6, Item '_diffrn_source.pdbx_wavelength_list'
       "end_char": 1
     },
     {
+      "line": 9,
+      "item": "_diffrn_radiation.pdbx_monochromatic_or_laue_m_l",
+      "message": "Mandatory item '_diffrn_radiation.pdbx_monochromatic_or_laue_m_l' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 9,
+      "item": "_diffrn_radiation.pdbx_scattering_type",
+      "message": "Mandatory item '_diffrn_radiation.pdbx_scattering_type' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
       "line": 6,
       "item": "_diffrn_source.diffrn_id",
       "message": "Child item '_diffrn_source.diffrn_id' has values but parent category 'diffrn' is missing",
@@ -12633,9 +14957,36 @@ ERROR: Line 6, Item '_diffrn_source.pdbx_wavelength_list'
     {
       "line": 6,
       "item": "_diffrn_source.pdbx_wavelength_list",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 1,
+      "start_char": 2,
+      "end_char": 4
+    },
+    {
+      "line": 6,
+      "item": "_diffrn_source.pdbx_wavelength_list",
       "message": "pdbx_wavelength_list must not be empty when pdbx_diffrn_protocol is LAUE or SINGLE WAVELENGTH for the same diffrn_id.",
       "severity": "error",
       "column": 1,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 4,
+      "item": "_diffrn_source.source",
+      "message": "Mandatory item '_diffrn_source.source' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 4,
+      "item": "_diffrn_source.type",
+      "message": "Mandatory item '_diffrn_source.type' is missing",
+      "severity": "error",
+      "column": null,
       "start_char": null,
       "end_char": null
     }
@@ -13053,16 +15404,31 @@ EXIT_CODE: 1
 FILE: test_procedural_diffrn_wavelength_invalid_empty_list_single.cif
 --------------------------------------------------------------------------------
 
-Found 3 validation issue(s):
+Found 8 validation issue(s):
 
 ERROR: Line 11, Item '_diffrn_radiation.diffrn_id'
   Child item '_diffrn_radiation.diffrn_id' has values but parent category 'diffrn' is missing
+
+ERROR: Line 9, Item '_diffrn_radiation.pdbx_monochromatic_or_laue_m_l'
+  Mandatory item '_diffrn_radiation.pdbx_monochromatic_or_laue_m_l' is missing
+
+ERROR: Line 9, Item '_diffrn_radiation.pdbx_scattering_type'
+  Mandatory item '_diffrn_radiation.pdbx_scattering_type' is missing
 
 ERROR: Line 6, Item '_diffrn_source.diffrn_id'
   Child item '_diffrn_source.diffrn_id' has values but parent category 'diffrn' is missing
 
 ERROR: Line 6, Item '_diffrn_source.pdbx_wavelength_list'
+  No value present for this mandatory item.
+
+ERROR: Line 6, Item '_diffrn_source.pdbx_wavelength_list'
   pdbx_wavelength_list must not be empty when pdbx_diffrn_protocol is LAUE or SINGLE WAVELENGTH for the same diffrn_id.
+
+ERROR: Line 4, Item '_diffrn_source.source'
+  Mandatory item '_diffrn_source.source' is missing
+
+ERROR: Line 4, Item '_diffrn_source.type'
+  Mandatory item '_diffrn_source.type' is missing
 
 {
   "errors": [
@@ -13076,6 +15442,24 @@ ERROR: Line 6, Item '_diffrn_source.pdbx_wavelength_list'
       "end_char": 1
     },
     {
+      "line": 9,
+      "item": "_diffrn_radiation.pdbx_monochromatic_or_laue_m_l",
+      "message": "Mandatory item '_diffrn_radiation.pdbx_monochromatic_or_laue_m_l' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 9,
+      "item": "_diffrn_radiation.pdbx_scattering_type",
+      "message": "Mandatory item '_diffrn_radiation.pdbx_scattering_type' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
       "line": 6,
       "item": "_diffrn_source.diffrn_id",
       "message": "Child item '_diffrn_source.diffrn_id' has values but parent category 'diffrn' is missing",
@@ -13087,9 +15471,36 @@ ERROR: Line 6, Item '_diffrn_source.pdbx_wavelength_list'
     {
       "line": 6,
       "item": "_diffrn_source.pdbx_wavelength_list",
+      "message": "No value present for this mandatory item.",
+      "severity": "error",
+      "column": 1,
+      "start_char": 2,
+      "end_char": 4
+    },
+    {
+      "line": 6,
+      "item": "_diffrn_source.pdbx_wavelength_list",
       "message": "pdbx_wavelength_list must not be empty when pdbx_diffrn_protocol is LAUE or SINGLE WAVELENGTH for the same diffrn_id.",
       "severity": "error",
       "column": 1,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 4,
+      "item": "_diffrn_source.source",
+      "message": "Mandatory item '_diffrn_source.source' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 4,
+      "item": "_diffrn_source.type",
+      "message": "Mandatory item '_diffrn_source.type' is missing",
+      "severity": "error",
+      "column": null,
       "start_char": null,
       "end_char": null
     }
@@ -13507,16 +15918,28 @@ EXIT_CODE: 1
 FILE: test_procedural_diffrn_wavelength_invalid_single_for_laue.cif
 --------------------------------------------------------------------------------
 
-Found 3 validation issue(s):
+Found 7 validation issue(s):
 
 ERROR: Line 11, Item '_diffrn_radiation.diffrn_id'
   Child item '_diffrn_radiation.diffrn_id' has values but parent category 'diffrn' is missing
+
+ERROR: Line 9, Item '_diffrn_radiation.pdbx_monochromatic_or_laue_m_l'
+  Mandatory item '_diffrn_radiation.pdbx_monochromatic_or_laue_m_l' is missing
+
+ERROR: Line 9, Item '_diffrn_radiation.pdbx_scattering_type'
+  Mandatory item '_diffrn_radiation.pdbx_scattering_type' is missing
 
 ERROR: Line 6, Item '_diffrn_source.diffrn_id'
   Child item '_diffrn_source.diffrn_id' has values but parent category 'diffrn' is missing
 
 ERROR: Line 6, Item '_diffrn_source.pdbx_wavelength_list'
   Wavelength list is inconsistent with diffraction protocol 'LAUE'; provide multiple wavelengths or a wavelength range.
+
+ERROR: Line 4, Item '_diffrn_source.source'
+  Mandatory item '_diffrn_source.source' is missing
+
+ERROR: Line 4, Item '_diffrn_source.type'
+  Mandatory item '_diffrn_source.type' is missing
 
 {
   "errors": [
@@ -13528,6 +15951,24 @@ ERROR: Line 6, Item '_diffrn_source.pdbx_wavelength_list'
       "column": 0,
       "start_char": 0,
       "end_char": 1
+    },
+    {
+      "line": 9,
+      "item": "_diffrn_radiation.pdbx_monochromatic_or_laue_m_l",
+      "message": "Mandatory item '_diffrn_radiation.pdbx_monochromatic_or_laue_m_l' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 9,
+      "item": "_diffrn_radiation.pdbx_scattering_type",
+      "message": "Mandatory item '_diffrn_radiation.pdbx_scattering_type' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
     },
     {
       "line": 6,
@@ -13544,6 +15985,24 @@ ERROR: Line 6, Item '_diffrn_source.pdbx_wavelength_list'
       "message": "Wavelength list is inconsistent with diffraction protocol 'LAUE'; provide multiple wavelengths or a wavelength range.",
       "severity": "error",
       "column": 1,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 4,
+      "item": "_diffrn_source.source",
+      "message": "Mandatory item '_diffrn_source.source' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 4,
+      "item": "_diffrn_source.type",
+      "message": "Mandatory item '_diffrn_source.type' is missing",
+      "severity": "error",
+      "column": null,
       "start_char": null,
       "end_char": null
     }
@@ -13962,13 +16421,25 @@ EXIT_CODE: 1
 FILE: test_procedural_diffrn_wavelength_valid_single.cif
 --------------------------------------------------------------------------------
 
-Found 2 validation issue(s):
+Found 6 validation issue(s):
 
 ERROR: Line 11, Item '_diffrn_radiation.diffrn_id'
   Child item '_diffrn_radiation.diffrn_id' has values but parent category 'diffrn' is missing
 
+ERROR: Line 9, Item '_diffrn_radiation.pdbx_monochromatic_or_laue_m_l'
+  Mandatory item '_diffrn_radiation.pdbx_monochromatic_or_laue_m_l' is missing
+
+ERROR: Line 9, Item '_diffrn_radiation.pdbx_scattering_type'
+  Mandatory item '_diffrn_radiation.pdbx_scattering_type' is missing
+
 ERROR: Line 6, Item '_diffrn_source.diffrn_id'
   Child item '_diffrn_source.diffrn_id' has values but parent category 'diffrn' is missing
+
+ERROR: Line 4, Item '_diffrn_source.source'
+  Mandatory item '_diffrn_source.source' is missing
+
+ERROR: Line 4, Item '_diffrn_source.type'
+  Mandatory item '_diffrn_source.type' is missing
 
 {
   "errors": [
@@ -13982,6 +16453,24 @@ ERROR: Line 6, Item '_diffrn_source.diffrn_id'
       "end_char": 1
     },
     {
+      "line": 9,
+      "item": "_diffrn_radiation.pdbx_monochromatic_or_laue_m_l",
+      "message": "Mandatory item '_diffrn_radiation.pdbx_monochromatic_or_laue_m_l' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 9,
+      "item": "_diffrn_radiation.pdbx_scattering_type",
+      "message": "Mandatory item '_diffrn_radiation.pdbx_scattering_type' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
       "line": 6,
       "item": "_diffrn_source.diffrn_id",
       "message": "Child item '_diffrn_source.diffrn_id' has values but parent category 'diffrn' is missing",
@@ -13989,6 +16478,24 @@ ERROR: Line 6, Item '_diffrn_source.diffrn_id'
       "column": 0,
       "start_char": 0,
       "end_char": 1
+    },
+    {
+      "line": 4,
+      "item": "_diffrn_source.source",
+      "message": "Mandatory item '_diffrn_source.source' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 4,
+      "item": "_diffrn_source.type",
+      "message": "Mandatory item '_diffrn_source.type' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
     }
   ],
   "metadata_completeness": {
@@ -14398,9 +16905,23 @@ EXIT_CODE: 1
 FILE: test_procedural_entity_poly_edge_normal_sequence.cif
 --------------------------------------------------------------------------------
 
-Validation passed! No errors found.
+Found 1 validation issue(s):
+
+ERROR: Line 6, Item '_entity.pdbx_description'
+  Mandatory item '_entity.pdbx_description' is missing
+
 {
-  "errors": [],
+  "errors": [
+    {
+      "line": 6,
+      "item": "_entity.pdbx_description",
+      "message": "Mandatory item '_entity.pdbx_description' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    }
+  ],
   "metadata_completeness": {
     "percentage": 6.1,
     "filled_count": 3,
@@ -14615,19 +17136,31 @@ Validation passed! No errors found.
   }
 }
 
-EXIT_CODE: 0
+EXIT_CODE: 1
 
 --------------------------------------------------------------------------------
 FILE: test_procedural_entity_poly_warning_homopolymer_ala.cif
 --------------------------------------------------------------------------------
 
-Found 1 validation issue(s):
+Found 2 validation issue(s):
+
+ERROR: Line 6, Item '_entity.pdbx_description'
+  Mandatory item '_entity.pdbx_description' is missing
 
 WARNING: Line 18, Item '_entity_poly.pdbx_seq_one_letter_code'
   We detected one or more chain(s) composed only of poly-ALA. If the residues have poorly defined side chains, they should be called by the register. If the register is unknown, the residues should be called UNK rather than ALA.
 
 {
   "errors": [
+    {
+      "line": 6,
+      "item": "_entity.pdbx_description",
+      "message": "Mandatory item '_entity.pdbx_description' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
     {
       "line": 18,
       "item": "_entity_poly.pdbx_seq_one_letter_code",
@@ -14858,13 +17391,25 @@ EXIT_CODE: 1
 FILE: test_procedural_entity_poly_warning_stretch_ala.cif
 --------------------------------------------------------------------------------
 
-Found 1 validation issue(s):
+Found 2 validation issue(s):
+
+ERROR: Line 6, Item '_entity.pdbx_description'
+  Mandatory item '_entity.pdbx_description' is missing
 
 WARNING: Line 18, Item '_entity_poly.pdbx_seq_one_letter_code'
   We detected one or more chain(s) containing stretches of poly-ALA. If the residues have poorly defined side chains, they should be called by the register.
 
 {
   "errors": [
+    {
+      "line": 6,
+      "item": "_entity.pdbx_description",
+      "message": "Mandatory item '_entity.pdbx_description' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
     {
       "line": 18,
       "item": "_entity_poly.pdbx_seq_one_letter_code",
@@ -21620,10 +24165,16 @@ EXIT_CODE: 1
 FILE: test_type_checks_pdb_id_and_date.cif
 --------------------------------------------------------------------------------
 
-Found 4 validation issue(s):
+Found 6 validation issue(s):
 
 ERROR: Line 9, Item '_pdbx_database_status.'
   Duplicate category 'pdbx_database_status' (first occurrence at line 8)
+
+ERROR: Line 8, Item '_pdbx_database_status.dep_release_code_coordinates'
+  Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing
+
+ERROR: Line 8, Item '_pdbx_database_status.dep_release_code_sequence'
+  Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing
 
 ERROR: Line 8, Item '_pdbx_database_status.entry_id'
   Mandatory item '_pdbx_database_status.entry_id' is missing
@@ -21640,6 +24191,24 @@ ERROR: Line 8, Item '_pdbx_database_status.status_code'
       "line": 9,
       "item": "_pdbx_database_status.",
       "message": "Duplicate category 'pdbx_database_status' (first occurrence at line 8)",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 8,
+      "item": "_pdbx_database_status.dep_release_code_coordinates",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_coordinates' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 8,
+      "item": "_pdbx_database_status.dep_release_code_sequence",
+      "message": "Mandatory item '_pdbx_database_status.dep_release_code_sequence' is missing",
       "severity": "error",
       "column": null,
       "start_char": null,
@@ -22140,7 +24709,7 @@ EXIT_CODE: 0
 FILE: test_value_out_of_range.cif
 --------------------------------------------------------------------------------
 
-Found 3 validation issue(s):
+Found 4 validation issue(s):
 
 ERROR: Line 7, Item '_em_image_scans.dimension_height'
   Value '0' does not match expected type 'positive_int'
@@ -22150,6 +24719,9 @@ ERROR: Line 8, Item '_em_image_scans.dimension_width'
 
 ERROR: Line 5, Item '_em_image_scans.image_recording_id'
   Mandatory item '_em_image_scans.image_recording_id' is missing
+
+ERROR: Line 5, Item '_em_image_scans.scanner_model'
+  Mandatory item '_em_image_scans.scanner_model' is missing
 
 {
   "errors": [
@@ -22175,6 +24747,15 @@ ERROR: Line 5, Item '_em_image_scans.image_recording_id'
       "line": 5,
       "item": "_em_image_scans.image_recording_id",
       "message": "Mandatory item '_em_image_scans.image_recording_id' is missing",
+      "severity": "error",
+      "column": null,
+      "start_char": null,
+      "end_char": null
+    },
+    {
+      "line": 5,
+      "item": "_em_image_scans.scanner_model",
+      "message": "Mandatory item '_em_image_scans.scanner_model' is missing",
       "severity": "error",
       "column": null,
       "start_char": null,
@@ -22410,5 +24991,5 @@ ERROR: Line 5, Item '_em_image_scans.image_recording_id'
 EXIT_CODE: 1
 
 ================================================================================
-SUMMARY: 55 file(s) had validation issues, 14 passed.
+SUMMARY: 67 file(s) had validation issues, 5 passed.
 ================================================================================

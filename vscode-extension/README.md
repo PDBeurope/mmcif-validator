@@ -2,7 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/PDBeurope/mmcif-validator/main/img/logo-validator.png" alt="PDBe mmCIF Validator" width="200">
 
-**Version 0.1.92**
+**Version 0.1.93**
 
 A Visual Studio Code extension to validate mmCIF/CIF files against the PDBx/mmCIF dictionary (or any CIF dictionary) with real-time error checking.
 
@@ -177,7 +177,7 @@ On Windows, use escaped backslashes, e.g. `"C:\\Python39\\python.exe"`.
 The validator performs the following checks:
 
 1. **Item Definition**: Verifies that items used in the mmCIF file are defined in the dictionary
-2. **Mandatory Items**: Checks that all mandatory items are present (only for categories that exist in the file)
+2. **Mandatory Items**: Checks that all mandatory items are present (only for categories that exist in the file), including `_pdbx_item.mandatory_code yes` (required for PDB deposition) as well as `_item.mandatory_code yes`. Unfilled deposition-mandatory values (`?`, `.`, empty) are reported as errors.
 3. **Enumeration Values**: Validates that item values match allowed enumerations (reported as errors)
    - Handles enumerations with only `_item_enumeration.value` (no detail field)
    - Handles enumerations with both `value` and `detail` fields
@@ -217,7 +217,7 @@ The validator reports issues with different severity levels:
 ### Errors (Red Underline)
 These are violations of mandatory constraints that must be fixed:
 
-- **Missing Mandatory Items**: Required items that are missing from categories present in the file
+- **Missing Mandatory Items**: Required items that are missing from categories present in the file, including deposition-mandatory items (`_pdbx_item.mandatory_code yes`) and unfilled `?` / `.` values for those items
 - **Enumeration Violations**: Values that don't match the controlled vocabulary/enumeration list
 - **Data Type Mismatches**: Values that don't match their expected data type
 - **Strictly Allowed Range Violations** (`_item_range`): Values outside the strictly allowed boundary conditions

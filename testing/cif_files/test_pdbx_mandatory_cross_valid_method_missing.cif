@@ -1,0 +1,12 @@
+data_TEST_PDBX_MANDATORY_CROSS_VALID_MISSING
+#
+_entry.id TEST_PDBX_MANDATORY_CROSS_VALID_MISSING
+#
+_refine.entry_id TEST_PDBX_MANDATORY_CROSS_VALID_MISSING
+_refine.pdbx_refine_id 'X-RAY DIFFRACTION'
+_refine.ls_d_res_high 1.90
+_refine.ls_d_res_low 8.00
+_refine.ls_number_reflns_obs 5000
+_refine.ls_percent_reflns_obs 80.0
+_refine.ls_R_factor_obs 0.200
+_refine.pdbx_method_to_determine_struct 'AB INITIO PHASING'

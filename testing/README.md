@@ -107,10 +107,13 @@ Each `test_*.cif` file is a small CIF chosen to trigger one or more specific val
 | **test_loop_row_mismatch.cif** | Loop with wrong number of values in a row (e.g. two columns, second row has one value). Exercises loop parsing and may surface row-length or parsing errors. |
 | **test_multiple_data_blocks.cif** | File contains two `data_` blocks. Expect: only the first block is validated (parser stops at second `data_`). |
 | **test_value_out_of_range.cif** | Item with type `positive_int` (e.g. `_em_image_scans.dimension_height`) set to `0`. Expect: type/range error. |
+| **test_item_range_exclusive_zero.cif** | Non-loop `_item_range.minimum 0.0` / `maximum .` (e.g. `_reflns_shell.pdbx_Rpim_I_all` / `pdbx_Rrim_I_all` = `0.000`). Expect: **error** that the value must be greater than `0.0` (DDL exclusive bound), not only an advisory warning. A second row with in-range values should not raise that hard range error. |
 | **test_type_checks_pdb_id_and_date.cif** | Invalid `pdb_id`-like value and invalid date format. Expect: type errors for the offending values. |
 | **test_enum_invalid_em_software.cif** | `_em_software.name` value not in the dictionary enumeration (e.g. `phaser_voyager.em_placement`). Expect: enumeration error (once `_pdbx_item_enumeration` is parsed). |
 | **test_asym_id_valid_invalid.cif** | `_atom_site.label_asym_id` / `auth_asym_id` with valid (e.g. `A`) and invalid (e.g. `B:Axp`) values. Expect: asym_id format errors for the invalid values when enforced. |
 | **test_mandatory_missing_item.cif** | Category present but a mandatory item missing (e.g. `entity` without `_entity.id`). Expect: missing mandatory item error. |
+| **test_pdbx_mandatory_cross_valid_method_missing.cif** | `refine` present but `_refine.pdbx_ls_cross_valid_method` omitted. This item is `_item.mandatory_code no` and `_pdbx_item.mandatory_code yes` (required for deposition). Expect: **error** that the mandatory item is missing. |
+| **test_pdbx_mandatory_cross_valid_method_unknown.cif** | Same item present as `?`. Expect: **error** "No value present for this mandatory item." |
 | **test_fk_missing_parent.cif** | Child references non-existent parent (e.g. `atom_site.label_asym_id` = `Z` with no `struct_asym.id` = `Z`). Expect: foreign-key / parent-missing error. |
 | **test_composite_fk_mismatch.cif** | Rows in `atom_site` that may violate composite key or parent–child consistency (e.g. label_asym_id + label_comp_id + label_seq_id). Exercises composite-FK logic. |
 | **test_undefined_items.cif** | Item names not in the dictionary (e.g. `_my_local_category.foo`, `_not_defined_item`). Expect: undefined-item warnings/errors as implemented. |
