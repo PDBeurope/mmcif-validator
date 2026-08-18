@@ -4,6 +4,16 @@ All notable changes to the PDBe mmCIF Validator extension will be documented in 
 
 # Released
 
+## [0.1.94] - 2026-08-18
+
+### Fixed
+
+- **Hover on semicolon-delimited loop values**: CIF hover now treats `;...;` text fields as a single loop value (STAR/CIF: `;` opens and closes only as the first character of a line). Continuation lines and the closing `;` are no longer counted as extra tokens, so later columns keep the correct tag. This fixes cases such as `_pdbx_seq_map_depositor_info`, where a following `entity_id` was shown as `one_letter_code`.
+
+### Changed
+
+- **Version bump**: Updated extension/package/docs version references from `0.1.93` to `0.1.94`.
+
 ## [0.1.93] - 2026-08-18
 
 ### Fixed

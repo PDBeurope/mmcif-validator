@@ -2,7 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/PDBeurope/mmcif-validator/main/img/logo-validator.png" alt="PDBe mmCIF Validator" width="200">
 
-**Version 0.1.93**
+**Version 0.1.94**
 
 A Visual Studio Code extension to validate mmCIF/CIF files against the PDBx/mmCIF dictionary (or any CIF dictionary) with real-time error checking.
 
