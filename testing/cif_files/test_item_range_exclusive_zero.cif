@@ -1,0 +1,13 @@
+data_TEST_ITEM_RANGE_EXCLUSIVE_ZERO
+#
+_entry.id TEST_ITEM_RANGE_EXCLUSIVE_ZERO
+#
+loop_
+_reflns_shell.pdbx_ordinal
+_reflns_shell.d_res_high
+_reflns_shell.d_res_low
+_reflns_shell.number_unique_obs
+_reflns_shell.pdbx_Rpim_I_all
+_reflns_shell.pdbx_Rrim_I_all
+1 1.90 2.00 15 0.000 0.000
+2 6.01 8.00 383 0.028 0.060

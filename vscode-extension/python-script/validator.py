@@ -39,6 +39,16 @@ class MmCIFValidator:
             if iv.value not in ('?', '.'):
                 yield iv
 
+    @staticmethod
+    def _is_unfilled_mandatory_value(value: Optional[str]) -> bool:
+        """Return True if a deposition-mandatory value is empty, unknown, or inapplicable."""
+        if value is None:
+            return True
+        stripped = value.strip()
+        if not stripped:
+            return True
+        return all(c in '.? ' for c in stripped)
+
     def _validate_duplicate_blocks(self) -> None:
         """Check for duplicate categories and duplicate items within/across blocks."""
         # Check for duplicate categories (same category in more than one block: loop or frame)
@@ -106,21 +116,35 @@ class MmCIFValidator:
                         severity="warning"
                     ))
 
-        # Check for missing mandatory items (only for categories that are present)
-        for mandatory_item in self.dictionary.mandatory_items:
+        # Check for missing mandatory items (only for categories that are present).
+        # Include _pdbx_item.mandatory_code yes (required for deposition) as well as
+        # _item.mandatory_code yes (required in archive entries).
+        pdbx_mandatory_items = self.dictionary.pdbx_mandatory_items
+        for mandatory_item in self.dictionary.mandatory_items | pdbx_mandatory_items:
+            if not (mandatory_item.startswith('_') and '.' in mandatory_item):
+                continue
+            category = mandatory_item[1:].split('.')[0]
+            if category not in self.mmcif.categories:
+                continue
             if mandatory_item not in self.mmcif.items:
-                # Extract category from item name (format: _category.item_name)
-                if mandatory_item.startswith('_') and '.' in mandatory_item:
-                    category = mandatory_item[1:].split('.')[0]
-                    # Only check if the category is present in the file
-                    if category in self.mmcif.categories:
-                        # Find approximate line number (search for category)
-                        line_num = self._find_category_line(category)
-                        self.errors.append(ValidationError(
-                            line=line_num if line_num > 0 else 1,
-                            item=mandatory_item,
-                            message=f"Mandatory item '{mandatory_item}' is missing",
-                            severity="error"
+                line_num = self._find_category_line(category)
+                self.errors.append(ValidationError(
+                    line=line_num if line_num > 0 else 1,
+                    item=mandatory_item,
+                    message=f"Mandatory item '{mandatory_item}' is missing",
+                    severity="error"
+                ))
+            elif mandatory_item in pdbx_mandatory_items:
+                for iv in self.mmcif.items[mandatory_item]:
+                    if self._is_unfilled_mandatory_value(iv.value):
+                        self.errors.append(self._create_validation_error(
+                            line_num=iv.line_num,
+                            item_name=mandatory_item,
+                            message="No value present for this mandatory item.",
+                            severity="error",
+                            global_column_index=iv.global_column_index,
+                            local_column_index=iv.local_column_index,
+                            value=iv.value
                         ))
 
     def _validate_item_values(self) -> None:
@@ -563,48 +587,21 @@ class MmCIFValidator:
         return True
     
     def _validate_range(self, value: str, min_val: Optional[str], max_val: Optional[str], item_type: Optional[str]) -> Optional[str]:
-        """Validate a value against its range constraints. Returns error message if invalid, None if valid."""
-        if not value or value in ['?', '.']:
-            return None  # Missing/unknown values are valid
-        
-        # Try to convert to numeric value for comparison
-        try:
-            # Determine if we should use int or float based on type or value format
-            if item_type in ['int', 'positive_int'] or (item_type is None and '.' not in value and 'e' not in value.lower()):
-                # Try integer first
-                try:
-                    num_value = int(value)
-                except ValueError:
-                    # If it's supposed to be int but can't parse, it's a type error, not range error
-                    return None
-            else:
-                # Use float
-                num_value = float(value)
-            
-            # Check minimum
-            if min_val is not None:
-                try:
-                    min_num = float(min_val) if '.' in min_val or 'e' in min_val.lower() else int(min_val)
-                    if num_value < min_num:
-                        return f"Value '{value}' is below minimum allowed value '{min_val}'"
-                except (ValueError, TypeError):
-                    pass  # If we can't parse min_val, skip this check
-            
-            # Check maximum
-            if max_val is not None:
-                try:
-                    max_num = float(max_val) if '.' in max_val or 'e' in max_val.lower() else int(max_val)
-                    if num_value > max_num:
-                        return f"Value '{value}' is above maximum allowed value '{max_val}'"
-                except (ValueError, TypeError):
-                    pass  # If we can't parse max_val, skip this check
-            
-        except (ValueError, TypeError):
-            # If we can't convert value to number, it's not a range error
-            # (it would be caught by type validation instead)
-            return None
-        
-        return None  # Value is within range
+        """Validate a value against a single (non-loop) min/max pair.
+
+        DDL treats range endpoints as exclusive unless a min==max row includes
+        that endpoint. A non-loop ``_item_range`` / ``_pdbx_item_range`` pair
+        cannot include such a row, so omitted bounds are unbounded ('.') and
+        present bounds are exclusive — matching loop-range handling and OneDep.
+        """
+        return self._validate_ranges(
+            value,
+            [{
+                'min': min_val if min_val is not None else '.',
+                'max': max_val if max_val is not None else '.',
+            }],
+            item_type,
+        )
     
     def _validate_ranges(self, value: str, ranges: List[Dict], item_type: Optional[str]) -> Optional[str]:
         """Validate a value against combined range constraints. Returns error message if invalid, None if valid.
