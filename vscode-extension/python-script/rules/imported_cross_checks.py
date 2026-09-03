@@ -18,6 +18,8 @@ from mmcif_types import ItemValue, ValidationError
 from rules.operators import compare_numeric
 from rules.utils import MISSING_VALUES, item_name_for_category, item_value_to_number, mmcif_datetime_tuple
 
+LINKED_FALLBACK_SINGLE_ROW = "single_row_if_key_missing"
+
 
 class ImportedCrossChecksRuleGroup:
     def __init__(
@@ -43,6 +45,54 @@ class ImportedCrossChecksRuleGroup:
     @staticmethod
     def _is_present(iv: Optional[ItemValue]) -> bool:
         return iv is not None and iv.value not in MISSING_VALUES
+
+    @staticmethod
+    def _join_key_missing(iv: Optional[ItemValue]) -> bool:
+        """True when a linked-join key is absent, placeholder, or blank."""
+        if iv is None or iv.value is None:
+            return True
+        value = str(iv.value).strip()
+        return not value or value in MISSING_VALUES
+
+    def _linked_matching_targets(
+        self,
+        source_rows: List[Dict[str, ItemValue]],
+        source_row: Dict[str, ItemValue],
+        source_key_item: str,
+        target_rows: List[Dict[str, ItemValue]],
+        target_key_item: str,
+        allow_single_row_fallback: bool,
+    ) -> List[Dict[str, ItemValue]]:
+        """
+        Pair source/target rows by join key.
+
+        Optional fallback (opt-in per rule): if the key match finds nothing, the
+        target category has exactly one row, and that row's join key is missing,
+        use the singleton target. Do not guess when keys are present and disagree,
+        or when there are multiple target rows.
+        """
+        source_key_iv = source_row.get(source_key_item)
+        source_key_missing = self._join_key_missing(source_key_iv)
+        matching: List[Dict[str, ItemValue]] = []
+        if not source_key_missing:
+            source_key = source_key_iv.value
+            matching = [
+                row for row in target_rows
+                if (
+                    not self._join_key_missing(row.get(target_key_item))
+                    and row[target_key_item].value == source_key
+                )
+            ]
+        if matching:
+            return matching
+        if not allow_single_row_fallback or len(target_rows) != 1:
+            return []
+        target_row = target_rows[0]
+        if not self._join_key_missing(target_row.get(target_key_item)):
+            return []
+        if source_key_missing and len(source_rows) != 1:
+            return []
+        return [target_row]
 
     @staticmethod
     def _severity_from_flag(flag: str) -> str:
@@ -396,20 +446,24 @@ class ImportedCrossChecksRuleGroup:
 
                     source_key_item = item_name_for_category(source_cat, cross)
                     target_key_item = item_name_for_category(target_cat, cross2)
-                    source_key_iv = source_row.get(source_key_item)
-                    if source_key_iv is None or source_key_iv.value in MISSING_VALUES:
-                        continue
-                    source_key = source_key_iv.value
+                    allow_single_row_fallback = (
+                        str(rule.get("fallback", "")).strip() == LINKED_FALLBACK_SINGLE_ROW
+                    )
 
                     target_rows = rows_cache.setdefault(target_cat, mmcif.get_category_rows(target_cat))
                     if not target_rows:
                         continue
-                    matching_targets = [
-                        row for row in target_rows
-                        if (row.get(target_key_item) is not None and row[target_key_item].value == source_key)
-                    ]
+                    matching_targets = self._linked_matching_targets(
+                        source_rows,
+                        source_row,
+                        source_key_item,
+                        target_rows,
+                        target_key_item,
+                        allow_single_row_fallback,
+                    )
                     if not matching_targets:
                         continue
+                    source_key_iv = source_row.get(source_key_item)
 
                     # Optional placeholder replacement for imported message templates.
                     target_display_value = ""
@@ -448,8 +502,15 @@ class ImportedCrossChecksRuleGroup:
                         continue
 
                     if failed:
-                        line = source_iv.line_num if source_iv else source_key_iv.line_num
-                        col = source_iv.global_column_index if source_iv else source_key_iv.global_column_index
+                        if source_iv is not None:
+                            line = source_iv.line_num
+                            col = source_iv.global_column_index
+                        elif source_key_iv is not None:
+                            line = source_key_iv.line_num
+                            col = source_key_iv.global_column_index
+                        else:
+                            line = self._row_anchor_line(source_row)
+                            col = None
                         errors.append(
                             ValidationError(
                                 line=line,

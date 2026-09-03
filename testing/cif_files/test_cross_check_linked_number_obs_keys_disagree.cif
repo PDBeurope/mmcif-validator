@@ -1,0 +1,16 @@
+data_test_linked_number_obs_keys_disagree
+#
+_entry.id TEST_LINKED_OBS_KEYS_DISAGREE
+#
+_diffrn.id 1
+#
+_reflns.pdbx_ordinal 1
+_reflns.pdbx_diffrn_id 1
+_reflns.number_obs 100
+#
+_refine.entry_id TEST_LINKED_OBS_KEYS_DISAGREE
+_refine.pdbx_refine_id 1
+_refine.pdbx_diffrn_id 2
+_refine.ls_number_reflns_obs 200
+_refine.pdbx_ls_cross_valid_method THROUGHOUT
+#

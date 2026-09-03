@@ -4,6 +4,20 @@ All notable changes to the PDBe mmCIF Validator extension will be documented in 
 
 # Released
 
+## [0.1.95] - 2026-09-03
+
+### Added
+
+- **Linked cross-check single-row fallback**: Rules in `cross_checks_linked_presence_and_comparison.json` may set `"fallback": "single_row_if_key_missing"`. If the join key does not match, the target category has exactly one row, and that row’s join key is missing, the singleton target is used. Opted in for `pdbx_diffrn_id` comparisons (including `_reflns.number_obs` vs `_refine.ls_number_reflns_obs`) so files that omit `_refine.pdbx_diffrn_id` are still checked. Keys that are present and disagree are not joined.
+
+### Added (tests)
+
+- Regression CIFs for missing-key fallback, matching keys, disagreeing keys, and two refine rows without a key.
+
+### Changed
+
+- **Version bump**: Updated extension/package/docs version references from `0.1.94` to `0.1.95`.
+
 ## [0.1.94] - 2026-08-18
 
 ### Fixed
