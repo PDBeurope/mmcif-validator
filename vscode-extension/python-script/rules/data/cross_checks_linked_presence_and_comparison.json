@@ -308,6 +308,7 @@
     {
       "cat": "refine",
       "cross": "pdbx_diffrn_id",
+      "fallback": "single_row_if_key_missing",
       "item": "ls_R_factor_R_free",
       "operator": ">",
       "text": "R_work is higher than R_free [{item2CrossValue}]",
@@ -318,6 +319,7 @@
     {
       "cat": "reflns",
       "cross": "pdbx_diffrn_id",
+      "fallback": "single_row_if_key_missing",
       "item": "d_resolution_high",
       "operator": "<",
       "text": "Refined high-resolution limit is higher than collected data high-resolution limit [{item2CrossValue}]"
@@ -325,6 +327,7 @@
     {
       "cat": "refine",
       "cross": "pdbx_diffrn_id",
+      "fallback": "single_row_if_key_missing",
       "item": "ls_d_res_low",
       "operator": ">",
       "text": "Refined high-resolution limit is lower than refined low-resolution limit [{item2CrossValue}]"
@@ -334,6 +337,7 @@
     {
       "cat": "reflns",
       "cross": "pdbx_diffrn_id",
+      "fallback": "single_row_if_key_missing",
       "item": "d_resolution_low",
       "operator": ">",
       "text": "Refined low-resolution limit is lower than collected data low-resolution limit [{item2CrossValue}]"
@@ -368,6 +372,7 @@
     {
       "cat": "refine",
       "cross": "pdbx_diffrn_id",
+      "fallback": "single_row_if_key_missing",
       "item": "ls_d_res_high",
       "operator": ">",
       "text": "Collected data high-resolution limit is lower than high-resolution limit used in refinement [{item2CrossValue}]"
@@ -377,6 +382,7 @@
     {
       "cat": "refine",
       "cross": "pdbx_diffrn_id",
+      "fallback": "single_row_if_key_missing",
       "item": "ls_d_res_low",
       "operator": "<",
       "text": "Collected data low-resolution limit is higher than low-resolution limit used in refinement [{item2CrossValue}]"
@@ -386,6 +392,7 @@
     {
       "cat": "refine",
       "cross": "pdbx_diffrn_id",
+      "fallback": "single_row_if_key_missing",
       "item": "ls_number_reflns_obs",
       "operator": "<",
       "text": "Total collected reflections is lower than total reflections used in refinement [{item2CrossValue}]"
@@ -395,6 +402,7 @@
     {
       "cat": "refine",
       "cross": "pdbx_diffrn_id",
+      "fallback": "single_row_if_key_missing",
       "item": "ls_number_reflns_obs",
       "operator": "<",
       "text": "Observed reflections is lower than total reflections used in refinement [{item2CrossValue}]"
@@ -404,6 +412,7 @@
     {
       "cat": "reflns",
       "cross": "pdbx_diffrn_id",
+      "fallback": "single_row_if_key_missing",
       "item": "d_resolution_high",
       "operator": "<",
       "text": "Shell high-resolution limit is higher than overall collected data high-resolution limit [{item2CrossValue}]"

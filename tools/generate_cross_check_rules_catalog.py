@@ -42,6 +42,7 @@ def main() -> None:
                     f"target={rule.get('cat')}.{rule.get('item')}; "
                     f"op={rule.get('operator')}; "
                     f"cross={rule.get('cross')}->{rule.get('cross2', rule.get('cross'))}; "
+                    f"fallback={rule.get('fallback') or ''}; "
                     f"warning={bool(rule.get('warning'))}; "
                     f"break={bool(rule.get('break'))}; "
                     f"text={rule.get('text', '')}"

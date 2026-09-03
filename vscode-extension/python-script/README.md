@@ -2,7 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/PDBeurope/mmcif-validator/main/img/logo-validator.png" alt="PDBe mmCIF Validator" width="200">
 
-**Version 0.1.94**
+**Version 0.1.95**
 
 A standalone Python script and PyPI package to validate mmCIF/CIF files against the PDBx/mmCIF dictionary or any CIF dictionary.
 
@@ -360,7 +360,7 @@ Imported cross-check families are stored as grouped JSON files under `rules/data
 - `cross_checks_pairwise_comparison.json`
 - `cross_checks_pairwise_date_order.json` — same-category date/datetime ordering (chronological constraints, currently `pdbx_database_status`)
 - `cross_checks_uniqueness.json` — duplicate detection for configured key columns within one category (e.g. `entity.id`)
-- `cross_checks_linked_presence_and_comparison.json`
+- `cross_checks_linked_presence_and_comparison.json` — linked rows are paired by `cross`/`cross2`. Rules may set **`fallback`: `single_row_if_key_missing`**: if the key match finds no row, the target category has exactly one row, and that row’s join key is missing (`?` / `.` / blank / omitted), use the singleton target. Keys that are present and disagree are not joined. Used for `pdbx_diffrn_id` checks (e.g. `_reflns.number_obs` vs `_refine.ls_number_reflns_obs`) when refinement software omits the PDBx id.
 - `cross_checks_conditional_required.json` — rules may include **`skip_if_any_category_present`** (list of category names): when any listed category has at least one row, the rule is skipped (e.g. skip legacy `refine.pdbx_starting_model` when `pdbx_initial_refinement_model` is present).
 - `cross_checks_conditional_regex.json`
 - `cross_checks_conditional_enumeration.json`

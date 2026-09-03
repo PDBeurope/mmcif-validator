@@ -1,0 +1,15 @@
+data_test_linked_number_obs_fallback_missing_refine_id
+#
+_entry.id TEST_LINKED_OBS_FALLBACK
+#
+_diffrn.id 1
+#
+_reflns.pdbx_ordinal 1
+_reflns.pdbx_diffrn_id 1
+_reflns.number_obs 68462
+#
+_refine.entry_id TEST_LINKED_OBS_FALLBACK
+_refine.pdbx_refine_id 1
+_refine.ls_number_reflns_obs 68663
+_refine.pdbx_ls_cross_valid_method THROUGHOUT
+#
