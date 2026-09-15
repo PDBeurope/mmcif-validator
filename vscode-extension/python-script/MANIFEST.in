@@ -1,0 +1,3 @@
+include completeness/*.list
+include rules/rule_groups.json
+recursive-include rules/data *.json

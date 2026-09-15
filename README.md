@@ -2,7 +2,7 @@
 
 <img src="img/logo-validator.png" alt="PDBe mmCIF Validator" width="200">
 
-**Version 0.1.95**
+**Version 0.1.96**
 
 Real-time VS Code extension, standalone Python tool, and online validator for mmCIF/CIF files.
 
@@ -133,6 +133,8 @@ See the [Python script README](vscode-extension/python-script/README.md) for det
 
 See the full [CHANGELOG](vscode-extension/CHANGELOG.md).
 
+Release **0.1.96** includes completeness category lists and cross-check JSON in the PyPI wheel, so `pip install` users get the same metadata completeness scoring as a source checkout.
+
 Release **0.1.95** adds a single-row join fallback for `pdbx_diffrn_id` linked cross-checks when the target row omits the PDBx id (for example `_reflns.number_obs` vs `_refine.ls_number_reflns_obs`).
 
 Release **0.1.94** fixes hover tag assignment in loops that contain semicolon-delimited text fields, so continuation lines and closing `;` are not counted as extra values.
@@ -147,7 +149,7 @@ Release **0.1.91** adds JSON-first procedural cross-checks, pairwise date-order 
 
 Pre-built VS Code extension packages (`.vsix`) are published on the [GitHub Releases](https://github.com/PDBeurope/mmcif-validator/releases) page. To install a specific version, download the `.vsix` from the desired release and install it via **Extensions → ⋯ → Install from VSIX...**.
 
-Releases are created from git tags (e.g. `v0.1.95`). Pushing a version tag triggers a GitHub Action that builds the extension and attaches the `.vsix` to the corresponding release.
+Releases are created from git tags (e.g. `v0.1.96`). Pushing a version tag triggers a GitHub Action that builds the extension and attaches the `.vsix` to the corresponding release.
 
 ## Contributing
 

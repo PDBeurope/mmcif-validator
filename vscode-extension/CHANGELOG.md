@@ -4,6 +4,16 @@ All notable changes to the PDBe mmCIF Validator extension will be documented in 
 
 # Released
 
+## [0.1.96] - 2026-09-15
+
+### Fixed
+
+- **PyPI package data**: Completeness category lists (`completeness/*.list`) and cross-check JSON (`rules/rule_groups.json`, `rules/data/*.json`) were omitted from the published wheel. A `pip install` then reported metadata completeness as 0% with `method_detected: null` (and skipped JSON-driven cross-checks). `pyproject.toml` now declares `package-data` and `MANIFEST.in` includes those files in sdist and wheel.
+
+### Changed
+
+- **Version bump**: Updated extension/package/docs version references from `0.1.95` to `0.1.96`.
+
 ## [0.1.95] - 2026-09-03
 
 ### Added
