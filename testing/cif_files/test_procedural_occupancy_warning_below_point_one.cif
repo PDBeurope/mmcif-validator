@@ -1,0 +1,25 @@
+data_test_procedural_occupancy_warning_below_point_one
+#
+_entry.id TEST_OCC_BELOW_POINT_ONE
+#
+loop_
+_atom_site.group_PDB
+_atom_site.id
+_atom_site.type_symbol
+_atom_site.label_atom_id
+_atom_site.label_alt_id
+_atom_site.label_comp_id
+_atom_site.label_asym_id
+_atom_site.label_entity_id
+_atom_site.label_seq_id
+_atom_site.Cartn_x
+_atom_site.Cartn_y
+_atom_site.Cartn_z
+_atom_site.occupancy
+_atom_site.B_iso_or_equiv
+_atom_site.auth_seq_id
+_atom_site.auth_asym_id
+_atom_site.pdbx_PDB_model_num
+ATOM 1 C CA . ALA A 1 1 0.000 0.000 0.000 0.05 15.00 1 A 1
+ATOM 2 C CB . ALA A 1 1 1.000 0.000 0.000 1.0 15.00 1 A 1
+#

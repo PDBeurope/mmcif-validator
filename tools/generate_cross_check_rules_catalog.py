@@ -196,6 +196,22 @@ def main() -> None:
                 str(check.get("category", "?")),
                 f"item={check.get('item')}; rules={check.get('rules')}; driver_item={check.get('driver_item', '')}",
             )
+        elif kind == "atom_site_occupancy":
+            add(
+                "procedural.atom_site_occupancy",
+                f"{check.get('category', 'atom_site')}.{check.get('item', 'occupancy')}",
+                f"over_one={check.get('over_one')}; below={check.get('below')}",
+            )
+        elif kind == "sequence_model_mismatch":
+            add(
+                "procedural.sequence_model_mismatch",
+                "atom_site vs entity_poly_seq",
+                (
+                    f"severity={check.get('severity')}; "
+                    f"mismatch={check.get('mismatch_message')}; "
+                    f"missing={check.get('missing_message')}"
+                ),
+            )
         else:
             add(f"procedural.{kind}", str(check.get("category", "?")), str(check))
 

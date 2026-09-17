@@ -1049,6 +1049,393 @@ class ImportedCrossChecksRuleGroup:
 
         return errors
 
+    @staticmethod
+    def _format_occupancy_number(value: float) -> str:
+        """Format occupancy for messages (strip trailing zeros, keep mmCIF-like decimals)."""
+        text = f"{round(float(value), 4):.4f}".rstrip("0").rstrip(".")
+        return text if text else "0"
+
+    @staticmethod
+    def _row_item_text(row: Dict[str, ItemValue], item: str, default: str = "") -> str:
+        iv = row.get(item)
+        if iv is None or iv.value in MISSING_VALUES:
+            return default
+        text = str(iv.value).strip()
+        return text if text else default
+
+    def _row_item_text_fallback(
+        self,
+        row: Dict[str, ItemValue],
+        category: str,
+        primary: str,
+        fallbacks: Optional[List[str]] = None,
+        default: str = "",
+    ) -> str:
+        names = [primary] + list(fallbacks or [])
+        for short in names:
+            text = self._row_item_text(row, item_name_for_category(category, short), default="")
+            if text:
+                return text
+        return default
+
+    def _atom_site_occupancy_identity(
+        self,
+        row: Dict[str, ItemValue],
+        category: str,
+    ) -> Optional[Tuple[Tuple[str, str, str, str, str], Dict[str, str]]]:
+        """
+        Identify an atom for occupancy summing: model, chain, residue, insertion, atom name.
+
+        Alternate locations of the same atom are grouped together. Residue name is for
+        messages only, so dual-conformation residue types still share occupancy.
+        """
+        atom = self._row_item_text_fallback(
+            row, category, "label_atom_id", ["auth_atom_id"], default=""
+        )
+        if not atom:
+            return None
+        model = self._row_item_text_fallback(
+            row, category, "pdbx_PDB_model_num", default="1"
+        )
+        chain = self._row_item_text_fallback(
+            row, category, "auth_asym_id", ["label_asym_id"], default="?"
+        )
+        seq = self._row_item_text_fallback(
+            row, category, "auth_seq_id", ["label_seq_id"], default="?"
+        )
+        ins = self._row_item_text_fallback(row, category, "pdbx_PDB_ins_code", default="")
+        comp = self._row_item_text_fallback(
+            row, category, "auth_comp_id", ["label_comp_id"], default="?"
+        )
+        residue = f"{seq}{ins}" if ins else seq
+        display = {
+            "model": model,
+            "chain": chain,
+            "seq": seq,
+            "ins": ins,
+            "residue": residue,
+            "comp": comp,
+            "atom": atom,
+        }
+        return (model, chain, seq, ins, atom), display
+
+    def _run_atom_site_occupancy(
+        self,
+        mmcif,
+        rows_cache: Dict[str, List[Dict[str, ItemValue]]],
+        check: dict,
+    ) -> List[ValidationError]:
+        """
+        Occupancy checks on _atom_site:
+
+        - Sum occupancy over alternate locations of the same atom; total > 1.0 is an error.
+        - An individual occupancy value below 0.1 is a warning.
+        """
+        errors: List[ValidationError] = []
+        category = str(check.get("category", "atom_site")).strip() or "atom_site"
+        item_short = str(check.get("item", "occupancy")).strip() or "occupancy"
+        occ_item = item_name_for_category(category, item_short)
+        rows = rows_cache.setdefault(category, mmcif.get_category_rows(category))
+        if not rows:
+            return errors
+
+        over_one = check.get("over_one")
+        below = check.get("below")
+        groups: Dict[
+            Tuple[str, str, str, str, str],
+            List[Tuple[ItemValue, float, Dict[str, str]]],
+        ] = defaultdict(list)
+
+        for row in rows:
+            occ_iv = row.get(occ_item)
+            occ = item_value_to_number(occ_iv) if occ_iv is not None else None
+            if occ is None:
+                continue
+            identity = self._atom_site_occupancy_identity(row, category)
+            if identity is None:
+                continue
+            key, display = identity
+            groups[key].append((occ_iv, occ, display))
+
+        if isinstance(over_one, dict):
+            try:
+                limit = float(over_one.get("limit", 1.0))
+            except (TypeError, ValueError):
+                limit = 1.0
+            severity = self._severity_from_flag(str(over_one.get("severity", "hard")))
+            template = str(
+                over_one.get(
+                    "message",
+                    "Chain [{chain}] residue [{residue}] [{comp}] atom [{atom}] in model [{model}] has a total occupancy of [{total}].",
+                )
+            )
+            for members in groups.values():
+                total = sum(occ for _iv, occ, _display in members)
+                total_rounded = round(total, 4)
+                if total_rounded <= limit:
+                    continue
+                display = members[0][2]
+                message = self._render_message_template(
+                    template,
+                    chain=display["chain"],
+                    residue=display["residue"],
+                    comp=display["comp"],
+                    atom=display["atom"],
+                    model=display["model"],
+                    total=self._format_occupancy_number(total_rounded),
+                )
+                for occ_iv, _occ, _display in members:
+                    errors.append(
+                        ValidationError(
+                            line=occ_iv.line_num,
+                            item=occ_item,
+                            message=message,
+                            severity=severity,  # type: ignore[arg-type]
+                            column=occ_iv.global_column_index,
+                        )
+                    )
+
+        if isinstance(below, dict):
+            try:
+                limit = float(below.get("limit", 0.1))
+            except (TypeError, ValueError):
+                limit = 0.1
+            severity = self._severity_from_flag(str(below.get("severity", "soft")))
+            template = str(
+                below.get(
+                    "message",
+                    "Chain [{chain}] residue [{residue}] [{comp}] atom [{atom}] in model [{model}] has occupancy [{occupancy}] (below 0.1).",
+                )
+            )
+            for members in groups.values():
+                group_total = sum(occ for _iv, occ, _display in members)
+                for occ_iv, occ, display in members:
+                    if round(occ, 4) >= limit:
+                        continue
+                    message = self._render_message_template(
+                        template,
+                        chain=display["chain"],
+                        residue=display["residue"],
+                        comp=display["comp"],
+                        atom=display["atom"],
+                        model=display["model"],
+                        occupancy=self._format_occupancy_number(occ),
+                        total=self._format_occupancy_number(group_total),
+                    )
+                    errors.append(
+                        ValidationError(
+                            line=occ_iv.line_num,
+                            item=occ_item,
+                            message=message,
+                            severity=severity,  # type: ignore[arg-type]
+                            column=occ_iv.global_column_index,
+                        )
+                    )
+
+        return errors
+
+    @staticmethod
+    def _parse_seq_number(value: str) -> Optional[int]:
+        try:
+            return int(str(value).strip())
+        except (TypeError, ValueError):
+            return None
+
+    def _run_sequence_model_mismatch(
+        self,
+        mmcif,
+        rows_cache: Dict[str, List[Dict[str, ItemValue]]],
+        check: dict,
+    ) -> List[ValidationError]:
+        """
+        Compare modeled polymer residues with entity_poly_seq.
+
+        Unmodelled sequence residues are ignored. A modeled residue whose
+        comp_id disagrees with the sequence is an error (exact match). Mapping uses label_seq_id when
+        present; otherwise a sliding window of residue types (for files that
+        omit label_seq_id, as in some deposition uploads).
+        """
+        errors: List[ValidationError] = []
+        severity = self._severity_from_flag(str(check.get("severity", "hard")))
+        mismatch_template = str(
+            check.get(
+                "mismatch_message",
+                "Residue ([{chain}] [{comp}] [{residue}]) does not match with the residue '[{sequence_comp}]' in sequence.",
+            )
+        )
+        missing_template = str(
+            check.get(
+                "missing_message",
+                "Residue ([{chain}] [{comp}] [{residue}]) is not present in the sequence.",
+            )
+        )
+
+        entity_rows = rows_cache.setdefault("entity", mmcif.get_category_rows("entity"))
+        entity_types: Dict[str, str] = {}
+        for row in entity_rows:
+            eid = self._row_item_text(row, "_entity.id")
+            etype = self._row_item_text(row, "_entity.type")
+            if eid:
+                entity_types[eid] = etype.lower()
+
+        poly_rows = rows_cache.setdefault("entity_poly_seq", mmcif.get_category_rows("entity_poly_seq"))
+        poly_by_entity: Dict[str, List[Tuple[int, str]]] = defaultdict(list)
+        poly_mons: Dict[Tuple[str, int], Set[str]] = defaultdict(set)
+        for row in poly_rows:
+            eid = self._row_item_text(row, "_entity_poly_seq.entity_id")
+            num = self._parse_seq_number(self._row_item_text(row, "_entity_poly_seq.num"))
+            mon = self._row_item_text(row, "_entity_poly_seq.mon_id").upper()
+            if not eid or num is None or not mon:
+                continue
+            poly_by_entity[eid].append((num, mon))
+            poly_mons[(eid, num)].add(mon)
+        for eid in poly_by_entity:
+            poly_by_entity[eid].sort(key=lambda item: item[0])
+
+        if not poly_mons:
+            return errors
+
+        atom_rows = rows_cache.setdefault("atom_site", mmcif.get_category_rows("atom_site"))
+        residues_by_chain: Dict[str, Dict[Tuple[int, str], dict]] = defaultdict(dict)
+        for row in atom_rows:
+            entity_id = self._row_item_text_fallback(
+                row, "atom_site", "label_entity_id", default=""
+            )
+            if entity_id not in poly_by_entity:
+                continue
+            if entity_types.get(entity_id) in {"non-polymer", "water"}:
+                continue
+            label_comp_iv = row.get("_atom_site.label_comp_id")
+            auth_comp_iv = row.get("_atom_site.auth_comp_id")
+            if label_comp_iv is not None and label_comp_iv.value not in MISSING_VALUES:
+                comp_iv = label_comp_iv
+                comp_item = "_atom_site.label_comp_id"
+                comp = str(label_comp_iv.value).strip().upper()
+            elif auth_comp_iv is not None and auth_comp_iv.value not in MISSING_VALUES:
+                comp_iv = auth_comp_iv
+                comp_item = "_atom_site.auth_comp_id"
+                comp = str(auth_comp_iv.value).strip().upper()
+            else:
+                continue
+            chain = self._row_item_text_fallback(
+                row, "atom_site", "auth_asym_id", ["label_asym_id"], default="?"
+            )
+            auth_seq_text = self._row_item_text_fallback(
+                row, "atom_site", "auth_seq_id", ["label_seq_id"], default=""
+            )
+            auth_seq = self._parse_seq_number(auth_seq_text)
+            if auth_seq is None:
+                continue
+            ins = self._row_item_text_fallback(row, "atom_site", "pdbx_PDB_ins_code", default="")
+            label_seq = self._parse_seq_number(
+                self._row_item_text_fallback(row, "atom_site", "label_seq_id", default="")
+            )
+            atom_name = self._row_item_text_fallback(
+                row, "atom_site", "label_atom_id", ["auth_atom_id"], default=""
+            )
+            key = (auth_seq, ins)
+            current = residues_by_chain[chain].get(key)
+            prefer_anchor = atom_name.upper() in {"CA", "C1'", "P"}
+            if current is None:
+                residues_by_chain[chain][key] = {
+                    "chain": chain,
+                    "entity_id": entity_id,
+                    "auth_seq": auth_seq,
+                    "ins": ins,
+                    "comp": comp,
+                    "label_seq": label_seq,
+                    "anchor": comp_iv,
+                    "comp_item": comp_item,
+                    "has_preferred_anchor": prefer_anchor,
+                }
+            else:
+                if current["label_seq"] is None and label_seq is not None:
+                    current["label_seq"] = label_seq
+                if prefer_anchor and not current["has_preferred_anchor"]:
+                    current["anchor"] = comp_iv
+                    current["comp_item"] = comp_item
+                    current["has_preferred_anchor"] = True
+
+        def _residue_display(res: dict) -> str:
+            ins = res["ins"]
+            return f"{res['auth_seq']}{ins}" if ins else str(res["auth_seq"])
+
+        def _emit_mismatch(res: dict, sequence_comp: Optional[str]) -> None:
+            residue = _residue_display(res)
+            if sequence_comp:
+                message = self._render_message_template(
+                    mismatch_template,
+                    chain=res["chain"],
+                    comp=res["comp"],
+                    residue=residue,
+                    sequence_comp=sequence_comp,
+                )
+            else:
+                message = self._render_message_template(
+                    missing_template,
+                    chain=res["chain"],
+                    comp=res["comp"],
+                    residue=residue,
+                    sequence_comp="",
+                )
+            anchor = res["anchor"]
+            errors.append(
+                ValidationError(
+                    line=anchor.line_num,
+                    item=res["comp_item"],
+                    message=message,
+                    severity=severity,  # type: ignore[arg-type]
+                    column=anchor.global_column_index,
+                )
+            )
+
+        for chain, residue_map in residues_by_chain.items():
+            residues = [residue_map[k] for k in sorted(residue_map)]
+            if not residues:
+                continue
+            mapped = [res for res in residues if res["label_seq"] is not None]
+            if mapped and len(mapped) == len(residues):
+                for res in residues:
+                    allowed = poly_mons.get((res["entity_id"], res["label_seq"]))
+                    if not allowed:
+                        _emit_mismatch(res, None)
+                        continue
+                    if res["comp"] in allowed:
+                        continue
+                    sequence_comp = sorted(allowed)[0]
+                    _emit_mismatch(res, sequence_comp)
+                continue
+
+            # No (complete) label_seq_id: sliding window of residue types vs entity_poly_seq.
+            entity_id = residues[0]["entity_id"]
+            seq = [mon for _num, mon in poly_by_entity.get(entity_id, [])]
+            if not seq:
+                continue
+            model = residues
+            n, m = len(seq), len(model)
+            best_s = 0
+            best_score = -1
+            max_s = (n - m + 1) if m <= n else 1
+            for start in range(max(max_s, 1)):
+                score = 0
+                for j, res in enumerate(model):
+                    idx = start + j
+                    if idx < n and seq[idx] == res["comp"]:
+                        score += 1
+                if score > best_score:
+                    best_score = score
+                    best_s = start
+            for j, res in enumerate(model):
+                idx = best_s + j
+                if idx >= n:
+                    _emit_mismatch(res, None)
+                    continue
+                if seq[idx] == res["comp"]:
+                    continue
+                _emit_mismatch(res, seq[idx])
+
+        return errors
+
     def _run_procedural_validators(self, mmcif, rows_cache: Dict[str, List[Dict[str, ItemValue]]]) -> List[ValidationError]:
         """
         Phase 2 procedural validator migration.
@@ -1457,6 +1844,20 @@ class ImportedCrossChecksRuleGroup:
                             column=value_iv.global_column_index,
                         )
                     )
+
+        for check in checks:
+            if not isinstance(check, dict):
+                continue
+            if str(check.get("kind", "")).strip().lower() != "atom_site_occupancy":
+                continue
+            errors.extend(self._run_atom_site_occupancy(mmcif, rows_cache, check))
+
+        for check in checks:
+            if not isinstance(check, dict):
+                continue
+            if str(check.get("kind", "")).strip().lower() != "sequence_model_mismatch":
+                continue
+            errors.extend(self._run_sequence_model_mismatch(mmcif, rows_cache, check))
 
         return errors
 

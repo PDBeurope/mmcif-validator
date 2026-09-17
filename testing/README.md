@@ -8,6 +8,9 @@ This directory contains the regression test suite for the mmCIF validator: test 
 testing/
 ├── README.md                    # This file
 ├── run_validation_suite.py      # Run validator on all CIFs, save/compare output
+├── test_occupancy_checks.py     # Occupancy procedural checks (no dictionary required)
+├── test_sequence_model_mismatch.py
+├── test_linked_single_row_fallback.py
 ├── validation_baseline.txt       # Saved reference output (generate with --generate-baseline)
 ├── validation_output.txt        # Latest run output (compare to baseline)
 └── cif_files/                   # All test .cif files
@@ -25,6 +28,13 @@ python testing/run_validation_suite.py
 
 # Generate or refresh the baseline (do this once before code changes, or to accept new behaviour)
 python testing/run_validation_suite.py --generate-baseline
+```
+
+Targeted occupancy checks (no dictionary download):
+
+```bash
+python testing/test_occupancy_checks.py
+python testing/test_sequence_model_mismatch.py
 ```
 
 Or from the `testing/` directory:
@@ -165,6 +175,17 @@ Each `test_*.cif` file is a small CIF chosen to trigger one or more specific val
 | **test_procedural_entity_poly_warning_homopolymer_ala.cif** | Procedural validator migration: `entity_poly.pdbx_seq_one_letter_code` all ALA (homopolymer). Expect: **warning** (poly-ALA homopolymer guidance). |
 | **test_procedural_entity_poly_warning_stretch_ala.cif** | Procedural validator migration: sequence contains ten consecutive `A` (poly-ALA stretch) but is not all-ALA. Expect: **warning** (stretch guidance). |
 | **test_procedural_entity_poly_edge_normal_sequence.cif** | Procedural validator edge case: ordinary one-letter sequence with no poly-ALA homopolymer or 10+ `A` stretch. Expect: no procedural entity_poly sequence warnings. |
+| **test_procedural_occupancy_invalid_total_over_one.cif** | Occupancy: three alternate locations of the same atom with occupancies 0.3 + 0.4 + 0.4. Expect: **error** that total occupancy is 1.1 (reported on each contributing occupancy). A fully occupied atom in the same file should not raise this occupancy error. |
+| **test_procedural_occupancy_valid_altlocs_sum_to_one.cif** | Occupancy positive case: two altlocs at 0.5 + 0.5. Expect: no total-occupancy error. |
+| **test_procedural_occupancy_warning_below_point_one.cif** | Occupancy: one atom with occupancy `0.05` and another at `1.0`. Expect: **warning** for occupancy below 0.1 on the low-occupancy atom only. |
+| **test_procedural_occupancy_edge_exactly_point_one.cif** | Occupancy edge case: occupancy exactly `0.1`. Expect: no low-occupancy warning. |
+| **test_procedural_occupancy_edge_exactly_one.cif** | Occupancy edge case: occupancy exactly `1.0` with no altlocs. Expect: no occupancy total-over-1 error. |
+| **test_procedural_occupancy_edge_missing.cif** | Occupancy edge case: occupancy `?`. Expect: no occupancy total or low-occupancy check. |
+| **test_procedural_sequence_mismatch_invalid.cif** | Sequence–model mismatch: `_atom_site.label_seq_id` 1 is `ASP` but `_entity_poly_seq` 1 is `GLU`. Expect: **error** `Residue (A ASP 145) does not match with the residue 'GLU' in sequence.` (one error per residue, not per atom). |
+| **test_procedural_sequence_mismatch_valid.cif** | Sequence–model positive case: modeled `GLU` matches sequence `GLU`. Expect: no sequence-mismatch error. |
+| **test_procedural_sequence_mismatch_unmodelled_ok.cif** | Sequence has residues 1–3; only 1 and 3 are modeled and they match. Expect: no error for the unmodelled middle residue. |
+| **test_procedural_sequence_mismatch_no_label_seq.cif** | Sequence–model mismatch when `label_seq_id` is `.`: residue types are window-aligned to `entity_poly_seq`. Expect: **error** for modeled `ASP` vs sequence `GLU`. |
+| **test_procedural_sequence_mismatch_mse_met.cif** | Sequence `MET` vs modeled `MSE`. Expect: **error** (`comp_id` must match exactly). |
 
 ---
 

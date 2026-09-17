@@ -2,7 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/PDBeurope/mmcif-validator/main/img/logo-validator.png" alt="PDBe mmCIF Validator" width="200">
 
-**Version 0.1.96**
+**Version 0.1.97**
 
 A Visual Studio Code extension to validate mmCIF/CIF files against the PDBx/mmCIF dictionary (or any CIF dictionary) with real-time error checking.
 
@@ -37,6 +37,8 @@ The validator performs comprehensive checks including:
 - Enumeration value validation
 - Data type validation (including regex patterns from dictionary)
 - Range constraints (strictly allowed vs advisory)
+- Atom occupancy (total occupancy over 1.0 is an error; occupancy below 0.1 is a warning)
+- Sequence–model mismatch (modeled residue type vs `_entity_poly_seq`; unmodelled residues are ignored)
 - Parent/child category relationships
 - Foreign key integrity
 - Composite key validation
