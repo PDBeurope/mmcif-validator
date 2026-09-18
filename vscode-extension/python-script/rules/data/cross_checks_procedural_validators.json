@@ -160,6 +160,29 @@
       ]
     },
     {
+      "kind": "atom_site_occupancy",
+      "id": "atom_site_occupancy",
+      "category": "atom_site",
+      "item": "occupancy",
+      "over_one": {
+        "limit": 1.0,
+        "severity": "hard",
+        "message": "Chain [{chain}] residue [{residue}] [{comp}] atom [{atom}] in model [{model}] has a total occupancy of [{total}]."
+      },
+      "below": {
+        "limit": 0.1,
+        "severity": "soft",
+        "message": "Chain [{chain}] residue [{residue}] [{comp}] atom [{atom}] in model [{model}] has occupancy [{occupancy}] (below 0.1)."
+      }
+    },
+    {
+      "kind": "sequence_model_mismatch",
+      "id": "atom_site_vs_entity_poly_seq",
+      "severity": "hard",
+      "mismatch_message": "Residue ([{chain}] [{comp}] [{residue}]) does not match with the residue '[{sequence_comp}]' in sequence.",
+      "missing_message": "Residue ([{chain}] [{comp}] [{residue}]) is not present in the sequence."
+    },
+    {
       "kind": "sequence_predicate_warning",
       "id": "entity_poly_pdbx_seq_one_letter_code_poly_ala",
       "category": "entity_poly",

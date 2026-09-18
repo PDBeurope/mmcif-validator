@@ -2,7 +2,7 @@
 
 <img src="img/logo-validator.png" alt="PDBe mmCIF Validator" width="200">
 
-**Version 0.1.96**
+**Version 0.1.97**
 
 Real-time VS Code extension, standalone Python tool, and online validator for mmCIF/CIF files.
 
@@ -60,6 +60,8 @@ The validator performs comprehensive checks including:
 - Enumeration value validation
 - Data type validation (including regex patterns from dictionary)
 - Range constraints (strictly allowed vs advisory)
+- Atom occupancy (total occupancy over 1.0 is an error; occupancy below 0.1 is a warning)
+- Sequence–model mismatch (modeled residue type vs `_entity_poly_seq`; unmodelled residues are ignored)
 - Parent/child category relationships
 - Foreign key integrity
 - Composite key validation
@@ -133,6 +135,8 @@ See the [Python script README](vscode-extension/python-script/README.md) for det
 
 See the full [CHANGELOG](vscode-extension/CHANGELOG.md).
 
+Release **0.1.97** adds occupancy checks (total occupancy of an atom over 1.0 is an error; occupancy below 0.1 is a warning) and sequence–model mismatch (a modeled residue that disagrees with `_entity_poly_seq` is an error; unmodelled sequence residues are ignored).
+
 Release **0.1.96** includes completeness category lists and cross-check JSON in the PyPI wheel, so `pip install` users get the same metadata completeness scoring as a source checkout.
 
 Release **0.1.95** adds a single-row join fallback for `pdbx_diffrn_id` linked cross-checks when the target row omits the PDBx id (for example `_reflns.number_obs` vs `_refine.ls_number_reflns_obs`).
@@ -149,7 +153,7 @@ Release **0.1.91** adds JSON-first procedural cross-checks, pairwise date-order 
 
 Pre-built VS Code extension packages (`.vsix`) are published on the [GitHub Releases](https://github.com/PDBeurope/mmcif-validator/releases) page. To install a specific version, download the `.vsix` from the desired release and install it via **Extensions → ⋯ → Install from VSIX...**.
 
-Releases are created from git tags (e.g. `v0.1.96`). Pushing a version tag triggers a GitHub Action that builds the extension and attaches the `.vsix` to the corresponding release.
+Releases are created from git tags (e.g. `v0.1.97`). Pushing a version tag triggers a GitHub Action that builds the extension and attaches the `.vsix` to the corresponding release.
 
 ## Contributing
 

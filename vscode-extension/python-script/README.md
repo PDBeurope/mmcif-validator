@@ -2,7 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/PDBeurope/mmcif-validator/main/img/logo-validator.png" alt="PDBe mmCIF Validator" width="200">
 
-**Version 0.1.96**
+**Version 0.1.97**
 
 A standalone Python script and PyPI package to validate mmCIF/CIF files against the PDBx/mmCIF dictionary or any CIF dictionary.
 
@@ -326,6 +326,8 @@ The validator performs the following checks:
    - Example: If `oper_expression` is `(1-60)`, validates that operation IDs 1 through 60 all exist
 10. **Category-aware validation**: Only checks mandatory items for categories that are actually present in the mmCIF file
 11. **First data block only**: By default, only validates the first data block in files containing multiple data blocks (each starting with `data_`)
+12. **Atom occupancy**: Sums `_atom_site.occupancy` over alternate locations of the same atom (model, author chain, residue number, insertion code, atom name). A **total occupancy greater than 1.0** is an **error**. An individual occupancy **below 0.1** is a **warning**. Missing occupancy (`?` / `.`) is skipped.
+13. **Sequence–model mismatch**: Compares modeled polymer residues with `_entity_poly_seq`. Unmodelled sequence residues are not reported. A modeled residue that disagrees with the sequence is an **error**. Uses `_atom_site.label_seq_id` when present; otherwise a sliding window of residue types. Files with no `_entity_poly_seq` (deposition files holding the sequence only in `_entity_poly.pdbx_seq_one_letter_code`) are **out of scope** and skipped; a one-letter fallback is deliberately not attempted because `label_seq_id` in those files is often not registered to `_entity_poly`, so comparing on it produces hundreds of false mismatches per chain while missing the real one. See extension **CHANGELOG** `[0.1.97]`.
 
 ## Adding New Rule Groups
 
@@ -367,7 +369,7 @@ Imported cross-check families are stored as grouped JSON files under `rules/data
 - `cross_checks_conditional_category_item.json`
 - `cross_checks_required_if_any_present.json`
 - `cross_checks_cross_reference_full.json`
-- `cross_checks_procedural_validators.json` — procedural checks (data-driven `kind` values: wavelength vs protocol including empty list, accession format rules, conditional accession/source rules on `pdbx_initial_refinement_model`, sequence predicate warnings on `entity_poly.pdbx_seq_one_letter_code`). See extension **CHANGELOG** `[0.1.91]` for the full list.
+- `cross_checks_procedural_validators.json` — procedural checks (data-driven `kind` values: wavelength vs protocol including empty list, accession format rules, conditional accession/source rules on `pdbx_initial_refinement_model`, sequence predicate warnings on `entity_poly.pdbx_seq_one_letter_code`, atom occupancy totals over 1.0 and occupancy below 0.1, sequence–model residue mismatches). See extension **CHANGELOG** `[0.1.91]` and `[0.1.97]` for the full list.
 
 Keeping related checks together in a consistent JSON family format makes future re-imports and diff reviews simpler.
 
@@ -396,12 +398,15 @@ These are violations of mandatory constraints that must be fixed:
 - **Foreign Key Integrity Violations**: Foreign key values that don't exist in their parent items
 - **Composite Key Violations**: Combinations of multiple child items that don't match corresponding combinations in parent categories (including label/auth field combinations)
 - **Invalid Operation Expression References**: Operation expressions referencing operation IDs that don't exist
+- **Total occupancy greater than 1.0**: Alternate locations of the same atom whose occupancies sum to more than 1.0
+- **Sequence–model mismatch**: A modeled polymer residue whose type disagrees with `_entity_poly_seq`
 
 ### Warnings (Yellow Underline)
 These are advisory issues that may indicate problems but are not strictly required:
 
 - **Undefined Items**: Items used in the mmCIF file that are not defined in the dictionary (only for items not starting with `_`)
 - **Advisory Range Violations** (`_pdbx_item_range`): Values outside the advisory boundary conditions (but within allowed range)
+- **Low occupancy**: Individual `_atom_site.occupancy` values below 0.1
 
 ## Command-Line Options
 

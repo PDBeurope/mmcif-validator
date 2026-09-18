@@ -4,6 +4,23 @@ All notable changes to the PDBe mmCIF Validator extension will be documented in 
 
 # Released
 
+## [0.1.97] - 2026-09-17
+
+### Added
+
+- **Atom occupancy checks**: Alternate locations of the same atom (model, chain, residue number, insertion code, atom name) are summed. A **total occupancy greater than 1.0** is an **error** (OneDep-style “at least one occupancy > 1”). An individual `_atom_site.occupancy` **below 0.1** is a **warning**. Missing occupancy (`?` / `.`) is skipped. Thresholds and messages are data-driven in `cross_checks_procedural_validators.json`.
+- **Sequence–model mismatch**: Modeled polymer residues are compared with `_entity_poly_seq`. Unmodelled sequence residues are ignored. A modeled residue whose `comp_id` disagrees with the sequence is an **error** (OneDep-style “Residue (A ASP 145) does not match with the residue 'GLU' in sequence”). Mapping uses `_atom_site.label_seq_id` when present; otherwise a sliding window of residue types is used (for deposition files that omit `label_seq_id`). Comparison is exact (`MSE` does not match `MET`).
+  - **Out of scope**: deposition files that carry no `_entity_poly_seq` (sequence only in `_entity_poly.pdbx_seq_one_letter_code`) are skipped, and no one-letter fallback is attempted on purpose. In such files `_atom_site.label_seq_id` is frequently not registered to `_entity_poly` — it may be renumbered 1..N over modeled residues only, or jump across a mismatch so the residue lands on a matching letter elsewhere in the sequence. Comparing on it yields hundreds of false mismatches per chain while missing the single real one, so reporting nothing is the deliberate choice. Detecting that class needs the alignment re-derived rather than trusted (candidate signals: `label_seq_id`/`auth_seq_id` continuity, and cross-chain comparison of chains sharing a sequence).
+
+### Added (tests)
+
+- Regression CIFs for occupancy total over 1, valid altloc sums of 1.0, occupancy below 0.1, occupancy exactly 0.1, occupancy exactly 1.0, and missing occupancy.
+- Regression CIFs for sequence–model mismatch (label_seq_id path, missing label_seq_id window, unmodelled residues, exact `MSE` vs `MET`).
+
+### Changed
+
+- **Version bump**: Updated extension/package/docs version references from `0.1.96` to `0.1.97`.
+
 ## [0.1.96] - 2026-09-15
 
 ### Fixed
