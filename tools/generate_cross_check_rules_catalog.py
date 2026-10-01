@@ -1,17 +1,17 @@
-import json
+import sys
 from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-BASE = REPO_ROOT / "vscode-extension" / "python-script" / "rules" / "data"
+sys.path.insert(0, str(REPO_ROOT / "vscode-extension" / "python-script"))
+
+from rules.cross_check_cif import load_rule_file  # noqa: E402
+
 OUT = REPO_ROOT / "docs" / "cross_check_rules_catalog.txt"
 
 
 def load(name: str):
-    path = BASE / name
-    if not path.exists():
-        return {}
-    return json.loads(path.read_text(encoding="utf-8"))
+    return load_rule_file(name)
 
 
 def main() -> None:
