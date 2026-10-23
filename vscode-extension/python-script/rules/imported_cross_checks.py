@@ -4,7 +4,9 @@ Rule group for imported cross-check datasets.
 Rule rows are stored in rules/data/cross_checks.cif. This executes the grouped
 families: pairwise (numeric and date order), linked presence/comparison,
 conditional rules, dictionary enum, procedural validators, and uniqueness
-within categories.
+within categories. Category-key uniqueness comes from the dictionary
+(`_category_key.name`); explicit `_validator_rule_uniqueness` rows still
+supply their own messages and are not reported a second time.
 """
 
 from __future__ import annotations
@@ -244,12 +246,92 @@ class ImportedCrossChecksRuleGroup:
 
         return errors
 
-    def _run_uniqueness(self, mmcif, rows_cache: Dict[str, List[Dict[str, ItemValue]]]) -> List[ValidationError]:
+    @staticmethod
+    def _category_key_short(category: str, key_name: str) -> Optional[str]:
+        """Return the item name within category for a `_category_key.name` value."""
+        name = str(key_name).strip().strip("'\"")
+        prefix = f"_{category}."
+        if name.startswith(prefix):
+            short = name[len(prefix):].strip()
+            return short or None
+        if name and "." not in name and not name.startswith("_"):
+            return name
+        return None
+
+    def _dictionary_category_key_rules(
+        self,
+        dictionary,
+        existing_rules: List[dict],
+        present_categories: Set[str],
+    ) -> List[dict]:
+        """Build uniqueness rules from dictionary category keys.
+
+        A category already covered by an explicit uniqueness rule with the same
+        key items is skipped, so that rule's message is the one reported.
+        """
+        categories = getattr(dictionary, "categories", None) if dictionary is not None else None
+        if not isinstance(categories, dict):
+            return []
+
+        covered = set()
+        for rule in existing_rules:
+            category = str(rule.get("category", "")).strip()
+            items = rule.get("key_items", [])
+            if not category or not isinstance(items, list):
+                continue
+            shorts = tuple(str(item).strip() for item in items if str(item).strip())
+            if shorts:
+                covered.add((category, frozenset(shorts)))
+
+        extra: List[dict] = []
+        for category in sorted(present_categories):
+            info = categories.get(category)
+            if not isinstance(info, dict):
+                continue
+            raw_keys = info.get("keys") or []
+            shorts: List[str] = []
+            for key_name in raw_keys:
+                short = self._category_key_short(category, str(key_name))
+                if not short:
+                    shorts = []
+                    break
+                shorts.append(short)
+            if not shorts or (category, frozenset(shorts)) in covered:
+                continue
+            full_names = [item_name_for_category(category, short) for short in shorts]
+            if len(full_names) == 1:
+                item = full_names[0]
+                message = (
+                    f"Duplicate {item} in this file: [{{duplicate_display}}]. "
+                    f"Each {item} must appear at most once."
+                )
+            else:
+                joined = ", ".join(full_names)
+                message = (
+                    f"Duplicate category key ({joined}) in this file: [{{duplicate_display}}]. "
+                    f"Each combination must appear at most once."
+                )
+            extra.append({
+                "category": category,
+                "key_items": shorts,
+                "severity": "hard",
+                "message": message,
+            })
+        return extra
+
+    def _run_uniqueness(
+        self,
+        mmcif,
+        rows_cache: Dict[str, List[Dict[str, ItemValue]]],
+        dictionary=None,
+    ) -> List[ValidationError]:
         data = self._load_rules("cross_checks_uniqueness.json")
         errors: List[ValidationError] = []
-        rules = data.get("uniqueness_rules", [])
-        if not isinstance(rules, list):
-            return errors
+        raw_rules = data.get("uniqueness_rules", [])
+        rules = [rule for rule in raw_rules if isinstance(rule, dict)] if isinstance(raw_rules, list) else []
+        present = getattr(mmcif, "categories", None)
+        present_categories = present if isinstance(present, set) else set()
+        rules.extend(self._dictionary_category_key_rules(dictionary, rules, present_categories))
 
         for rule in rules:
             if not isinstance(rule, dict):
@@ -1841,7 +1923,7 @@ class ImportedCrossChecksRuleGroup:
         errors = []
         errors.extend(self._run_pairwise(mmcif, rows_cache))
         errors.extend(self._run_pairwise_date_order(mmcif, rows_cache))
-        errors.extend(self._run_uniqueness(mmcif, rows_cache))
+        errors.extend(self._run_uniqueness(mmcif, rows_cache, dictionary))
         errors.extend(self._run_linked(mmcif, rows_cache))
         errors.extend(self._run_conditional_required(mmcif, rows_cache))
         errors.extend(self._run_conditional_regex(mmcif, rows_cache))

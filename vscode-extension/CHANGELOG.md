@@ -4,6 +4,17 @@ All notable changes to the PDBe mmCIF Validator extension will be documented in 
 
 # Released
 
+## [0.2.1] - 2026-10-23
+
+### Added
+
+- **Dictionary category-key uniqueness**: Values of `_category_key.name` must be unique within a category. A repeated key, including a composite key, is an **error** on each repeated row. The message matches the existing duplicate-key form (`Duplicate _audit_author.pdbx_ordinal in this file: 1. Each _audit_author.pdbx_ordinal must appear at most once.`). Missing key values (`?` / `.`) are skipped. Loop-style category keys in the dictionary are parsed, not only single-line keys.
+- **Explicit uniqueness messages kept**: `entity`, `struct_asym`, and `entity_poly` still use their `_validator_rule_uniqueness` messages and are not reported a second time.
+
+### Changed
+
+- **Version bump**: Updated extension/package/docs version references from `0.2.0` to `0.2.1`.
+
 ## [0.2.0] - 2026-10-01
 
 ### Changed

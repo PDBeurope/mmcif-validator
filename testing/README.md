@@ -35,6 +35,7 @@ Targeted occupancy checks (no dictionary download):
 ```bash
 python testing/test_occupancy_checks.py
 python testing/test_sequence_model_mismatch.py
+python testing/test_category_key_uniqueness.py
 ```
 
 Or from the `testing/` directory:

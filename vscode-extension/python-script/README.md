@@ -2,7 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/PDBeurope/mmcif-validator/main/img/logo-validator.png" alt="PDBe mmCIF Validator" width="200">
 
-**Version 0.2.0**
+**Version 0.2.1**
 
 A standalone Python script and PyPI package to validate mmCIF/CIF files against the PDBx/mmCIF dictionary or any CIF dictionary.
 
@@ -363,7 +363,7 @@ Families:
 
 - `_validator_rule_pairwise` — numeric comparison of two items
 - `_validator_rule_date_order` — same-category date/datetime ordering (chronological constraints, currently `pdbx_database_status`)
-- `_validator_rule_uniqueness` — duplicate detection for configured key columns within one category (e.g. `entity.id`). Composite keys use `_validator_rule_uniqueness_key`
+- `_validator_rule_uniqueness` — duplicate detection for configured key columns within one category (e.g. `entity.id`). Composite keys use `_validator_rule_uniqueness_key`. Every dictionary category key (`_category_key.name`) is checked the same way; an explicit rule for the same items keeps its own message and is not reported twice. Missing key values (`?` / `.`) are skipped.
 - `_validator_rule_linked` — linked rows are paired by `cross`/`cross2`. Rules may set **`fallback`** to `single_row_if_key_missing`: if the key match finds no row, the target category has exactly one row, and that row’s join key is missing (`?` / `.` / blank / omitted), use the singleton target. Keys that are present and disagree are not joined. Used for `pdbx_diffrn_id` checks (e.g. `_reflns.number_obs` vs `_refine.ls_number_reflns_obs`) when refinement software omits the PDBx id. **`absolute`** `yes` compares absolute values
 - `_validator_rule_conditional_required` — rules may include `_validator_rule_skip_category` rows: when any listed category has at least one row, the rule is skipped (e.g. skip legacy `refine.pdbx_starting_model` when `pdbx_initial_refinement_model` is present)
 - `_validator_rule_conditional_regex`
@@ -381,7 +381,7 @@ Add or change rules by editing `rules/data/cross_checks.cif`. **`ImportedCrossCh
 ### Roadmap (cross-check families)
 
 - **Date/time (in progress)**: `_validator_rule_date_order` covers same-row ordering on `_pdbx_database_status`. Next steps are more rows in that category (other date pairs) or additional categories such as `_database_PDB_rev` and `_audit_*` once row alignment rules are clear.
-- **Uniqueness**: first slice is `_validator_rule_uniqueness` (`entity`, `struct_asym`, `entity_poly`). Extend with more `_validator_rule_uniqueness_key` rows for composite keys (for example several `atom_site` columns) where file-level uniqueness is required.
+- **Uniqueness**: dictionary `_category_key.name` values are enforced for every category present in the file (single-item and composite keys). Explicit `_validator_rule_uniqueness` rows remain for custom messages (`entity`, `struct_asym`, `entity_poly`). Add further rows only when uniqueness is required for columns that are not the category key.
 - **Taxonomy / source**: conditional or linked rules across `entity` / `entity_src_*` without external NCBI calls, unless you later bundle a taxonomy table.
 
 ## Error vs Warning Severity
