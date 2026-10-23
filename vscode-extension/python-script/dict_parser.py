@@ -432,15 +432,85 @@ class DictionaryParser:
         if mandatory_match:
             category_info['mandatory'] = mandatory_match.group(1).strip()
         
-        # Extract category keys
-        key_pattern = r'_category_key\.name\s+([^\n]+)'
-        key_matches = re.finditer(key_pattern, content)
-        category_info['keys'] = []
-        for key_match in key_matches:
-            key_name = key_match.group(1).strip().strip("'\"")
-            category_info['keys'].append(key_name)
+        category_info['keys'] = self._parse_category_keys(content)
         
         return category_info
+
+    def _parse_category_keys(self, content: str) -> List[str]:
+        """Collect _category_key.name values from a category save frame.
+
+        Keys are either a single `_category_key.name` value or a `loop_` whose
+        column is `_category_key.name` (composite keys). Semicolon text fields
+        are skipped: a text field starts and ends on a line whose first
+        character is ';', so an indented ';' inside an example stays data.
+        """
+        keys: List[str] = []
+        lines = content.splitlines()
+        in_text = False
+        i = 0
+        while i < len(lines):
+            raw = lines[i]
+            if raw.startswith(";"):
+                in_text = not in_text
+                i += 1
+                continue
+            if in_text:
+                i += 1
+                continue
+            stripped = raw.strip()
+            if not stripped or stripped.startswith("#"):
+                i += 1
+                continue
+            inline = re.match(r"_category_key\.name\s+(\S+)", stripped)
+            if inline:
+                keys.append(inline.group(1).strip("'\""))
+                i += 1
+                continue
+            if stripped == "loop_":
+                i += 1
+                headers: List[str] = []
+                while i < len(lines):
+                    header_raw = lines[i]
+                    if header_raw.startswith(";"):
+                        break
+                    header = header_raw.strip()
+                    if not header or header.startswith("#"):
+                        if headers:
+                            break
+                        i += 1
+                        continue
+                    if header.startswith("_") and len(header.split()) == 1:
+                        headers.append(header)
+                        i += 1
+                        continue
+                    break
+                if "_category_key.name" not in headers:
+                    continue
+                column = headers.index("_category_key.name")
+                while i < len(lines):
+                    row_raw = lines[i]
+                    if row_raw.startswith(";"):
+                        break
+                    row = row_raw.strip()
+                    if not row:
+                        i += 1
+                        continue
+                    if (
+                        row.startswith("#")
+                        or row == "loop_"
+                        or row.startswith("save_")
+                        or row.startswith("_")
+                    ):
+                        break
+                    values = self._parse_enumeration_line(row)
+                    if column < len(values):
+                        key_name = values[column].strip().strip("'\"")
+                        if key_name:
+                            keys.append(key_name)
+                    i += 1
+                continue
+            i += 1
+        return keys
     
     def _parse_parent_child_relationships(self, content: str):
         """Parse parent/child category relationships from _pdbx_item_linked_group_list."""
