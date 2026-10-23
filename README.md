@@ -2,7 +2,7 @@
 
 <img src="img/logo-validator.png" alt="PDBe mmCIF Validator" width="200">
 
-**Version 0.1.97**
+**Version 0.2.0**
 
 Real-time VS Code extension, standalone Python tool, and online validator for mmCIF/CIF files.
 
@@ -134,6 +134,8 @@ See the [Python script README](vscode-extension/python-script/README.md) for det
 ## What's new
 
 See the full [CHANGELOG](vscode-extension/CHANGELOG.md).
+
+Release **0.2.0** stores cross-check rules in `rules/data/cross_checks.cif` instead of the grouped JSON files. Validation findings are unchanged.
 
 Release **0.1.97** adds occupancy checks (total occupancy of an atom over 1.0 is an error; occupancy below 0.1 is a warning) and sequence–model mismatch (a modeled residue that disagrees with `_entity_poly_seq` is an error; unmodelled sequence residues are ignored).
 

@@ -1,0 +1,940 @@
+data_validator_rules
+#
+loop_
+_validator_rule_pairwise.id
+_validator_rule_pairwise.source_category
+_validator_rule_pairwise.source_item
+_validator_rule_pairwise.target_category
+_validator_rule_pairwise.target_item
+_validator_rule_pairwise.message
+_validator_rule_pairwise.operator
+_validator_rule_pairwise.severity
+_validator_rule_pairwise.extra
+pairwise_em_3d_reconstruction_resolution_1 em_3d_reconstruction resolution em_diffraction_stats high_resolution
+;3D reconstruction resolution is higher than diffraction-statistics high-resolution limit [{item2CrossValue}].
+;
+< hard .
+pairwise_em_diffraction_shell_high_resolution_1 em_diffraction_shell high_resolution em_diffraction_stats high_resolution
+;Diffraction-shell high-resolution limit is higher than diffraction-statistics high-resolution limit [{item2CrossValue}].
+;
+< hard .
+pairwise_em_diffraction_shell_num_structure_factors_1 em_diffraction_shell num_structure_factors em_diffraction_stats num_structure_factors
+;Number of shell structure factors is higher than total collected structure factors [{item2CrossValue}].
+;
+> hard .
+pairwise_em_focused_ion_beam_final_thickness_1 em_focused_ion_beam final_thickness em_focused_ion_beam initial_thickness
+;Final thickness is larger than initial thickness [{item2CrossValue}].
+;
+> hard .
+pairwise_em_imaging_recording_temperature_maximum_1 em_imaging recording_temperature_maximum em_imaging recording_temperature_minimum
+;Maximum recording temperature is lower than minimum recording temperature [{item2CrossValue}].
+;
+< hard .
+pairwise_em_imaging_recording_temperature_minimum_1 em_imaging recording_temperature_minimum em_imaging recording_temperature_maximum
+;Minimum recording temperature is higher than maximum recording temperature [{item2CrossValue}].
+;
+> hard .
+pairwise_pdbx_nmr_ensemble_conformers_submitted_total_number_1 pdbx_nmr_ensemble conformers_submitted_total_number pdbx_nmr_ensemble conformers_calculated_total_number
+;Submitted conformer count is higher than calculated conformer count [{item2CrossValue}].
+;
+> hard .
+pairwise_pdbx_nmr_representative_conformer_id_1 pdbx_nmr_representative conformer_id pdbx_nmr_ensemble conformers_submitted_total_number
+;Representative conformer identifier is higher than submitted conformer count [{item2CrossValue}].
+;
+> hard .
+pairwise_refine_ls_shell_r_factor_r_work_1 refine_ls_shell R_factor_R_work refine_ls_shell R_factor_R_free
+;Shell R_work is higher than shell R_free [{item2CrossValue}].
+;
+> soft .
+pairwise_refine_ls_shell_d_res_high_1 refine_ls_shell d_res_high refine_ls_shell d_res_low
+;Shell high-resolution limit is lower than shell low-resolution limit [{item2CrossValue}].
+;
+> hard .
+pairwise_refine_ls_shell_d_res_low_1 refine_ls_shell d_res_low refine_ls_shell d_res_high
+;Shell low-resolution limit is higher than shell high-resolution limit [{item2CrossValue}].
+;
+< hard .
+pairwise_reflns_shell_d_res_high_1 reflns_shell d_res_high reflns_shell d_res_low
+;Shell high-resolution limit is lower than shell low-resolution limit [{item2CrossValue}].
+;
+> hard .
+pairwise_reflns_shell_d_res_low_1 reflns_shell d_res_low reflns_shell d_res_high
+;Shell low-resolution limit is higher than shell high-resolution limit [{item2CrossValue}].
+;
+< hard .
+#
+loop_
+_validator_rule_date_order.id
+_validator_rule_date_order.category
+_validator_rule_date_order.left_item
+_validator_rule_date_order.right_item
+_validator_rule_date_order.op
+_validator_rule_date_order.severity
+_validator_rule_date_order.message
+date_pdbx_database_status_recvd_initial_deposition_date_1 pdbx_database_status recvd_initial_deposition_date date_coordinates <= hard
+;Initial deposition date must not be after the date coordinates were received (coordinates date: [{right_value}]).
+;
+date_pdbx_database_status_recvd_initial_deposition_date_2 pdbx_database_status recvd_initial_deposition_date date_author_release_request <= hard
+;Initial deposition date must not be after the author release request date (release request date: [{right_value}]).
+;
+date_pdbx_database_status_date_deposition_form_3 pdbx_database_status date_deposition_form recvd_initial_deposition_date <= hard
+;Deposition form date must not be after the initial deposition received date (initial deposition date: [{right_value}]).
+;
+date_pdbx_database_status_date_begin_deposition_4 pdbx_database_status date_begin_deposition date_end_processing <= hard
+;Begin processing date must not be after end processing date (end processing date: [{right_value}]).
+;
+#
+loop_
+_validator_rule_uniqueness.id
+_validator_rule_uniqueness.category
+_validator_rule_uniqueness.severity
+_validator_rule_uniqueness.message
+uniq_entity_1 entity hard
+;Duplicate _entity.id in this file: [{duplicate_display}]. Each entity id must appear at most once.
+;
+uniq_struct_asym_2 struct_asym hard
+;Duplicate _struct_asym.id in this file: [{duplicate_display}]. Each chain (asym) id must appear at most once.
+;
+uniq_entity_poly_3 entity_poly hard
+;Duplicate _entity_poly.entity_id in this file: [{duplicate_display}]. Each polymer entity must have at most one entity_poly row.
+;
+#
+loop_
+_validator_rule_uniqueness_key.rule_id
+_validator_rule_uniqueness_key.ordinal
+_validator_rule_uniqueness_key.item
+uniq_entity_1 1 id
+uniq_struct_asym_2 1 id
+uniq_entity_poly_3 1 entity_id
+#
+loop_
+_validator_rule_linked.id
+_validator_rule_linked.source_category
+_validator_rule_linked.source_item
+_validator_rule_linked.target_category
+_validator_rule_linked.target_item
+_validator_rule_linked.cross
+_validator_rule_linked.cross2
+_validator_rule_linked.operator
+_validator_rule_linked.fallback
+_validator_rule_linked.break_flag
+_validator_rule_linked.warning
+_validator_rule_linked.absolute
+_validator_rule_linked.text
+linked_em_3d_fitting_list_source_name_1 em_3d_fitting_list source_name em_3d_fitting_list type id . exists . yes . .
+;Source name must be provided.
+;
+linked_em_3d_fitting_list_source_name_2 em_3d_fitting_list source_name em_3d_fitting_list accession_code id . exists . yes . .
+;Source name must be provided.
+;
+linked_em_3d_fitting_list_source_name_3 em_3d_fitting_list source_name em_3d_fitting_list details id . exists . yes . .
+;Source name must be provided.
+;
+linked_em_3d_fitting_list_source_name_4 em_3d_fitting_list source_name em_3d_fitting_list chain_id id . exists . yes . .
+;Source name must be provided.
+;
+linked_em_3d_fitting_list_source_name_5 em_3d_fitting_list source_name em_3d_fitting_list chain_residue_range id . exists . yes . .
+;Source name must be provided.
+;
+linked_em_3d_fitting_list_type_1 em_3d_fitting_list type em_3d_fitting_list source_name id . exists . yes . .
+;Type must be provided.
+;
+linked_em_3d_fitting_list_type_2 em_3d_fitting_list type em_3d_fitting_list accession_code id . exists . yes . .
+;Type must be provided.
+;
+linked_em_3d_fitting_list_type_3 em_3d_fitting_list type em_3d_fitting_list details id . exists . yes . .
+;Type must be provided.
+;
+linked_em_3d_fitting_list_type_4 em_3d_fitting_list type em_3d_fitting_list chain_id id . exists . yes . .
+;Type must be provided.
+;
+linked_em_3d_fitting_list_type_5 em_3d_fitting_list type em_3d_fitting_list chain_residue_range id . exists . yes . .
+;Type must be provided.
+;
+linked_em_buffer_component_concentration_1 em_buffer_component concentration em_buffer_component name id . exists . yes . .
+;Concentration must be provided when a buffer name is given.
+;
+linked_em_buffer_component_concentration_2 em_buffer_component concentration em_buffer_component concentration_units id . exists . yes . .
+;Concentration must be provided when buffer concentration units are given.
+;
+linked_em_buffer_component_concentration_3 em_buffer_component concentration em_buffer_component formula id . exists . yes . .
+;Concentration must be provided when a buffer formula is given.
+;
+linked_em_buffer_component_concentration_units_1 em_buffer_component concentration_units em_buffer_component name id . exists . yes . .
+;Concentration units must be provided when a buffer name is given.
+;
+linked_em_buffer_component_concentration_units_2 em_buffer_component concentration_units em_buffer_component concentration id . exists . yes . .
+;Concentration units must be provided when a buffer concentration is given.
+;
+linked_em_buffer_component_concentration_units_3 em_buffer_component concentration_units em_buffer_component formula id . exists . yes . .
+;Concentration units must be provided when a buffer formula is given.
+;
+linked_em_buffer_component_name_1 em_buffer_component name em_buffer_component concentration id . exists . yes . .
+;Name must be provided when a buffer concentration is given.
+;
+linked_em_buffer_component_name_2 em_buffer_component name em_buffer_component concentration_units id . exists . yes . .
+;Name must be provided when buffer concentration units are given.
+;
+linked_em_buffer_component_name_3 em_buffer_component name em_buffer_component formula id . exists . yes . .
+;Name must be provided when a buffer formula is given.
+;
+linked_em_entity_assembly_molwt_experimental_flag_1 em_entity_assembly_molwt experimental_flag em_entity_assembly_molwt value id . exists . yes . .
+;Molecular weight value must be provided when related fields are present.
+;
+linked_em_entity_assembly_molwt_experimental_flag_2 em_entity_assembly_molwt experimental_flag em_entity_assembly_molwt units id . exists . yes . .
+;Experimental flag must be provided when molecular weight units are given.
+;
+linked_em_entity_assembly_molwt_units_1 em_entity_assembly_molwt units em_entity_assembly_molwt value id . exists . yes . .
+;Molecular weight units must be provided when molecular weight value is given.
+;
+linked_em_entity_assembly_molwt_value_1 em_entity_assembly_molwt value em_entity_assembly_molwt units id . exists . yes . .
+;Molecular weight value must be provided when molecular weight units are given.
+;
+linked_em_imaging_calibrated_defocus_max_1 em_imaging calibrated_defocus_max em_imaging calibrated_defocus_min id . < . . . yes
+;Absolute minimum calibrated defocus is greater than absolute maximum calibrated defocus.
+;
+linked_em_imaging_calibrated_defocus_min_1 em_imaging calibrated_defocus_min em_imaging calibrated_defocus_max id . > . . . yes
+;Absolute minimum calibrated defocus is greater than absolute maximum calibrated defocus.
+;
+linked_em_imaging_nominal_defocus_max_1 em_imaging nominal_defocus_max em_imaging nominal_defocus_min id . < . . . yes
+;Absolute minimum nominal defocus is greater than absolute maximum nominal defocus.
+;
+linked_em_imaging_nominal_defocus_min_1 em_imaging nominal_defocus_min em_imaging nominal_defocus_max id . > . . . yes
+;Absolute minimum nominal defocus is greater than absolute maximum nominal defocus.
+;
+linked_em_sample_support_grid_type_1 em_sample_support grid_type em_support_film material id sample_support_id exists . yes . .
+;Grid information must be provided when support film information is present.
+;
+linked_em_sample_support_grid_type_2 em_sample_support grid_type em_support_film topology id sample_support_id exists . yes . .
+;Grid information must be provided when support film information is present.
+;
+linked_em_sample_support_grid_type_3 em_sample_support grid_type em_support_film thickness id sample_support_id exists . yes . .
+;Grid information must be provided when support film information is present.
+;
+linked_em_sample_support_grid_type_4 em_sample_support grid_type em_grid_pretreatment atmosphere id sample_support_id exists . yes . .
+;Grid information must be provided when grid pretreatment information is present.
+;
+linked_em_sample_support_grid_type_5 em_sample_support grid_type em_grid_pretreatment pressure id sample_support_id exists . yes . .
+;Grid information must be provided when grid pretreatment information is present.
+;
+linked_em_sample_support_grid_type_6 em_sample_support grid_type em_grid_pretreatment time id sample_support_id exists . yes . .
+;Grid information must be provided when grid pretreatment information is present.
+;
+linked_em_sample_support_grid_type_7 em_sample_support grid_type em_grid_pretreatment type id sample_support_id exists . yes . .
+;Grid information must be provided when grid pretreatment information is present.
+;
+linked_refine_ls_r_factor_r_work_1 refine ls_R_factor_R_work refine ls_R_factor_R_free pdbx_diffrn_id . > single_row_if_key_missing . yes .
+;R_work is higher than R_free [{item2CrossValue}]
+;
+linked_refine_ls_d_res_high_1 refine ls_d_res_high reflns d_resolution_high pdbx_diffrn_id . < single_row_if_key_missing . . .
+;Refined high-resolution limit is higher than collected data high-resolution limit [{item2CrossValue}]
+;
+linked_refine_ls_d_res_high_2 refine ls_d_res_high refine ls_d_res_low pdbx_diffrn_id . > single_row_if_key_missing . . .
+;Refined high-resolution limit is lower than refined low-resolution limit [{item2CrossValue}]
+;
+linked_refine_ls_d_res_low_1 refine ls_d_res_low reflns d_resolution_low pdbx_diffrn_id . > single_row_if_key_missing . . .
+;Refined low-resolution limit is lower than collected data low-resolution limit [{item2CrossValue}]
+;
+linked_refine_ls_d_res_low_2 refine ls_d_res_low refine ls_d_res_high pdbx_refine_id . < . . . .
+;Refined low-resolution limit is higher than refined high-resolution limit [{item2CrossValue}]
+;
+linked_refine_ls_shell_d_res_high_1 refine_ls_shell d_res_high refine ls_d_res_high pdbx_refine_id . < . . . .
+;Shell high-resolution limit is higher than overall refined high-resolution limit [{item2CrossValue}]
+;
+linked_refine_ls_shell_d_res_low_1 refine_ls_shell d_res_low refine ls_d_res_low pdbx_refine_id . > . . . .
+;Shell low-resolution limit is lower than overall refined low-resolution limit [{item2CrossValue}]
+;
+linked_reflns_d_resolution_high_1 reflns d_resolution_high refine ls_d_res_high pdbx_diffrn_id . > single_row_if_key_missing . . .
+;Collected data high-resolution limit is lower than high-resolution limit used in refinement [{item2CrossValue}]
+;
+linked_reflns_d_resolution_low_1 reflns d_resolution_low refine ls_d_res_low pdbx_diffrn_id . < single_row_if_key_missing . . .
+;Collected data low-resolution limit is higher than low-resolution limit used in refinement [{item2CrossValue}]
+;
+linked_reflns_number_all_1 reflns number_all refine ls_number_reflns_obs pdbx_diffrn_id . < single_row_if_key_missing . . .
+;Total collected reflections is lower than total reflections used in refinement [{item2CrossValue}]
+;
+linked_reflns_number_obs_1 reflns number_obs refine ls_number_reflns_obs pdbx_diffrn_id . < single_row_if_key_missing . . .
+;Observed reflections is lower than total reflections used in refinement [{item2CrossValue}]
+;
+linked_reflns_shell_d_res_high_1 reflns_shell d_res_high reflns d_resolution_high pdbx_diffrn_id . < single_row_if_key_missing . . .
+;Shell high-resolution limit is higher than overall collected data high-resolution limit [{item2CrossValue}]
+;
+#
+loop_
+_validator_rule_conditional_required.id
+_validator_rule_conditional_required.category
+_validator_rule_conditional_required.error
+_validator_rule_conditional_required.error_text
+_validator_rule_conditional_required.warning_text
+condreq_em_3d_fitting_list_1 em_3d_fitting_list yes
+;Details must be provided.
+;
+.
+condreq_em_3d_fitting_list_2 em_3d_fitting_list yes
+;Details must be provided.
+;
+.
+condreq_em_3d_fitting_list_3 em_3d_fitting_list yes
+;PDB accession code must be provided.
+;
+.
+condreq_em_3d_reconstruction_1 em_3d_reconstruction yes
+;FSC type must be provided when an FSC resolution method is selected.
+;
+.
+condreq_em_entity_assembly_molwt_1 em_entity_assembly_molwt yes
+;Must be supplied when experimentally measured.
+;
+.
+condreq_em_software_1 em_software yes
+;Software name must be provided.
+;
+.
+condreq_em_software_2 em_software yes
+;Software name must be provided.
+;
+.
+condreq_em_software_3 em_software yes
+;Software name must be provided.
+;
+.
+condreq_em_software_4 em_software yes
+;Software name must be provided.
+;
+.
+condreq_em_software_5 em_software yes
+;RELION software version must be provided.
+;
+.
+condreq_em_start_model_1 em_start_model yes
+;Must be supplied when EMDB map selected.
+;
+.
+condreq_em_start_model_2 em_start_model yes
+;Must be supplied when PDB entry selected.
+;
+.
+condreq_em_start_model_3 em_start_model yes
+;Must be supplied when orthogonal tilt selected.
+;
+.
+condreq_em_start_model_4 em_start_model yes
+;Must be supplied when orthogonal tilt selected.
+;
+.
+condreq_em_start_model_5 em_start_model yes
+;Must be supplied when orthogonal tilt selected.
+;
+.
+condreq_em_start_model_6 em_start_model yes
+;Must be supplied when random conical tilt selected.
+;
+.
+condreq_em_start_model_7 em_start_model yes
+;Must be supplied when random conical tilt selected.
+;
+.
+condreq_pdbx_audit_support_1 pdbx_audit_support yes
+;Country must be provided when funding organization is "Other government" or "Other private".
+;
+.
+condreq_pdbx_audit_support_2 pdbx_audit_support yes
+;Funding organization details must be provided when funding organization is "Other government" or "Other private".
+;
+.
+condreq_pdbx_initial_refinement_model_1 pdbx_initial_refinement_model yes
+;Initial refinement model details must be provided.
+;
+.
+condreq_pdbx_initial_refinement_model_2 pdbx_initial_refinement_model yes
+;Initial refinement model details must be provided.
+;
+.
+condreq_refine_1 refine yes
+;No value present for this mandatory item.
+;
+.
+condreq_software_1 software yes
+;Refinement software version must be provided.
+;
+.
+#
+loop_
+_validator_rule_conditional_required_item.rule_id
+_validator_rule_conditional_required_item.ordinal
+_validator_rule_conditional_required_item.item
+condreq_em_3d_fitting_list_1 1 details
+condreq_em_3d_fitting_list_2 1 details
+condreq_em_3d_fitting_list_3 1 accession_code
+condreq_em_3d_reconstruction_1 1 fsc_type
+condreq_em_entity_assembly_molwt_1 1 units
+condreq_em_entity_assembly_molwt_1 2 value
+condreq_em_software_1 1 name
+condreq_em_software_2 1 name
+condreq_em_software_3 1 name
+condreq_em_software_4 1 name
+condreq_em_software_5 1 version
+condreq_em_start_model_1 1 emdb_id
+condreq_em_start_model_2 1 pdb_id
+condreq_em_start_model_3 1 orthogonal_tilt_num_images
+condreq_em_start_model_4 1 orthogonal_tilt_angle1
+condreq_em_start_model_5 1 orthogonal_tilt_angle2
+condreq_em_start_model_6 1 random_conical_tilt_num_images
+condreq_em_start_model_7 1 random_conical_tilt_angle
+condreq_pdbx_audit_support_1 1 country
+condreq_pdbx_audit_support_2 1 details
+condreq_pdbx_initial_refinement_model_1 1 details
+condreq_pdbx_initial_refinement_model_2 1 details
+condreq_refine_1 1 pdbx_starting_model
+condreq_software_1 1 version
+#
+loop_
+_validator_rule_condition.owner
+_validator_rule_condition.rule_id
+_validator_rule_condition.branch_ordinal
+_validator_rule_condition.item
+_validator_rule_condition.ordinal
+_validator_rule_condition.value
+_validator_rule_condition.value_form
+conditional_required condreq_em_3d_fitting_list_1 1 type 1 other list
+conditional_required condreq_em_3d_fitting_list_2 1 source_name 1 Other list
+conditional_required condreq_em_3d_fitting_list_3 1 source_name 1 PDB list
+conditional_required condreq_em_3d_reconstruction_1 1 resolution_method 1
+;FSC 0.5 CUT-OFF
+;
+list
+conditional_required condreq_em_3d_reconstruction_1 1 resolution_method 2
+;FSC 0.33 CUT-OFF
+;
+list
+conditional_required condreq_em_3d_reconstruction_1 1 resolution_method 3
+;FSC 0.143 CUT-OFF
+;
+list
+conditional_required condreq_em_3d_reconstruction_1 1 resolution_method 4
+;FSC 3 SIGMA CUT-OFF
+;
+list
+conditional_required condreq_em_3d_reconstruction_1 1 resolution_method 5
+;FSC 1/2 BIT CUT-OFF
+;
+list
+conditional_required condreq_em_entity_assembly_molwt_1 1 experimental_flag 1 YES list
+conditional_required condreq_em_software_1 1 category 1 RECONSTRUCTION list
+conditional_required condreq_em_software_2 1 category 1
+;PARTICLE SELECTION
+;
+list
+conditional_required condreq_em_software_3 1 category 1
+;VOLUME SELECTION
+;
+list
+conditional_required condreq_em_software_4 1 category 1
+;SERIES ALIGNMENT
+;
+list
+conditional_required condreq_em_software_5 1 name 1 RELION list
+conditional_required condreq_em_start_model_1 1 type 1
+;EMDB MAP
+;
+list
+conditional_required condreq_em_start_model_2 1 type 1
+;PDB ENTRY
+;
+list
+conditional_required condreq_em_start_model_3 1 type 1
+;ORTHOGONAL TILT
+;
+list
+conditional_required condreq_em_start_model_4 1 type 1
+;ORTHOGONAL TILT
+;
+list
+conditional_required condreq_em_start_model_5 1 type 1
+;ORTHOGONAL TILT
+;
+list
+conditional_required condreq_em_start_model_6 1 type 1
+;RANDOM CONICAL TILT
+;
+list
+conditional_required condreq_em_start_model_7 1 type 1
+;RANDOM CONICAL TILT
+;
+list
+conditional_required condreq_pdbx_audit_support_1 1 funding_organization 1
+;Other government
+;
+list
+conditional_required condreq_pdbx_audit_support_1 1 funding_organization 2
+;Other private
+;
+list
+conditional_required condreq_pdbx_audit_support_2 1 funding_organization 1
+;Other government
+;
+list
+conditional_required condreq_pdbx_audit_support_2 1 funding_organization 2
+;Other private
+;
+list
+conditional_required condreq_pdbx_initial_refinement_model_1 1 source_name 1 Other list
+conditional_required condreq_pdbx_initial_refinement_model_2 1 type 1 other list
+conditional_required condreq_refine_1 1 pdbx_method_to_determine_struct 1
+;MOLECULAR REPLACEMENT
+;
+list
+conditional_required condreq_software_1 1 classification 1 refinement list
+conditional_required condreq_software_1 1 name 1 PHENIX list
+conditional_required condreq_software_1 1 name 2 REFMAC list
+procedural pdbx_initial_refinement_model_accession_code 1 type 1
+;experimental model
+;
+scalar
+procedural pdbx_initial_refinement_model_accession_code 1 source_name 1 PDB scalar
+procedural pdbx_initial_refinement_model_accession_code 2 type 1
+;integrative model
+;
+scalar
+procedural pdbx_initial_refinement_model_accession_code 2 source_name 1 PDB-Dev scalar
+procedural pdbx_initial_refinement_model_accession_code 3 type 1
+;in silico model
+;
+scalar
+procedural pdbx_initial_refinement_model_accession_code 3 source_name 1 AlphaFold scalar
+procedural pdbx_initial_refinement_model_accession_code 4 type 1
+;in silico model
+;
+scalar
+procedural pdbx_initial_refinement_model_accession_code 4 source_name 1 ModelArchive scalar
+procedural pdbx_initial_refinement_model_integrative_source_name 1 type 1
+;integrative model
+;
+scalar
+#
+loop_
+_validator_rule_skip_category.rule_id
+_validator_rule_skip_category.ordinal
+_validator_rule_skip_category.category
+condreq_refine_1 1 pdbx_initial_refinement_model
+#
+loop_
+_validator_rule_conditional_regex.id
+_validator_rule_conditional_regex.category
+_validator_rule_conditional_regex.item
+_validator_rule_conditional_regex.regex
+_validator_rule_conditional_regex.error
+_validator_rule_conditional_regex.error_text
+_validator_rule_conditional_regex.condition_item
+_validator_rule_conditional_regex.condition_value
+regex_em_3d_fitting_list_accession_code_1 em_3d_fitting_list accession_code
+;^(pdb_0000)?[\w\d]{4}$
+;
+yes
+;Please provide a valid PDB accession code e.g. 1csb, pdb_00001csb
+;
+source_name PDB
+#
+loop_
+_validator_rule_conditional_enum.id
+_validator_rule_conditional_enum.category
+_validator_rule_conditional_enum.driver_item
+_validator_rule_conditional_enum.affected_item
+enum_em_3d_fitting_list_type_1 em_3d_fitting_list type source_name
+enum_em_3d_fitting_list_source_name_2 em_3d_fitting_list source_name type
+enum_pdbx_initial_refinement_model_type_1 pdbx_initial_refinement_model type source_name
+enum_pdbx_initial_refinement_model_source_name_2 pdbx_initial_refinement_model source_name type
+#
+loop_
+_validator_rule_conditional_enum_value.rule_id
+_validator_rule_conditional_enum_value.branch_ordinal
+_validator_rule_conditional_enum_value.driver_value
+_validator_rule_conditional_enum_value.error_text
+_validator_rule_conditional_enum_value.ordinal
+_validator_rule_conditional_enum_value.allowed_value
+enum_em_3d_fitting_list_type_1 1
+;experimental model
+;
+;For type "experimental model", source name must be PDB or Other.
+;
+1 PDB
+enum_em_3d_fitting_list_type_1 1
+;experimental model
+;
+;For type "experimental model", source name must be PDB or Other.
+;
+2 Other
+enum_em_3d_fitting_list_type_1 2
+;integrative model
+;
+;For type "integrative model", source name must be Other.
+;
+1 Other
+enum_em_3d_fitting_list_type_1 3 other
+;For type "other", source name must be Other.
+;
+1 Other
+enum_em_3d_fitting_list_source_name_2 1 PDB
+;For source name "PDB", type must be "experimental model".
+;
+1
+;experimental model
+;
+enum_pdbx_initial_refinement_model_type_1 1
+;experimental model
+;
+;For type "experimental model", source name must be PDB or Other.
+;
+1 PDB
+enum_pdbx_initial_refinement_model_type_1 1
+;experimental model
+;
+;For type "experimental model", source name must be PDB or Other.
+;
+2 Other
+enum_pdbx_initial_refinement_model_type_1 2 other
+;For type "other", source name must be Other.
+;
+1 Other
+enum_pdbx_initial_refinement_model_source_name_2 1 PDB
+;For source name "PDB", type must be "experimental model".
+;
+1
+;experimental model
+;
+#
+loop_
+_validator_rule_conditional_category_item.id
+_validator_rule_conditional_category_item.category
+_validator_rule_conditional_category_item.item
+_validator_rule_conditional_category_item.regex
+_validator_rule_conditional_category_item.error
+_validator_rule_conditional_category_item.error_text
+_validator_rule_conditional_category_item.condition_category
+_validator_rule_conditional_category_item.condition_item
+_validator_rule_conditional_category_item.condition_value
+catitem_pdbx_initial_refinement_model_type_1 pdbx_initial_refinement_model type
+;^.+$
+;
+yes
+;This field cannot be empty when "MOLECULAR REPLACEMENT" is selected.
+;
+refine pdbx_method_to_determine_struct
+;MOLECULAR REPLACEMENT
+;
+catitem_pdbx_initial_refinement_model_source_name_2 pdbx_initial_refinement_model source_name
+;^.+$
+;
+yes
+;This field cannot be empty when "MOLECULAR REPLACEMENT" is selected.
+;
+refine pdbx_method_to_determine_struct
+;MOLECULAR REPLACEMENT
+;
+#
+loop_
+_validator_rule_dictionary_enum.id
+_validator_rule_dictionary_enum.category
+_validator_rule_dictionary_enum.source_item
+_validator_rule_dictionary_enum.cross_item
+dictenum_diffrn_detector_type diffrn_detector type detector
+dictenum_diffrn_source_type diffrn_source type source
+dictenum_pdbx_database_related_db_name pdbx_database_related db_name content_type
+dictenum_software_name software name classification
+#
+loop_
+_validator_rule_cross_reference.id
+_validator_rule_cross_reference.category
+_validator_rule_cross_reference.item
+_validator_rule_cross_reference.cross_category
+_validator_rule_cross_reference.cross_item
+_validator_rule_cross_reference.expt
+_validator_rule_cross_reference.code
+_validator_rule_cross_reference.subtype
+_validator_rule_cross_reference.type
+xref_entity_poly_entity_src_gen_1 entity_poly entity_id entity_src_gen entity_id all . full cross
+xref_entity_poly_entity_src_nat_2 entity_poly entity_id entity_src_nat entity_id all . full cross
+xref_entity_poly_pdbx_entity_src_syn_3 entity_poly entity_id pdbx_entity_src_syn entity_id all . full cross
+xref_exptl_crystal_grow_exptl_crystal_4 exptl_crystal_grow crystal_id exptl_crystal id . . full cross
+xref_diffrn_exptl_crystal_5 diffrn crystal_id exptl_crystal id . . full cross
+xref_diffrn_detector_diffrn_6 diffrn_detector diffrn_id diffrn id . . full cross
+xref_diffrn_radiation_diffrn_7 diffrn_radiation diffrn_id diffrn id . . full cross
+xref_diffrn_source_diffrn_8 diffrn_source diffrn_id diffrn id . . full cross
+xref_pdbx_serial_crystallography_measurement_diffrn_9 pdbx_serial_crystallography_measurement diffrn_id diffrn id . . full cross
+xref_pdbx_serial_crystallography_sample_delivery_diffrn_10 pdbx_serial_crystallography_sample_delivery diffrn_id diffrn id . . full cross
+xref_pdbx_serial_crystallography_sample_delivery_injection_diffrn_11 pdbx_serial_crystallography_sample_delivery_injection diffrn_id diffrn id . . full cross
+xref_pdbx_serial_crystallography_sample_delivery_fixed_target_diffrn_1 pdbx_serial_crystallography_sample_delivery_fixed_target diffrn_id diffrn id . . full cross
+xref_pdbx_serial_crystallography_data_reduction_diffrn_13 pdbx_serial_crystallography_data_reduction diffrn_id diffrn id . . full cross
+xref_pdbx_struct_assembly_depositor_info_pdbx_struct_assembly_auth_evi pdbx_struct_assembly_depositor_info id pdbx_struct_assembly_auth_evidence_depositor_info assembly_id coded PDB full cross
+xref_pdbx_struct_assembly_depositor_info_pdbx_struct_assembly_gen_depo pdbx_struct_assembly_depositor_info id pdbx_struct_assembly_gen_depositor_info assembly_id coded PDB full cross
+xref_pdbx_nmr_exptl_sample_pdbx_nmr_sample_details_16 pdbx_nmr_exptl_sample solution_id pdbx_nmr_sample_details solution_id . . full cross
+xref_pdbx_nmr_chem_shift_reference_pdbx_nmr_chem_shift_ref_17 pdbx_nmr_chem_shift_reference id pdbx_nmr_chem_shift_ref chem_shift_reference_id . . full cross
+xref_pdbx_nmr_assigned_chem_shift_list_pdbx_nmr_chem_shift_experiment_ pdbx_nmr_assigned_chem_shift_list id pdbx_nmr_chem_shift_experiment assigned_chem_shift_list_id . . full cross
+xref_pdbx_nmr_assigned_chem_shift_list_pdbx_nmr_chem_shift_software_19 pdbx_nmr_assigned_chem_shift_list id pdbx_nmr_chem_shift_software assigned_chem_shift_list_id . . full cross
+xref_pdbx_nmr_assigned_chem_shift_list_pdbx_nmr_systematic_chem_shift_ pdbx_nmr_assigned_chem_shift_list id pdbx_nmr_systematic_chem_shift_offset assigned_chem_shift_list_id . . full cross
+xref_em_specimen_em_experiment_21 em_specimen experiment_id em_experiment id . . full cross
+xref_em_imaging_optics_em_imaging_22 em_imaging_optics imaging_id em_imaging id . . full cross
+xref_em_image_scans_em_image_recording_23 em_image_scans image_recording_id em_image_recording id . . full cross
+xref_em_particle_selection_em_image_processing_24 em_particle_selection image_processing_id em_image_processing id . . full cross
+xref_em_volume_selection_em_image_processing_25 em_volume_selection image_processing_id em_image_processing id . . full cross
+xref_em_ctf_correction_em_image_processing_26 em_ctf_correction em_image_processing_id em_image_processing id . . full cross
+xref_em_start_model_em_image_processing_27 em_start_model image_processing_id em_image_processing id . . full cross
+xref_em_3d_reconstruction_em_image_processing_28 em_3d_reconstruction image_processing_id em_image_processing id . . full cross
+xref_em_final_classification_em_image_processing_29 em_final_classification image_processing_id em_image_processing id . . full cross
+xref_em_3d_fitting_list_em_3d_fitting_30 em_3d_fitting_list 3d_fitting_id em_3d_fitting id . . full cross
+#
+loop_
+_validator_rule_cross_reference_expt.rule_id
+_validator_rule_cross_reference_expt.ordinal
+_validator_rule_cross_reference_expt.mode
+xref_exptl_crystal_grow_exptl_crystal_4 1 xray
+xref_exptl_crystal_grow_exptl_crystal_4 2 nd
+xref_exptl_crystal_grow_exptl_crystal_4 3 fd
+xref_exptl_crystal_grow_exptl_crystal_4 4 ec
+xref_diffrn_exptl_crystal_5 1 xray
+xref_diffrn_exptl_crystal_5 2 nd
+xref_diffrn_exptl_crystal_5 3 fd
+xref_diffrn_detector_diffrn_6 1 xray
+xref_diffrn_detector_diffrn_6 2 nd
+xref_diffrn_detector_diffrn_6 3 fd
+xref_diffrn_radiation_diffrn_7 1 xray
+xref_diffrn_radiation_diffrn_7 2 nd
+xref_diffrn_radiation_diffrn_7 3 fd
+xref_diffrn_source_diffrn_8 1 xray
+xref_diffrn_source_diffrn_8 2 nd
+xref_diffrn_source_diffrn_8 3 fd
+xref_pdbx_serial_crystallography_measurement_diffrn_9 1 xray
+xref_pdbx_serial_crystallography_sample_delivery_diffrn_10 1 xray
+xref_pdbx_serial_crystallography_sample_delivery_injection_diffrn_11 1 xray
+xref_pdbx_serial_crystallography_sample_delivery_fixed_target_diffrn_1 1 xray
+xref_pdbx_serial_crystallography_data_reduction_diffrn_13 1 xray
+xref_pdbx_nmr_exptl_sample_pdbx_nmr_sample_details_16 1 nmr
+xref_pdbx_nmr_exptl_sample_pdbx_nmr_sample_details_16 2 ssnmr
+xref_pdbx_nmr_chem_shift_reference_pdbx_nmr_chem_shift_ref_17 1 nmr
+xref_pdbx_nmr_chem_shift_reference_pdbx_nmr_chem_shift_ref_17 2 ssnmr
+xref_pdbx_nmr_assigned_chem_shift_list_pdbx_nmr_chem_shift_experiment_ 1 nmr
+xref_pdbx_nmr_assigned_chem_shift_list_pdbx_nmr_chem_shift_experiment_ 2 ssnmr
+xref_pdbx_nmr_assigned_chem_shift_list_pdbx_nmr_chem_shift_software_19 1 nmr
+xref_pdbx_nmr_assigned_chem_shift_list_pdbx_nmr_chem_shift_software_19 2 ssnmr
+xref_pdbx_nmr_assigned_chem_shift_list_pdbx_nmr_systematic_chem_shift_ 1 nmr
+xref_pdbx_nmr_assigned_chem_shift_list_pdbx_nmr_systematic_chem_shift_ 2 ssnmr
+xref_em_specimen_em_experiment_21 1 em
+xref_em_specimen_em_experiment_21 2 ec
+xref_em_imaging_optics_em_imaging_22 1 em
+xref_em_imaging_optics_em_imaging_22 2 ec
+xref_em_image_scans_em_image_recording_23 1 em
+xref_em_image_scans_em_image_recording_23 2 ec
+xref_em_particle_selection_em_image_processing_24 1 em
+xref_em_particle_selection_em_image_processing_24 2 ec
+xref_em_volume_selection_em_image_processing_25 1 em
+xref_em_ctf_correction_em_image_processing_26 1 em
+xref_em_ctf_correction_em_image_processing_26 2 ec
+xref_em_start_model_em_image_processing_27 1 em
+xref_em_start_model_em_image_processing_27 2 ec
+xref_em_3d_reconstruction_em_image_processing_28 1 em
+xref_em_3d_reconstruction_em_image_processing_28 2 ec
+xref_em_final_classification_em_image_processing_29 1 em
+xref_em_final_classification_em_image_processing_29 2 ec
+xref_em_3d_fitting_list_em_3d_fitting_30 1 em
+xref_em_3d_fitting_list_em_3d_fitting_30 2 ec
+#
+loop_
+_validator_rule_make_mandatory.id
+_validator_rule_make_mandatory.scope
+_validator_rule_make_mandatory.subtype
+_validator_rule_make_mandatory.category
+mandatory_em_imaging makeMandatory . em_imaging
+mandatory_pdbx_database_related makeMandatory . pdbx_database_related
+mandatory_refine_ls_shell makeMandatory . refine_ls_shell
+mandatory_ec_em_3d_reconstruction makeMandatorySubtypes EC em_3d_reconstruction
+mandatory_em_helical_em_3d_reconstruction makeMandatorySubtypes EM-helical em_3d_reconstruction
+mandatory_em_single_part_em_3d_reconstruction makeMandatorySubtypes EM-single_part em_3d_reconstruction
+mandatory_em_subtomogram_em_3d_reconstruction makeMandatorySubtypes EM-subtomogram em_3d_reconstruction
+mandatory_em_subtomogram_em_image_recording makeMandatorySubtypes EM-subtomogram em_image_recording
+#
+loop_
+_validator_rule_make_mandatory_item.rule_id
+_validator_rule_make_mandatory_item.role
+_validator_rule_make_mandatory_item.ordinal
+_validator_rule_make_mandatory_item.item
+mandatory_em_imaging to_check 1 nominal_defocus_min
+mandatory_em_imaging to_check 2 nominal_defocus_max
+mandatory_pdbx_database_related exclude 1 content_type
+mandatory_pdbx_database_related to_check 1 db_name
+mandatory_refine_ls_shell exclude 1 pdbx_refine_id
+mandatory_refine_ls_shell exclude 2 pdbx_ordinal
+mandatory_refine_ls_shell to_check 1 d_res_high
+mandatory_refine_ls_shell to_check 2 d_res_low
+mandatory_ec_em_3d_reconstruction to_check 1 resolution
+mandatory_ec_em_3d_reconstruction to_check 2 resolution_method
+mandatory_em_helical_em_3d_reconstruction to_check 1 resolution
+mandatory_em_helical_em_3d_reconstruction to_check 2 resolution_method
+mandatory_em_single_part_em_3d_reconstruction to_check 1 resolution
+mandatory_em_single_part_em_3d_reconstruction to_check 2 resolution_method
+mandatory_em_subtomogram_em_3d_reconstruction to_check 1 resolution
+mandatory_em_subtomogram_em_3d_reconstruction to_check 2 resolution_method
+mandatory_em_subtomogram_em_image_recording to_check 1 avg_electron_dose_per_subtomogram
+#
+loop_
+_validator_rule_one_of.id
+_validator_rule_one_of.category
+oneof_refine refine
+oneof_reflns reflns
+oneof_reflns_shell reflns_shell
+#
+loop_
+_validator_rule_one_of_item.rule_id
+_validator_rule_one_of_item.ordinal
+_validator_rule_one_of_item.item
+oneof_refine 1 ls_R_factor_obs
+oneof_refine 2 ls_R_factor_R_work
+oneof_refine 3 ls_R_factor_R_free
+oneof_reflns 1 pdbx_CC_half
+oneof_reflns 2 pdbx_Rmerge_I_obs
+oneof_reflns 3 pdbx_Rsym_value
+oneof_reflns 4 pdbx_Rpim_I_all
+oneof_reflns 5 pdbx_Rrim_I_all
+oneof_reflns 6 pdbx_R_split
+oneof_reflns_shell 1 pdbx_CC_half
+oneof_reflns_shell 2 Rmerge_I_obs
+oneof_reflns_shell 3 pdbx_Rsym_value
+oneof_reflns_shell 4 pdbx_Rpim_I_all
+oneof_reflns_shell 5 pdbx_Rrim_I_all
+oneof_reflns_shell 6 pdbx_R_split
+#
+loop_
+_validator_rule_procedural.id
+_validator_rule_procedural.kind
+_validator_rule_procedural.category
+_validator_rule_procedural.item
+_validator_rule_procedural.driver_item
+_validator_rule_procedural.skip_if_empty
+_validator_rule_procedural.severity
+_validator_rule_procedural.message
+_validator_rule_procedural.mismatch_message
+_validator_rule_procedural.missing_message
+_validator_rule_procedural.source_category
+_validator_rule_procedural.source_item
+_validator_rule_procedural.source_key
+_validator_rule_procedural.target_category
+_validator_rule_procedural.target_item
+_validator_rule_procedural.target_key
+diffrn_source_wavelength_vs_protocol wavelength_protocol_consistency . . . . . . . . diffrn_source pdbx_wavelength_list diffrn_id diffrn_radiation pdbx_diffrn_protocol diffrn_id
+pdbx_database_related_db_id accession_format_rule pdbx_database_related db_id db_name . . . . . . . . . . .
+pdbx_struct_ref_seq_depositor_info_db_accession accession_format_rule pdbx_struct_ref_seq_depositor_info db_accession db_name yes . . . . . . . . . .
+pdbx_initial_refinement_model_accession_code conditional_accession_format_rule pdbx_initial_refinement_model accession_code . . . . . . . . . . . .
+pdbx_initial_refinement_model_integrative_source_name conditional_value_rule pdbx_initial_refinement_model source_name . . . . . . . . . . . .
+atom_site_occupancy atom_site_occupancy atom_site occupancy . . . . . . . . . . . .
+atom_site_vs_entity_poly_seq sequence_model_mismatch . . . . hard .
+;Residue ([{chain}] [{comp}] [{residue}]) does not match with the residue '[{sequence_comp}]' in sequence.
+;
+;Residue ([{chain}] [{comp}] [{residue}]) is not present in the sequence.
+;
+. . . . . .
+entity_poly_pdbx_seq_one_letter_code_poly_ala sequence_predicate_warning entity_poly pdbx_seq_one_letter_code . . . . . . . . . . . .
+#
+loop_
+_validator_rule_procedural_branch.rule_id
+_validator_rule_procedural_branch.ordinal
+_validator_rule_procedural_branch.driver_value
+_validator_rule_procedural_branch.protocol
+_validator_rule_procedural_branch.requires
+_validator_rule_procedural_branch.predicate
+_validator_rule_procedural_branch.substring
+_validator_rule_procedural_branch.severity
+_validator_rule_procedural_branch.message
+diffrn_source_wavelength_vs_protocol 1 . LAUE multi . . error
+;Wavelength list is inconsistent with diffraction protocol 'LAUE'; provide multiple wavelengths or a wavelength range.
+;
+diffrn_source_wavelength_vs_protocol 2 .
+;SINGLE WAVELENGTH
+;
+single . . error
+;Wavelength list is inconsistent with diffraction protocol 'SINGLE WAVELENGTH'; provide a single wavelength value.
+;
+pdbx_database_related_db_id 1 PDB . . . . error
+;Invalid PDB accession code format.
+;
+pdbx_database_related_db_id 2 EMDB . . . . error
+;Invalid EMDB accession code format.
+;
+pdbx_struct_ref_seq_depositor_info_db_accession 1 GB . . . . error
+;Invalid GenBank accession code format. The format should be 'A12345.1' or 'AB123456.1'.
+;
+pdbx_struct_ref_seq_depositor_info_db_accession 2 UNP . . . . error
+;Invalid UniProt accession code format.
+;
+pdbx_initial_refinement_model_accession_code 1 . . . . . error
+;Invalid PDB accession code format.
+;
+pdbx_initial_refinement_model_accession_code 2 . . . . . error
+;Invalid PDB-Dev accession code format.
+;
+pdbx_initial_refinement_model_accession_code 3 . . . . . error
+;Invalid AlphaFold accession code format.
+;
+pdbx_initial_refinement_model_accession_code 4 . . . . . error
+;Invalid ModelArchive accession code format.
+;
+pdbx_initial_refinement_model_integrative_source_name 1 . . . . . error
+;Source name for integrative model type can be only PDB-Dev.
+;
+entity_poly_pdbx_seq_one_letter_code_poly_ala 1 . . . homopolymer_ala . soft
+;We detected one or more chain(s) composed only of poly-ALA. If the residues have poorly defined side chains, they should be called by the register. If the register is unknown, the residues should be called UNK rather than ALA.
+;
+entity_poly_pdbx_seq_one_letter_code_poly_ala 2 . . . substring AAAAAAAAAA soft
+;We detected one or more chain(s) containing stretches of poly-ALA. If the residues have poorly defined side chains, they should be called by the register.
+;
+#
+loop_
+_validator_rule_procedural_format.rule_id
+_validator_rule_procedural_format.branch_ordinal
+_validator_rule_procedural_format.ordinal
+_validator_rule_procedural_format.format
+pdbx_database_related_db_id 1 1 pdb_id
+pdbx_database_related_db_id 1 2 deposition_id
+pdbx_database_related_db_id 2 1 emdb_id
+pdbx_database_related_db_id 2 2 deposition_id
+pdbx_struct_ref_seq_depositor_info_db_accession 1 1 genbank_id
+pdbx_struct_ref_seq_depositor_info_db_accession 2 1 uniprot_id
+pdbx_initial_refinement_model_accession_code 1 1 pdb_id
+pdbx_initial_refinement_model_accession_code 2 1 pdbdev_id
+pdbx_initial_refinement_model_accession_code 3 1 alphafold_id
+pdbx_initial_refinement_model_accession_code 4 1 modelarchive_id
+#
+loop_
+_validator_rule_procedural_allowed_value.rule_id
+_validator_rule_procedural_allowed_value.branch_ordinal
+_validator_rule_procedural_allowed_value.ordinal
+_validator_rule_procedural_allowed_value.value
+pdbx_initial_refinement_model_integrative_source_name 1 1 PDB-Dev
+#
+loop_
+_validator_rule_procedural_empty_list.rule_id
+_validator_rule_procedural_empty_list.ordinal
+_validator_rule_procedural_empty_list.protocol
+_validator_rule_procedural_empty_list.severity
+_validator_rule_procedural_empty_list.message
+diffrn_source_wavelength_vs_protocol 1 LAUE hard
+;pdbx_wavelength_list must not be empty when pdbx_diffrn_protocol is LAUE or SINGLE WAVELENGTH for the same diffrn_id.
+;
+diffrn_source_wavelength_vs_protocol 2
+;SINGLE WAVELENGTH
+;
+hard
+;pdbx_wavelength_list must not be empty when pdbx_diffrn_protocol is LAUE or SINGLE WAVELENGTH for the same diffrn_id.
+;
+#
+loop_
+_validator_rule_procedural_limit.rule_id
+_validator_rule_procedural_limit.role
+_validator_rule_procedural_limit.limit
+_validator_rule_procedural_limit.severity
+_validator_rule_procedural_limit.message
+atom_site_occupancy over_one 1 hard
+;Chain [{chain}] residue [{residue}] [{comp}] atom [{atom}] in model [{model}] has a total occupancy of [{total}].
+;
+atom_site_occupancy below 0.1 soft
+;Chain [{chain}] residue [{residue}] [{comp}] atom [{atom}] in model [{model}] has occupancy [{occupancy}] (below 0.1).
+;
+#

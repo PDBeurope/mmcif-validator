@@ -4,6 +4,13 @@ All notable changes to the PDBe mmCIF Validator extension will be documented in 
 
 # Released
 
+## [0.2.0] - 2026-10-01
+
+### Changed
+
+- **Cross-check rules are stored as mmCIF**: The grouped rule files under `rules/data/cross_checks_*.json` are now one file, `rules/data/cross_checks.cif`. Each family is a `_validator_rule_*` loop. The family runners are unchanged and still see the same rule documents, so validation findings match the JSON-backed validator. Procedural checks stay Python functions selected by `kind`; the CIF holds their parameters and messages. `rule_groups.json` is unchanged.
+- **Version bump**: Updated extension/package/docs version references from `0.1.97` to `0.2.0`.
+
 ## [0.1.97] - 2026-09-17
 
 ### Added

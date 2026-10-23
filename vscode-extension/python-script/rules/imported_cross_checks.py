@@ -1,20 +1,21 @@
 """
 Rule group for imported cross-check datasets.
 
-This executes grouped JSON rule families: pairwise (numeric and date order),
-linked presence/comparison, conditional rules, dictionary enum, procedural
-validators, and uniqueness within categories.
+Rule rows are stored in rules/data/cross_checks.cif. This executes the grouped
+families: pairwise (numeric and date order), linked presence/comparison,
+conditional rules, dictionary enum, procedural validators, and uniqueness
+within categories.
 """
 
 from __future__ import annotations
 
-import json
 import re
 from collections import defaultdict
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 
 from mmcif_types import ItemValue, ValidationError
+from rules.cross_check_cif import load_rule_file
 from rules.operators import compare_numeric
 from rules.utils import MISSING_VALUES, item_name_for_category, item_value_to_number, mmcif_datetime_tuple
 
@@ -27,20 +28,14 @@ class ImportedCrossChecksRuleGroup:
         pairwise_path: Optional[Path] = None,
         linked_path: Optional[Path] = None,
     ):
-        base = Path(__file__).resolve().parent / "data"
-        self.pairwise_path = pairwise_path or (base / "cross_checks_pairwise_comparison.json")
-        self.linked_path = linked_path or (base / "cross_checks_linked_presence_and_comparison.json")
+        # Kept so existing callers can still construct the group. Rules load from
+        # rules/data/cross_checks.cif, not from these paths.
+        self.pairwise_path = pairwise_path
+        self.linked_path = linked_path
 
     @staticmethod
-    def _load_json(path: Path) -> dict:
-        if not path.exists():
-            return {}
-        try:
-            with path.open("r", encoding="utf-8") as fh:
-                data = json.load(fh)
-            return data if isinstance(data, dict) else {}
-        except (OSError, json.JSONDecodeError):
-            return {}
+    def _load_rules(filename: str) -> dict:
+        return load_rule_file(filename)
 
     @staticmethod
     def _is_present(iv: Optional[ItemValue]) -> bool:
@@ -197,9 +192,7 @@ class ImportedCrossChecksRuleGroup:
         return False
 
     def _run_pairwise_date_order(self, mmcif, rows_cache: Dict[str, List[Dict[str, ItemValue]]]) -> List[ValidationError]:
-        data = self._load_json(
-            Path(__file__).resolve().parent / "data" / "cross_checks_pairwise_date_order.json"
-        )
+        data = self._load_rules("cross_checks_pairwise_date_order.json")
         errors: List[ValidationError] = []
         rules = data.get("date_order_rules", [])
         if not isinstance(rules, list):
@@ -252,9 +245,7 @@ class ImportedCrossChecksRuleGroup:
         return errors
 
     def _run_uniqueness(self, mmcif, rows_cache: Dict[str, List[Dict[str, ItemValue]]]) -> List[ValidationError]:
-        data = self._load_json(
-            Path(__file__).resolve().parent / "data" / "cross_checks_uniqueness.json"
-        )
+        data = self._load_rules("cross_checks_uniqueness.json")
         errors: List[ValidationError] = []
         rules = data.get("uniqueness_rules", [])
         if not isinstance(rules, list):
@@ -323,7 +314,7 @@ class ImportedCrossChecksRuleGroup:
         return errors
 
     def _run_pairwise(self, mmcif, rows_cache: Dict[str, List[Dict[str, ItemValue]]]) -> List[ValidationError]:
-        pairwise = self._load_json(self.pairwise_path)
+        pairwise = self._load_rules("cross_checks_pairwise_comparison.json")
         errors: List[ValidationError] = []
 
         for source_ref, tests in pairwise.items():
@@ -412,7 +403,7 @@ class ImportedCrossChecksRuleGroup:
         return errors
 
     def _run_linked(self, mmcif, rows_cache: Dict[str, List[Dict[str, ItemValue]]]) -> List[ValidationError]:
-        linked = self._load_json(self.linked_path)
+        linked = self._load_rules("cross_checks_linked_presence_and_comparison.json")
         errors: List[ValidationError] = []
 
         for source_ref, rules in linked.items():
@@ -529,9 +520,7 @@ class ImportedCrossChecksRuleGroup:
         return errors
 
     def _run_conditional_required(self, mmcif, rows_cache: Dict[str, List[Dict[str, ItemValue]]]) -> List[ValidationError]:
-        conditional_required = self._load_json(
-            Path(__file__).resolve().parent / "data" / "cross_checks_conditional_required.json"
-        )
+        conditional_required = self._load_rules("cross_checks_conditional_required.json")
         errors: List[ValidationError] = []
 
         for category, rules in conditional_required.items():
@@ -611,9 +600,7 @@ class ImportedCrossChecksRuleGroup:
         return errors
 
     def _run_conditional_regex(self, mmcif, rows_cache: Dict[str, List[Dict[str, ItemValue]]]) -> List[ValidationError]:
-        conditional_regex = self._load_json(
-            Path(__file__).resolve().parent / "data" / "cross_checks_conditional_regex.json"
-        )
+        conditional_regex = self._load_rules("cross_checks_conditional_regex.json")
         errors: List[ValidationError] = []
 
         for category, rules in conditional_regex.items():
@@ -672,9 +659,7 @@ class ImportedCrossChecksRuleGroup:
         return errors
 
     def _run_conditional_enumeration(self, mmcif, rows_cache: Dict[str, List[Dict[str, ItemValue]]]) -> List[ValidationError]:
-        conditional_enum = self._load_json(
-            Path(__file__).resolve().parent / "data" / "cross_checks_conditional_enumeration.json"
-        )
+        conditional_enum = self._load_rules("cross_checks_conditional_enumeration.json")
         errors: List[ValidationError] = []
 
         for category, rules in conditional_enum.items():
@@ -734,9 +719,7 @@ class ImportedCrossChecksRuleGroup:
         return errors
 
     def _run_conditional_category_item(self, mmcif, rows_cache: Dict[str, List[Dict[str, ItemValue]]]) -> List[ValidationError]:
-        conditional_category_item = self._load_json(
-            Path(__file__).resolve().parent / "data" / "cross_checks_conditional_category_item.json"
-        )
+        conditional_category_item = self._load_rules("cross_checks_conditional_category_item.json")
         errors: List[ValidationError] = []
 
         for category, rules in conditional_category_item.items():
@@ -805,9 +788,7 @@ class ImportedCrossChecksRuleGroup:
         rows_cache: Dict[str, List[Dict[str, ItemValue]]],
         runtime_context: Optional[dict],
     ) -> List[ValidationError]:
-        required_if_any = self._load_json(
-            Path(__file__).resolve().parent / "data" / "cross_checks_required_if_any_present.json"
-        )
+        required_if_any = self._load_rules("cross_checks_required_if_any_present.json")
         errors: List[ValidationError] = []
 
         make_mandatory = required_if_any.get("makeMandatory", {})
@@ -918,9 +899,7 @@ class ImportedCrossChecksRuleGroup:
         rows_cache: Dict[str, List[Dict[str, ItemValue]]],
         dictionary=None,
     ) -> List[ValidationError]:
-        dictionary_enum = self._load_json(
-            Path(__file__).resolve().parent / "data" / "cross_checks_dictionary_enum.json"
-        )
+        dictionary_enum = self._load_rules("cross_checks_dictionary_enum.json")
         errors: List[ValidationError] = []
         if not isinstance(dictionary_enum, dict):
             return errors
@@ -990,9 +969,7 @@ class ImportedCrossChecksRuleGroup:
         rows_cache: Dict[str, List[Dict[str, ItemValue]]],
         runtime_context: Optional[dict],
     ) -> List[ValidationError]:
-        build_defaults = self._load_json(
-            Path(__file__).resolve().parent / "data" / "cross_checks_cross_reference_full.json"
-        )
+        build_defaults = self._load_rules("cross_checks_cross_reference_full.json")
         rules = build_defaults.get("cross_reference_full", [])
         errors: List[ValidationError] = []
         if not isinstance(rules, list):
@@ -1439,11 +1416,9 @@ class ImportedCrossChecksRuleGroup:
     def _run_procedural_validators(self, mmcif, rows_cache: Dict[str, List[Dict[str, ItemValue]]]) -> List[ValidationError]:
         """
         Phase 2 procedural validator migration.
-        Rule definitions are data-driven under rules/data/cross_checks_procedural_validators.json.
+        Rule definitions are data-driven under rules/data/cross_checks.cif.
         """
-        procedural = self._load_json(
-            Path(__file__).resolve().parent / "data" / "cross_checks_procedural_validators.json"
-        )
+        procedural = self._load_rules("cross_checks_procedural_validators.json")
         errors: List[ValidationError] = []
         checks = procedural.get("procedural_checks", []) if isinstance(procedural, dict) else []
         if not isinstance(checks, list):

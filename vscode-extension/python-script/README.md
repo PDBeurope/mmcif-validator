@@ -2,7 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/PDBeurope/mmcif-validator/main/img/logo-validator.png" alt="PDBe mmCIF Validator" width="200">
 
-**Version 0.1.97**
+**Version 0.2.0**
 
 A standalone Python script and PyPI package to validate mmCIF/CIF files against the PDBx/mmCIF dictionary or any CIF dictionary.
 
@@ -335,7 +335,7 @@ Additional cross-check rule groups are managed by the rule engine and registry u
 
 ### Steps
 
-1. Create a new rule-group class in `rules/` (JSON-backed grouped rule files are preferred for large imported families).
+1. Create a new rule-group class in `rules/` (CIF categories in `rules/data/cross_checks.cif` are preferred for large imported families).
 2. Add it to `RULE_GROUP_REGISTRY` in `rules/engine.py` with a unique ID.
 3. Toggle it in `rules/rule_groups.json` as needed.
 
@@ -355,32 +355,33 @@ If your new rule group ID is `geometry_consistency`, your config can look like:
 
 If `enabled_rule_groups` is omitted, all registered rule groups are enabled by default.
 
-### Grouped JSON rule format
+### Cross-check rule file
 
-Imported cross-check families are stored as grouped JSON files under `rules/data/` using a shared prefix:
+Imported cross-check families are stored in `rules/data/cross_checks.cif`. Each family is a `loop_` under a `_validator_rule_*` category. List-valued fields (keys, conditions, experiment selectors, allowed values) are child loops joined by `rule_id`. Messages and regular expressions are semicolon-delimited text. `ImportedCrossChecksRuleGroup` loads that file and rebuilds the in-memory rule documents the family runners execute.
 
-- `cross_checks_pairwise_comparison.json`
-- `cross_checks_pairwise_date_order.json` — same-category date/datetime ordering (chronological constraints, currently `pdbx_database_status`)
-- `cross_checks_uniqueness.json` — duplicate detection for configured key columns within one category (e.g. `entity.id`)
-- `cross_checks_linked_presence_and_comparison.json` — linked rows are paired by `cross`/`cross2`. Rules may set **`fallback`: `single_row_if_key_missing`**: if the key match finds no row, the target category has exactly one row, and that row’s join key is missing (`?` / `.` / blank / omitted), use the singleton target. Keys that are present and disagree are not joined. Used for `pdbx_diffrn_id` checks (e.g. `_reflns.number_obs` vs `_refine.ls_number_reflns_obs`) when refinement software omits the PDBx id.
-- `cross_checks_conditional_required.json` — rules may include **`skip_if_any_category_present`** (list of category names): when any listed category has at least one row, the rule is skipped (e.g. skip legacy `refine.pdbx_starting_model` when `pdbx_initial_refinement_model` is present).
-- `cross_checks_conditional_regex.json`
-- `cross_checks_conditional_enumeration.json`
-- `cross_checks_conditional_category_item.json`
-- `cross_checks_required_if_any_present.json`
-- `cross_checks_cross_reference_full.json`
-- `cross_checks_procedural_validators.json` — procedural checks (data-driven `kind` values: wavelength vs protocol including empty list, accession format rules, conditional accession/source rules on `pdbx_initial_refinement_model`, sequence predicate warnings on `entity_poly.pdbx_seq_one_letter_code`, atom occupancy totals over 1.0 and occupancy below 0.1, sequence–model residue mismatches). See extension **CHANGELOG** `[0.1.91]` and `[0.1.97]` for the full list.
+Families:
 
-Keeping related checks together in a consistent JSON family format makes future re-imports and diff reviews simpler.
+- `_validator_rule_pairwise` — numeric comparison of two items
+- `_validator_rule_date_order` — same-category date/datetime ordering (chronological constraints, currently `pdbx_database_status`)
+- `_validator_rule_uniqueness` — duplicate detection for configured key columns within one category (e.g. `entity.id`). Composite keys use `_validator_rule_uniqueness_key`
+- `_validator_rule_linked` — linked rows are paired by `cross`/`cross2`. Rules may set **`fallback`** to `single_row_if_key_missing`: if the key match finds no row, the target category has exactly one row, and that row’s join key is missing (`?` / `.` / blank / omitted), use the singleton target. Keys that are present and disagree are not joined. Used for `pdbx_diffrn_id` checks (e.g. `_reflns.number_obs` vs `_refine.ls_number_reflns_obs`) when refinement software omits the PDBx id. **`absolute`** `yes` compares absolute values
+- `_validator_rule_conditional_required` — rules may include `_validator_rule_skip_category` rows: when any listed category has at least one row, the rule is skipped (e.g. skip legacy `refine.pdbx_starting_model` when `pdbx_initial_refinement_model` is present)
+- `_validator_rule_conditional_regex`
+- `_validator_rule_conditional_enum`
+- `_validator_rule_conditional_category_item`
+- `_validator_rule_dictionary_enum`
+- `_validator_rule_cross_reference` — `expt` is `all`, `coded` (with `code`), or a list of modes in `_validator_rule_cross_reference_expt`
+- `_validator_rule_make_mandatory` and `_validator_rule_one_of` — required items when any value is present, including subtype-gated rows
+- `_validator_rule_procedural` — procedural checks selected by `kind`: wavelength vs protocol including empty list, accession format rules, conditional accession/source rules on `pdbx_initial_refinement_model`, sequence predicate warnings on `entity_poly.pdbx_seq_one_letter_code`, atom occupancy totals over 1.0 and occupancy below 0.1, sequence–model residue mismatches. Parameters and messages are in the CIF; the comparison code stays in Python. See extension **CHANGELOG** `[0.1.91]` and `[0.1.97]` for the full list.
 
-### Maintaining grouped cross-check data
+### Maintaining cross-check rules
 
-Add or change rules by editing the JSON files under `rules/data/`. Each file is loaded by **`ImportedCrossChecksRuleGroup`** in `rules/imported_cross_checks.py` (or the shared rule engine where registered). Prefer small, reviewable JSON diffs and matching runtime tests under `testing/cif_files/`.
+Add or change rules by editing `rules/data/cross_checks.cif`. **`ImportedCrossChecksRuleGroup`** in `rules/imported_cross_checks.py` loads it. After a rule change, regenerate the catalog with `python tools/generate_cross_check_rules_catalog.py` and add a matching runtime test under `testing/cif_files/`.
 
 ### Roadmap (cross-check families)
 
-- **Date/time (in progress)**: `cross_checks_pairwise_date_order.json` covers same-row ordering on `_pdbx_database_status`. Next steps are more rows in that file (other date pairs) or additional categories such as `_database_PDB_rev` and `_audit_*` once row alignment rules are clear.
-- **Uniqueness**: first slice shipped as `cross_checks_uniqueness.json` (`entity`, `struct_asym`, `entity_poly`). Extend with `key_items` lists for composite keys (for example several `atom_site` columns) where file-level uniqueness is required.
+- **Date/time (in progress)**: `_validator_rule_date_order` covers same-row ordering on `_pdbx_database_status`. Next steps are more rows in that category (other date pairs) or additional categories such as `_database_PDB_rev` and `_audit_*` once row alignment rules are clear.
+- **Uniqueness**: first slice is `_validator_rule_uniqueness` (`entity`, `struct_asym`, `entity_poly`). Extend with more `_validator_rule_uniqueness_key` rows for composite keys (for example several `atom_site` columns) where file-level uniqueness is required.
 - **Taxonomy / source**: conditional or linked rules across `entity` / `entity_src_*` without external NCBI calls, unless you later bundle a taxonomy table.
 
 ## Error vs Warning Severity
