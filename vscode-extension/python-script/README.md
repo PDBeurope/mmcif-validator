@@ -2,7 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/PDBeurope/mmcif-validator/main/img/logo-validator.png" alt="PDBe mmCIF Validator" width="200">
 
-**Version 0.2.1**
+**Version 0.2.2**
 
 A standalone Python script and PyPI package to validate mmCIF/CIF files against the PDBx/mmCIF dictionary or any CIF dictionary.
 
@@ -27,7 +27,7 @@ See the full [CHANGELOG](../CHANGELOG.md).
 <img align="right" width="220" src="https://raw.githubusercontent.com/PDBeurope/mmcif-validator/main/img/validation.png" alt="Validation checks against the mmCIF dictionary">
 
 - **Dictionary flexibility** — Works with PDBx/mmCIF dictionary or any CIF dictionary format; local files or URLs
-- **Works out-of-the-box** — No pip dependencies beyond the standard library
+- **Works out-of-the-box** — No pip dependencies beyond the standard library (HTTPS dictionary downloads use a bundled Mozilla CA file)
 - **CI/CD friendly** — Exit codes (0 success, 1 errors) and JSON output with line/column positions
 
 The validator performs comprehensive checks including:
