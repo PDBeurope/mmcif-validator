@@ -1,3 +1,4 @@
 include completeness/*.list
 include rules/rule_groups.json
+include cacert.pem
 recursive-include rules/data *.cif

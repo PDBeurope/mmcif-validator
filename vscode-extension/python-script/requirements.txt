@@ -1,3 +1,4 @@
 # Python requirements for mmCIF validator
-# No external dependencies required - uses only standard library
+# No external dependencies required - uses only the standard library.
+# HTTPS dictionary downloads use the bundled Mozilla CA file (cacert.pem).
 

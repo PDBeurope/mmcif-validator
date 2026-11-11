@@ -2,7 +2,7 @@
 
 <img src="img/logo-validator.png" alt="PDBe mmCIF Validator" width="200">
 
-**Version 0.2.1**
+**Version 0.2.2**
 
 Real-time VS Code extension, standalone Python tool, and online validator for mmCIF/CIF files.
 
@@ -134,6 +134,8 @@ See the [Python script README](vscode-extension/python-script/README.md) for det
 ## What's new
 
 See the full [CHANGELOG](vscode-extension/CHANGELOG.md).
+
+Release **0.2.2** fixes dictionary loading in the VS Code extension: a set `dictionaryPath` now takes precedence over the default URL, and HTTPS dictionary downloads work on Windows Python installs with a missing system CA path (bundled Mozilla CA bundle).
 
 Release **0.2.1** reports duplicate dictionary category keys. A repeated `_audit_author.pdbx_ordinal`, or any other `_category_key.name`, is an error on each repeated row. Missing key values (`?` / `.`) are skipped. The existing `entity`, `struct_asym`, and `entity_poly` messages are unchanged.
 

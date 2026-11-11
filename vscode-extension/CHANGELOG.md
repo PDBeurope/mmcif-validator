@@ -4,6 +4,17 @@ All notable changes to the PDBe mmCIF Validator extension will be documented in 
 
 # Released
 
+## [0.2.2] - 2026-11-11
+
+### Fixed
+
+- **Local dictionary path ignored**: `mmcifValidator.dictionaryPath` now takes precedence over the default `dictionaryUrl`, so a local dictionary works without clearing the URL setting.
+- **Dictionary download SSL failures on Windows**: HTTPS dictionary downloads (including the HTTP→HTTPS redirect from `mmcif.pdb.org`) now use a bundled Mozilla CA bundle when the Python install’s default CA path is missing, fixing `CERTIFICATE_VERIFY_FAILED` / “Failed to download dictionary” errors.
+
+### Changed
+
+- **Version bump**: Updated extension/package/docs version references from `0.2.1` to `0.2.2`.
+
 ## [0.2.1] - 2026-10-23
 
 ### Added

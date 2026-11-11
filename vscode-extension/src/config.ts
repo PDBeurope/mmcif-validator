@@ -47,10 +47,42 @@ export interface DictionarySource {
     useUrl: boolean;
 }
 
+function resolveLocalDictionaryPath(
+    dictionaryPath: string,
+    workspaceFolder: vscode.WorkspaceFolder | undefined
+): string {
+    return path.isAbsolute(dictionaryPath)
+        ? dictionaryPath
+        : workspaceFolder
+            ? path.join(workspaceFolder.uri.fsPath, dictionaryPath)
+            : dictionaryPath;
+}
+
+function findWorkspaceDictionary(workspaceFolder: vscode.WorkspaceFolder | undefined): string | null {
+    if (!workspaceFolder) {
+        return null;
+    }
+    for (const name of COMMON_DICT_NAMES) {
+        const p = path.join(workspaceFolder.uri.fsPath, name);
+        if (fs.existsSync(p)) {
+            return p;
+        }
+    }
+    return null;
+}
+
 export function getDictionarySource(workspaceFolder: vscode.WorkspaceFolder | undefined, getCachedPath: () => string | null): DictionarySource | null {
     const config = vscode.workspace.getConfiguration('mmcifValidator');
     const dictionaryUrl = config.get<string>('dictionaryUrl', 'http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic');
-    const dictionaryPath = config.get<string>('dictionaryPath', '');
+    const dictionaryPath = (config.get<string>('dictionaryPath', '') || '').trim();
+
+    // Local path wins when set so offline / custom dictionaries work without clearing dictionaryUrl.
+    if (dictionaryPath) {
+        return {
+            dictSource: resolveLocalDictionaryPath(dictionaryPath, workspaceFolder),
+            useUrl: false,
+        };
+    }
 
     let dictSource: string | null = null;
     let useUrl = false;
@@ -58,31 +90,10 @@ export function getDictionarySource(workspaceFolder: vscode.WorkspaceFolder | un
     if (dictionaryUrl) {
         dictSource = dictionaryUrl;
         useUrl = true;
-    } else if (dictionaryPath) {
-        dictSource = path.isAbsolute(dictionaryPath)
-            ? dictionaryPath
-            : workspaceFolder
-                ? path.join(workspaceFolder.uri.fsPath, dictionaryPath)
-                : dictionaryPath;
-    } else if (workspaceFolder) {
-        for (const name of COMMON_DICT_NAMES) {
-            const p = path.join(workspaceFolder.uri.fsPath, name);
-            if (fs.existsSync(p)) {
-                dictSource = p;
-                break;
-            }
-        }
+    } else {
+        dictSource = findWorkspaceDictionary(workspaceFolder);
     }
 
-    if (!dictSource && workspaceFolder) {
-        for (const name of COMMON_DICT_NAMES) {
-            const p = path.join(workspaceFolder.uri.fsPath, name);
-            if (fs.existsSync(p)) {
-                dictSource = p;
-                break;
-            }
-        }
-    }
     if (!dictSource) {
         const cached = getCachedPath();
         if (cached && fs.existsSync(cached)) {

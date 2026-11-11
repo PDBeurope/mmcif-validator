@@ -1,0 +1,6 @@
+cacert.pem is the Mozilla CA certificate bundle (same source as the certifi
+project). It is included so HTTPS dictionary downloads work on Python installs
+whose default OpenSSL CA path is missing or incomplete (common on Windows).
+
+License: Mozilla Public License 2.0
+Source: https://github.com/certifi/python-certifi
