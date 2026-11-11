@@ -48,6 +48,7 @@ def _ssl_contexts():
         if ctx is not None:
             yield ctx
     except ImportError:
+        # certifi is optional; fall through to the bundled CA or system defaults.
         pass
 
     if _BUNDLED_CA.is_file():
