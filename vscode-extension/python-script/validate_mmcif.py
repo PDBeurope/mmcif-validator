@@ -118,7 +118,7 @@ def cmd_download_dictionary() -> int:
         if args.output:
             cache_path = Path(args.output)
         else:
-            cache_path = get_cached_dictionary_path()
+            cache_path = get_cached_dictionary_path(args.url)
         download_dictionary(args.url, cache_path=cache_path)
         print(json.dumps(download_success_dict(str(cache_path))))
         return 0
@@ -156,12 +156,15 @@ Examples:
   # Use local dictionary file
   validate_mmcif.py --file mmcif_pdbx_v5_next.dic 6qvt.cif
   
-  # Use dictionary from URL
+  # Use the public PDBx/mmCIF dictionary (V50)
+  validate_mmcif.py --url https://mmcif.wwpdb.org/dictionaries/ascii/mmcif_pdbx_v50.dic 6qvt.cif
+
+  # Internal dictionary (V5), for advanced use
   validate_mmcif.py --url http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic 6qvt.cif
   
   # Auto-detect (file path or URL) - backward compatible
   validate_mmcif.py mmcif_pdbx_v5_next.dic 6qvt.cif
-  validate_mmcif.py http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic 6qvt.cif
+  validate_mmcif.py https://mmcif.wwpdb.org/dictionaries/ascii/mmcif_pdbx_v50.dic 6qvt.cif
         """
     )
     

@@ -28,8 +28,9 @@ logger = logging.getLogger(__name__)
 TESTING_DIR = Path(__file__).resolve().parent
 REPO_ROOT = TESTING_DIR.parent
 VALIDATOR_SCRIPT = REPO_ROOT / "vscode-extension" / "python-script" / "validate_mmcif.py"
-# Default dictionary source: URL used by the VS Code extension / validator CLI examples
-DEFAULT_DICT_SOURCE = "http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic"
+# Default dictionary source: public PDBx/mmCIF dictionary (V50), same URL as the extension.
+# Internal V5: http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic (pass with --dict).
+DEFAULT_DICT_SOURCE = "https://mmcif.wwpdb.org/dictionaries/ascii/mmcif_pdbx_v50.dic"
 DEFAULT_TESTS_DIR = TESTING_DIR / "cif_files"
 OUTPUT_FILE = "validation_output.txt"
 BASELINE_FILE = "validation_baseline.txt"

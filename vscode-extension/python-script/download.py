@@ -5,6 +5,7 @@ Dictionary download and cache (shared with VS Code extension).
 import logging
 import ssl
 import tempfile
+import urllib.parse
 import urllib.request
 import urllib.error
 from pathlib import Path
@@ -24,9 +25,28 @@ def get_cache_dir() -> Path:
     return Path(tempfile.gettempdir()) / "mmcif-validator-cache"
 
 
-def get_cached_dictionary_path() -> Path:
+def dictionary_cache_filename(url: str) -> str:
+    """Basename of the dictionary URL, used as the cache file name.
+
+    Must stay in sync with cacheFilenameForUrl() in vscode-extension/src/dictionary.ts
+    so the public (V50) and internal (V5) dictionaries are cached separately.
+    """
+    name = Path(urllib.parse.urlparse(url).path).name
+    if (
+        name.endswith(".dic")
+        and name != ".dic"
+        and ".." not in name
+        and "/" not in name
+        and "\\" not in name
+    ):
+        return name
+    return "mmcif_pdbx.dic"
+
+
+def get_cached_dictionary_path(url: Optional[str] = None) -> Path:
     """Return the path where the downloaded dictionary is cached (same as extension's cache)."""
-    return get_cache_dir() / "mmcif_pdbx.dic"
+    filename = dictionary_cache_filename(url) if url else "mmcif_pdbx.dic"
+    return get_cache_dir() / filename
 
 
 def _ssl_contexts():

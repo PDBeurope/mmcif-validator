@@ -8,7 +8,7 @@
 
 import * as vscode from 'vscode';
 import * as fs from 'fs';
-import { getSettings, getScriptPath } from './config';
+import { DEFAULT_DICTIONARY_URL, getSettings, getScriptPath } from './config';
 import { getCachedDictionaryPath, downloadAndCacheDictionary } from './dictionary';
 import { createHoverProvider } from './hover';
 import { validateDocument, updateMetadataCompletenessUIFromCache } from './validation';
@@ -28,13 +28,13 @@ export function activate(context: vscode.ExtensionContext): void {
     context.subscriptions.push(diagnosticCollection);
 
     const config = vscode.workspace.getConfiguration('mmcifValidator');
-    const dictionaryUrl = config.get<string>('dictionaryUrl', 'http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic');
+    const dictionaryUrl = config.get<string>('dictionaryUrl', DEFAULT_DICTIONARY_URL);
     const dictionaryPath = config.get<string>('dictionaryPath', '');
     const settings = getSettings();
     const scriptPath = getScriptPath(context.extensionPath);
 
     if (dictionaryUrl && !dictionaryPath && scriptPath && fs.existsSync(scriptPath)) {
-        const cachedPath = getCachedDictionaryPath();
+        const cachedPath = getCachedDictionaryPath(dictionaryUrl);
         if (!cachedPath || !fs.existsSync(cachedPath)) {
             downloadAndCacheDictionary(dictionaryUrl, {
                 pythonPath: settings.pythonPath,

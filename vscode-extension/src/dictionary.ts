@@ -10,9 +10,33 @@ import { promisify } from 'util';
 const execFileAsync = promisify(execFile);
 
 const CACHE_DIR_NAME = 'mmcif-validator-cache';
-const CACHE_FILENAME = 'mmcif_pdbx.dic';
+const FALLBACK_CACHE_FILENAME = 'mmcif_pdbx.dic';
 
-export function getCachedDictionaryPath(): string | null {
+/**
+ * Cache file name is the dictionary URL's basename (for example mmcif_pdbx_v50.dic).
+ * Must match dictionary_cache_filename() in python-script/download.py so the
+ * public (V50) and internal (V5) dictionaries are not stored as the same file.
+ */
+export function cacheFilenameForUrl(url: string): string {
+    let name = '';
+    try {
+        name = path.posix.basename(new URL(url).pathname);
+    } catch {
+        name = '';
+    }
+    if (
+        name.endsWith('.dic') &&
+        name !== '.dic' &&
+        !name.includes('..') &&
+        !name.includes('/') &&
+        !name.includes('\\')
+    ) {
+        return name;
+    }
+    return FALLBACK_CACHE_FILENAME;
+}
+
+export function getCachedDictionaryPath(url?: string): string | null {
     const os = require('os');
     const cacheDir = path.join(os.tmpdir(), CACHE_DIR_NAME);
     if (!fs.existsSync(cacheDir)) {
@@ -22,7 +46,8 @@ export function getCachedDictionaryPath(): string | null {
             return null;
         }
     }
-    return path.join(cacheDir, CACHE_FILENAME);
+    const filename = url ? cacheFilenameForUrl(url) : FALLBACK_CACHE_FILENAME;
+    return path.join(cacheDir, filename);
 }
 
 export interface DownloadOptions {
@@ -40,7 +65,7 @@ export async function downloadAndCacheDictionary(
     options: DownloadOptions
 ): Promise<string | null> {
     const { pythonPath, scriptPath, outputChannel } = options;
-    const cachedPath = getCachedDictionaryPath();
+    const cachedPath = getCachedDictionaryPath(url);
     if (!cachedPath) return null;
 
     if (fs.existsSync(cachedPath)) {

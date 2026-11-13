@@ -2,7 +2,7 @@
   "name": "pdbe-mmcif-validator",
   "displayName": "PDBe mmCIF Validator",
   "description": "Validates mmCIF/CIF files against the PDBx/mmCIF dictionary or any CIF dictionary with real-time error checking",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "author": "Deborah Harrus <Protein Data Bank in Europe (PDBe), EMBL-EBI>",
   "publisher": "PDBEurope",
   "icon": "icon.png",
@@ -72,8 +72,8 @@
         },
         "mmcifValidator.dictionaryUrl": {
           "type": "string",
-          "default": "http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic",
-          "description": "URL to download the mmCIF dictionary from. Defaults to the official PDB dictionary. Used only when dictionaryPath is empty."
+          "default": "https://mmcif.wwpdb.org/dictionaries/ascii/mmcif_pdbx_v50.dic",
+          "description": "URL to download the mmCIF dictionary from. Defaults to the public PDBx/mmCIF dictionary (V50). Advanced users can set the internal dictionary (V5): http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic. Used only when dictionaryPath is empty."
         },
         "mmcifValidator.pythonPath": {
           "type": "string",

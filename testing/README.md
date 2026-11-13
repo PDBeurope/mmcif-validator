@@ -63,7 +63,7 @@ python testing/run_validation_suite.py --dict path/to/mmcif.dic --tests path/to/
 python testing/run_validation_suite.py --generate-baseline -o path/to/my_baseline.txt
 ```
 
-By default the suite uses the PDBx/mmCIF dictionary from `http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic`; you can override this with `--dict`.
+By default the suite uses the public PDBx/mmCIF dictionary (V50) from `https://mmcif.wwpdb.org/dictionaries/ascii/mmcif_pdbx_v50.dic`, the same URL as the VS Code extension. Override it with `--dict`, for example the internal dictionary (V5): `--dict http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic`.
 
 ### Logging
 

@@ -4,6 +4,14 @@ All notable changes to the PDBe mmCIF Validator extension will be documented in 
 
 # Released
 
+## [0.2.5] - 2026-11-13
+
+### Changed
+
+- **Default dictionary**: Validation uses the public PDBx/mmCIF dictionary (V50) by default (`https://mmcif.wwpdb.org/dictionaries/ascii/mmcif_pdbx_v50.dic`). The internal dictionary (V5) is available by setting `mmcifValidator.dictionaryUrl` to `http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic`.
+- **Dictionary cache per URL**: Each dictionary URL is cached under its own filename, so switching between the public and internal dictionaries does not reuse the other file.
+- **Version bump**: Updated extension/package/docs version references from `0.2.4` to `0.2.5`.
+
 ## [0.2.4] - 2026-11-13
 
 ### Fixed

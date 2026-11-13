@@ -2,7 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/PDBeurope/mmcif-validator/main/img/logo-validator.png" alt="PDBe mmCIF Validator" width="200">
 
-**Version 0.2.4**
+**Version 0.2.5**
 
 A Visual Studio Code extension to validate mmCIF/CIF files against the PDBx/mmCIF dictionary (or any CIF dictionary) with real-time error checking.
 
@@ -79,14 +79,14 @@ Install from the [VS Code Marketplace](https://marketplace.visualstudio.com/item
 
 The extension works out-of-the-box! By default, it will automatically:
 
-- Download and cache the PDBx/mmCIF dictionary from the official wwPDB website (http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic)
-- Cache the dictionary locally for one month to balance freshness with download efficiency
+- Download and cache the **public** PDBx/mmCIF dictionary (V50) from [https://mmcif.wwpdb.org/dictionaries/ascii/mmcif_pdbx_v50.dic](https://mmcif.wwpdb.org/dictionaries/ascii/mmcif_pdbx_v50.dic)
+- Cache that dictionary locally for one month to balance freshness with download efficiency
 - Dictionary updates are usually released in conjunction with OneDep software releases (average update frequency ~43 days)
 - Validate any `.cif` files you open
 - Show errors and warnings in the Problems panel with precise character positioning
 - Show **metadata completeness** (percentage and missing items) in the status bar and in the **Metadata Completeness** view in the Explorer sidebar
 
-**No configuration required!** However, you can also use any other CIF dictionary by configuring the `dictionaryPath` or `dictionaryUrl` settings (see [Configuration](#configuration) below).
+**No configuration required.** Most users should keep the public dictionary. Advanced users who need the internal dictionary can change `mmcifValidator.dictionaryUrl` (see [Which dictionary?](#which-dictionary) below). You can also point the extension at any other CIF dictionary with `dictionaryPath` or `dictionaryUrl` (see [Configuration](#configuration)).
 
 ## Usage
 
@@ -105,14 +105,45 @@ The extension works out-of-the-box! By default, it will automatically:
 
 **Behaviour**: The score uses row-level checks (every row in a mandatory loop must have all mandatory items filled). Items that trigger a validation error (severity "error") are counted as not filled and appear in the missing list with a validation-error flag.
 
+## Which dictionary?
+
+Two PDBx/mmCIF dictionaries are published:
+
+| Dictionary | Who it is for | URL |
+| --- | --- | --- |
+| **Public (V50)** | Most users. This is the default. | `https://mmcif.wwpdb.org/dictionaries/ascii/mmcif_pdbx_v50.dic` |
+| **Internal (V5)** | Advanced users who need the internal dictionary. | `http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic` |
+
+Leave the default URL in place unless you specifically need the internal dictionary.
+
+### Use the internal dictionary
+
+Replace `mmcifValidator.dictionaryUrl` in VS Code settings:
+
+1. Open **File → Preferences → Settings** (on macOS: **Code → Settings → Settings**), or press `Ctrl+,` (`Cmd+,` on macOS).
+2. Search for `mmcifValidator.dictionaryUrl`.
+3. Replace the public V50 URL with the internal V5 URL: `http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic`.
+
+Or edit `settings.json` directly (**Preferences: Open User Settings (JSON)**):
+
+```json
+{
+  "mmcifValidator.dictionaryUrl": "http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic"
+}
+```
+
+Leave `mmcifValidator.dictionaryPath` empty. A local path overrides the URL. Each URL is cached in its own file for one month, so changing the URL takes effect on the next validation.
+
+To go back to the public dictionary, set `mmcifValidator.dictionaryUrl` to `https://mmcif.wwpdb.org/dictionaries/ascii/mmcif_pdbx_v50.dic`, or clear the setting so the default is used.
+
 ## Configuration
 
 The extension works with sensible defaults, but you can customize it in VSCode settings (File → Preferences → Settings):
 
 ### Settings
 
-- **`mmcifValidator.dictionaryUrl`** (default: `http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic`)
-  - URL to download the dictionary from. Defaults to the official PDBx/mmCIF dictionary, but you can use any CIF dictionary URL.
+- **`mmcifValidator.dictionaryUrl`** (default: `https://mmcif.wwpdb.org/dictionaries/ascii/mmcif_pdbx_v50.dic`)
+  - URL to download the dictionary from. Defaults to the public PDBx/mmCIF dictionary (V50). Advanced users can set the internal dictionary (V5): `http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic`. Any other CIF dictionary URL also works.
   - Used only when `dictionaryPath` is empty. Works out-of-the-box with the default.
   
 - **`mmcifValidator.dictionaryPath`** (optional)
@@ -150,6 +181,13 @@ The extension works with sensible defaults, but you can customize it in VSCode s
 ```json
 {
   "mmcifValidator.dictionaryPath": "path/to/your/cif_dictionary.dic"
+}
+```
+
+**Use the internal PDBx/mmCIF dictionary (V5):**
+```json
+{
+  "mmcifValidator.dictionaryUrl": "http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic"
 }
 ```
 

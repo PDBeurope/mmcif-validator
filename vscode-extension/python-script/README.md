@@ -2,7 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/PDBeurope/mmcif-validator/main/img/logo-validator.png" alt="PDBe mmCIF Validator" width="200">
 
-**Version 0.2.4**
+**Version 0.2.5**
 
 A standalone Python script and PyPI package to validate mmCIF/CIF files against the PDBx/mmCIF dictionary or any CIF dictionary.
 
@@ -76,7 +76,19 @@ pip install pdbe-mmcif-validator
 
 - Python 3.7 or higher (uses only Python standard library, no pip packages required)
 - Internet connection (optional) - Only needed if downloading dictionary from URL. Can use local dictionary file for offline use.
-- CIF dictionary file (optional) - Defaults to PDBx/mmCIF dictionary from URL, but can use any CIF dictionary format
+- CIF dictionary file or URL — Use the public PDBx/mmCIF dictionary (V50) unless you need the internal dictionary (V5). Any other CIF dictionary also works. See [Dictionaries](#dictionaries).
+
+## Dictionaries
+
+Most users should validate against the **public** PDBx/mmCIF dictionary (V50):
+
+`https://mmcif.wwpdb.org/dictionaries/ascii/mmcif_pdbx_v50.dic`
+
+Advanced users who need the **internal** dictionary (V5) can pass that URL instead:
+
+`http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic`
+
+The VS Code extension uses the public dictionary by default. To use the internal dictionary there, open **File → Preferences → Settings**, search for `mmcifValidator.dictionaryUrl`, and replace the value with the internal URL. Leave `mmcifValidator.dictionaryPath` empty. Details are in the [extension README](../README.md#which-dictionary).
 
 ## Usage
 
@@ -101,14 +113,17 @@ python validate_mmcif.py path/to/your/cif_dictionary.dic your_file.cif
 ### Using Dictionary from URL
 
 ```bash
-# Using --url option (explicit) - defaults to PDBx/mmCIF dictionary
+# Public PDBx/mmCIF dictionary (V50) — use this unless you need the internal dictionary
+python validate_mmcif.py --url https://mmcif.wwpdb.org/dictionaries/ascii/mmcif_pdbx_v50.dic 6qvt.cif
+
+# Internal PDBx/mmCIF dictionary (V5), for advanced use
 python validate_mmcif.py --url http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic 6qvt.cif
 
 # Or use any CIF dictionary URL
 python validate_mmcif.py --url https://example.com/path/to/your/dictionary.dic 6qvt.cif
 
 # Or as positional argument (auto-detects URL)
-python validate_mmcif.py http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic 6qvt.cif
+python validate_mmcif.py https://mmcif.wwpdb.org/dictionaries/ascii/mmcif_pdbx_v50.dic 6qvt.cif
 ```
 
 ### Explicit Options
@@ -117,8 +132,8 @@ python validate_mmcif.py http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic 
 # Use local file
 python validate_mmcif.py --file mmcif_pdbx_v5_next.dic 6qvt.cif
 
-# Use URL
-python validate_mmcif.py --url http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic 6qvt.cif
+# Use the public dictionary URL (V50)
+python validate_mmcif.py --url https://mmcif.wwpdb.org/dictionaries/ascii/mmcif_pdbx_v50.dic 6qvt.cif
 ```
 
 ### Help
@@ -188,7 +203,7 @@ from pathlib import Path
 from validate_mmcif import validate, download_dictionary, DownloadError
 
 try:
-    dict_path = download_dictionary("http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic")
+    dict_path = download_dictionary("https://mmcif.wwpdb.org/dictionaries/ascii/mmcif_pdbx_v50.dic")
     errors = validate(dict_path, Path("file.cif"))
     # ... use errors ...
 finally:
@@ -421,7 +436,10 @@ These are advisory issues that may indicate problems but are not strictly requir
 # Validate with local dictionary
 python validate_mmcif.py mmcif_pdbx_v5_next.dic 6qvt.cif
 
-# Validate with online dictionary
+# Validate with the public dictionary (V50)
+python validate_mmcif.py --url https://mmcif.wwpdb.org/dictionaries/ascii/mmcif_pdbx_v50.dic 6qvt.cif
+
+# Validate with the internal dictionary (V5)
 python validate_mmcif.py --url http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic 6qvt.cif
 
 # Output to file

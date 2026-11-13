@@ -2,7 +2,7 @@
 
 <img src="img/logo-validator.png" alt="PDBe mmCIF Validator" width="200">
 
-**Version 0.2.4**
+**Version 0.2.5**
 
 Real-time VS Code extension, standalone Python tool, and online validator for mmCIF/CIF files.
 
@@ -101,21 +101,35 @@ Open the [online validator](https://wwwdev.ebi.ac.uk/pdbe/mmcif-validator/) (und
 
 ### VS Code extension
 
-Install from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=PDBEurope.pdbe-mmcif-validator) or [Open VSX](https://open-vsx.org/extension/PDBEurope/pdbe-mmcif-validator), then open any `.cif` file. The extension works out-of-the-box and automatically downloads the PDBx/mmCIF dictionary. See the [extension README](vscode-extension/README.md) for detailed documentation.
+Install from the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=PDBEurope.pdbe-mmcif-validator) or [Open VSX](https://open-vsx.org/extension/PDBEurope/pdbe-mmcif-validator), then open any `.cif` file. The extension works out-of-the-box and downloads the **public** PDBx/mmCIF dictionary (V50). See the [extension README](vscode-extension/README.md) for detailed documentation, including how to switch to the internal dictionary.
+
+### Dictionaries
+
+Most users should validate against the **public** dictionary (V50), which is the default:
+
+`https://mmcif.wwpdb.org/dictionaries/ascii/mmcif_pdbx_v50.dic`
+
+Advanced users who need the **internal** dictionary (V5) can use:
+
+`http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic`
+
+In the VS Code extension, replace `mmcifValidator.dictionaryUrl` with that internal URL (**File → Preferences → Settings**, search for `mmcifValidator.dictionaryUrl`). Leave `mmcifValidator.dictionaryPath` empty. Full steps are in the [extension README](vscode-extension/README.md#which-dictionary).
 
 ### Standalone Python script
 
 ```bash
 pip install pdbe-mmcif-validator
-validate-mmcif --url http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic model.cif
+validate-mmcif --url https://mmcif.wwpdb.org/dictionaries/ascii/mmcif_pdbx_v50.dic model.cif
 ```
 
 Or run from a clone:
 
 ```bash
-python vscode-extension/python-script/validate_mmcif.py --url http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic model.cif
+python vscode-extension/python-script/validate_mmcif.py --url https://mmcif.wwpdb.org/dictionaries/ascii/mmcif_pdbx_v50.dic model.cif
 python vscode-extension/python-script/validate_mmcif.py --file mmcif_pdbx.dic model.cif
 ```
+
+For the internal dictionary, pass `--url http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic` instead.
 
 See the [Python script README](vscode-extension/python-script/README.md) for detailed usage and library API.
 
@@ -134,6 +148,8 @@ See the [Python script README](vscode-extension/python-script/README.md) for det
 ## What's new
 
 See the full [CHANGELOG](vscode-extension/CHANGELOG.md).
+
+Release **0.2.5** validates against the public PDBx/mmCIF dictionary (V50) by default. The internal dictionary (V5) is available by setting `mmcifValidator.dictionaryUrl`.
 
 Release **0.2.4** fixes packaging so the bundled CA file is included under the `rules` package (setuptools rejects an empty package-data key).
 

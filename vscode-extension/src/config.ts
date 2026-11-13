@@ -6,6 +6,10 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
 
+/** Public PDBx/mmCIF dictionary (V50). Internal V5 is an advanced-user override. */
+export const DEFAULT_DICTIONARY_URL =
+    'https://mmcif.wwpdb.org/dictionaries/ascii/mmcif_pdbx_v50.dic';
+
 const COMMON_DICT_NAMES = ['mmcif_pdbx_v5_next.dic', 'mmcif_pdbx_5408.dic', 'mmcif_pdbx.dic'];
 
 /**
@@ -36,7 +40,7 @@ export function getSettings(): ValidatorSettings {
     return {
         enabled: config.get<boolean>('enabled', true),
         dictionaryPath: config.get<string>('dictionaryPath', ''),
-        dictionaryUrl: config.get<string>('dictionaryUrl', 'http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic'),
+        dictionaryUrl: config.get<string>('dictionaryUrl', DEFAULT_DICTIONARY_URL),
         pythonPath,
         validationTimeoutMs: Math.max(5000, Math.min(600000, validationTimeoutSeconds * 1000)),
     };
@@ -73,7 +77,7 @@ function findWorkspaceDictionary(workspaceFolder: vscode.WorkspaceFolder | undef
 
 export function getDictionarySource(workspaceFolder: vscode.WorkspaceFolder | undefined, getCachedPath: () => string | null): DictionarySource | null {
     const config = vscode.workspace.getConfiguration('mmcifValidator');
-    const dictionaryUrl = config.get<string>('dictionaryUrl', 'http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic');
+    const dictionaryUrl = config.get<string>('dictionaryUrl', DEFAULT_DICTIONARY_URL);
     const dictionaryPath = (config.get<string>('dictionaryPath', '') || '').trim();
 
     // Local path wins when set so offline / custom dictionaries work without clearing dictionaryUrl.
@@ -99,7 +103,7 @@ export function getDictionarySource(workspaceFolder: vscode.WorkspaceFolder | un
         if (cached && fs.existsSync(cached)) {
             dictSource = cached;
         } else {
-            dictSource = 'http://mmcif.pdb.org/dictionaries/ascii/mmcif_pdbx.dic';
+            dictSource = DEFAULT_DICTIONARY_URL;
             useUrl = true;
         }
     }
