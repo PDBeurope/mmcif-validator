@@ -2,7 +2,7 @@
 
 <img src="https://raw.githubusercontent.com/PDBeurope/mmcif-validator/main/img/logo-validator.png" alt="PDBe mmCIF Validator" width="200">
 
-**Version 0.2.5**
+**Version 0.2.6**
 
 A standalone Python script and PyPI package to validate mmCIF/CIF files against the PDBx/mmCIF dictionary or any CIF dictionary.
 
@@ -385,7 +385,7 @@ Families:
 - `_validator_rule_conditional_enum`
 - `_validator_rule_conditional_category_item`
 - `_validator_rule_dictionary_enum`
-- `_validator_rule_cross_reference` — `expt` is `all`, `coded` (with `code`), or a list of modes in `_validator_rule_cross_reference_expt`
+- `_validator_rule_cross_reference` — `expt` is `all`, `coded` (with `code`), or a list of modes in `_validator_rule_cross_reference_expt`. Optional `_validator_rule_cross_reference_gate` rows limit a rule to source keys whose joined item matches a value. Polymer source checks use `_entity.src_method`: `man` → `entity_src_gen`, `nat` → `entity_src_nat`, `syn` → `pdbx_entity_src_syn`. A missing `src_method` skips that polymer. The matching source category is required even when the category is absent.
 - `_validator_rule_make_mandatory` and `_validator_rule_one_of` — required items when any value is present, including subtype-gated rows
 - `_validator_rule_procedural` — procedural checks selected by `kind`: wavelength vs protocol including empty list, accession format rules, conditional accession/source rules on `pdbx_initial_refinement_model`, sequence predicate warnings on `entity_poly.pdbx_seq_one_letter_code`, atom occupancy totals over 1.0 and occupancy below 0.1, sequence–model residue mismatches. Parameters and messages are in the CIF; the comparison code stays in Python. See extension **CHANGELOG** `[0.1.91]` and `[0.1.97]` for the full list.
 

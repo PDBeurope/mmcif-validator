@@ -1,0 +1,9 @@
+data_test_cross_check_entity_src_by_method_missing_category
+#
+_entity.id 1
+_entity.type polymer
+_entity.src_method man
+#
+_entity_poly.entity_id 1
+_entity_poly.type polypeptide(L)
+#

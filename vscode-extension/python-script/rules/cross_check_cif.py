@@ -67,6 +67,9 @@ COLUMNS = {
         "id", "category", "item", "cross_category", "cross_item", "expt", "code",
         "subtype", "type",
     ),
+    "validator_rule_cross_reference_gate": (
+        "rule_id", "category", "key_item", "item", "value",
+    ),
     "validator_rule_cross_reference_expt": ("rule_id", "ordinal", "mode"),
     "validator_rule_make_mandatory": ("id", "scope", "subtype", "category"),
     "validator_rule_make_mandatory_item": ("rule_id", "role", "ordinal", "item"),
@@ -446,8 +449,10 @@ class _Index:
 
     def cross_reference(self) -> dict:
         modes = self._group("validator_rule_cross_reference_expt", ("rule_id",))
+        gates = self._group("validator_rule_cross_reference_gate", ("rule_id",))
         rules = []
         used = set()
+        used_gates = set()
         for row in self.tables["validator_rule_cross_reference"]:
             rule = {"category": row["category"]}
             if row["code"] != ".":
@@ -472,6 +477,26 @@ class _Index:
                         f"{self.path}: cross-reference rule {row['id']} has both "
                         "an expt token and experiment-mode rows"
                     )
+            gate_rows = gates.get((row["id"],), [])
+            if len(gate_rows) > 1:
+                raise CrossCheckRulesError(
+                    f"{self.path}: cross-reference rule {row['id']} has more than one gate"
+                )
+            if gate_rows:
+                gate = gate_rows[0]
+                for field in ("category", "key_item", "item", "value"):
+                    if gate[field] in _MISSING:
+                        raise CrossCheckRulesError(
+                            f"{self.path}: cross-reference gate for {row['id']} "
+                            f"is missing {field}"
+                        )
+                rule["gate"] = {
+                    "category": gate["category"],
+                    "key": gate["key_item"],
+                    "item": gate["item"],
+                    "value": gate["value"],
+                }
+                used_gates.add(row["id"])
             rule["item"] = row["item"]
             rule["subtype"] = row["subtype"]
             rule["type"] = row["type"]
@@ -483,6 +508,14 @@ class _Index:
             if rule_id not in used:
                 raise CrossCheckRulesError(
                     f"{self.path}: unused experiment modes for cross-reference rule {rule_id}"
+                )
+        for (rule_id,), _rows in gates.items():
+            self._require_parent(
+                "validator_rule_cross_reference_gate", "validator_rule_cross_reference", rule_id
+            )
+            if rule_id not in used_gates:
+                raise CrossCheckRulesError(
+                    f"{self.path}: unused gate for cross-reference rule {rule_id}"
                 )
         return {"cross_reference_full": rules}
 

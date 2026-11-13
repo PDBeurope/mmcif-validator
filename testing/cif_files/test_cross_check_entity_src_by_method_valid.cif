@@ -1,0 +1,30 @@
+data_test_cross_check_entity_src_by_method_valid
+#
+loop_
+_entity.id
+_entity.type
+_entity.src_method
+1 polymer man
+2 polymer nat
+3 polymer syn
+4 polymer MAN
+5 polymer ?
+#
+loop_
+_entity_poly.entity_id
+_entity_poly.type
+1 polypeptide(L)
+2 polypeptide(L)
+3 polypeptide(L)
+4 polypeptide(L)
+5 polypeptide(L)
+#
+loop_
+_entity_src_gen.entity_id
+1
+4
+#
+_entity_src_nat.entity_id 2
+#
+_pdbx_entity_src_syn.entity_id 3
+#

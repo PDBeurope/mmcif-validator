@@ -117,6 +117,13 @@ def main() -> None:
 
     cross_reference = load("cross_checks_cross_reference_full.json")
     for rule in cross_reference.get("cross_reference_full", []):
+        gate = rule.get("gate")
+        gate_text = ""
+        if isinstance(gate, dict):
+            gate_text = (
+                f"; gate={gate.get('category')}.{gate.get('item')}"
+                f"={gate.get('value')} via {gate.get('key')}"
+            )
         add(
             "cross_reference_full",
             str(rule.get("category", "?")),
@@ -126,6 +133,7 @@ def main() -> None:
                 f"expt={rule.get('expt')}; "
                 f"code={rule.get('code', '')}; "
                 f"subtype={rule.get('subtype')}"
+                f"{gate_text}"
             ),
         )
 

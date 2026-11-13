@@ -2,7 +2,7 @@
 
 <img src="img/logo-validator.png" alt="PDBe mmCIF Validator" width="200">
 
-**Version 0.2.5**
+**Version 0.2.6**
 
 Real-time VS Code extension, standalone Python tool, and online validator for mmCIF/CIF files.
 
@@ -148,6 +148,8 @@ See the [Python script README](vscode-extension/python-script/README.md) for det
 ## What's new
 
 See the full [CHANGELOG](vscode-extension/CHANGELOG.md).
+
+Release **0.2.6** checks each polymer against the entity source category selected by `_entity.src_method` (`man` → `_entity_src_gen`, `nat` → `_entity_src_nat`, `syn` → `_pdbx_entity_src_syn`).
 
 Release **0.2.5** validates against the public PDBx/mmCIF dictionary (V50) by default. The internal dictionary (V5) is available by setting `mmcifValidator.dictionaryUrl`.
 

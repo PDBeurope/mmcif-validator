@@ -683,6 +683,17 @@ xref_em_3d_reconstruction_em_image_processing_28 em_3d_reconstruction image_proc
 xref_em_final_classification_em_image_processing_29 em_final_classification image_processing_id em_image_processing id . . full cross
 xref_em_3d_fitting_list_em_3d_fitting_30 em_3d_fitting_list 3d_fitting_id em_3d_fitting id . . full cross
 #
+# Polymer entity_id must exist in the source category selected by _entity.src_method.
+loop_
+_validator_rule_cross_reference_gate.rule_id
+_validator_rule_cross_reference_gate.category
+_validator_rule_cross_reference_gate.key_item
+_validator_rule_cross_reference_gate.item
+_validator_rule_cross_reference_gate.value
+xref_entity_poly_entity_src_gen_1 entity id src_method man
+xref_entity_poly_entity_src_nat_2 entity id src_method nat
+xref_entity_poly_pdbx_entity_src_syn_3 entity id src_method syn
+#
 loop_
 _validator_rule_cross_reference_expt.rule_id
 _validator_rule_cross_reference_expt.ordinal

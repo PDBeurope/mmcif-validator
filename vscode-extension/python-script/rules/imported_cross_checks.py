@@ -1045,6 +1045,29 @@ class ImportedCrossChecksRuleGroup:
 
         return errors
 
+    def _gate_values_by_key(self, mmcif, rows_cache: Dict[str, List[Dict[str, ItemValue]]], gate: dict) -> Dict[str, Set[str]]:
+        """Map a gate category's key to the case-folded values of the gated item."""
+        category = str(gate.get("category", "")).strip()
+        key_short = str(gate.get("key", "")).strip()
+        item_short = str(gate.get("item", "")).strip()
+        if not (category and key_short and item_short):
+            return {}
+        key_item = item_name_for_category(category, key_short)
+        value_item = item_name_for_category(category, item_short)
+        rows = rows_cache.setdefault(category, mmcif.get_category_rows(category))
+        index: Dict[str, Set[str]] = {}
+        for row in rows:
+            key_iv = row.get(key_item)
+            value_iv = row.get(value_item)
+            if key_iv is None or key_iv.value in MISSING_VALUES:
+                continue
+            if value_iv is None or value_iv.value in MISSING_VALUES:
+                continue
+            index.setdefault(str(key_iv.value).strip(), set()).add(
+                str(value_iv.value).strip().casefold()
+            )
+        return index
+
     def _run_build_defaults_cross(
         self,
         mmcif,
@@ -1077,8 +1100,20 @@ class ImportedCrossChecksRuleGroup:
             source_item = item_name_for_category(source_cat, source_item_short)
             target_item = item_name_for_category(target_cat, target_item_short)
             source_rows = rows_cache.setdefault(source_cat, mmcif.get_category_rows(source_cat))
+            if not source_rows:
+                continue
+
+            gate = rule.get("gate")
+            gate_index = None
+            expected_gate = ""
+            if isinstance(gate, dict):
+                gate_index = self._gate_values_by_key(mmcif, rows_cache, gate)
+                expected_gate = str(gate.get("value", "")).strip().casefold()
+
             target_rows = rows_cache.setdefault(target_cat, mmcif.get_category_rows(target_cat))
-            if not source_rows or not target_rows:
+            # Ungated rules only run when the target category has values.
+            # A gated rule still reports a source row whose required target is absent.
+            if gate_index is None and not target_rows:
                 continue
 
             target_values = {
@@ -1087,12 +1122,16 @@ class ImportedCrossChecksRuleGroup:
                 for iv in [row.get(target_item)]
                 if iv is not None and iv.value not in MISSING_VALUES
             }
-            if not target_values:
+            if gate_index is None and not target_values:
                 continue
 
             for row in source_rows:
                 source_iv = row.get(source_item)
                 if source_iv is None or source_iv.value in MISSING_VALUES:
+                    continue
+                if gate_index is not None and expected_gate not in gate_index.get(
+                    str(source_iv.value).strip(), ()
+                ):
                     continue
                 if source_iv.value in target_values:
                     continue

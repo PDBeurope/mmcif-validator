@@ -91,9 +91,9 @@
 91. [dictionary_enum] diffrn_source :: type compatible with source via dictionary enumeration_details
 92. [dictionary_enum] pdbx_database_related :: db_name compatible with content_type via dictionary enumeration_details
 93. [dictionary_enum] software :: name compatible with classification via dictionary enumeration_details
-94. [cross_reference_full] entity_poly :: item=entity_id; cross=entity_src_gen.entity_id; expt=all; code=; subtype=full
-95. [cross_reference_full] entity_poly :: item=entity_id; cross=entity_src_nat.entity_id; expt=all; code=; subtype=full
-96. [cross_reference_full] entity_poly :: item=entity_id; cross=pdbx_entity_src_syn.entity_id; expt=all; code=; subtype=full
+94. [cross_reference_full] entity_poly :: item=entity_id; cross=entity_src_gen.entity_id; expt=all; code=; subtype=full; gate=entity.src_method=man via id
+95. [cross_reference_full] entity_poly :: item=entity_id; cross=entity_src_nat.entity_id; expt=all; code=; subtype=full; gate=entity.src_method=nat via id
+96. [cross_reference_full] entity_poly :: item=entity_id; cross=pdbx_entity_src_syn.entity_id; expt=all; code=; subtype=full; gate=entity.src_method=syn via id
 97. [cross_reference_full] exptl_crystal_grow :: item=crystal_id; cross=exptl_crystal.id; expt=['xray', 'nd', 'fd', 'ec']; code=; subtype=full
 98. [cross_reference_full] diffrn :: item=crystal_id; cross=exptl_crystal.id; expt=['xray', 'nd', 'fd']; code=; subtype=full
 99. [cross_reference_full] diffrn_detector :: item=diffrn_id; cross=diffrn.id; expt=['xray', 'nd', 'fd']; code=; subtype=full

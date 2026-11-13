@@ -4,6 +4,16 @@ All notable changes to the PDBe mmCIF Validator extension will be documented in 
 
 # Released
 
+## [0.2.6] - 2026-11-13
+
+### Fixed
+
+- **Polymer source cross-reference**: `_entity_poly.entity_id` is checked against the source category selected by `_entity.src_method` (`man` → `_entity_src_gen`, `nat` → `_entity_src_nat`, `syn` → `_pdbx_entity_src_syn`). A polymer is no longer required to appear in every source category present in the file. A missing `src_method` skips the check. The selected category is required even when that category is absent.
+
+### Changed
+
+- **Version bump**: Updated extension/package/docs version references from `0.2.5` to `0.2.6`.
+
 ## [0.2.5] - 2026-11-13
 
 ### Changed
