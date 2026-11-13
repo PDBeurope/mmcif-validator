@@ -4,6 +4,16 @@ All notable changes to the PDBe mmCIF Validator extension will be documented in 
 
 # Released
 
+## [0.2.4] - 2026-11-13
+
+### Fixed
+
+- **PyPI package-data config**: Moved `cacert.pem` into `rules/` and listed it under `tool.setuptools.package-data.rules`. The previous empty-string key (`"" = ["cacert.pem"]`) is rejected by current setuptools.
+
+### Changed
+
+- **Version bump**: Updated extension/package/docs version references from `0.2.3` to `0.2.4`.
+
 ## [0.2.3] - 2026-11-13
 
 ### Fixed

@@ -14,9 +14,9 @@ from mmcif_types import DownloadError
 
 logger = logging.getLogger(__name__)
 
-# Mozilla CA bundle shipped with the package so HTTPS downloads work on
-# Windows/Python installs whose default OpenSSL CA path is missing.
-_BUNDLED_CA = Path(__file__).with_name("cacert.pem")
+# Mozilla CA bundle shipped under rules/ so setuptools package-data can
+# include it (flat-module siblings are not valid package-data keys).
+_BUNDLED_CA = Path(__file__).resolve().parent / "rules" / "cacert.pem"
 
 
 def get_cache_dir() -> Path:

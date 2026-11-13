@@ -2,7 +2,7 @@
 
 <img src="img/logo-validator.png" alt="PDBe mmCIF Validator" width="200">
 
-**Version 0.2.3**
+**Version 0.2.4**
 
 Real-time VS Code extension, standalone Python tool, and online validator for mmCIF/CIF files.
 
@@ -134,6 +134,8 @@ See the [Python script README](vscode-extension/python-script/README.md) for det
 ## What's new
 
 See the full [CHANGELOG](vscode-extension/CHANGELOG.md).
+
+Release **0.2.4** fixes packaging so the bundled CA file is included under the `rules` package (setuptools rejects an empty package-data key).
 
 Release **0.2.3** republishes the 0.2.2 fixes after correcting invalid TOML in `pyproject.toml` that blocked the PyPI build.
 
