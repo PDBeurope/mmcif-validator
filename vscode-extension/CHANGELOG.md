@@ -4,6 +4,16 @@ All notable changes to the PDBe mmCIF Validator extension will be documented in 
 
 # Released
 
+## [0.2.3] - 2026-11-13
+
+### Fixed
+
+- **PyPI build parse error**: Removed an invalid trailing comma after `version` in `pyproject.toml` so `python3 -m build` succeeds.
+
+### Changed
+
+- **Version bump**: Updated extension/package/docs version references from `0.2.2` to `0.2.3`.
+
 ## [0.2.2] - 2026-11-11
 
 ### Fixed
